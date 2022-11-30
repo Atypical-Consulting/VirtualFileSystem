@@ -15,10 +15,10 @@ public class VFSRootPathTests
         {
             // Arrange
             const string expectedPath = @"vfs://";
-            
+
             // Act
             var directoryPath = new VFSRootPath();
-            
+
             // Assert
             directoryPath.Should().NotBeNull();
             directoryPath.Value.Should().Be(expectedPath);
@@ -34,15 +34,15 @@ public class VFSRootPathTests
         {
             // Arrange
             const string expectedPath = @"vfs://";
-            
+
             // Act
             var directoryPath = new VFSRootPath();
-            
+
             // Assert
             directoryPath.ToString().Should().Be(expectedPath);
         }
     }
-    
+
     public class ImplicitOperator
     {
         [Fact]
@@ -51,10 +51,10 @@ public class VFSRootPathTests
             // Arrange
             var rootPath = new VFSRootPath();
             const string expectedPath = "vfs://";
-            
+
             // Act
             string result = rootPath;
-            
+
             // Assert
             result.Should().Be(expectedPath);
         }

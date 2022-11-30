@@ -24,9 +24,7 @@ public record VFSDirectoryPath : VFSPath
         // cannot ends with a file extension
         var lastSegment = Value.Split('/').Last();
         if (lastSegment.Contains('.'))
-        {
             throw new ArgumentException("The path must not contain a file extension.", nameof(path));
-        }
     }
 
     /// <summary>
@@ -34,19 +32,13 @@ public record VFSDirectoryPath : VFSPath
     ///     The string representation of the directory path is the path itself.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-    {
-        return Value;
-    }
-    
+    public override string ToString() => Value;
+
     /// <summary>
     ///     Implicit conversion to string
     ///     This allows you to use a <see cref="VFSDirectoryPath" /> as a string.
     /// </summary>
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
-    public static implicit operator string(VFSDirectoryPath path)
-    {
-        return path.Value;
-    }
+    public static implicit operator string(VFSDirectoryPath path) => path.Value;
 }

@@ -20,7 +20,7 @@ public class VirtualFileSystemFactoryTests
             virtualFileSystemFactory.Should().NotBeNull();
         }
     }
-    
+
     public class MethodCreateFileSystem
     {
         [Fact]

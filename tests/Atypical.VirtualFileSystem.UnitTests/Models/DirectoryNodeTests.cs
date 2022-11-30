@@ -35,7 +35,7 @@ public class DirectoryNodeTests
         {
             var directoryPath = new VFSDirectoryPath("parent/child");
             var directory = new DirectoryNode(directoryPath);
-            
+
             directory.Path.Value.Should().Be("vfs://parent/child");
             directory.Path.Parent.Should().NotBeNull();
             directory.Path.Parent!.Value.Should().Be("vfs://parent");
@@ -52,13 +52,13 @@ public class DirectoryNodeTests
 
             directoryNode.ToString().Should().Be("vfs://test");
         }
-        
+
         [Fact]
         public void ToString_return_path_with_parent()
         {
             var directoryPath = new VFSDirectoryPath("parent/child");
             var directory = new DirectoryNode(directoryPath);
-            
+
             directory.ToString().Should().Be("vfs://parent/child");
         }
     }

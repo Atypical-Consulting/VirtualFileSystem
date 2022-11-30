@@ -37,7 +37,7 @@ public class FileNodeTests
             var fileNode = new FileNode(path);
 
             // Act
-            string result = fileNode.ToString();
+            var result = fileNode.ToString();
 
             // Assert
             result.Should().Be(path.ToString());
