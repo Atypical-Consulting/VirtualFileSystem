@@ -22,6 +22,11 @@ public record VFSFilePath : VFSPath
     {
     }
 
+    /// <summary>
+    ///     Returns a string that represents the current object.
+    ///     The file path is relative to the root of the virtual file system.
+    /// </summary>
+    /// <returns>A string that represents the current object.</returns>
     public override string ToString()
     {
         return Value;

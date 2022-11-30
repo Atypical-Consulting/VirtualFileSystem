@@ -9,7 +9,7 @@ namespace Atypical.VirtualFileSystem.Core.Abstractions;
 /// <summary>
 ///     Represents a file system entry (file or directory) in the virtual file system.
 /// </summary>
-public abstract partial record VFSPath
+public abstract record VFSPath
 {
     /// <summary>
     ///     Regex pattern for matching a valid file system path.
@@ -145,7 +145,16 @@ public abstract partial record VFSPath
         return cleanPath;
     }
 
-    public VFSPath GetAbsoluteParent(int depthFromRoot)
+    /// <summary>
+    ///     Gets the absolute path of the parent directory with depth <paramref name="depthFromRoot" />.
+    ///     The root directory has a depth of 0.
+    ///     The depth of a file is the depth of its parent directory plus one.
+    ///     The depth of a directory is the depth of its parent directory plus one.
+    /// </summary>
+    /// <param name="depthFromRoot">The depth of the parent directory from the root directory.</param>
+    /// <returns>The absolute path of the parent directory with depth <paramref name="depthFromRoot" />.</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when the depth is negative.</exception>
+    public VFSPath GetAbsoluteParentPath(int depthFromRoot)
     {
         if (depthFromRoot < 0)
             throw new ArgumentOutOfRangeException(nameof(depthFromRoot), "The depth from root must be greater than or equal to 0.");
@@ -162,6 +171,11 @@ public abstract partial record VFSPath
         return path;
     }
 
+    /// <summary>
+    ///     Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>A value that indicates whether the current object is equal to the <paramref name="other" /> parameter.</returns>
     public virtual bool Equals(VFSPath? other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -169,6 +183,10 @@ public abstract partial record VFSPath
         return Value == other.Value;
     }
 
+    /// <summary>
+    ///     Serves as the default hash function.
+    /// </summary>
+    /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode()
     {
         return Value.GetHashCode();

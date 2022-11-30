@@ -7,6 +7,7 @@
         <LangVersion>11</LangVersion>
         <Company>Atypical Consulting SRL</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
     <!-- File inclusion -->
