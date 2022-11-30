@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA11C821-EFDE-4714-A0DE-B7D4D93CE336}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{10E2E10B-AB65-4800-93ED-CDB737917154}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{48AA64C3-8E79-43C9-9D28-96FA881E5125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.Core", "src\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj", "{87387B16-144D-4163-B559-5847ED0D1E3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.UnitTests", "tests\Atypical.VirtualFileSystem.UnitTests\Atypical.VirtualFileSystem.UnitTests.csproj", "{DD02DF87-F94E-4218-8D65-4DB03760926E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87387B16-144D-4163-B559-5847ED0D1E3B} = {BA11C821-EFDE-4714-A0DE-B7D4D93CE336}
+		{DD02DF87-F94E-4218-8D65-4DB03760926E} = {10E2E10B-AB65-4800-93ED-CDB737917154}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87387B16-144D-4163-B559-5847ED0D1E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87387B16-144D-4163-B559-5847ED0D1E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87387B16-144D-4163-B559-5847ED0D1E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87387B16-144D-4163-B559-5847ED0D1E3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD02DF87-F94E-4218-8D65-4DB03760926E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD02DF87-F94E-4218-8D65-4DB03760926E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD02DF87-F94E-4218-8D65-4DB03760926E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD02DF87-F94E-4218-8D65-4DB03760926E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
