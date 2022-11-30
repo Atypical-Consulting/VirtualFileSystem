@@ -17,13 +17,10 @@ public abstract partial record VFSPath
     private const string VFSPathRegexPattern =
         @$"^{ROOT_PATH}(?<path>([a-zA-Z0-9_\-\.]+{DIRECTORY_SEPARATOR})*[a-zA-Z0-9_\-\.]+)$";
 
-    [GeneratedRegex(VFSPathRegexPattern, RegexOptions.Compiled)]
-    private static partial Regex GetVFSPathRegex();
-
     /// <summary>
     ///     Regex for matching a valid file system path.
     /// </summary>
-    public static readonly Regex VFSPathRegex = GetVFSPathRegex();
+    public static readonly Regex VFSPathRegex = new(VFSPathRegexPattern, RegexOptions.Compiled);
 
     /// <summary>
     ///     Creates a new instance of <see cref="VFSPath" />.
