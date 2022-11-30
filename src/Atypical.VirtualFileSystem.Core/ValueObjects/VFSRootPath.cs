@@ -12,6 +12,11 @@ namespace Atypical.VirtualFileSystem.Core.ValueObjects;
 public record VFSRootPath()
     : VFSDirectoryPath(ROOT_PATH)
 {
+    /// <summary>
+    ///     Returns a string that represents the current object.
+    ///     The string representation of the root directory is the constant <see cref="ROOT_PATH" />.
+    /// </summary>
+    /// <returns>A string that represents the current object.</returns>
     public override string ToString()
     {
         return Value;

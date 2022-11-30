@@ -15,6 +15,12 @@ public record DirectoryNode
     private readonly List<IDirectoryNode> _directories = new();
     private readonly List<IFileNode> _files = new();
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="DirectoryNode"/> class.
+    ///     Creates a new directory node.
+    ///     The directory is created with the current date and time as creation and last modification date.
+    /// </summary>
+    /// <param name="directoryPath">The path of the directory.</param>
     [SuppressMessage("ReSharper", "SuggestBaseTypeForParameterInConstructor")]
     public DirectoryNode(VFSDirectoryPath directoryPath)
         : base(directoryPath)
@@ -22,20 +28,29 @@ public record DirectoryNode
         Path = directoryPath;
     }
 
+    /// <inheritdoc cref="IVirtualFileSystemNode.Path"/>
     public override VFSDirectoryPath Path { get; }
 
-    public override bool IsDirectory
-        => true;
-
-    public override bool IsFile
-        => false;
-
-    public ReadOnlyCollection<IFileNode> Files
-        => _files.AsReadOnly();
-
+    /// <inheritdoc cref="IVirtualFileSystemNode.Directories"/>
     public ReadOnlyCollection<IDirectoryNode> Directories
         => _directories.AsReadOnly();
 
+    /// <inheritdoc cref="IVirtualFileSystemNode.IsDirectory"/>
+    public override bool IsDirectory
+        => true;
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.Files"/>
+    public ReadOnlyCollection<IFileNode> Files
+        => _files.AsReadOnly();
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.IsFile"/>
+    public override bool IsFile
+        => false;
+
+    /// <summary>
+    ///     Returns a string that represents the path of the directory.
+    /// </summary>
+    /// <returns>A string that represents the path of the directory.</returns>
     public override string ToString()
     {
         return Path.ToString();

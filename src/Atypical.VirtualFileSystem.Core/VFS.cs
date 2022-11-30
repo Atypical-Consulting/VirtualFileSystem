@@ -13,15 +13,22 @@ namespace Atypical.VirtualFileSystem.Core;
 public record VFS
     : IVirtualFileSystem
 {
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="VFS"/> class.
+    /// </summary>
     public VFS()
     {
         Root = new RootNode();
         Index = new VFSIndex(Root);
     }
 
+    /// <inheritdoc cref="IVirtualFileSystem.Root"/>
     public IRootNode Root { get; }
+    
+    /// <inheritdoc cref="IVirtualFileSystem.Index"/>
     public VFSIndex Index { get; }
 
+    /// <inheritdoc cref="IVirtualFileSystem.IsEmpty"/>
     public bool IsEmpty
         => Index.Count == 1;
 
@@ -43,7 +50,6 @@ public record VFS
     #region Directory
 
     /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(VFSDirectoryPath)" />
-    
     public IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath)
         => (IDirectoryNode)Index[directoryPath.Value];
     
@@ -192,6 +198,14 @@ public record VFS
 
     #endregion
 
+    /// <summary>
+    ///     Returns the index as an ASCII tree.
+    /// </summary>
+    /// <returns>
+    ///     The index as an ASCII tree.
+    ///     <para />
+    ///     The root directory is always the first line.
+    /// </returns>
     public override string ToString()
     {
         var sb = new StringBuilder();
@@ -210,7 +224,7 @@ public record VFS
 
             while (depth > 1)
             {
-                string parent = node.Path.GetAbsoluteParent(1).Value;
+                string parent = node.Path.GetAbsoluteParentPath(1).Value;
                 bool isLastNodeOfLevelParent = GetBrothers(GetDirectory(parent)).Last() == GetDirectory(parent);
 
                 sb.Append(isLastNodeOfLevelParent ? STR_INDENT_CLEAR : STR_INDENT_FILL);

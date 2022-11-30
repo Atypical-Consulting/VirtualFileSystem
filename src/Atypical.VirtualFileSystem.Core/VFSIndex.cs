@@ -15,6 +15,14 @@ namespace Atypical.VirtualFileSystem.Core;
 public sealed class VFSIndex
     : SortedDictionary<string, IVirtualFileSystemNode>
 {
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="VFSIndex"/> class.
+    ///     - the vfs index is a dictionary of vfs paths and vfs nodes
+    ///     - the vfs index is used to store the nodes of the virtual file system
+    ///     - the vfs index is sorted by the vfs paths
+    ///     - the vfs index is case insensitive
+    /// </summary>
+    /// <param name="rootNode">The root node of the virtual file system.</param>
     public VFSIndex(IRootNode rootNode)
     {
         Add(rootNode.Path.Value, rootNode);

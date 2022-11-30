@@ -20,6 +20,11 @@ public record RootNode
     {
     }
 
+    /// <summary>
+    ///     Returns a string that represents the current object.
+    ///     For <see cref="RootNode" /> this is always the constant string <cref see="ROOT_PATH" />.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return Path.ToString();

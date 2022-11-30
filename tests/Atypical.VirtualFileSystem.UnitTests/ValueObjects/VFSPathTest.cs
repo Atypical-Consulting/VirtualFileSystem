@@ -329,7 +329,7 @@ public class VFSPathTest
             var vfsPath = new VFSDirectoryPath(path);
             
             // Act
-            var parent = vfsPath.GetAbsoluteParent(0);
+            var parent = vfsPath.GetAbsoluteParentPath(0);
             
             // Assert
             parent.Should().NotBeNull();
@@ -344,7 +344,7 @@ public class VFSPathTest
             var vfsPath = new VFSDirectoryPath(path);
             
             // Act
-            Action action = () => vfsPath.GetAbsoluteParent(-1);
+            Action action = () => vfsPath.GetAbsoluteParentPath(-1);
             
             // Assert
             action.Should().Throw<ArgumentOutOfRangeException>();
@@ -359,7 +359,7 @@ public class VFSPathTest
             var vfsPath = new VFSDirectoryPath(path);
             
             // Act
-            var parent = vfsPath.GetAbsoluteParent(0);
+            var parent = vfsPath.GetAbsoluteParentPath(0);
             
             // Assert
             parent.Should().NotBeNull();
@@ -375,7 +375,7 @@ public class VFSPathTest
             var vfsPath = new VFSDirectoryPath(path);
             
             // Act
-            var parent = vfsPath.GetAbsoluteParent(1);
+            var parent = vfsPath.GetAbsoluteParentPath(1);
             
             // Assert
             parent.Should().NotBeNull();
@@ -391,7 +391,7 @@ public class VFSPathTest
             var vfsPath = new VFSDirectoryPath(path);
             
             // Act
-            var parent = vfsPath.GetAbsoluteParent(2);
+            var parent = vfsPath.GetAbsoluteParentPath(2);
             
             // Assert
             parent.Should().NotBeNull();
