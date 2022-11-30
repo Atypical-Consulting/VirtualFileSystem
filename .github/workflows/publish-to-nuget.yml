@@ -6,12 +6,6 @@ name: .NET
 on:
   create:
     branches: [ "release/**" ]
-  push:
-    branches: [ "main" ]
-    tags:
-      - v*
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -50,11 +44,3 @@ jobs:
     - name: Publish to NuGet
       if: startsWith(github.ref, 'refs/heads/release')
       run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
-
-    - name: Create Release
-      uses: softprops/action-gh-release@v1
-      if: ${{ !contains(github.ref, 'beta') }}
-      with:
-        draft: false
-        name: ${{ github.ref_name }} Release
-        body_path: Src/Library/changelog.md
