@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree. 
 
 using System.Text.RegularExpressions;
-using Atypical.VirtualFileSystem.Core.Abstractions;
 using Atypical.VirtualFileSystem.Core.Contracts;
 
 namespace VirtualFileSystem.UnitTests.Models;

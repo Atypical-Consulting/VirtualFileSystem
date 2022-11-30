@@ -35,6 +35,13 @@ _Call-to-Action buttons_
 A virtual file system is a data structure that represents a file system in memory. It is used to simulate a file system on a computer. It is useful for testing purposes, for example, when you want to test a file system without actually creating files on the hard drive.
 
 
+## We use the lastest C# features
+
+This library targets .NET 7.0 and uses the latest C# features. It is written in C# 11.0 and uses the new `init` properties, `record` types, `switch` expressions, `using` declarations, and more.
+
+I invite you to read the [C# 11.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11) to learn more about these features.
+
+
 ## License
 
 This project is licensed under the terms of the BSD-3-Clause license.

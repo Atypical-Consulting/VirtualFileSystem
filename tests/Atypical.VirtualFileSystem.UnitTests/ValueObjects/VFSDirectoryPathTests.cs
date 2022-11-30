@@ -23,7 +23,10 @@ public class VFSDirectoryPathTests
             const string path = null!;
             
             // Act
-            Action action = () => new VFSDirectoryPath(path!);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path!);
+            };
             
             // Assert
             action.Should().Throw<ArgumentNullException>();
@@ -36,7 +39,10 @@ public class VFSDirectoryPathTests
             const string path = "";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -49,7 +55,10 @@ public class VFSDirectoryPathTests
             const string path = @"invalid\path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -62,7 +71,10 @@ public class VFSDirectoryPathTests
             const string path = @"invalid\..\path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -75,7 +87,10 @@ public class VFSDirectoryPathTests
             const string path = @"invalid//path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -88,7 +103,10 @@ public class VFSDirectoryPathTests
             const string path = @"invalid/path.txt";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();

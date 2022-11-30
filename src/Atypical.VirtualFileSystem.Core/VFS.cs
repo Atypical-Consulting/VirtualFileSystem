@@ -51,7 +51,7 @@ public record VFS
     public IDirectoryNode GetDirectory(string directoryPath)
         => GetDirectory(new VFSDirectoryPath(directoryPath));
     
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath)" />
+    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath, out IDirectoryNode)" />
     public bool TryGetDirectory(VFSDirectoryPath directoryPath, out IDirectoryNode? directory)
     {
         try
@@ -66,7 +66,7 @@ public record VFS
         }
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(string)" />
+    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(string, out IDirectoryNode)" />
     public bool TryGetDirectory(string path, out IDirectoryNode? directory)
         => TryGetDirectory(new VFSDirectoryPath(path), out directory);
     
@@ -92,7 +92,7 @@ public record VFS
             throw new ArgumentException("Cannot delete root directory.", nameof(directoryPath));
         
         // try to get the directory
-        var found = TryGetDirectory(directoryPath, out var directory);
+        var found = TryGetDirectory(directoryPath, out _);
         if (!found)
             throw new KeyNotFoundException($"The directory '{directoryPath}' does not exist.");
 
@@ -133,7 +133,7 @@ public record VFS
     public IFileNode GetFile(string filePath)
         => GetFile(new VFSFilePath(filePath));
     
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(VFSFilePath)" />
+    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(VFSFilePath, out IFileNode)" />
     public bool TryGetFile(VFSFilePath filePath, out IFileNode? file)
     {
         try
@@ -148,7 +148,7 @@ public record VFS
         }
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(string)" />
+    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(string, out IFileNode)" />
     public bool TryGetFile(string filePath, out IFileNode? file)
         => TryGetFile(new VFSFilePath(filePath), out file);
     
@@ -168,10 +168,10 @@ public record VFS
     public IVirtualFileSystem DeleteFile(VFSFilePath filePath)
     {
         // try to get the file
-        var found = TryGetFile(filePath, out var file);
+        var found = TryGetFile(filePath, out _);
         if (!found)
             throw new KeyNotFoundException($"The file '{filePath}' does not exist.");
-
+        
         // remove the file from the index
         Index.Remove(filePath.Value);
         

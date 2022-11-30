@@ -24,7 +24,10 @@ public class VFSFilePathTests
             const string path = null!;
 
             // Act
-            Action action = () => new VFSFilePath(path);
+            Action action = () =>
+            {
+                var _ = new VFSFilePath(path!);
+            };
 
             // Assert
             action.Should().Throw<ArgumentNullException>();
@@ -37,7 +40,10 @@ public class VFSFilePathTests
             const string path = "";
 
             // Act
-            Action action = () => new VFSFilePath(path);
+            Action action = () =>
+            {
+                var _ = new VFSFilePath(path);
+            };
 
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -50,7 +56,10 @@ public class VFSFilePathTests
             const string path = @"invalid\path";
             
             // Act
-            Action action = () => new VFSFilePath(path);
+            Action action = () =>
+            {
+                var _ = new VFSFilePath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
