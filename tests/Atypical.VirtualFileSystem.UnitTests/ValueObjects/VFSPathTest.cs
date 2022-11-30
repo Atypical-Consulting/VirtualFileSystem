@@ -24,7 +24,10 @@ public class VFSPathTest
             const string path = null!;
 
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path!);
+            };
 
             // Assert
             action.Should().Throw<ArgumentNullException>();
@@ -37,7 +40,10 @@ public class VFSPathTest
             const string path = "";
 
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
 
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -50,7 +56,10 @@ public class VFSPathTest
             const string path = @"invalid\path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -63,7 +72,10 @@ public class VFSPathTest
             const string path = @"invalid/../path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -76,7 +88,10 @@ public class VFSPathTest
             const string path = @"invalid//path";
             
             // Act
-            Action action = () => new VFSDirectoryPath(path);
+            Action action = () =>
+            {
+                var _ = new VFSDirectoryPath(path);
+            };
             
             // Assert
             action.Should().Throw<ArgumentException>();
@@ -318,7 +333,7 @@ public class VFSPathTest
             
             // Assert
             parent.Should().NotBeNull();
-            parent!.Value.Should().Be(expectedPath);
+            parent.Value.Should().Be(expectedPath);
         }
         
         [Fact]
@@ -348,7 +363,7 @@ public class VFSPathTest
             
             // Assert
             parent.Should().NotBeNull();
-            parent!.Value.Should().Be(expectedPath);
+            parent.Value.Should().Be(expectedPath);
         }
         
         [Fact]
@@ -364,7 +379,7 @@ public class VFSPathTest
             
             // Assert
             parent.Should().NotBeNull();
-            parent!.Value.Should().Be(expectedPath);
+            parent.Value.Should().Be(expectedPath);
         }
         
         [Fact]
@@ -380,7 +395,7 @@ public class VFSPathTest
             
             // Assert
             parent.Should().NotBeNull();
-            parent!.Value.Should().Be(expectedPath);
+            parent.Value.Should().Be(expectedPath);
         }
     }
 

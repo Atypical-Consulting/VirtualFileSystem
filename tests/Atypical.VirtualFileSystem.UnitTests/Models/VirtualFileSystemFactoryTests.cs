@@ -13,9 +13,6 @@ public class VirtualFileSystemFactoryTests
         [Fact]
         public void Constructor_create_a_virtual_file_system_factory()
         {
-            // Arrange
-            var expectedRoot = new DirectoryNode(new VFSDirectoryPath("vfs://"));
-
             // Act
             var virtualFileSystemFactory = new VirtualFileSystemFactory();
 

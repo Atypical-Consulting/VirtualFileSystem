@@ -8,6 +8,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{10E2E10B-AB65-4800-93ED-CDB737917154}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{48AA64C3-8E79-43C9-9D28-96FA881E5125}"
+	ProjectSection(SolutionItems) = preProject
+		CODE_OF_CONDUCT.md = CODE_OF_CONDUCT.md
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.Core", "src\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj", "{87387B16-144D-4163-B559-5847ED0D1E3B}"
 EndProject
