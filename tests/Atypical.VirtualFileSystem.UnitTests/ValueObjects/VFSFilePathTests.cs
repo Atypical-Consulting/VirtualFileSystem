@@ -24,7 +24,7 @@ public class VFSFilePathTests
             const string path = null!;
 
             // Act
-            Action action = () =>
+            var action = () =>
             {
                 var _ = new VFSFilePath(path!);
             };
@@ -32,7 +32,7 @@ public class VFSFilePathTests
             // Assert
             action.Should().Throw<ArgumentNullException>();
         }
-        
+
         [Fact]
         public void Constructor_throw_ArgumentException_when_path_is_empty()
         {
@@ -40,7 +40,7 @@ public class VFSFilePathTests
             const string path = "";
 
             // Act
-            Action action = () =>
+            var action = () =>
             {
                 var _ = new VFSFilePath(path);
             };
@@ -48,19 +48,19 @@ public class VFSFilePathTests
             // Assert
             action.Should().Throw<ArgumentException>();
         }
-        
+
         [Fact]
         public void Constructor_throw_ArgumentException_when_path_contains_invalid_characters()
         {
             // Arrange
             const string path = @"invalid\path";
-            
+
             // Act
-            Action action = () =>
+            var action = () =>
             {
                 var _ = new VFSFilePath(path);
             };
-            
+
             // Assert
             action.Should().Throw<ArgumentException>();
         }
@@ -74,15 +74,15 @@ public class VFSFilePathTests
             // Arrange
             var filePath = new VFSFilePath("valid/path");
             const string expectedPath = "vfs://valid/path";
-            
+
             // Act
             var result = filePath.ToString();
-            
+
             // Assert
             result.Should().Be(expectedPath);
         }
     }
-    
+
     public class MethodGetHashCode
     {
         [Fact]
@@ -91,16 +91,16 @@ public class VFSFilePathTests
             // Arrange
             var filePath1 = new VFSFilePath("valid/path");
             var filePath2 = new VFSFilePath("valid/path");
-            
+
             // Act
             var hashCode1 = filePath1.GetHashCode();
             var hashCode2 = filePath2.GetHashCode();
-            
+
             // Assert
             hashCode1.Should().Be(hashCode2);
         }
     }
-    
+
     public class ImplicitOperator
     {
         [Fact]
@@ -109,10 +109,10 @@ public class VFSFilePathTests
             // Arrange
             var filePath = new VFSFilePath("valid/path/file.txt");
             const string expectedPath = "vfs://valid/path/file.txt";
-            
+
             // Act
             string result = filePath;
-            
+
             // Assert
             result.Should().Be(expectedPath);
         }

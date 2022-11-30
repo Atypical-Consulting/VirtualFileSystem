@@ -27,7 +27,7 @@ public class RootNodeTests
             rootNode.Path.Parent.Should().BeNull();
         }
     }
-    
+
     public class MethodToString
     {
         [Fact]

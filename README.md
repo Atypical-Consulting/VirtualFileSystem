@@ -2,10 +2,11 @@
 
 A virtual file system implementation in modern C#.
 
-When writing applications in .NET, you often need to write or read the contents of a file. .NET provides `System.IO` namespace dedicated to this purpose. But how do we deal with the filesystem when testing our code?
+When writing applications in .NET, you often need to write or read the contents of a file. .NET provides `System.IO`
+namespace dedicated to this purpose. But how do we deal with the filesystem when testing our code?
 
-"Virtual File System" is an attempt to solve this problem. Currently, this library is at an early stage of development. If you need additional functionality, I invite you to open an issue to discuss it.
-
+"Virtual File System" is an attempt to solve this problem. Currently, this library is at an early stage of development.
+If you need additional functionality, I invite you to open an issue to discuss it.
 
 ## Badges
 
@@ -15,7 +16,6 @@ _Social buttons_
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![stars - VirtualFileSystem](https://img.shields.io/github/stars/Atypical-Consulting/VirtualFileSystem?style=social)](https://github.com/Atypical-Consulting/VirtualFileSystem)
 [![forks - VirtualFileSystem](https://img.shields.io/github/forks/Atypical-Consulting/VirtualFileSystem?style=social)](https://github.com/Atypical-Consulting/VirtualFileSystem)
-
 
 _Repo metadata_
 
@@ -30,21 +30,24 @@ _Call-to-Action buttons_
 [![View site - GH Pages](https://img.shields.io/badge/View_site-GH_Pages-2ea44f?style=for-the-badge)](https://atypical-consulting.github.io/VirtualFileSystem/)
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](/docs/ "Go to project documentation")
 
-
 ## What is a virtual file system and why should I use it?
-A virtual file system is a data structure that represents a file system in memory. It is used to simulate a file system on a computer. It is useful for testing purposes, for example, when you want to test a file system without actually creating files on the hard drive.
 
+A virtual file system is a data structure that represents a file system in memory. It is used to simulate a file system
+on a computer. It is useful for testing purposes, for example, when you want to test a file system without actually
+creating files on the hard drive.
 
 ## We use the lastest C# features
 
-This library targets .NET 7.0 and uses the latest C# features. It is written in C# 11.0 and uses the new `init` properties, `record` types, `switch` expressions, `using` declarations, and more.
+This library targets .NET 7.0 and uses the latest C# features. It is written in C# 11.0 and uses the new `init`
+properties, `record` types, `switch` expressions, `using` declarations, and more.
 
-I invite you to read the [C# 11.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11) to learn more about these features.
-
+I invite you to read the [C# 11.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11) to
+learn more about these features.
 
 ## License
 
 This project is licensed under the terms of the BSD-3-Clause license.
 If you use this library in your project, please consider adding a link to this repository in your project's README.
 
-This project is maintained by [Atypical Consulting](https://www.atypical.consulting/). If you need help with this project, please contact us from this repository by opening an issue.
+This project is maintained by [Atypical Consulting](https://www.atypical.consulting/). If you need help with this
+project, please contact us from this repository by opening an issue.

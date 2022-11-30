@@ -12,11 +12,11 @@
 
     <!-- File inclusion -->
     <ItemGroup>
-        <None Include="../../Logo.png" Pack="true" PackagePath="" />
+        <None Include="../../Logo.png" Pack="true" PackagePath=""/>
         <None Include="../../LICENSE" Pack="true" PackagePath=""/>
         <None Include="../../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
-    
+
     <!-- NuGet metadata -->
     <PropertyGroup>
         <PackageId>Atypical.VirtualFileSystem</PackageId>
@@ -39,7 +39,7 @@
             - Initial release
         </PackageReleaseNotes>
     </PropertyGroup>
-    
+
     <!-- Versioning -->
     <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
     <PropertyGroup>

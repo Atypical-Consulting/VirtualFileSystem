@@ -14,7 +14,7 @@ public abstract record VFSNode
     : IVirtualFileSystemNode
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="VFSNode"/> class.
+    ///     Initializes a new instance of the <see cref="VFSNode" /> class.
     ///     This constructor is used by derived classes.
     /// </summary>
     /// <param name="path">The path of the node.</param>
@@ -29,21 +29,21 @@ public abstract record VFSNode
         LastWriteTime = now;
     }
 
-    /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime"/>
+    /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime" />
     public abstract VFSPath Path { get; }
-    
-    /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime"/>
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime" />
     public DateTimeOffset CreationTime { get; }
-    
-    /// <inheritdoc cref="IVirtualFileSystemNode.LastAccessTime"/>
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.LastAccessTime" />
     public DateTimeOffset LastAccessTime { get; }
 
-    /// <inheritdoc cref="IVirtualFileSystemNode.LastWriteTime"/>
+    /// <inheritdoc cref="IVirtualFileSystemNode.LastWriteTime" />
     public DateTimeOffset LastWriteTime { get; }
-    
-    /// <inheritdoc cref="IVirtualFileSystemNode.IsDirectory"/>
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.IsDirectory" />
     public abstract bool IsDirectory { get; }
-    
-    /// <inheritdoc cref="IVirtualFileSystemNode.IsFile"/>
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.IsFile" />
     public abstract bool IsFile { get; }
 }

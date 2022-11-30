@@ -22,7 +22,7 @@ public interface IVirtualFileSystemNode
     ///     The full path of the node.
     /// </value>
     VFSPath Path { get; }
-    
+
     /// <summary>
     ///     Gets the name of the virtual file system node.
     ///     The name is the last part of the path.

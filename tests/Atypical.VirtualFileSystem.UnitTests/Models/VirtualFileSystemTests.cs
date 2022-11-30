@@ -4,8 +4,8 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-using System.Text.RegularExpressions;
 using Atypical.VirtualFileSystem.Core.Contracts;
+using System.Text.RegularExpressions;
 
 namespace VirtualFileSystem.UnitTests.Models;
 
@@ -18,7 +18,7 @@ public class VirtualFileSystemTests
         {
             // Act
             IVirtualFileSystem vfs = new VFS();
-            
+
             // Assert
             vfs.Should().NotBeNull();
             vfs.IsEmpty.Should().BeTrue();
@@ -37,15 +37,15 @@ public class VirtualFileSystemTests
             // Arrange
             IVirtualFileSystem vfs = new VFS();
             var rootPath = new VFSRootPath();
-            
+
             // Act
             var root = vfs.GetDirectory(rootPath);
-            
+
             // Assert
             root.Should().NotBeNull();
             root.Path.Value.Should().Be("vfs://");
         }
-        
+
         [Fact]
         public void GetDirectory_returns_a_directory()
         {
@@ -53,25 +53,25 @@ public class VirtualFileSystemTests
             IVirtualFileSystem vfs = new VFS();
             const string directoryPath = "dir1/dir2/dir3";
             vfs.CreateDirectory(directoryPath);
-            
+
             // Act
             var directory = vfs.GetDirectory(directoryPath);
-            
+
             // Assert
             directory.Should().NotBeNull();
             directory.Path.Value.Should().Be("vfs://dir1/dir2/dir3");
         }
-        
+
         [Fact]
         public void GetDirectory_throws_an_exception_if_the_directory_does_not_exist()
         {
             // Arrange
             IVirtualFileSystem vfs = new VFS();
             const string directoryPath = "dir1/dir2/dir3";
-            
+
             // Act
             Action action = () => vfs.GetDirectory(directoryPath);
-            
+
             // Assert
             action.Should().Throw<KeyNotFoundException>();
         }
@@ -120,10 +120,10 @@ public class VirtualFileSystemTests
             // Arrange
             IVirtualFileSystem vfs = new VFS();
             const string directoryPath = "dir1";
-            
+
             // Act
             vfs.CreateDirectory(directoryPath);
-            
+
             // Assert
             vfs.IsEmpty.Should().BeFalse();
             vfs.Root.IsDirectory.Should().BeTrue();
@@ -131,7 +131,7 @@ public class VirtualFileSystemTests
             vfs.Root.Path.Value.Should().Be("vfs://");
             vfs.Root.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(1));
         }
-        
+
         [Fact]
         public void CreateDirectory_creates_a_directory_and_its_parents()
         {
@@ -139,10 +139,10 @@ public class VirtualFileSystemTests
             IVirtualFileSystem vfs = new VFS();
             const string directoryPath = "dir1/dir2/dir3";
             var path = new VFSDirectoryPath(directoryPath);
-            
+
             // Act
             vfs.CreateDirectory(directoryPath);
-            
+
             // Assert
             vfs.Index.Should().NotBeEmpty();
             vfs.Index.Should().HaveCount(4); // Root + dir1 + dir2 + dir3
@@ -151,7 +151,7 @@ public class VirtualFileSystemTests
             vfs.Index.Should().ContainKey("vfs://dir1/dir2");
             vfs.Index.Should().ContainKey("vfs://dir1/dir2/dir3");
         }
-        
+
         [Fact]
         public void CreateDirectory_throws_an_exception_if_the_directory_already_exists()
         {
@@ -159,14 +159,14 @@ public class VirtualFileSystemTests
             IVirtualFileSystem vfs = new VFS();
             var directoryPath = new VFSDirectoryPath("dir1");
             vfs.CreateDirectory(directoryPath);
-            
+
             // Act
             Action action = () => vfs.CreateDirectory(directoryPath);
-            
+
             // Assert
             action.Should().Throw<InvalidOperationException>();
         }
-        
+
         [Fact]
         public void CreateDirectory_throws_an_exception_if_the_path_is_not_a_directory()
         {
@@ -174,10 +174,10 @@ public class VirtualFileSystemTests
             var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
             IVirtualFileSystem vfs = new VFS();
             vfs.CreateFile(filePath);
-            
+
             // Act
             Action action = () => vfs.CreateDirectory(filePath);
-            
+
             // Assert
             action.Should().Throw<ArgumentException>();
         }
@@ -229,7 +229,7 @@ public class VirtualFileSystemTests
             action.Should().Throw<KeyNotFoundException>();
         }
     }
-    
+
     public class MethodFindDirectories
     {
         [Fact]
@@ -240,10 +240,10 @@ public class VirtualFileSystemTests
             vfs.CreateDirectory("dir1");
             vfs.CreateDirectory("dir2");
             vfs.CreateDirectory("dir3");
-            
+
             // Act
             var directories = vfs.FindDirectories().ToList();
-            
+
             // Assert
             directories.Should().NotBeEmpty();
             directories.Should().HaveCount(4); // Root + dir1 + dir2 + dir3
@@ -251,7 +251,7 @@ public class VirtualFileSystemTests
             directories.Should().Contain(d => d.Path.Value == "vfs://dir2");
             directories.Should().Contain(d => d.Path.Value == "vfs://dir3");
         }
-        
+
         [Fact]
         public void FindDirectories_returns_all_directories_matching_a_pattern()
         {
@@ -260,11 +260,11 @@ public class VirtualFileSystemTests
             vfs.CreateDirectory("dir1");
             vfs.CreateDirectory("dir2");
             vfs.CreateDirectory("dir3");
-            
+
             // Act
             var regexPattern = new Regex("dir1");
             var directories = vfs.FindDirectories(regexPattern).ToList();
-            
+
             // Assert
             directories.Should().NotBeEmpty();
             directories.Should().HaveCount(1);
@@ -316,7 +316,7 @@ public class VirtualFileSystemTests
             vfs.CreateFile(filePath);
 
             // Act
-            var result = vfs.TryGetFile(filePath, out IFileNode? file);
+            var result = vfs.TryGetFile(filePath, out var file);
 
             // Assert
             result.Should().BeTrue();
@@ -350,7 +350,7 @@ public class VirtualFileSystemTests
 
             // Act
             vfs.CreateFile(new VFSFilePath("dir1/dir2/dir3/file.txt"));
-            
+
             // Assert
             vfs.Index.Count.Should().Be(5); // Root + dir1 + dir2 + dir3 + file.txt
             vfs.Index.Should().ContainKey(new VFSFilePath("dir1/dir2/dir3/file.txt"));
@@ -371,7 +371,7 @@ public class VirtualFileSystemTests
             action.Should().Throw<InvalidOperationException>();
         }
     }
-    
+
     public class MethodDeleteFile
     {
         [Fact]
@@ -406,7 +406,7 @@ public class VirtualFileSystemTests
     public class MethodFindFiles
     {
         [Fact]
-        public void  FindFiles_returns_all_files()
+        public void FindFiles_returns_all_files()
         {
             // Arrange
             IVirtualFileSystem vfs = new VFS();
@@ -416,10 +416,10 @@ public class VirtualFileSystemTests
             vfs.CreateFile("dir1/file1.txt");
             vfs.CreateFile("dir2/file2.txt");
             vfs.CreateFile("dir3/file3.txt");
-            
+
             // Act
             var files = vfs.FindFiles().ToList();
-            
+
             // Assert
             files.Should().NotBeEmpty();
             files.Should().HaveCount(3);
@@ -427,7 +427,7 @@ public class VirtualFileSystemTests
             files.Should().Contain(f => f.Path.Value == "vfs://dir2/file2.txt");
             files.Should().Contain(f => f.Path.Value == "vfs://dir3/file3.txt");
         }
-        
+
         [Fact]
         public void FindFiles_with_valid_data_returns_a_list_of_files_with_content_and_name()
         {
@@ -437,11 +437,11 @@ public class VirtualFileSystemTests
             vfs.CreateFile("file2.txt", "content2");
             vfs.CreateFile("file3.txt", "content3");
 
-            Regex regex = new Regex(@"file\d.txt");
-            
+            var regex = new Regex(@"file\d.txt");
+
             // Act
             var files = vfs.FindFiles(regex).ToList();
-            
+
             // Assert
             files.Should().NotBeNull();
             files.Count.Should().Be(3);
@@ -470,20 +470,20 @@ public class VirtualFileSystemTests
             // Assert
             result.Should().Be("vfs://");
         }
-        
+
         [Fact]
         public void ToString_returns_3_files_as_ASCII_tree()
         {
             // Arrange
-            string expected = """
+            var expected = """
                 vfs://
                 ├── file1.txt
                 ├── file2.txt
                 └── file3.txt
                 """
                 .Replace("\r", "");
-            
-            IVirtualFileSystem vfs = new VFS()
+
+            var vfs = new VFS()
                 .CreateFile("file1.txt")
                 .CreateFile("file2.txt")
                 .CreateFile("file3.txt");
@@ -499,31 +499,31 @@ public class VirtualFileSystemTests
         public void ToString_returns_3_directories_as_ASCII_tree()
         {
             // Arrange
-            string expected = """
+            var expected = """
                 vfs://
                 ├── dir1
                 ├── dir2
                 └── dir3
                 """
                 .Replace("\r", "");
-            
-            IVirtualFileSystem vfs = new VFS()
+
+            var vfs = new VFS()
                 .CreateDirectory("dir1")
                 .CreateDirectory("dir2")
                 .CreateDirectory("dir3");
-            
+
             // Act
             var result = vfs.ToString();
-            
+
             // Assert
             result.Should().Be(expected);
         }
-        
+
         [Fact]
         public void ToString_returns_3_files_and_3_directories_as_ASCII_tree()
         {
             // Arrange
-            string expected = """
+            var expected = """
                 vfs://
                 ├── dir1
                 │   ├── file1.txt
@@ -539,8 +539,8 @@ public class VirtualFileSystemTests
                     └── file3.txt
                 """
                 .Replace("\r", "");
-            
-            IVirtualFileSystem vfs = new VFS()
+
+            var vfs = new VFS()
                 .CreateFile("dir1/file1.txt")
                 .CreateFile("dir1/file2.txt")
                 .CreateFile("dir1/file3.txt")
@@ -550,19 +550,19 @@ public class VirtualFileSystemTests
                 .CreateFile("dir3/file1.txt")
                 .CreateFile("dir3/file2.txt")
                 .CreateFile("dir3/file3.txt");
-            
+
             // Act
             var result = vfs.ToString();
-            
+
             // Assert
             result.Should().Be(expected);
         }
-        
+
         [Fact]
         public void ToString_returns_a_complex_tree()
         {
             // Arrange
-            string expected = """
+            var expected = """
                 vfs://
                 ├── dir1
                 │   ├── dir2
@@ -590,8 +590,8 @@ public class VirtualFileSystemTests
                     └── file3.txt
                 """
                 .Replace("\r", "");
-            
-            IVirtualFileSystem vfs = new VFS()
+
+            var vfs = new VFS()
                 .CreateFile("dir1/dir2/dir3/file1.txt")
                 .CreateFile("dir1/dir2/dir3/file2.txt")
                 .CreateFile("dir1/dir2/dir3/file3.txt")
@@ -610,10 +610,10 @@ public class VirtualFileSystemTests
                 .CreateFile("dir3/file1.txt")
                 .CreateFile("dir3/file2.txt")
                 .CreateFile("dir3/file3.txt");
-            
+
             // Act
             var result = vfs.ToString();
-            
+
             // Assert
             result.Should().Be(expected);
         }

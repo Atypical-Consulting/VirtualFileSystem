@@ -16,31 +16,31 @@ public static class VFSConstants
     ///     This is the path used to identify the root directory.
     /// </summary>
     public const string ROOT_PATH = "vfs://";
-    
+
     /// <summary>
     ///     The directory separator.
     ///     This is the character used to separate directory names.
     /// </summary>
     public const string DIRECTORY_SEPARATOR = "/";
-    
+
     /// <summary>
     ///     The string indent clear.
-    ///     A 4 characters string used by a string builder to indent a line. 
+    ///     A 4 characters string used by a string builder to indent a line.
     /// </summary>
     public const string STR_INDENT_CLEAR = "    ";
-    
+
     /// <summary>
     ///     The string indent entry middle.
     ///     A 4 characters string used by a string builder to indent a line which is not the last one.
     /// </summary>
     public const string STR_INDENT_ENTRY_MIDDLE = "├── ";
-    
+
     /// <summary>
     ///     The string indent entry last.
     ///     A 4 characters string used by a string builder to indent a line which is the last one.
     /// </summary>
     public const string STR_INDENT_ENTRY_LAST = "└── ";
-    
+
     /// <summary>
     ///     The string indent entry fill.
     ///     A 4 characters string used by a string builder to indent a line which is not the last one.

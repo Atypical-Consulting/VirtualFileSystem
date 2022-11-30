@@ -64,7 +64,7 @@ public abstract record VFSPath
     ///     Gets the path of the parent directory.
     /// </summary>
     public VFSDirectoryPath? Parent { get; }
-    
+
     /// <summary>
     ///     Indicates whether the path has a parent directory.
     /// </summary>
@@ -87,11 +87,10 @@ public abstract record VFSPath
     ///     The depth of a directory is the depth of its parent directory plus one.
     /// </summary>
     public int Depth {
-        get
-        {
+        get {
             if (IsRoot)
                 return 0;
-            
+
             var depth = 0;
             var path = this;
             while (path!.Value != ROOT_PATH)
@@ -99,7 +98,7 @@ public abstract record VFSPath
                 path = path.Parent;
                 depth++;
             }
-            
+
             return depth;
         }
     }
@@ -110,14 +109,25 @@ public abstract record VFSPath
     ///     The name of a file is the name of the file with its extension.
     /// </summary>
     public string Name {
-        get
-        {
+        get {
             if (IsRoot)
                 return ROOT_PATH;
-            
+
             var lastIndexOfName = Value.LastIndexOf(DIRECTORY_SEPARATOR, StringComparison.Ordinal);
             return Value[(lastIndexOfName + 1)..];
-        } 
+        }
+    }
+
+    /// <summary>
+    ///     Indicates whether the current object is equal to another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>A value that indicates whether the current object is equal to the <paramref name="other" /> parameter.</returns>
+    public virtual bool Equals(VFSPath? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Value == other.Value;
     }
 
     /// <summary>
@@ -157,38 +167,21 @@ public abstract record VFSPath
     public VFSPath GetAbsoluteParentPath(int depthFromRoot)
     {
         if (depthFromRoot < 0)
-            throw new ArgumentOutOfRangeException(nameof(depthFromRoot), "The depth from root must be greater than or equal to 0.");
-        
+            throw new ArgumentOutOfRangeException(nameof(depthFromRoot),
+                "The depth from root must be greater than or equal to 0.");
+
         if (IsRoot)
             return this;
-        
-        var path = this;
-        while (path!.Depth > depthFromRoot)
-        {
-            path = path.Parent;
-        }
-        
-        return path;
-    }
 
-    /// <summary>
-    ///     Indicates whether the current object is equal to another object of the same type.
-    /// </summary>
-    /// <param name="other">An object to compare with this object.</param>
-    /// <returns>A value that indicates whether the current object is equal to the <paramref name="other" /> parameter.</returns>
-    public virtual bool Equals(VFSPath? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Value == other.Value;
+        var path = this;
+        while (path!.Depth > depthFromRoot) path = path.Parent;
+
+        return path;
     }
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
-    public override int GetHashCode()
-    {
-        return Value.GetHashCode();
-    }
+    public override int GetHashCode() => Value.GetHashCode();
 }

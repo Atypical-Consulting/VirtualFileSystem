@@ -18,14 +18,14 @@ public interface IVirtualFileSystem
     ///     This is the entry point for all operations on the file system.
     /// </summary>
     IRootNode Root { get; }
-    
+
     /// <summary>
     ///     Gets the file index of the file system.
     ///     Basically, this is a dictionary that maps file paths to file nodes.
     ///     This is useful for quickly finding a file node by its path.
     /// </summary>
     VFSIndex Index { get; }
-    
+
     /// <summary>
     ///     Indicates whether the file system is empty.
     ///     This is the case if the root directory is empty.
@@ -149,7 +149,7 @@ public interface IVirtualFileSystem
     /// <param name="file">The file node.</param>
     /// <returns><c>true</c> if the file node exists; otherwise, <c>false</c>.</returns>
     bool TryGetFile(string filePath, out IFileNode? file);
-    
+
     /// <summary>
     ///     Creates a file node at the specified path.
     ///     The path must be absolute.
@@ -196,7 +196,7 @@ public interface IVirtualFileSystem
     /// <param name="regexPattern">The regular expression pattern.</param>
     /// <returns>The file nodes.</returns>
     IEnumerable<IFileNode> FindFiles(Regex regexPattern);
-    
+
     // TODO: Add methods for copying, moving, renaming, etc.
     // /// <summary>
     // ///     Reads the content of a file.
