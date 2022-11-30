@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
         <Company>Atypical Consulting SRL</Company>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <!-- File inclusion -->
