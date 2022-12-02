@@ -100,19 +100,6 @@ dotnet build
 ### Creating a virtual file system, add some files and print the content of the root directory as an ASCII tree
 
 ```csharp
-IVirtualFileSystem vfs = new VFS()
-    .CreateFile("dir1/file1.txt")
-    .CreateFile("dir1/file2.txt")
-    .CreateFile("dir1/file3.txt")
-    .CreateFile("dir2/file1.txt")
-    .CreateFile("dir2/file2.txt")
-    .CreateFile("dir2/file3.txt")
-    .CreateFile("dir3/file1.txt")
-    .CreateFile("dir3/file2.txt")
-    .CreateFile("dir3/file3.txt");
-
-string tree = vfs.ToString();
-
 // sample output (the order of the files is alphabetical)
 string expected = """
     vfs://
@@ -129,6 +116,22 @@ string expected = """
         ├── metropolis.txt
         └── themyscira.txt
     """;
+
+// create a virtual file system
+IVirtualFileSystem vfs = new VFS()
+    // add some files (directories are created automatically)
+    .CreateFile("superheroes/batman.txt")
+    .CreateFile("superheroes/superman.txt")
+    .CreateFile("superheroes/wonderwoman.txt")
+    .CreateFile("villains/joker.txt")
+    .CreateFile("villains/lexluthor.txt")
+    .CreateFile("villains/penguin.txt")
+    .CreateFile("world/gotham.txt")
+    .CreateFile("world/metropolis.txt")
+    .CreateFile("world/themyscira.txt");
+
+// get the string representation of the virtual file system
+string tree = vfs.ToString();
 ```
 
 ## Documentation
