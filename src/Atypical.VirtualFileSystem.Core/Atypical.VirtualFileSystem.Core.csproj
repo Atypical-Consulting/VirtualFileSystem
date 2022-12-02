@@ -8,7 +8,7 @@
         <Company>Atypical Consulting SRL</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <DefaultDocumentationFolder>../../doc/api</DefaultDocumentationFolder>
+        <DefaultDocumentationFolder>../../docs/api</DefaultDocumentationFolder>
         <DefaultDocumentationAssemblyPageName>Atypical.VirtualFileSystem.Core</DefaultDocumentationAssemblyPageName>
     </PropertyGroup>
 
