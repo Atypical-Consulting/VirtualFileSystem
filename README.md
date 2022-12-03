@@ -32,15 +32,15 @@
   * [📝 Table of Contents](#-table-of-contents)
   * [📖 Introduction](#-introduction)
     * [🧐 What is a virtual file system and why should I use it?](#-what-is-a-virtual-file-system-and-why-should-i-use-it)
-    * [📋 Prerequisites](#-prerequisites)
   * [📌 Features](#-features)
-    * [🚀 We use the latest C# features](#-we-use-the-latest-c-features)
+  * [📄 Documentation](#-documentation)
   * [📥 Installation](#-installation)
+    * [📋 Prerequisites](#-prerequisites)
+    * [🚀 We use the latest C# features](#-we-use-the-latest-c-features)
     * [📦 NuGet](#-nuget)
     * [📁 From source](#-from-source)
   * [📚 Use cases](#-use-cases)
-    * [Creating a virtual file system, add some files and print the content of the root directory as an ASCII tree](#creating-a-virtual-file-system-add-some-files-and-print-the-content-of-the-root-directory-as-an-ascii-tree)
-  * [📄 Documentation](#-documentation)
+    * [Creating a virtual file system, add some files and print the content as an ASCII tree](#creating-a-virtual-file-system-add-some-files-and-print-the-content-as-an-ascii-tree)
   * [🤝 Contributing](#-contributing)
   * [📜 License](#-license)
   * [📬 Contact](#-contact)
@@ -63,18 +63,29 @@ A virtual file system is a data structure that represents a file system in memor
 on a computer. It is useful for testing purposes, for example, when you want to test a file system without actually
 creating files on the hard drive.
 
-### 📋 Prerequisites
-
-- .NET 6.0
-- A C# IDE (Visual Studio, Rider, etc.)
-- A C# compiler (dotnet CLI, etc.)
-
 ## 📌 Features
 
 - [x] Create a virtual file system
 - [x] Create a virtual file or directory
 - [x] Print the contents of a virtual file system as a tree
 - [ ] ...
+
+## 📄 Documentation
+
+**Virtual File System** provides a [COMPLETE DOCUMENTATION](./docs/README.md) of the library.
+
+All summaries are written in English. If you want to help us translate the documentation, please open an issue to
+discuss it.
+
+> **Note:** The documentation is generated using [Doraku/DefaultDocumentation]() tool. It is generated automatically when the project is built.
+
+## 📥 Installation
+
+### 📋 Prerequisites
+
+- .NET 6.0
+- A C# IDE (Visual Studio, Rider, etc.)
+- A C# compiler (dotnet CLI, etc.)
 
 ### 🚀 We use the latest C# features
 
@@ -83,8 +94,6 @@ properties, `record` types, `switch` expressions, `using` declarations, and more
 
 I invite you to read the [C# 11.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11) to
 learn more about these features.
-
-## 📥 Installation
 
 ### 📦 NuGet
 
@@ -114,7 +123,7 @@ dotnet build
 
 ## 📚 Use cases
 
-### Creating a virtual file system, add some files and print the content of the root directory as an ASCII tree
+### Creating a virtual file system, add some files and print the content as an ASCII tree
 
 ```csharp
 // sample output (the order of the files is alphabetical)
@@ -151,18 +160,9 @@ IVirtualFileSystem vfs = new VFS()
 string tree = vfs.ToString();
 ```
 
-## 📄 Documentation
-
-**Virtual File System** provides a complete documentation of the library available in the [`./docs/api`](./doc/api) folder.
-
-The documentation is generated using [Doraku's DefaultDocumentation](https://github.com/Doraku/DefaultDocumentation) tool.
-
-All summaries are written in English. If you want to help us translate the documentation, please open an issue to
-discuss it.
-
 ## 🤝 Contributing
 
-Contributions are welcome! Please read the [contribution guidelines](CONTRIBUTING.md) first.
+Contributions are welcome! Please read the [CONTRIBUTION GUIDELINES](CONTRIBUTING.md) first.
 
 ## 📜 License
 
