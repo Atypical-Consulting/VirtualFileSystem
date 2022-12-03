@@ -8,15 +8,16 @@
         <Company>Atypical Consulting SRL</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <DefaultDocumentationFolder>../../docs</DefaultDocumentationFolder>
-        <DefaultDocumentationAssemblyPageName>Atypical.VirtualFileSystem.Core</DefaultDocumentationAssemblyPageName>
+        <DefaultDocumentationFolder>../../docs/api</DefaultDocumentationFolder>
+        <DefaultDocumentationLinksOutputFile>../../docs/links</DefaultDocumentationLinksOutputFile>
+        <DefaultDocumentationAssemblyPageName>VirtualFileSystem</DefaultDocumentationAssemblyPageName>
     </PropertyGroup>
 
     <!-- File inclusion -->
     <ItemGroup>
-        <None Include="../../Logo.png" Pack="true" PackagePath=""/>
-        <None Include="../../LICENSE" Pack="true" PackagePath=""/>
-        <None Include="../../README.md" Pack="true" PackagePath=""/>
+        <None Include="../../Logo.png" Pack="true" PackagePath="" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="" />
+        <None Include="../../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
     
     <!-- Development dependencies -->
