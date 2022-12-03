@@ -153,9 +153,7 @@ string tree = vfs.ToString();
 
 ## 📄 Documentation
 
-**Virtual File System** provides a complete documentation of the library available in the [`./docs/api`](./doc/api) folder.
-
-The documentation is generated using [Doraku's DefaultDocumentation](https://github.com/Doraku/DefaultDocumentation) tool.
+**Virtual File System** provides a [complete documentation](./docs/README.md) of the library. The documentation is generated using [Doraku's DefaultDocumentation](https://github.com/Doraku/DefaultDocumentation) tool.
 
 All summaries are written in English. If you want to help us translate the documentation, please open an issue to
 discuss it.
