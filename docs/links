@@ -51,6 +51,9 @@ M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.#ctor|VFSRootPath.VFS
 M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.ToString|VFSRootPath.ToString().md|ToString()
 M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.op_Implicit(Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath)~System.String|VFSRootPath.implicitoperatorstring(VFSRootPath).md|implicit operator string(VFSRootPath)
 T:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath|VFSRootPath.md|VFSRootPath
+M:Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions.AddVirtualFileSystem(Microsoft.Extensions.DependencyInjection.IServiceCollection)|ServiceCollectionExtensions.AddVirtualFileSystem(thisIServiceCollection).md|AddVirtualFileSystem(this IServiceCollection)
+N:Atypical.VirtualFileSystem.Core.Services|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Services|Atypical.VirtualFileSystem.Core.Services
+T:Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions|ServiceCollectionExtensions.md|ServiceCollectionExtensions
 P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Path|DirectoryNode.Path.md|Path
 P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsDirectory|DirectoryNode.IsDirectory.md|IsDirectory
 P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsFile|DirectoryNode.IsFile.md|IsFile

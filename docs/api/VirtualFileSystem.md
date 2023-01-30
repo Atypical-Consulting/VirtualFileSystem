@@ -232,6 +232,13 @@
   - **[ToString()](RootNode.ToString().md 'Atypical.VirtualFileSystem.Core.Models.RootNode.ToString()')** `Method` Returns a string that represents the current object.  
     For [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode') this is always the constant string <cref see="ROOT_PATH"/>.
 
+<a name='Atypical.VirtualFileSystem.Core.Services'></a>
+
+## Atypical.VirtualFileSystem.Core.Services Namespace
+- **[ServiceCollectionExtensions](ServiceCollectionExtensions.md 'Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions')** `Class` Extension methods for [Microsoft.Extensions.DependencyInjection.IServiceCollection](https://docs.microsoft.com/en-us/dotnet/api/Microsoft.Extensions.DependencyInjection.IServiceCollection 'Microsoft.Extensions.DependencyInjection.IServiceCollection').  
+  This class is used to register the virtual file system in the dependency injection container.
+  - **[AddVirtualFileSystem(this IServiceCollection)](ServiceCollectionExtensions.AddVirtualFileSystem(thisIServiceCollection).md 'Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions.AddVirtualFileSystem(this Microsoft.Extensions.DependencyInjection.IServiceCollection)')** `Method` Registers the virtual file system in the dependency injection container.
+
 <a name='Atypical.VirtualFileSystem.Core.ValueObjects'></a>
 
 ## Atypical.VirtualFileSystem.Core.ValueObjects Namespace
