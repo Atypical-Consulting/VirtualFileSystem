@@ -480,7 +480,7 @@ public class VirtualFileSystemTests
                 ├── file1.txt
                 ├── file2.txt
                 └── file3.txt
-                """.Normalize();
+                """.ReplaceLineEndings();
 
             var vfs = new VFS()
                 .CreateFile("file1.txt")
@@ -503,7 +503,7 @@ public class VirtualFileSystemTests
                 ├── dir1
                 ├── dir2
                 └── dir3
-                """.Normalize();
+                """.ReplaceLineEndings();
 
             var vfs = new VFS()
                 .CreateDirectory("dir1")
@@ -535,7 +535,7 @@ public class VirtualFileSystemTests
                     ├── file1.txt
                     ├── file2.txt
                     └── file3.txt
-                """.Normalize();
+                """.ReplaceLineEndings();
 
             var vfs = new VFS()
                 .CreateFile("dir1/file1.txt")
@@ -585,7 +585,7 @@ public class VirtualFileSystemTests
                     ├── file1.txt
                     ├── file2.txt
                     └── file3.txt
-                """.Normalize();
+                """.ReplaceLineEndings();
 
             var vfs = new VFS()
                 .CreateFile("dir1/dir2/dir3/file1.txt")
