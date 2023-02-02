@@ -84,7 +84,7 @@ public record VFS
             sb.AppendLine(node.Path.Name);
         }
 
-        return sb.ToString().Trim();
+        return sb.ToString().Trim().Normalize();
     }
 
     /// <summary>
