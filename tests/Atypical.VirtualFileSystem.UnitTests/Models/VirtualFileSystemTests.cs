@@ -145,7 +145,7 @@ public class VirtualFileSystemTests
 
             // Assert
             vfs.Index.Should().NotBeEmpty();
-            vfs.Index.Should().HaveCount(4); // Root + dir1 + dir2 + dir3
+            vfs.Index.Should().HaveCount(3); // dir1 + dir2 + dir3
             vfs.Index.Should().ContainKey(path.Value);
             vfs.Index.Should().ContainKey("vfs://dir1");
             vfs.Index.Should().ContainKey("vfs://dir1/dir2");
@@ -201,7 +201,7 @@ public class VirtualFileSystemTests
             vfs.DeleteDirectory(directoryPath);
 
             // Assert
-            vfs.Index.Count.Should().Be(1); // Root
+            vfs.Index.Count.Should().Be(0);
         }
 
         [Fact]
@@ -216,7 +216,7 @@ public class VirtualFileSystemTests
             vfs.DeleteDirectory("dir1");
 
             // Assert
-            vfs.Index.Count.Should().Be(1); // Root
+            vfs.Index.Count.Should().Be(0);
         }
 
         [Fact]
@@ -252,7 +252,7 @@ public class VirtualFileSystemTests
 
             // Assert
             directories.Should().NotBeEmpty();
-            directories.Should().HaveCount(4); // Root + dir1 + dir2 + dir3
+            directories.Should().HaveCount(3); // dir1 + dir2 + dir3
             directories.Should().Contain(d => d.Path.Value == "vfs://dir1");
             directories.Should().Contain(d => d.Path.Value == "vfs://dir2");
             directories.Should().Contain(d => d.Path.Value == "vfs://dir3");
@@ -358,7 +358,7 @@ public class VirtualFileSystemTests
             vfs.CreateFile(new VFSFilePath("dir1/dir2/dir3/file.txt"));
 
             // Assert
-            vfs.Index.Count.Should().Be(5); // Root + dir1 + dir2 + dir3 + file.txt
+            vfs.Index.Count.Should().Be(4); // dir1 + dir2 + dir3 + file.txt
             vfs.Index.Should().ContainKey(new VFSFilePath("dir1/dir2/dir3/file.txt"));
         }
 
@@ -394,7 +394,7 @@ public class VirtualFileSystemTests
             vfs.DeleteFile(filePath);
 
             // Assert
-            vfs.Index.Count.Should().Be(4); // Root, dir1, dir2, dir3
+            vfs.Index.Count.Should().Be(3); // dir1, dir2, dir3
         }
 
         [Fact]
@@ -462,7 +462,7 @@ public class VirtualFileSystemTests
             files[2].Name.Should().Be("file3.txt");
             files[2].Content.Should().Be("content3");
             // Assert Index
-            vfs.Index.Count.Should().Be(4); // Root, file1, file2, file3
+            vfs.Index.Count.Should().Be(3); // file1, file2, file3
         }
     }
 
