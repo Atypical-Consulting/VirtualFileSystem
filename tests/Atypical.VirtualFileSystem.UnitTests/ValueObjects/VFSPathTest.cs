@@ -18,7 +18,7 @@ public class VFSPathTest
         // - The path must not end with a slash (/).
 
         [Fact]
-        public void Constructor_throw_ArgumentNullException_when_path_is_null()
+        public void Constructor_throw_VFSException_when_path_is_null()
         {
             // Arrange
             const string path = null!;
@@ -30,11 +30,13 @@ public class VFSPathTest
             };
 
             // Assert
-            action.Should().Throw<ArgumentNullException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("An empty path is invalid.");
         }
 
         [Fact]
-        public void Constructor_throw_ArgumentException_when_path_is_empty()
+        public void Constructor_throw_VFSException_when_path_is_empty()
         {
             // Arrange
             const string path = "";
@@ -46,27 +48,13 @@ public class VFSPathTest
             };
 
             // Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("An empty path is invalid.");
         }
 
         [Fact]
-        public void Constructor_throw_ArgumentException_when_path_contains_invalid_characters()
-        {
-            // Arrange
-            const string path = @"invalid\path";
-
-            // Act
-            var action = () =>
-            {
-                var _ = new VFSDirectoryPath(path);
-            };
-
-            // Assert
-            action.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void Constructor_throw_ArgumentException_when_path_contains_relative_path_segments()
+        public void Constructor_throw_VFSException_when_path_contains_relative_path_segments()
         {
             // Arrange
             const string path = @"invalid/../path";
@@ -78,11 +66,13 @@ public class VFSPathTest
             };
 
             // Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The path 'vfs://invalid/../path' contains a relative path segment.");
         }
 
         [Fact]
-        public void Constructor_throw_ArgumentException_when_path_contains_consecutive_slashes()
+        public void Constructor_throw_VFSException_when_path_contains_consecutive_slashes()
         {
             // Arrange
             const string path = @"invalid//path";
@@ -94,7 +84,9 @@ public class VFSPathTest
             };
 
             // Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The path 'vfs://invalid//path' is invalid.");
         }
 
         [Fact]
@@ -337,7 +329,7 @@ public class VFSPathTest
         }
 
         [Fact]
-        public void MethodGetAbsoluteParentPath_throw_exception_when_depth_is_negative()
+        public void MethodGetAbsoluteParentPath_throw_VFSException_when_depth_is_negative()
         {
             // Arrange
             const string path = @"directory/subdirectory";
@@ -347,7 +339,12 @@ public class VFSPathTest
             Action action = () => vfsPath.GetAbsoluteParentPath(-1);
 
             // Assert
-            action.Should().Throw<ArgumentOutOfRangeException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage($"""
+                    The depth from root must be greater than or equal to 0.
+                    Actual value: {-1}.
+                    """);
         }
 
         [Fact]

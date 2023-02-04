@@ -24,7 +24,7 @@ public record VFSDirectoryPath : VFSPath
         // cannot ends with a file extension
         var lastSegment = Value.Split('/').Last();
         if (lastSegment.Contains('.'))
-            throw new ArgumentException("The path must not contain a file extension.", nameof(path));
+            ThrowArgumentHasFileExtension(path);
     }
 
     /// <summary>
@@ -41,4 +41,11 @@ public record VFSDirectoryPath : VFSPath
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
     public static implicit operator string(VFSDirectoryPath path) => path.Value;
+    
+    [DoesNotReturn]
+    private static void ThrowArgumentHasFileExtension(string path)
+    {
+        var message = $"The directory path '{path}' contains a file extension.";
+        throw new VFSException(message, new ArgumentException(message));
+    }
 }

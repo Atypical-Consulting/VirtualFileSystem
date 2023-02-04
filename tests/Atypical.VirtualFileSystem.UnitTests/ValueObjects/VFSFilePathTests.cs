@@ -18,7 +18,7 @@ public class VFSFilePathTests
         // - The path must not end with a slash (/).
 
         [Fact]
-        public void Constructor_throw_ArgumentNullException_when_path_is_null()
+        public void Constructor_throw_VFSException_when_path_is_null()
         {
             // Arrange
             const string path = null!;
@@ -30,11 +30,13 @@ public class VFSFilePathTests
             };
 
             // Assert
-            action.Should().Throw<ArgumentNullException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("An empty path is invalid.");
         }
 
         [Fact]
-        public void Constructor_throw_ArgumentException_when_path_is_empty()
+        public void Constructor_throw_VFSException_when_path_is_empty()
         {
             // Arrange
             const string path = "";
@@ -46,23 +48,9 @@ public class VFSFilePathTests
             };
 
             // Assert
-            action.Should().Throw<ArgumentException>();
-        }
-
-        [Fact]
-        public void Constructor_throw_ArgumentException_when_path_contains_invalid_characters()
-        {
-            // Arrange
-            const string path = @"invalid\path";
-
-            // Act
-            var action = () =>
-            {
-                var _ = new VFSFilePath(path);
-            };
-
-            // Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("An empty path is invalid.");
         }
     }
 
