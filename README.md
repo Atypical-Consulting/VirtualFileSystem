@@ -1,12 +1,7 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Atypical-Consulting/VirtualFileSystem/main/Logo.png" alt="Virtual File System Logo" width="200" height="200">
-  <h1>Virtual File System</h1>
-</div>
-<p align="center">A virtual file system implementation in modern C#.</p>
+# Virtual File System
+A virtual file system implementation in modern C#.
 
 ---
-
-<div align="center">
 
 [![Atypical-Consulting - VirtualFileSystem](https://img.shields.io/static/v1?label=Atypical-Consulting&message=VirtualFileSystem&color=blue&logo=github)](https://github.com/Atypical-Consulting/VirtualFileSystem "Go to GitHub repo")
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
@@ -22,7 +17,6 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Atypical.VirtualFileSystem.svg)](https://www.nuget.org/packages/Atypical.VirtualFileSystem)
 [![NuGet](https://img.shields.io/nuget/dt/Atypical.VirtualFileSystem.svg)](https://www.nuget.org/packages/Atypical.VirtualFileSystem)
-</div>
 
 ---
 
@@ -72,7 +66,7 @@ creating files on the hard drive.
 
 ## 📄 Documentation
 
-**Virtual File System** provides a [COMPLETE DOCUMENTATION](./docs/README.md) of the library.
+**Virtual File System** provides a [COMPLETE DOCUMENTATION](https://github.com/Atypical-Consulting/VirtualFileSystem/blob/main/docs/README.md) of the library.
 
 All summaries are written in English. If you want to help us translate the documentation, please open an issue to
 discuss it.
@@ -162,7 +156,7 @@ string tree = vfs.ToString();
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read the [CONTRIBUTION GUIDELINES](CONTRIBUTING.md) first.
+Contributions are welcome! Please read the [CONTRIBUTION GUIDELINES](https://github.com/Atypical-Consulting/VirtualFileSystem/blob/main/CONTRIBUTING.md) first.
 
 ## 📜 License
 
@@ -183,7 +177,7 @@ You can contact us by opening an issue on this repository.
 
 ## 🎉 Change log
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [RELEASES](https://github.com/Atypical-Consulting/VirtualFileSystem/releases) for more information what has changed recently.
 
 ## ✨ Contributors
 
