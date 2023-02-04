@@ -42,23 +42,32 @@
             "Virtual File System" is an attempt to solve this problem. Currently, this library is at an early stage of development. If you need additional functionality, I invite you to open an issue to discuss it.
         </Description>
         <PackageTags>virtual filesystem;testing;core;net7</PackageTags>
-        <Copyright>Copyright (c) 2022 Atypical Consulting SRL</Copyright>
+        <Copyright>Copyright (c) 2022-2023 Atypical Consulting SRL</Copyright>
         <PackageProjectUrl>https://github.com/Atypical-Consulting/VirtualFileSystem</PackageProjectUrl>
         <RepositoryUrl>https://github.com/Atypical-Consulting/VirtualFileSystem.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <RepositoryBranch>main</RepositoryBranch>
         <PackageReleaseNotes>
-            - Initial release
+            ## Changes
+            - Update Copyright @phmatray (#25)
+            - Create ServiceCollectionExtensionsTests.cs @phmatray (#24)
+            - Introduce VFSException class @phmatray (#23)
+            - Fix a group of broken tests (VFS.ToString method) @phmatray (#22)
+            - Add virtual file system extension method @phmatray (#21)
+            - Bump FluentAssertions from 6.8.0 to 6.9.0 @dependabot (#20)
+            - Bump Microsoft.NET.Test.Sdk from 17.4.0 to 17.4.1 @dependabot (#19)
+            - Use Markdown documentation @phmatray (#18)
+            - Move and copy .editorconfig @phmatray (#15)
         </PackageReleaseNotes>
     </PropertyGroup>
 
     <!-- Versioning -->
     <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
     <PropertyGroup>
-        <Version>0.1.0</Version>
-        <AssemblyVersion>0.1.0</AssemblyVersion>
-        <FileVersion>0.1.0</FileVersion>
-        <InformationalVersion>0.1.0</InformationalVersion>
+        <Version>0.1.3</Version>
+        <AssemblyVersion>0.1.3</AssemblyVersion>
+        <FileVersion>0.1.3</FileVersion>
+        <InformationalVersion>0.1.3</InformationalVersion>
     </PropertyGroup>
 
 </Project>
