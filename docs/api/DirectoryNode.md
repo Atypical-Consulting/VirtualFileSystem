@@ -31,4 +31,6 @@ Implements [IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.C
 
 | Methods | |
 | :--- | :--- |
+| [AddChild(IDirectoryNode)](DirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)') | Adds a child directory to the current directory. |
+| [AddChild(IFileNode)](DirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)') | Adds a child file to the current directory. |
 | [ToString()](DirectoryNode.ToString().md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.ToString()') | Returns a string that represents the path of the directory. |

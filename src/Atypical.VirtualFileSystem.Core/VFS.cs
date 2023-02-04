@@ -137,8 +137,15 @@ public record VFS
         if (directoryPath.IsRoot)
             ThrowCannotCreateRootDirectory();
 
+        if (directoryPath.Parent == null)
+            ThrowCannotCreateDirectoryWithoutParent();
+        
         var directory = new DirectoryNode(directoryPath);
         AddToIndex(directory);
+
+        var parent = GetDirectory(directoryPath.Parent);
+        parent.AddChild(directory);
+
         return this;
     }
 
@@ -216,8 +223,15 @@ public record VFS
     /// <inheritdoc cref="IVirtualFileSystem.CreateFile(VFSFilePath, string)" />
     public IVirtualFileSystem CreateFile(VFSFilePath filePath, string? content = null)
     {
+        if (filePath.Parent == null)
+            ThrowCannotCreateDirectoryWithoutParent();
+        
         var file = new FileNode(filePath, content);
         AddToIndex(file);
+
+        var parent = GetDirectory(filePath.Parent);
+        parent.AddChild(file);
+
         return this;
     }
 
@@ -285,6 +299,13 @@ public record VFS
     private static void ThrowCannotCreateRootDirectory()
     {
         const string message = "Cannot create the root directory.";
+        throw new VFSException(message);
+    }
+
+    [DoesNotReturn]
+    private static void ThrowCannotCreateDirectoryWithoutParent()
+    {
+        const string message = "Cannot create a directory without a parent.";
         throw new VFSException(message);
     }
 }

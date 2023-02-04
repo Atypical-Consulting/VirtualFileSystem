@@ -58,6 +58,8 @@ P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Path|DirectoryNode.Path.m
 P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsDirectory|DirectoryNode.IsDirectory.md|IsDirectory
 P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsFile|DirectoryNode.IsFile.md|IsFile
 M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.#ctor(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|DirectoryNode.DirectoryNode(VFSDirectoryPath).md|DirectoryNode(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)|DirectoryNode.AddChild(IDirectoryNode).md|AddChild(IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)|DirectoryNode.AddChild(IFileNode).md|AddChild(IFileNode)
 M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.ToString|DirectoryNode.ToString().md|ToString()
 N:Atypical.VirtualFileSystem.Core.Models|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models|Atypical.VirtualFileSystem.Core.Models
 T:Atypical.VirtualFileSystem.Core.Models.DirectoryNode|DirectoryNode.md|DirectoryNode
@@ -75,6 +77,8 @@ M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String)|V
 M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String,System.Exception)|VFSException.VFSException(string,Exception).md|VFSException(string, Exception)
 N:Atypical.VirtualFileSystem.Core.Exceptions|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Exceptions|Atypical.VirtualFileSystem.Core.Exceptions
 T:Atypical.VirtualFileSystem.Core.Exceptions.VFSException|VFSException.md|VFSException
+M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)|IDirectoryNode.AddChild(IDirectoryNode).md|AddChild(IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)|IDirectoryNode.AddChild(IFileNode).md|AddChild(IFileNode)
 N:Atypical.VirtualFileSystem.Core.Contracts|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts|Atypical.VirtualFileSystem.Core.Contracts
 T:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode|IDirectoryNode.md|IDirectoryNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content|IFileNode.Content.md|Content
