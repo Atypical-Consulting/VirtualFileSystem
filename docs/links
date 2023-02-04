@@ -71,6 +71,10 @@ T:Atypical.VirtualFileSystem.Core.Models.FileNode|FileNode.md|FileNode
 M:Atypical.VirtualFileSystem.Core.Models.RootNode.#ctor|RootNode.RootNode().md|RootNode()
 M:Atypical.VirtualFileSystem.Core.Models.RootNode.ToString|RootNode.ToString().md|ToString()
 T:Atypical.VirtualFileSystem.Core.Models.RootNode|RootNode.md|RootNode
+M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String)|VFSException.VFSException(string).md|VFSException(string)
+M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String,System.Exception)|VFSException.VFSException(string,Exception).md|VFSException(string, Exception)
+N:Atypical.VirtualFileSystem.Core.Exceptions|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Exceptions|Atypical.VirtualFileSystem.Core.Exceptions
+T:Atypical.VirtualFileSystem.Core.Exceptions.VFSException|VFSException.md|VFSException
 N:Atypical.VirtualFileSystem.Core.Contracts|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts|Atypical.VirtualFileSystem.Core.Contracts
 T:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode|IDirectoryNode.md|IDirectoryNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content|IFileNode.Content.md|Content

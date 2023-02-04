@@ -164,7 +164,9 @@ public class VirtualFileSystemTests
             Action action = () => vfs.CreateDirectory(directoryPath);
 
             // Assert
-            action.Should().Throw<InvalidOperationException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage($"The node 'vfs://dir1' already exists in the index.");
         }
 
         [Fact]
@@ -179,7 +181,9 @@ public class VirtualFileSystemTests
             Action action = () => vfs.CreateDirectory(filePath);
 
             // Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The directory path 'vfs://dir1/dir2/dir3/file.txt' contains a file extension.");
         }
     }
 
@@ -226,7 +230,9 @@ public class VirtualFileSystemTests
             Action action = () => vfs.DeleteDirectory(directoryPath);
 
             // Assert
-            action.Should().Throw<KeyNotFoundException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The directory 'vfs://dir1' does not exist in the index.");
         }
     }
 
@@ -368,7 +374,9 @@ public class VirtualFileSystemTests
             Action action = () => vfs.CreateFile(filePath);
 
             // Assert
-            action.Should().Throw<InvalidOperationException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The node 'vfs://dir1/dir2/dir3/file.txt' already exists in the index.");
         }
     }
 
@@ -399,7 +407,9 @@ public class VirtualFileSystemTests
             Action action = () => vfs.DeleteFile("dir1/dir2/dir3/file.txt");
 
             // Assert
-            action.Should().Throw<KeyNotFoundException>();
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
         }
     }
 

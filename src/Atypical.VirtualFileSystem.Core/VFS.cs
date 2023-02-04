@@ -39,7 +39,7 @@ public record VFS
         var added = Index.TryAdd(node.Path.Value, node);
 
         if (!added)
-            throw new InvalidOperationException($"The node '{node.Path}' already exists in the index.");
+            ThrowVirtualNodeAlreadyExists(node);
 
         if (node.Path.Parent is not null && !Index.ContainsKey(node.Path.Parent.Value))
             CreateDirectory(node.Path.Parent);
@@ -135,7 +135,7 @@ public record VFS
     public IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath)
     {
         if (directoryPath.IsRoot)
-            throw new ArgumentException("Cannot create root directory.", nameof(directoryPath));
+            ThrowCannotCreateRootDirectory();
 
         var directory = new DirectoryNode(directoryPath);
         AddToIndex(directory);
@@ -150,12 +150,12 @@ public record VFS
     public IVirtualFileSystem DeleteDirectory(VFSDirectoryPath directoryPath)
     {
         if (directoryPath.IsRoot)
-            throw new ArgumentException("Cannot delete root directory.", nameof(directoryPath));
+            ThrowCannotDeleteRootDirectory();
 
         // try to get the directory
         var found = TryGetDirectory(directoryPath, out _);
         if (!found)
-            throw new KeyNotFoundException($"The directory '{directoryPath}' does not exist.");
+            ThrowVirtualDirectoryNotFound(directoryPath);
 
         // find the path and its children in the index
         var paths = Index.Keys
@@ -231,7 +231,7 @@ public record VFS
         // try to get the file
         var found = TryGetFile(filePath, out _);
         if (!found)
-            throw new KeyNotFoundException($"The file '{filePath}' does not exist.");
+            ThrowVirtualFileNotFound(filePath);
 
         // remove the file from the index
         Index.Remove(filePath.Value);
@@ -252,4 +252,39 @@ public record VFS
         => FindFiles().Where(f => regexPattern.IsMatch(f.Path.Value));
 
     #endregion
+    
+    [DoesNotReturn]
+    private static void ThrowVirtualNodeAlreadyExists(IVirtualFileSystemNode node)
+    {
+        var message = $"The node '{node.Path}' already exists in the index.";
+        throw new VFSException(message);
+    }
+
+    [DoesNotReturn]
+    private static void ThrowVirtualFileNotFound(VFSFilePath filePath)
+    {
+        var message = $"The file '{filePath}' does not exist in the index.";
+        throw new VFSException(message);
+    }
+    
+    [DoesNotReturn]
+    private static void ThrowVirtualDirectoryNotFound(VFSDirectoryPath directoryPath)
+    {
+        var message = $"The directory '{directoryPath}' does not exist in the index.";
+        throw new VFSException(message);
+    }
+
+    [DoesNotReturn]
+    private static void ThrowCannotDeleteRootDirectory()
+    {
+        const string message = "Cannot delete the root directory.";
+        throw new VFSException(message);
+    }
+    
+    [DoesNotReturn]
+    private static void ThrowCannotCreateRootDirectory()
+    {
+        const string message = "Cannot create the root directory.";
+        throw new VFSException(message);
+    }
 }

@@ -200,6 +200,14 @@
     For example, the path of the node with the path "./temp/file.txt" is "./temp/file.txt".  
     The path of the node with the path "./temp/" is "./temp/".
 
+<a name='Atypical.VirtualFileSystem.Core.Exceptions'></a>
+
+## Atypical.VirtualFileSystem.Core.Exceptions Namespace
+- **[VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException')** `Class` Exception thrown by the VFS.
+  - **[VFSException(string, Exception)](VFSException.VFSException(string,Exception).md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException.VFSException(string, System.Exception)')** `Constructor` Initializes a new instance of the [VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException') class with a message and an inner exception that is the cause  
+    of this exception.
+  - **[VFSException(string)](VFSException.VFSException(string).md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException.VFSException(string)')** `Constructor` Initializes a new instance of the [VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException') class with a message that describes the error.
+
 <a name='Atypical.VirtualFileSystem.Core.Models'></a>
 
 ## Atypical.VirtualFileSystem.Core.Models Namespace

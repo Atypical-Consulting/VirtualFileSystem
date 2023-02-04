@@ -7,6 +7,7 @@
 // Global using directives
 
 global using Atypical.VirtualFileSystem.Core;
+global using Atypical.VirtualFileSystem.Core.Exceptions;
 global using Atypical.VirtualFileSystem.Core.Models;
 global using Atypical.VirtualFileSystem.Core.ValueObjects;
 global using FluentAssertions;

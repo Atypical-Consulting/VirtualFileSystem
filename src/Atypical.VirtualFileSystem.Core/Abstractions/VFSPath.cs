@@ -22,6 +22,8 @@ public abstract record VFSPath
     /// </summary>
     public static readonly Regex VFSPathRegex = new(VFSPathRegexPattern, RegexOptions.Compiled);
 
+
+    
     /// <summary>
     ///     Creates a new instance of <see cref="VFSPath" />.
     /// </summary>
@@ -30,7 +32,9 @@ public abstract record VFSPath
     /// <exception cref="ArgumentException">Thrown when the path is invalid.</exception>
     public VFSPath(string path)
     {
-        ArgumentNullException.ThrowIfNull(path);
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (path is null)
+            ThrowArgumentHasInvalidFormat(string.Empty);
 
         var vfsPath = CleanVFSPathInput(path);
 
@@ -41,11 +45,11 @@ public abstract record VFSPath
             return;
         }
 
-        if (!VFSPathRegex.IsMatch(vfsPath))
-            throw new ArgumentException($"The path '{path}' is invalid.", nameof(path));
-
         if (vfsPath.Contains($".{DIRECTORY_SEPARATOR}") || vfsPath.Contains($"{DIRECTORY_SEPARATOR}."))
-            throw new ArgumentException($"The path '{path}' contains relative path segments.", nameof(path));
+            ThrowArgumentHasRelativePathSegment(vfsPath);
+
+        if (!VFSPathRegex.IsMatch(vfsPath))
+            ThrowArgumentHasInvalidFormat(vfsPath);
 
         Value = vfsPath;
 
@@ -143,6 +147,9 @@ public abstract record VFSPath
         // if is root path, return it
         if (cleanPath is ROOT_PATH or "")
             return cleanPath;
+        
+        // replace backslashes with forward slashes
+        cleanPath = cleanPath.Replace('\\', '/');
 
         // clean up the path - remove leading and trailing slashes
         cleanPath = cleanPath.TrimStart('/');
@@ -167,8 +174,7 @@ public abstract record VFSPath
     public VFSPath GetAbsoluteParentPath(int depthFromRoot)
     {
         if (depthFromRoot < 0)
-            throw new ArgumentOutOfRangeException(nameof(depthFromRoot),
-                "The depth from root must be greater than or equal to 0.");
+            ThrowDepthFromRootMustBeGreaterThanOrEqualToZero(depthFromRoot);
 
         if (IsRoot)
             return this;
@@ -184,4 +190,33 @@ public abstract record VFSPath
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     public override int GetHashCode() => Value.GetHashCode();
+    
+    [DoesNotReturn]
+    private static void ThrowArgumentHasRelativePathSegment(string vfsPath)
+    {
+        var message = $"The path '{vfsPath}' contains a relative path segment.";
+        throw new VFSException(message, new ArgumentException(message));
+    }
+
+    [DoesNotReturn]
+    private static void ThrowArgumentHasInvalidFormat(string vfsPath)
+    {
+        var message = vfsPath.Length > 0
+            ? $"The path '{vfsPath}' is invalid."
+            : "An empty path is invalid.";
+
+        throw new VFSException(message, new ArgumentException(message));
+    }
+    
+    [DoesNotReturn]
+    private static void ThrowDepthFromRootMustBeGreaterThanOrEqualToZero(int depthFromRoot)
+    {
+        var message = $"""
+            The depth from root must be greater than or equal to 0.
+            Actual value: {depthFromRoot}.
+            """;
+        
+        throw new VFSException(message);
+    }
 }
+
