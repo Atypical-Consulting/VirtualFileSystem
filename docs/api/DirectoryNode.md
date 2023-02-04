@@ -25,6 +25,8 @@ Implements [IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.C
 
 | Properties | |
 | :--- | :--- |
+| [Directories](DirectoryNode.Directories.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Directories') | Gets the child directories of the node. |
+| [Files](DirectoryNode.Files.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Files') | Gets the child files of the node. |
 | [IsDirectory](DirectoryNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsDirectory') | Indicates whether the node is a directory. |
 | [IsFile](DirectoryNode.IsFile.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsFile') | Indicates whether the node is a file. |
 | [Path](DirectoryNode.Path.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Path') | Gets the full path of the node.<br/>The path is the path from the root of the file system to the node.<br/>For example, the path of the node with the path "./temp/file.txt" is "./temp/file.txt".<br/>The path of the node with the path "./temp/" is "./temp/". |
