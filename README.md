@@ -1,12 +1,7 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Atypical-Consulting/VirtualFileSystem/main/Logo.png" alt="Virtual File System Logo" width="200" height="200">
-  <h1>Virtual File System</h1>
-</div>
-<p align="center">A virtual file system implementation in modern C#.</p>
+# Virtual File System
+A virtual file system implementation in modern C#.
 
 ---
-
-<div align="center">
 
 [![Atypical-Consulting - VirtualFileSystem](https://img.shields.io/static/v1?label=Atypical-Consulting&message=VirtualFileSystem&color=blue&logo=github)](https://github.com/Atypical-Consulting/VirtualFileSystem "Go to GitHub repo")
 [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD--3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
@@ -22,7 +17,6 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Atypical.VirtualFileSystem.svg)](https://www.nuget.org/packages/Atypical.VirtualFileSystem)
 [![NuGet](https://img.shields.io/nuget/dt/Atypical.VirtualFileSystem.svg)](https://www.nuget.org/packages/Atypical.VirtualFileSystem)
-</div>
 
 ---
 
