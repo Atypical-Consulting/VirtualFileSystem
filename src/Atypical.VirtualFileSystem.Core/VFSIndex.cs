@@ -22,9 +22,7 @@ public sealed class VFSIndex
     ///     - the vfs index is sorted by the vfs paths
     ///     - the vfs index is case insensitive
     /// </summary>
-    /// <param name="rootNode">The root node of the virtual file system.</param>
-    public VFSIndex(IRootNode rootNode)
+    public VFSIndex()
     {
-        Add(rootNode.Path.Value, rootNode);
     }
 }

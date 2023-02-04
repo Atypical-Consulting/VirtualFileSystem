@@ -19,7 +19,7 @@ public record VFS
     public VFS()
     {
         Root = new RootNode();
-        Index = new VFSIndex(Root);
+        Index = new VFSIndex();
     }
 
     /// <inheritdoc cref="IVirtualFileSystem.Root" />
@@ -30,7 +30,7 @@ public record VFS
 
     /// <inheritdoc cref="IVirtualFileSystem.IsEmpty" />
     public bool IsEmpty
-        => Index.Count == 1;
+        => Index.Count == 0;
 
     #region Indexing
 
@@ -41,7 +41,9 @@ public record VFS
         if (!added)
             ThrowVirtualNodeAlreadyExists(node);
 
-        if (node.Path.Parent is not null && !Index.ContainsKey(node.Path.Parent.Value))
+        if (node.Path.Parent is not null 
+            && !Index.ContainsKey(node.Path.Parent.Value)
+            && node.Path.Parent != Root.Path)
             CreateDirectory(node.Path.Parent);
     }
 
@@ -61,7 +63,7 @@ public record VFS
 
         sb.AppendLine(Root.Name);
 
-        foreach (var node in Index.Values.Skip(1))
+        foreach (var node in Index.Values)
         {
             var depth = node.Path.Depth;
 
@@ -106,7 +108,10 @@ public record VFS
 
     /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(VFSDirectoryPath)" />
     public IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath)
-        => (IDirectoryNode)Index[directoryPath.Value];
+        // if the path is the root path, return the root node
+        => directoryPath.IsRoot
+            ? Root
+            : (IDirectoryNode)Index[directoryPath.Value];
 
     /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(string)" />
     public IDirectoryNode GetDirectory(string directoryPath)
@@ -143,8 +148,8 @@ public record VFS
         var directory = new DirectoryNode(directoryPath);
         AddToIndex(directory);
 
-        var parent = GetDirectory(directoryPath.Parent);
-        parent.AddChild(directory);
+        TryGetDirectory(directoryPath.Parent, out var parent);
+        parent?.AddChild(directory);
 
         return this;
     }
@@ -229,8 +234,8 @@ public record VFS
         var file = new FileNode(filePath, content);
         AddToIndex(file);
 
-        var parent = GetDirectory(filePath.Parent);
-        parent.AddChild(file);
+        TryGetDirectory(filePath.Parent, out var parent);
+        parent?.AddChild(file);
 
         return this;
     }

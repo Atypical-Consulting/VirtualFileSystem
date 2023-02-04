@@ -16,4 +16,4 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Constructors | |
 | :--- | :--- |
-| [VFSIndex(IRootNode)](VFSIndex.VFSIndex(IRootNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex(Atypical.VirtualFileSystem.Core.Contracts.IRootNode)') | Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.<br/>- the vfs index is a dictionary of vfs paths and vfs nodes<br/>- the vfs index is used to store the nodes of the virtual file system<br/>- the vfs index is sorted by the vfs paths<br/>- the vfs index is case insensitive |
+| [VFSIndex()](VFSIndex.VFSIndex().md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex()') | Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.<br/>- the vfs index is a dictionary of vfs paths and vfs nodes<br/>- the vfs index is used to store the nodes of the virtual file system<br/>- the vfs index is sorted by the vfs paths<br/>- the vfs index is case insensitive |

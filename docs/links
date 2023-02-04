@@ -33,7 +33,7 @@ F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_ENTRY_MIDDLE|VFSConsta
 F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_ENTRY_LAST|VFSConstants.STR_INDENT_ENTRY_LAST.md|STR_INDENT_ENTRY_LAST
 F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_FILL|VFSConstants.STR_INDENT_FILL.md|STR_INDENT_FILL
 T:Atypical.VirtualFileSystem.Core.VFSConstants|VFSConstants.md|VFSConstants
-M:Atypical.VirtualFileSystem.Core.VFSIndex.#ctor(Atypical.VirtualFileSystem.Core.Contracts.IRootNode)|VFSIndex.VFSIndex(IRootNode).md|VFSIndex(IRootNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.#ctor|VFSIndex.VFSIndex().md|VFSIndex()
 T:Atypical.VirtualFileSystem.Core.VFSIndex|VFSIndex.md|VFSIndex
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.#ctor|VirtualFileSystemFactory.VirtualFileSystemFactory().md|VirtualFileSystemFactory()
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem|VirtualFileSystemFactory.CreateFileSystem().md|CreateFileSystem()

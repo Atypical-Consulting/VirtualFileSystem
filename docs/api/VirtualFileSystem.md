@@ -75,7 +75,7 @@
   - a vfs index is a dictionary of vfs paths and vfs nodes  
   - the vfs index is used to store the nodes of the virtual file system  
   This class cannot be inherited.
-  - **[VFSIndex(IRootNode)](VFSIndex.VFSIndex(IRootNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex(Atypical.VirtualFileSystem.Core.Contracts.IRootNode)')** `Constructor` Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.  
+  - **[VFSIndex()](VFSIndex.VFSIndex().md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex()')** `Constructor` Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.  
     - the vfs index is a dictionary of vfs paths and vfs nodes  
     - the vfs index is used to store the nodes of the virtual file system  
     - the vfs index is sorted by the vfs paths  
@@ -124,6 +124,8 @@
 - **[IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode')** `Interface` Represents a directory in a virtual file system.  
   This is an in-memory representation of a directory.  
   It is not a representation of a directory on a physical file system.
+  - **[Directories](IDirectoryNode.Directories.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Directories')** `Property` Gets the child directories of the node.
+  - **[Files](IDirectoryNode.Files.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Files')** `Property` Gets the child files of the node.
   - **[AddChild(IDirectoryNode)](IDirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Adds a child directory to the current directory.
   - **[AddChild(IFileNode)](IDirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Adds a child file to the current directory.
 - **[IFileNode](IFileNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode')** `Interface` Represents a file in a virtual file system.  
@@ -217,6 +219,8 @@
   - **[DirectoryNode(VFSDirectoryPath)](DirectoryNode.DirectoryNode(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.DirectoryNode(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode') class.  
     Creates a new directory node.  
     The directory is created with the current date and time as creation and last modification date.
+  - **[Directories](DirectoryNode.Directories.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Directories')** `Property` Gets the child directories of the node.
+  - **[Files](DirectoryNode.Files.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Files')** `Property` Gets the child files of the node.
   - **[IsDirectory](DirectoryNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsDirectory')** `Property` Indicates whether the node is a directory.
   - **[IsFile](DirectoryNode.IsFile.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsFile')** `Property` Indicates whether the node is a file.
   - **[Path](DirectoryNode.Path.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Path')** `Property` Gets the full path of the node.  
