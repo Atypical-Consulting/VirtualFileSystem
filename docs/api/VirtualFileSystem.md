@@ -124,6 +124,8 @@
 - **[IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode')** `Interface` Represents a directory in a virtual file system.  
   This is an in-memory representation of a directory.  
   It is not a representation of a directory on a physical file system.
+  - **[AddChild(IDirectoryNode)](IDirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Adds a child directory to the current directory.
+  - **[AddChild(IFileNode)](IDirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Adds a child file to the current directory.
 - **[IFileNode](IFileNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode')** `Interface` Represents a file in a virtual file system.  
   This is the base interface for all file types.
   - **[Content](IFileNode.Content.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content')** `Property` Gets the content of the file as a string.  
@@ -221,6 +223,8 @@
     The path is the path from the root of the file system to the node.  
     For example, the path of the node with the path "./temp/file.txt" is "./temp/file.txt".  
     The path of the node with the path "./temp/" is "./temp/".
+  - **[AddChild(IDirectoryNode)](DirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Adds a child directory to the current directory.
+  - **[AddChild(IFileNode)](DirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Adds a child file to the current directory.
   - **[ToString()](DirectoryNode.ToString().md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode.ToString()')** `Method` Returns a string that represents the path of the directory.
 - **[FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.Models.FileNode')** `Class` Represents a file in the virtual file system.
   - **[FileNode(VFSFilePath, string)](FileNode.FileNode(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Models.FileNode.FileNode(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath, string)')** `Constructor` Initializes a new instance of the [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.Models.FileNode') class.  

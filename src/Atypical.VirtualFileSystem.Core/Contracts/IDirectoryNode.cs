@@ -13,4 +13,15 @@ namespace Atypical.VirtualFileSystem.Core.Contracts;
 /// </summary>
 public interface IDirectoryNode : IVirtualFileSystemNode
 {
+    /// <summary>
+    ///     Adds a child directory to the current directory.
+    /// </summary>
+    /// <param name="directory">The child directory to add.</param>
+    void AddChild(IDirectoryNode directory);
+    
+    /// <summary>
+    ///     Adds a child file to the current directory.
+    /// </summary>
+    /// <param name="file">The child file to add.</param>
+    void AddChild(IFileNode file);
 }

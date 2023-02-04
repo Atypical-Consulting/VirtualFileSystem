@@ -47,9 +47,18 @@ public record DirectoryNode
     public override bool IsFile
         => false;
 
+    /// <inheritdoc cref="IDirectoryNode.AddChild(IDirectoryNode)" />
+    public void AddChild(IDirectoryNode directory)
+        => _directories.Add(directory);
+
+    /// <inheritdoc cref="IDirectoryNode.AddChild(IFileNode)" />
+    public void AddChild(IFileNode file)
+        => _files.Add(file);
+
     /// <summary>
     ///     Returns a string that represents the path of the directory.
     /// </summary>
     /// <returns>A string that represents the path of the directory.</returns>
-    public override string ToString() => Path.ToString();
+    public override string ToString()
+        => Path.ToString();
 }

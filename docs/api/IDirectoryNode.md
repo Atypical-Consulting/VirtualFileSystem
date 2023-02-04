@@ -18,3 +18,8 @@ Derived
 &#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')
+
+| Methods | |
+| :--- | :--- |
+| [AddChild(IDirectoryNode)](IDirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)') | Adds a child directory to the current directory. |
+| [AddChild(IFileNode)](IDirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)') | Adds a child file to the current directory. |
