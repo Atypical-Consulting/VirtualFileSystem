@@ -31,11 +31,11 @@ public record DirectoryNode
     /// <inheritdoc cref="IVirtualFileSystemNode.Path" />
     public override VFSDirectoryPath Path { get; }
 
-    /// <inheritdoc cref="IVirtualFileSystemNode.Directories" />
+    /// <inheritdoc cref="IDirectoryNode.Directories" />
     public ReadOnlyCollection<IDirectoryNode> Directories
         => _directories.AsReadOnly();
 
-    /// <inheritdoc cref="IVirtualFileSystemNode.Files" />
+    /// <inheritdoc cref="IDirectoryNode.Files" />
     public ReadOnlyCollection<IFileNode> Files
         => _files.AsReadOnly();
 
