@@ -1,11 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
-        <Company>Atypical Consulting SRL</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DefaultDocumentationFolder>../../docs/api</DefaultDocumentationFolder>
@@ -58,10 +53,10 @@
     <!-- Versioning -->
     <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
     <PropertyGroup>
-        <Version>0.1.4</Version>
-        <AssemblyVersion>0.1.4</AssemblyVersion>
-        <FileVersion>0.1.4</FileVersion>
-        <InformationalVersion>0.1.4</InformationalVersion>
+        <Version>0.1.5</Version>
+        <AssemblyVersion>0.1.5</AssemblyVersion>
+        <FileVersion>0.1.5</FileVersion>
+        <InformationalVersion>0.1.5</InformationalVersion>
     </PropertyGroup>
 
 </Project>
