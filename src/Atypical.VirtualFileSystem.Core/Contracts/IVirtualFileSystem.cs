@@ -31,6 +31,12 @@ public interface IVirtualFileSystem
     ///     This is the case if the root directory is empty.
     /// </summary>
     bool IsEmpty();
+    
+    /// <summary>
+    ///     Gets the path of the root directory.
+    /// </summary>
+    /// <returns>The path of the root directory.</returns>
+    VFSPath GetRootPath();
 
     /// <summary>
     ///     Gets a directory node by its path.

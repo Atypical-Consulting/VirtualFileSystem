@@ -12,6 +12,7 @@ M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(System.String)|VFS.DeleteFile(s
 M:Atypical.VirtualFileSystem.Core.VFS.#ctor|VFS.VFS().md|VFS()
 M:Atypical.VirtualFileSystem.Core.VFS.ToString|VFS.ToString().md|ToString()
 M:Atypical.VirtualFileSystem.Core.VFS.IsEmpty|VFS.IsEmpty().md|IsEmpty()
+M:Atypical.VirtualFileSystem.Core.VFS.GetRootPath|VFS.GetRootPath().md|GetRootPath()
 M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(System.String)|VFS.GetDirectory(string).md|GetDirectory(string)
 M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
@@ -91,6 +92,7 @@ T:Atypical.VirtualFileSystem.Core.Contracts.IRootNode|IRootNode.md|IRootNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root|IVirtualFileSystem.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index|IVirtualFileSystem.Index.md|Index
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty().md|IsEmpty()
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetRootPath|IVirtualFileSystem.GetRootPath().md|GetRootPath()
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(System.String)|IVirtualFileSystem.GetDirectory(string).md|GetDirectory(string)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)

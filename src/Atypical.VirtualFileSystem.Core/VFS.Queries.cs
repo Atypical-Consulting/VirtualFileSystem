@@ -1,14 +1,14 @@
 ﻿namespace Atypical.VirtualFileSystem.Core;
 
 public partial record VFS
-    : IVirtualFileSystem
 {
-    public VFSPath GetRootPath()
-        => this.Root.Path;
-    
     /// <inheritdoc cref="IVirtualFileSystem.IsEmpty()" />
     public bool IsEmpty()
         => this.Index.Count == 0;
+    
+    /// <inheritdoc cref="IVirtualFileSystem.GetRootPath()" />
+    public VFSPath GetRootPath()
+        => this.Root.Path;
 
     /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(VFSDirectoryPath)" />
     public IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath)

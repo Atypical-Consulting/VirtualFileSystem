@@ -43,6 +43,7 @@
     The path must be absolute.
   - **[GetFile(string)](VFS.GetFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
+  - **[GetRootPath()](VFS.GetRootPath().md 'Atypical.VirtualFileSystem.Core.VFS.GetRootPath()')** `Method` Gets the path of the root directory.
   - **[IsEmpty()](VFS.IsEmpty().md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty()')** `Method` Indicates whether the file system is empty.  
     This is the case if the root directory is empty.
   - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns the index as an ASCII tree.
@@ -171,6 +172,7 @@
     The path must be absolute.
   - **[GetFile(string)](IVirtualFileSystem.GetFile(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
+  - **[GetRootPath()](IVirtualFileSystem.GetRootPath().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetRootPath()')** `Method` Gets the path of the root directory.
   - **[IsEmpty()](IVirtualFileSystem.IsEmpty().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty()')** `Method` Indicates whether the file system is empty.  
     This is the case if the root directory is empty.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
