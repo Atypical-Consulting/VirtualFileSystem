@@ -1,14 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <LangVersion>11</LangVersion>
-        <Company>Atypical Consulting SRL</Company>
-
         <IsPackable>false</IsPackable>
-
         <RootNamespace>VirtualFileSystem.UnitTests</RootNamespace>
     </PropertyGroup>
 
