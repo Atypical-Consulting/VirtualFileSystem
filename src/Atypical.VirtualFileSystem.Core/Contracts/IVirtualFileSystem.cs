@@ -210,4 +210,11 @@ public interface IVirtualFileSystem
     /// <param name="regexPattern">The regular expression pattern.</param>
     /// <returns>The file nodes.</returns>
     IEnumerable<IFileNode> FindFiles(Regex regexPattern);
+    
+    // GetTree
+    /// <summary>
+    ///     Gets the tree of the file system.
+    /// </summary>
+    /// <returns>The tree of the file system.</returns>
+    string GetTree();
 }

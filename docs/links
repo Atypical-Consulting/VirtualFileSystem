@@ -26,6 +26,7 @@ M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core
 M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(System.String,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(string,IFileNode).md|TryGetFile(string, IFileNode)
 M:Atypical.VirtualFileSystem.Core.VFS.FindFiles|VFS.FindFiles().md|FindFiles()
 M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|VFS.FindFiles(Regex).md|FindFiles(Regex)
+M:Atypical.VirtualFileSystem.Core.VFS.GetTree|VFS.GetTree().md|GetTree()
 N:Atypical.VirtualFileSystem.Core|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core|Atypical.VirtualFileSystem.Core
 T:Atypical.VirtualFileSystem.Core.VFS|VFS.md|VFS
 F:Atypical.VirtualFileSystem.Core.VFSConstants.ROOT_PATH|VFSConstants.ROOT_PATH.md|ROOT_PATH
@@ -115,6 +116,7 @@ M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypic
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(System.String)|IVirtualFileSystem.DeleteFile(string).md|DeleteFile(string)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles|IVirtualFileSystem.FindFiles().md|FindFiles()
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindFiles(Regex).md|FindFiles(Regex)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree|IVirtualFileSystem.GetTree().md|GetTree()
 T:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem|IVirtualFileSystem.md|IVirtualFileSystem
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory.CreateFileSystem|IVirtualFileSystemFactory.CreateFileSystem().md|CreateFileSystem()
 T:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory|IVirtualFileSystemFactory.md|IVirtualFileSystemFactory
