@@ -115,6 +115,14 @@ public interface IVirtualFileSystem
     IEnumerable<IDirectoryNode> FindDirectories();
 
     /// <summary>
+    ///     Finds all directory nodes that match the specified predicate.
+    /// </summary>
+    /// <param name="predicate">The predicate.</param>
+    /// <returns>The directory nodes.</returns>
+    IEnumerable<IDirectoryNode> SelectDirectories(
+        Func<IDirectoryNode, bool> predicate);
+
+    /// <summary>
     ///     Finds all directory nodes that match the specified regular expression.
     ///     The regular expression must be relative to the root directory.
     /// </summary>
