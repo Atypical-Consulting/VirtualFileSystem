@@ -18,6 +18,21 @@ public class VFSFilePathTests
         // - The path must not end with a slash (/).
 
         [Fact]
+        public void Constructor_create_instance_when_path_is_valid_and_starts_with_dot()
+        {
+            // Arrange
+            const string path = @"/.gitignore";
+            const string expectedPath = @"vfs://.gitignore";
+
+            // Act
+            var vfsPath = new VFSFilePath(path);
+
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
+        
+        [Fact]
         public void Constructor_throw_VFSException_when_path_is_null()
         {
             // Arrange
@@ -51,6 +66,37 @@ public class VFSFilePathTests
             action.Should()
                 .Throw<VFSException>()
                 .WithMessage("An empty path is invalid.");
+        }
+    }
+
+    public class PropertyName
+    {
+        [Fact]
+        public void PropertyName_return_name_of_file()
+        {
+            // Arrange
+            const string path = @"valid/path/file.txt";
+            const string expectedName = @"file.txt";
+
+            // Act
+            var vfsPath = new VFSFilePath(path);
+
+            // Assert
+            vfsPath.Name.Should().Be(expectedName);
+        }
+
+        [Fact]
+        public void PropertyName_return_name_of_root_directory()
+        {
+            // Arrange
+            const string path = @"/";
+            const string expectedName = @"vfs://";
+
+            // Act
+            var vfsPath = new VFSFilePath(path);
+
+            // Assert
+            vfsPath.Name.Should().Be(expectedName);
         }
     }
 

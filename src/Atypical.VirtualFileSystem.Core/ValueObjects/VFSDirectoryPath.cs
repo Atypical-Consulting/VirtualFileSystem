@@ -21,9 +21,8 @@ public record VFSDirectoryPath : VFSPath
     public VFSDirectoryPath(string path)
         : base(path)
     {
-        // cannot ends with a file extension
         var lastSegment = Value.Split('/').Last();
-        if (lastSegment.Contains('.'))
+        if (lastSegment.Contains('.') && !lastSegment.StartsWith("."))
             ThrowArgumentHasFileExtension(path);
     }
 

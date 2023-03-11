@@ -1,27 +1,27 @@
 https://github.com/Atypical-Consulting/VirtualFileSystem/blob/master/docs/
 P:Atypical.VirtualFileSystem.Core.VFS.Root|VFS.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.VFS.Index|VFS.Index.md|Index
-P:Atypical.VirtualFileSystem.Core.VFS.IsEmpty|VFS.IsEmpty.md|IsEmpty
-M:Atypical.VirtualFileSystem.Core.VFS.#ctor|VFS.VFS().md|VFS()
-M:Atypical.VirtualFileSystem.Core.VFS.ToString|VFS.ToString().md|ToString()
-M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(System.String)|VFS.GetDirectory(string).md|GetDirectory(string)
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(System.String,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(string,IDirectoryNode).md|TryGetDirectory(string, IDirectoryNode)
 M:Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.CreateDirectory(VFSDirectoryPath).md|CreateDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(System.String)|VFS.CreateDirectory(string).md|CreateDirectory(string)
 M:Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.DeleteDirectory(VFSDirectoryPath).md|DeleteDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(System.String)|VFS.DeleteDirectory(string).md|DeleteDirectory(string)
+M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,System.String)|VFS.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(System.String,System.String)|VFS.CreateFile(string,string).md|CreateFile(string, string)
+M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|VFS.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(System.String)|VFS.DeleteFile(string).md|DeleteFile(string)
+M:Atypical.VirtualFileSystem.Core.VFS.#ctor|VFS.VFS().md|VFS()
+M:Atypical.VirtualFileSystem.Core.VFS.ToString|VFS.ToString().md|ToString()
+M:Atypical.VirtualFileSystem.Core.VFS.IsEmpty|VFS.IsEmpty().md|IsEmpty()
+M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(System.String)|VFS.GetDirectory(string).md|GetDirectory(string)
+M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(System.String,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(string,IDirectoryNode).md|TryGetDirectory(string, IDirectoryNode)
 M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories|VFS.FindDirectories().md|FindDirectories()
 M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)|VFS.FindDirectories(Regex).md|FindDirectories(Regex)
 M:Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|VFS.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.VFS.GetFile(System.String)|VFS.GetFile(string).md|GetFile(string)
 M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
 M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(System.String,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(string,IFileNode).md|TryGetFile(string, IFileNode)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,System.String)|VFS.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(System.String,System.String)|VFS.CreateFile(string,string).md|CreateFile(string, string)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|VFS.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(System.String)|VFS.DeleteFile(string).md|DeleteFile(string)
 M:Atypical.VirtualFileSystem.Core.VFS.FindFiles|VFS.FindFiles().md|FindFiles()
 M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|VFS.FindFiles(Regex).md|FindFiles(Regex)
 N:Atypical.VirtualFileSystem.Core|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core|Atypical.VirtualFileSystem.Core
@@ -90,7 +90,7 @@ T:Atypical.VirtualFileSystem.Core.Contracts.IFileNode|IFileNode.md|IFileNode
 T:Atypical.VirtualFileSystem.Core.Contracts.IRootNode|IRootNode.md|IRootNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root|IVirtualFileSystem.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index|IVirtualFileSystem.Index.md|Index
-P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty.md|IsEmpty
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty().md|IsEmpty()
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(System.String)|IVirtualFileSystem.GetDirectory(string).md|GetDirectory(string)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)

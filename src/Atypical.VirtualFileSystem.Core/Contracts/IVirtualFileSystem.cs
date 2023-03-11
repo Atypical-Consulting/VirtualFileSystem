@@ -30,7 +30,7 @@ public interface IVirtualFileSystem
     ///     Indicates whether the file system is empty.
     ///     This is the case if the root directory is empty.
     /// </summary>
-    bool IsEmpty { get; }
+    bool IsEmpty();
 
     /// <summary>
     ///     Gets a directory node by its path.
@@ -196,25 +196,4 @@ public interface IVirtualFileSystem
     /// <param name="regexPattern">The regular expression pattern.</param>
     /// <returns>The file nodes.</returns>
     IEnumerable<IFileNode> FindFiles(Regex regexPattern);
-
-    // TODO: Add methods for copying, moving, renaming, etc.
-    // /// <summary>
-    // ///     Reads the content of a file.
-    // ///     The file must exist.
-    // /// </summary>
-    // /// <param name="path">The path to the file.</param>
-    // /// <returns>The content of the file.</returns>
-    // /// <exception cref="FileNotFoundException">Thrown if the file does not exist.</exception>
-    // /// <exception cref="IOException">Thrown if an error occurs while reading the file.</exception>
-    // string ReadContentFromFile(VFSFilePath path);
-    //
-    // /// <summary>
-    // ///     Writes the content of a file.
-    // ///     The file must exist.
-    // /// </summary>
-    // /// <param name="path">The path to the file.</param>
-    // /// <param name="content">The content to write to the file.</param>
-    // /// <exception cref="FileNotFoundException">Thrown if the file does not exist.</exception>
-    // /// <exception cref="IOException">Thrown if an error occurs while writing the file.</exception>
-    // void WriteContentToFile(VFSFilePath path, string content);
 }

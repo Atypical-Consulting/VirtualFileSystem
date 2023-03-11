@@ -7,13 +7,15 @@ Creates a directory node at the specified path.
 The path must be absolute.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem CreateDirectory(string path);
+public Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem CreateDirectory(string directoryPath);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(string).path'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(string).directoryPath'></a>
 
-`path` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+`directoryPath` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+
+The path of the directory node.
 
 Implements [CreateDirectory(string)](IVirtualFileSystem.CreateDirectory(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(string)')
 

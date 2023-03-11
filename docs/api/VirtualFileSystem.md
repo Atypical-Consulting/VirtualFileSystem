@@ -12,8 +12,6 @@
   - **[Index](VFS.Index.md 'Atypical.VirtualFileSystem.Core.VFS.Index')** `Property` Gets the file index of the file system.  
     Basically, this is a dictionary that maps file paths to file nodes.  
     This is useful for quickly finding a file node by its path.
-  - **[IsEmpty](VFS.IsEmpty.md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty')** `Property` Indicates whether the file system is empty.  
-    This is the case if the root directory is empty.
   - **[Root](VFS.Root.md 'Atypical.VirtualFileSystem.Core.VFS.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
   - **[CreateDirectory(VFSDirectoryPath)](VFS.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
@@ -45,6 +43,8 @@
     The path must be absolute.
   - **[GetFile(string)](VFS.GetFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
+  - **[IsEmpty()](VFS.IsEmpty().md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty()')** `Method` Indicates whether the file system is empty.  
+    This is the case if the root directory is empty.
   - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns the index as an ASCII tree.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
@@ -140,8 +140,6 @@
   - **[Index](IVirtualFileSystem.Index.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index')** `Property` Gets the file index of the file system.  
     Basically, this is a dictionary that maps file paths to file nodes.  
     This is useful for quickly finding a file node by its path.
-  - **[IsEmpty](IVirtualFileSystem.IsEmpty.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty')** `Property` Indicates whether the file system is empty.  
-    This is the case if the root directory is empty.
   - **[Root](IVirtualFileSystem.Root.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
   - **[CreateDirectory(VFSDirectoryPath)](IVirtualFileSystem.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
@@ -173,6 +171,8 @@
     The path must be absolute.
   - **[GetFile(string)](IVirtualFileSystem.GetFile(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
+  - **[IsEmpty()](IVirtualFileSystem.IsEmpty().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty()')** `Method` Indicates whether the file system is empty.  
+    This is the case if the root directory is empty.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
     If the directory node does not exist, this method returns `false`  

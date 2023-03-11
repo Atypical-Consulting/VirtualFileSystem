@@ -10,7 +10,7 @@ namespace Atypical.VirtualFileSystem.Core;
 ///     Represents a virtual file system.
 ///     This class cannot be inherited.
 /// </summary>
-public record VFS
+public partial record VFS
     : IVirtualFileSystem
 {
     /// <summary>
@@ -28,13 +28,20 @@ public record VFS
     /// <inheritdoc cref="IVirtualFileSystem.Index" />
     public VFSIndex Index { get; }
 
-    /// <inheritdoc cref="IVirtualFileSystem.IsEmpty" />
-    public bool IsEmpty
-        => Index.Count == 0;
-
-    #region Indexing
-
-    private void AddToIndex(IVirtualFileSystemNode node)
+    /// <summary>
+    ///     Returns the index as an ASCII tree.
+    /// </summary>
+    /// <returns>
+    ///     The index as an ASCII tree.
+    ///     <para />
+    ///     The root directory is always the first line.
+    /// </returns>
+    public override string ToString()
+    {
+        return GetTree();
+    }
+    
+    internal void AddToIndex(IVirtualFileSystemNode node)
     {
         var added = Index.TryAdd(node.Path.Value, node);
 
@@ -47,270 +54,10 @@ public record VFS
             CreateDirectory(node.Path.Parent);
     }
 
-    #endregion
-
-    /// <summary>
-    ///     Returns the index as an ASCII tree.
-    /// </summary>
-    /// <returns>
-    ///     The index as an ASCII tree.
-    ///     <para />
-    ///     The root directory is always the first line.
-    /// </returns>
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-
-        sb.AppendLine(Root.Name);
-
-        foreach (var node in Index.Values)
-        {
-            var depth = node.Path.Depth;
-
-            // get all brothers of the node
-            var brothers = GetBrothers(node);
-
-            // check if the node is the last node on its level
-            var isLastNodeOfLevel = brothers.Last() == node;
-
-            while (depth > 1)
-            {
-                var parent = node.Path.GetAbsoluteParentPath(1).Value;
-                var isLastNodeOfLevelParent = GetBrothers(GetDirectory(parent)).Last() == GetDirectory(parent);
-
-                sb.Append(isLastNodeOfLevelParent ? STR_INDENT_CLEAR : STR_INDENT_FILL);
-                depth--;
-            }
-
-            sb.Append(isLastNodeOfLevel ? STR_INDENT_ENTRY_LAST : STR_INDENT_ENTRY_MIDDLE);
-            sb.AppendLine(node.Path.Name);
-        }
-
-        return sb.ToString().Trim().ReplaceLineEndings();
-    }
-
-    /// <summary>
-    ///     Get all brothers of the node
-    ///     (all nodes on the same level including the node itself)
-    /// </summary>
-    /// <param name="node">The node</param>
-    /// <returns></returns>
-    private List<IVirtualFileSystemNode> GetBrothers(IVirtualFileSystemNode node)
-    {
-        var brothers = Index.Values
-            .Where(n => n.Path.Parent == node.Path.Parent)
-            .ToList();
-
-        return brothers;
-    }
-
-    #region Directory
-
-    /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(VFSDirectoryPath)" />
-    public IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath)
-        // if the path is the root path, return the root node
-        => directoryPath.IsRoot
-            ? Root
-            : (IDirectoryNode)Index[directoryPath.Value];
-
-    /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(string)" />
-    public IDirectoryNode GetDirectory(string directoryPath)
-        => GetDirectory(new VFSDirectoryPath(directoryPath));
-
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath, out IDirectoryNode)" />
-    public bool TryGetDirectory(VFSDirectoryPath directoryPath, out IDirectoryNode? directory)
-    {
-        try
-        {
-            directory = GetDirectory(directoryPath);
-            return true;
-        }
-        catch (KeyNotFoundException)
-        {
-            directory = null;
-            return false;
-        }
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(string, out IDirectoryNode)" />
-    public bool TryGetDirectory(string path, out IDirectoryNode? directory)
-        => TryGetDirectory(new VFSDirectoryPath(path), out directory);
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateDirectory(VFSDirectoryPath)" />
-    public IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath)
-    {
-        if (directoryPath.IsRoot)
-            ThrowCannotCreateRootDirectory();
-
-        if (directoryPath.Parent == null)
-            ThrowCannotCreateDirectoryWithoutParent();
-        
-        var directory = new DirectoryNode(directoryPath);
-        AddToIndex(directory);
-
-        TryGetDirectory(directoryPath.Parent, out var parent);
-        parent?.AddChild(directory);
-
-        return this;
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateDirectory(string)" />
-    public IVirtualFileSystem CreateDirectory(string path)
-        => CreateDirectory(new VFSDirectoryPath(path));
-
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath)" />
-    public IVirtualFileSystem DeleteDirectory(VFSDirectoryPath directoryPath)
-    {
-        if (directoryPath.IsRoot)
-            ThrowCannotDeleteRootDirectory();
-
-        // try to get the directory
-        var found = TryGetDirectory(directoryPath, out _);
-        if (!found)
-            ThrowVirtualDirectoryNotFound(directoryPath);
-
-        // find the path and its children in the index
-        var paths = Index.Keys
-            .Where(p => p.StartsWith(directoryPath.Value))
-            .OrderByDescending(p => p.Length)
-            .ToList();
-
-        // remove the paths from the index
-        foreach (var p in paths)
-            Index.Remove(p);
-
-        return this;
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteDirectory(string)" />
-    public IVirtualFileSystem DeleteDirectory(string directoryPath)
-        => DeleteDirectory(new VFSDirectoryPath(directoryPath));
-
-    /// <inheritdoc cref="IVirtualFileSystem.FindDirectories()" />
-    public IEnumerable<IDirectoryNode> FindDirectories()
-        => Index.Values.OfType<IDirectoryNode>();
-
-    /// <inheritdoc cref="IVirtualFileSystem.FindDirectories(Regex)" />
-    public IEnumerable<IDirectoryNode> FindDirectories(Regex regexPattern)
-        => FindDirectories().Where(f => regexPattern.IsMatch(f.Path.Value));
-
-    #endregion
-
-    #region File
-
-    /// <inheritdoc cref="IVirtualFileSystem.GetFile(VFSFilePath)" />
-    public IFileNode GetFile(VFSFilePath filePath)
-        => (IFileNode)Index[filePath.Value];
-
-    /// <inheritdoc cref="IVirtualFileSystem.GetFile(string)" />
-    public IFileNode GetFile(string filePath)
-        => GetFile(new VFSFilePath(filePath));
-
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(VFSFilePath, out IFileNode)" />
-    public bool TryGetFile(VFSFilePath filePath, out IFileNode? file)
-    {
-        try
-        {
-            file = GetFile(filePath);
-            return true;
-        }
-        catch (KeyNotFoundException)
-        {
-            file = null;
-            return false;
-        }
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetFile(string, out IFileNode)" />
-    public bool TryGetFile(string filePath, out IFileNode? file)
-        => TryGetFile(new VFSFilePath(filePath), out file);
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateFile(VFSFilePath, string)" />
-    public IVirtualFileSystem CreateFile(VFSFilePath filePath, string? content = null)
-    {
-        if (filePath.Parent == null)
-            ThrowCannotCreateDirectoryWithoutParent();
-        
-        var file = new FileNode(filePath, content);
-        AddToIndex(file);
-
-        TryGetDirectory(filePath.Parent, out var parent);
-        parent?.AddChild(file);
-
-        return this;
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateFile(string, string)" />
-    public IVirtualFileSystem CreateFile(string filePath, string? content = null)
-        => CreateFile(new VFSFilePath(filePath), content);
-
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteFile(VFSFilePath)" />
-    public IVirtualFileSystem DeleteFile(VFSFilePath filePath)
-    {
-        // try to get the file
-        var found = TryGetFile(filePath, out _);
-        if (!found)
-            ThrowVirtualFileNotFound(filePath);
-
-        // remove the file from the index
-        Index.Remove(filePath.Value);
-
-        return this;
-    }
-
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteFile(string)" />
-    public IVirtualFileSystem DeleteFile(string filePath)
-        => DeleteFile(new VFSFilePath(filePath));
-
-    /// <inheritdoc cref="IVirtualFileSystem.FindFiles()" />
-    public IEnumerable<IFileNode> FindFiles()
-        => Index.Values.OfType<IFileNode>();
-
-    /// <inheritdoc cref="IVirtualFileSystem.FindFiles(Regex)" />
-    public IEnumerable<IFileNode> FindFiles(Regex regexPattern)
-        => FindFiles().Where(f => regexPattern.IsMatch(f.Path.Value));
-
-    #endregion
-    
     [DoesNotReturn]
     private static void ThrowVirtualNodeAlreadyExists(IVirtualFileSystemNode node)
     {
         var message = $"The node '{node.Path}' already exists in the index.";
-        throw new VFSException(message);
-    }
-
-    [DoesNotReturn]
-    private static void ThrowVirtualFileNotFound(VFSFilePath filePath)
-    {
-        var message = $"The file '{filePath}' does not exist in the index.";
-        throw new VFSException(message);
-    }
-    
-    [DoesNotReturn]
-    private static void ThrowVirtualDirectoryNotFound(VFSDirectoryPath directoryPath)
-    {
-        var message = $"The directory '{directoryPath}' does not exist in the index.";
-        throw new VFSException(message);
-    }
-
-    [DoesNotReturn]
-    private static void ThrowCannotDeleteRootDirectory()
-    {
-        const string message = "Cannot delete the root directory.";
-        throw new VFSException(message);
-    }
-    
-    [DoesNotReturn]
-    private static void ThrowCannotCreateRootDirectory()
-    {
-        const string message = "Cannot create the root directory.";
-        throw new VFSException(message);
-    }
-
-    [DoesNotReturn]
-    private static void ThrowCannotCreateDirectoryWithoutParent()
-    {
-        const string message = "Cannot create a directory without a parent.";
         throw new VFSException(message);
     }
 }

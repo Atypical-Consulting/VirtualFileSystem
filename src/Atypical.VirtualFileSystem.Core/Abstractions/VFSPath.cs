@@ -45,7 +45,7 @@ public abstract record VFSPath
             return;
         }
 
-        if (vfsPath.Contains($".{DIRECTORY_SEPARATOR}") || vfsPath.Contains($"{DIRECTORY_SEPARATOR}."))
+        if (vfsPath.Contains($".{DIRECTORY_SEPARATOR}"))
             ThrowArgumentHasRelativePathSegment(vfsPath);
 
         if (!VFSPathRegex.IsMatch(vfsPath))

@@ -165,6 +165,67 @@ public class VFSDirectoryPathTests
             directoryPath.Should().NotBeNull();
             directoryPath.Value.Should().Be(expectedPath);
         }
+        
+        
+        [Fact]
+        public void Constructor_create_instance_when_path_is_valid_and_ends_with_slash()
+        {
+            // Arrange
+            const string path = @"valid/path/";
+            const string expectedPath = @"vfs://valid/path";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
+
+        [Fact]
+        public void Constructor_create_instance_when_path_is_valid_and_starts_with_slash()
+        {
+            // Arrange
+            const string path = @"/valid/path";
+            const string expectedPath = @"vfs://valid/path";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
+        
+        [Fact]
+        public void Constructor_create_instance_when_path_is_valid_and_starts_with_dot()
+        {
+            // Arrange
+            const string path = @"/.github";
+            const string expectedPath = @"vfs://.github";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
+
+        [Fact]
+        public void Constructor_create_instance_when_path_is_valid_and_starts_and_ends_with_slash()
+        {
+            // Arrange
+            const string path = @"/valid/path/";
+            const string expectedPath = @"vfs://valid/path";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
 
         [Fact]
         public void Constructor_create_instance_for_root_directory()
@@ -220,6 +281,224 @@ public class VFSDirectoryPathTests
         }
     }
 
+    public class PropertyName
+    {
+        [Fact]
+        public void PropertyName_return_name_of_directory()
+        {
+            // Arrange
+            const string path = @"valid/path";
+            const string expectedName = @"path";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Name.Should().Be(expectedName);
+        }
+    }
+
+    public class PropertyDepth
+    {
+        [Fact]
+        public void PropertyDepth_return_0_when_path_is_root()
+        {
+            // Arrange
+            const string path = @"/";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Depth.Should().Be(0);
+        }
+
+        [Fact]
+        public void PropertyDepth_return_1_with_one_directory()
+        {
+            // Arrange
+            const string path = @"directory";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Depth.Should().Be(1);
+        }
+
+        [Fact]
+        public void PropertyDepth_return_2_with_two_directories()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Depth.Should().Be(2);
+        }
+
+        [Fact]
+        public void PropertyDepth_return_3_with_three_directories()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory/subsubdirectory";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Depth.Should().Be(3);
+        }
+    }
+
+    public class PropertyHasParent
+    {
+        [Fact]
+        public void PropertyHasParent_return_false_when_path_is_root()
+        {
+            // Arrange
+            const string path = @"/";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.HasParent.Should().BeFalse();
+        }
+
+        [Fact]
+        public void PropertyHasParent_return_true_when_path_has_parent()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.HasParent.Should().BeTrue();
+        }
+    }
+
+    public class PropertyParent
+    {
+        [Fact]
+        public void PropertyParentPath_return_null_when_path_is_root()
+        {
+            // Arrange
+            const string path = @"/";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Parent.Should().BeNull();
+        }
+        
+        [Fact]
+        public void PropertyParentPath_return_parent_path_when_path_has_parent()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+            const string expectedParentPath = @"vfs://directory";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.Parent.Should().NotBeNull();
+            vfsPath.Parent!.Value.Should().Be(expectedParentPath);
+        }
+    }
+
+    public class MethodGetAbsoluteParentPath
+    {
+        [Fact]
+        public void MethodGetAbsoluteParentPath_return_root_when_path_is_root()
+        {
+            // Arrange
+            const string path = @"/";
+            const string expectedPath = @"vfs://";
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Act
+            var parent = vfsPath.GetAbsoluteParentPath(0);
+
+            // Assert
+            parent.Should().NotBeNull();
+            parent.Value.Should().Be(expectedPath);
+        }
+
+        [Fact]
+        public void MethodGetAbsoluteParentPath_throw_VFSException_when_depth_is_negative()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Act
+            Action action = () => vfsPath.GetAbsoluteParentPath(-1);
+
+            // Assert
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage($"""
+                    The depth from root must be greater than or equal to 0.
+                    Actual value: {-1}.
+                    """);
+        }
+
+        [Fact]
+        public void MethodGetAbsoluteParentPath_return_root_when_depth_is_zero()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+            const string expectedPath = @"vfs://";
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Act
+            var parent = vfsPath.GetAbsoluteParentPath(0);
+
+            // Assert
+            parent.Should().NotBeNull();
+            parent.Value.Should().Be(expectedPath);
+        }
+
+        [Fact]
+        public void MethodGetAbsoluteParentPath_return_parent_when_depth_is_one()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory";
+            const string expectedPath = @"vfs://directory";
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Act
+            var parent = vfsPath.GetAbsoluteParentPath(1);
+
+            // Assert
+            parent.Should().NotBeNull();
+            parent.Value.Should().Be(expectedPath);
+        }
+
+        [Fact]
+        public void MethodGetAbsoluteParentPath_return_grandparent_when_depth_is_two()
+        {
+            // Arrange
+            const string path = @"directory/subdirectory/subsubdirectory";
+            const string expectedPath = @"vfs://directory/subdirectory";
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Act
+            var parent = vfsPath.GetAbsoluteParentPath(2);
+
+            // Assert
+            parent.Should().NotBeNull();
+            parent.Value.Should().Be(expectedPath);
+        }
+    }
+
     public class MethodToString
     {
         [Fact]
@@ -235,6 +514,20 @@ public class VFSDirectoryPathTests
 
             // Assert
             result.Should().Be(expectedPath);
+        }
+        
+        [Fact]
+        public void ToString_returns_path_with_child()
+        {
+            // Arrange
+            const string path = @"valid/path";
+            const string expectedPath = @"vfs://valid/path";
+
+            // Act
+            var vfsPath = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath.ToString().Should().Be(expectedPath);
         }
 
         [Fact]
@@ -283,6 +576,49 @@ public class VFSDirectoryPathTests
 
             // Assert
             result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Equals_returns_true_when_paths_are_the_same()
+        {
+            // Arrange
+            const string path = @"valid/path";
+
+            // Act
+            var vfsPath1 = new VFSDirectoryPath(path);
+
+            // Assert
+            vfsPath1.Equals(vfsPath1).Should().BeTrue();
+        }
+
+        [Fact]
+        public void Equals_returns_false_when_paths_are_not_equal()
+        {
+            // Arrange
+            const string path1 = @"valid/path";
+            const string path2 = @"valid/path2";
+
+            // Act
+            var vfsPath1 = new VFSDirectoryPath(path1);
+            var vfsPath2 = new VFSDirectoryPath(path2);
+
+            // Assert
+            vfsPath1.Equals(vfsPath2).Should().BeFalse();
+        }
+
+        [Fact]
+        public void Equals_returns_false_when_paths_are_not_equal_and_one_is_file()
+        {
+            // Arrange
+            const string path1 = @"valid/path";
+            const string path2 = @"valid/path/file.txt";
+
+            // Act
+            var vfsPath1 = new VFSDirectoryPath(path1);
+            var vfsPath2 = new VFSFilePath(path2);
+
+            // Assert
+            vfsPath1.Equals(vfsPath2).Should().BeFalse();
         }
     }
 }
