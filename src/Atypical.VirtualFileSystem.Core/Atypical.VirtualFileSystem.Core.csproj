@@ -44,10 +44,10 @@
       <RepositoryBranch>main</RepositoryBranch>
       <PackageReleaseNotes>
         ## Changes
-        - Bump Microsoft.NET.Test.Sdk from 17.4.1 to 17.5.0 @dependabot (#31)
-        - Bump FluentAssertions from 6.9.0 to 6.10.0 @dependabot (#30)
-        - Fix readme file on NuGet.org @phmatray (#29)
-        - Move commands and queries in separate files
+        - Get a summary from the ToString method @phmatray (#35)
+        - Add some unit tests @phmatray (#34)
+        - Add method to IVirtualFileSystem + comments and test @phmatray (#33)
+        - Create Directory.Build.props @phmatray (#32)
       </PackageReleaseNotes>
     </PropertyGroup>
 

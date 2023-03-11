@@ -102,7 +102,7 @@ dotnet add package Atypical.VirtualFileSystem
 or by adding a package reference to your project file:
 
 ```xml
-<PackageReference Include="Atypical.VirtualFileSystem" Version="0.1.5" />
+<PackageReference Include="Atypical.VirtualFileSystem" Version="0.1.6" />
 ```
 
 ### 📁 From source
@@ -151,7 +151,7 @@ IVirtualFileSystem vfs = new VFS()
     .CreateFile("world/themyscira.txt");
 
 // get the string representation of the virtual file system
-string tree = vfs.ToString();
+string tree = vfs.GetTree();
 ```
 
 ## 🤝 Contributing
