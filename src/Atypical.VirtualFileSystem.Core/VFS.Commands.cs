@@ -1,7 +1,6 @@
 ﻿namespace Atypical.VirtualFileSystem.Core;
 
 public partial record VFS
-    : IVirtualFileSystem
 {
     /// <inheritdoc cref="IVirtualFileSystem.CreateDirectory(VFSDirectoryPath)" />
     public IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath)

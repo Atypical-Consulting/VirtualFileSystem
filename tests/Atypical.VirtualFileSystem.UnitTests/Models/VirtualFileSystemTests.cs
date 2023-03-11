@@ -29,6 +29,23 @@ public class VirtualFileSystemTests
         }
     }
 
+    public class MethodGetRootPath
+    {
+        [Fact]
+        public void GetRootPath_returns_the_root_path()
+        {
+            // Arrange
+            IVirtualFileSystem vfs = new VFS();
+
+            // Act
+            var rootPath = vfs.GetRootPath();
+
+            // Assert
+            rootPath.Should().NotBeNull();
+            rootPath.Value.Should().Be("vfs://");
+        }
+    }
+    
     public class MethodGetDirectory
     {
         [Fact]
