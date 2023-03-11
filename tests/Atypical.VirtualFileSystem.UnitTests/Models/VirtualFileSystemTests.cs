@@ -212,6 +212,21 @@ public class VirtualFileSystemTests
                 .Throw<VFSException>()
                 .WithMessage("The directory path 'vfs://dir1/dir2/dir3/file.txt' contains a file extension.");
         }
+        
+        [Fact]
+        public void CreateDirectory_throws_an_exception_if_the_path_is_the_root_directory()
+        {
+            // Arrange
+            IVirtualFileSystem vfs = new VFS();
+
+            // Act
+            Action action = () => vfs.CreateDirectory("vfs://");
+
+            // Assert
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("Cannot create the root directory.");
+        }
     }
 
     public class MethodDeleteDirectory
@@ -261,6 +276,21 @@ public class VirtualFileSystemTests
                 .Throw<VFSException>()
                 .WithMessage("The directory 'vfs://dir1' does not exist in the index.");
         }
+        
+        [Fact]
+        public void DeleteDirectory_throws_an_exception_if_the_path_is_the_root_directory()
+        {
+            // Arrange
+            IVirtualFileSystem vfs = new VFS();
+
+            // Act
+            Action action = () => vfs.DeleteDirectory("vfs://");
+
+            // Assert
+            action.Should()
+                .Throw<VFSException>()
+                .WithMessage("Cannot delete the root directory.");
+        }
     }
 
     public class MethodFindDirectories
@@ -302,6 +332,31 @@ public class VirtualFileSystemTests
             directories.Should().NotBeEmpty();
             directories.Should().HaveCount(1);
             directories.Should().Contain(d => d.Path.Value == "vfs://dir1");
+        }
+    }
+
+    public class MethodSelectDirectories
+    {
+        [Fact]
+        public void SelectDirectories_returns_all_directories()
+        {
+            // Arrange
+            IVirtualFileSystem vfs = new VFS();
+            vfs.CreateDirectory("dir1");
+            vfs.CreateDirectory("dir2");
+            vfs.CreateDirectory("dir3");
+
+            // Act
+            var directories = vfs
+                .SelectDirectories(x => x.IsDirectory)
+                .ToList();
+
+            // Assert
+            directories.Should().NotBeEmpty();
+            directories.Should().HaveCount(3); // dir1 + dir2 + dir3
+            directories.Should().Contain(d => d.Path.Value == "vfs://dir1");
+            directories.Should().Contain(d => d.Path.Value == "vfs://dir2");
+            directories.Should().Contain(d => d.Path.Value == "vfs://dir3");
         }
     }
 

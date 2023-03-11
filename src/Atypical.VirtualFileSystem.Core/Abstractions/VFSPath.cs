@@ -22,8 +22,6 @@ public abstract record VFSPath
     /// </summary>
     public static readonly Regex VFSPathRegex = new(VFSPathRegexPattern, RegexOptions.Compiled);
 
-
-    
     /// <summary>
     ///     Creates a new instance of <see cref="VFSPath" />.
     /// </summary>
@@ -130,7 +128,6 @@ public abstract record VFSPath
     public virtual bool Equals(VFSPath? other)
     {
         if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
         return Value == other.Value;
     }
 
