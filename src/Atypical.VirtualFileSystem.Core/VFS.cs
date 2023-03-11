@@ -38,7 +38,15 @@ public partial record VFS
     /// </returns>
     public override string ToString()
     {
-        return GetTree();
+        var files = Index.Values.Count(x => x.IsFile);
+        var directories = Index.Values.Count(x => x.IsDirectory);
+
+        return new StringBuilder()
+            .Append("VFS:")
+            .Append($" {files} files")
+            .Append(',')
+            .Append($" {directories} directories")
+            .ToString();
     }
     
     internal void AddToIndex(IVirtualFileSystemNode node)

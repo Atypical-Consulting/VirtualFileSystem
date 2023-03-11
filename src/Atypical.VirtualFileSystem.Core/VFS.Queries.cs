@@ -91,6 +91,7 @@ public partial record VFS
     public IEnumerable<IFileNode> FindFiles(Regex regexPattern)
         => FindFiles().Where(f => regexPattern.IsMatch(f.Path.Value));
 
+    /// <inheritdoc cref="IVirtualFileSystem.GetTree()" />
     public string GetTree()
     {
         var sb = new StringBuilder();

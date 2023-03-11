@@ -44,6 +44,7 @@ Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSyste
 | [GetFile(VFSFilePath)](VFS.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)') | Gets a file node by its path.<br/>The path must be absolute. |
 | [GetFile(string)](VFS.GetFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(string)') | Gets a file node by its path.<br/>The path must be absolute. |
 | [GetRootPath()](VFS.GetRootPath().md 'Atypical.VirtualFileSystem.Core.VFS.GetRootPath()') | Gets the path of the root directory. |
+| [GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()') | Gets the tree of the file system. |
 | [IsEmpty()](VFS.IsEmpty().md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty()') | Indicates whether the file system is empty.<br/>This is the case if the root directory is empty. |
 | [SelectDirectories(Func&lt;IDirectoryNode,bool&gt;)](VFS.SelectDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.SelectDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)') | Finds all directory nodes that match the specified predicate. |
 | [ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()') | Returns the index as an ASCII tree. |

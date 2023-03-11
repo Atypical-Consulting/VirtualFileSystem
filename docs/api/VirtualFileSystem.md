@@ -44,6 +44,7 @@
   - **[GetFile(string)](VFS.GetFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetRootPath()](VFS.GetRootPath().md 'Atypical.VirtualFileSystem.Core.VFS.GetRootPath()')** `Method` Gets the path of the root directory.
+  - **[GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()')** `Method` Gets the tree of the file system.
   - **[IsEmpty()](VFS.IsEmpty().md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty()')** `Method` Indicates whether the file system is empty.  
     This is the case if the root directory is empty.
   - **[SelectDirectories(Func&lt;IDirectoryNode,bool&gt;)](VFS.SelectDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.SelectDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
@@ -174,6 +175,7 @@
   - **[GetFile(string)](IVirtualFileSystem.GetFile(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(string)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetRootPath()](IVirtualFileSystem.GetRootPath().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetRootPath()')** `Method` Gets the path of the root directory.
+  - **[GetTree()](IVirtualFileSystem.GetTree().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree()')** `Method` Gets the tree of the file system.
   - **[IsEmpty()](IVirtualFileSystem.IsEmpty().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty()')** `Method` Indicates whether the file system is empty.  
     This is the case if the root directory is empty.
   - **[SelectDirectories(Func&lt;IDirectoryNode,bool&gt;)](IVirtualFileSystem.SelectDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.SelectDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.

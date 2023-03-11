@@ -575,23 +575,23 @@ public class VirtualFileSystemTests
         }
     }
 
-    public class MethodToString
+    public class MethodGetTree
     {
         [Fact]
-        public void ToString_returns_root_directory()
+        public void GetTree_returns_root_directory()
         {
             // Arrange
             IVirtualFileSystem vfs = new VFS();
 
             // Act
-            var result = vfs.ToString();
+            var result = vfs.GetTree();
 
             // Assert
             result.Should().Be("vfs://");
         }
 
         [Fact]
-        public void ToString_returns_3_files_as_ASCII_tree()
+        public void GetTree_returns_3_files_as_ASCII_tree()
         {
             // Arrange
             var expected = """
@@ -607,14 +607,14 @@ public class VirtualFileSystemTests
                 .CreateFile("file3.txt");
 
             // Act
-            var result = vfs.ToString();
+            var result = vfs.GetTree();
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void ToString_returns_3_directories_as_ASCII_tree()
+        public void GetTree_returns_3_directories_as_ASCII_tree()
         {
             // Arrange
             var expected = """
@@ -630,14 +630,14 @@ public class VirtualFileSystemTests
                 .CreateDirectory("dir3");
 
             // Act
-            var result = vfs.ToString();
+            var result = vfs.GetTree();
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void ToString_returns_3_files_and_3_directories_as_ASCII_tree()
+        public void GetTree_returns_3_files_and_3_directories_as_ASCII_tree()
         {
             // Arrange
             var expected = """
@@ -668,14 +668,14 @@ public class VirtualFileSystemTests
                 .CreateFile("dir3/file3.txt");
 
             // Act
-            var result = vfs.ToString();
+            var result = vfs.GetTree();
 
             // Assert
             result.Should().Be(expected);
         }
 
         [Fact]
-        public void ToString_returns_a_complex_tree()
+        public void GetTree_returns_a_complex_tree()
         {
             // Arrange
             var expected = """
@@ -725,6 +725,30 @@ public class VirtualFileSystemTests
                 .CreateFile("dir3/file1.txt")
                 .CreateFile("dir3/file2.txt")
                 .CreateFile("dir3/file3.txt");
+
+            // Act
+            var result = vfs.GetTree();
+
+            // Assert
+            result.Should().Be(expected);
+        }
+    }
+
+    public class MethodToString
+    {
+        [Fact]
+        public void ToString_returns_a_summary_of_the_VFS()
+        {
+            // Arrange
+            const string expected = "VFS: 3 files, 3 directories";
+
+            var vfs = new VFS()
+                .CreateFile("file1.txt")
+                .CreateFile("file2.txt")
+                .CreateFile("file3.txt")
+                .CreateDirectory("dir1")
+                .CreateDirectory("dir2")
+                .CreateDirectory("dir3");
 
             // Act
             var result = vfs.ToString();
