@@ -102,7 +102,7 @@ dotnet add package Atypical.VirtualFileSystem
 or by adding a package reference to your project file:
 
 ```xml
-<PackageReference Include="Atypical.VirtualFileSystem" Version="0.1.6" />
+<PackageReference Include="Atypical.VirtualFileSystem" Version="0.1.7" />
 ```
 
 ### 📁 From source
