@@ -137,7 +137,6 @@ P:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.IsFile|VFSNode.IsFile.md|
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.#ctor(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSNode.VFSNode(VFSPath).md|VFSNode(VFSPath)
 N:Atypical.VirtualFileSystem.Core.Abstractions|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions|Atypical.VirtualFileSystem.Core.Abstractions
 T:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode|VFSNode.md|VFSNode
-F:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPathRegex|VFSPath.VFSPathRegex.md|VFSPathRegex
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Value|VFSPath.Value.md|Value
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Parent|VFSPath.Parent.md|Parent
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.HasParent|VFSPath.HasParent.md|HasParent

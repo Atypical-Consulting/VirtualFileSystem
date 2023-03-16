@@ -12,17 +12,6 @@ namespace Atypical.VirtualFileSystem.Core.Abstractions;
 public abstract record VFSPath
 {
     /// <summary>
-    ///     Regex pattern for matching a valid file system path.
-    /// </summary>
-    private const string VFSPathRegexPattern =
-        @$"^{ROOT_PATH}(?<path>([a-zA-Z0-9_\-\.]+{DIRECTORY_SEPARATOR})*[a-zA-Z0-9_\-\.]+)$";
-
-    /// <summary>
-    ///     Regex for matching a valid file system path.
-    /// </summary>
-    public static readonly Regex VFSPathRegex = new(VFSPathRegexPattern, RegexOptions.Compiled);
-
-    /// <summary>
     ///     Creates a new instance of <see cref="VFSPath" />.
     /// </summary>
     /// <param name="path">The path to the file system entry.</param>
@@ -31,7 +20,7 @@ public abstract record VFSPath
     public VFSPath(string path)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (path is null)
+        if (string.IsNullOrWhiteSpace(path))
             ThrowArgumentHasInvalidFormat(string.Empty);
 
         var vfsPath = CleanVFSPathInput(path);
@@ -46,9 +35,9 @@ public abstract record VFSPath
         if (vfsPath.Contains($".{DIRECTORY_SEPARATOR}"))
             ThrowArgumentHasRelativePathSegment(vfsPath);
 
-        if (!VFSPathRegex.IsMatch(vfsPath))
+        if (vfsPath.Split(DIRECTORY_SEPARATOR + DIRECTORY_SEPARATOR).Length > 2)
             ThrowArgumentHasInvalidFormat(vfsPath);
-
+        
         Value = vfsPath;
 
         // set parent path

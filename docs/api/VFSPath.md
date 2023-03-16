@@ -22,10 +22,6 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 | :--- | :--- |
 | [VFSPath(string)](VFSPath.VFSPath(string).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPath(string)') | Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath'). |
 
-| Fields | |
-| :--- | :--- |
-| [VFSPathRegex](VFSPath.VFSPathRegex.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPathRegex') | Regex for matching a valid file system path. |
-
 | Properties | |
 | :--- | :--- |
 | [Depth](VFSPath.Depth.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Depth') | Gets the depth of the file system entry.<br/>The root directory has a depth of 0.<br/>The depth of a file is the depth of its parent directory plus one.<br/>The depth of a directory is the depth of its parent directory plus one. |

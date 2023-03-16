@@ -102,7 +102,6 @@
   - **[Path](VFSNode.Path.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.Path')** `Property` Gets the creation time of the node.
 - **[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')** `Class` Represents a file system entry (file or directory) in the virtual file system.
   - **[VFSPath(string)](VFSPath.VFSPath(string).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPath(string)')** `Constructor` Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath').
-  - **[VFSPathRegex](VFSPath.VFSPathRegex.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPathRegex')** `Field` Regex for matching a valid file system path.
   - **[Depth](VFSPath.Depth.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Depth')** `Property` Gets the depth of the file system entry.  
     The root directory has a depth of 0.  
     The depth of a file is the depth of its parent directory plus one.  

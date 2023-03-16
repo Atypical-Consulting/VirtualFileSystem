@@ -16,7 +16,24 @@ public class VFSFilePathTests
         // - The path must not contain any relative path segments (..).
         // - The path must not contain any consecutive slashes (//).
         // - The path must not end with a slash (/).
+        
+        [Theory]
+        [InlineData(@"AddChild.md", @"vfs://AddChild.md")]
+        [InlineData(@"AddChild(IDirectoryNode).md", @"vfs://AddChild(IDirectoryNode).md")]
+        [InlineData(@"DirectoryNode.AddChild(IDirectoryNode).md", @"vfs://DirectoryNode.AddChild(IDirectoryNode).md")]
+        [InlineData(@"api/AddChild.md", @"vfs://api/AddChild.md")]
+        [InlineData(@"api/AddChild(IDirectoryNode).md", @"vfs://api/AddChild(IDirectoryNode).md")]
+        [InlineData(@"api/DirectoryNode.AddChild(IDirectoryNode).md", @"vfs://api/DirectoryNode.AddChild(IDirectoryNode).md")]
+        public void Constructor_create_instance_when_path_is_valid(string path, string expectedPath)
+        {
+            // Act
+            var vfsPath = new VFSFilePath(path);
 
+            // Assert
+            vfsPath.Value.Should().NotBeNull();
+            vfsPath.Value.Should().Be(expectedPath);
+        }
+        
         [Fact]
         public void Constructor_create_instance_when_path_is_valid_and_starts_with_dot()
         {
