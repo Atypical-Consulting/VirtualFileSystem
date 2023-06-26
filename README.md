@@ -1,4 +1,4 @@
-# Virtual File System
+# Virtual File System  [![Sparkline](https://stars.medv.io/Atypical-Consulting/SalesPitch.svg)](https://stars.medv.io/Atypical-Consulting/SalesPitch)
 A virtual file system implementation in modern C#.
 
 ---
