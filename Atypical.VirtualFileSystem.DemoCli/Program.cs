@@ -1,13 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Atypical.VirtualFileSystem.Core;
-using Atypical.VirtualFileSystem.Core.Contracts;
 using Atypical.VirtualFileSystem.DemoCli;
 using Spectre.Console;
 
 // Create a virtual file system
 var factory = new VirtualFileSystemFactory();
-IVirtualFileSystem vfs = factory.CreateFileSystem();
+var vfs = factory.CreateFileSystem();
 
 // Display a banner
 AnsiConsole.Write(

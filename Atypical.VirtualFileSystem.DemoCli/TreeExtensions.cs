@@ -12,14 +12,14 @@ public static class TreeExtensions
     /// <param name="directoryNode">The directory node to use as the source</param>
     public static void FillTree(this Tree treeNode, IDirectoryNode directoryNode)
     {
-        foreach (IDirectoryNode dir in directoryNode.Directories)
+        foreach (var dir in directoryNode.Directories)
         {
             var tree = new Tree(dir.Name);
             treeNode.AddNode(tree);
             FillTree(tree, dir); // Call FillTree recursively for subdirectories
         }
 
-        foreach (IFileNode file in directoryNode.Files)
+        foreach (var file in directoryNode.Files)
         {
             var tree = new Tree(file.Name);
             treeNode.AddNode(tree);
