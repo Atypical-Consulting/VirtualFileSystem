@@ -41,11 +41,10 @@ public partial record VFS
     /// </summary>
     /// <param name="node">The node</param>
     /// <returns>All brothers of the node</returns>
-    private List<IVirtualFileSystemNode> GetBrothers(IVirtualFileSystemNode node)
+    private IEnumerable<IVirtualFileSystemNode> GetBrothers(IVirtualFileSystemNode node)
     {
         var brothers = this.Index.Values
-            .Where(n => n.Path.Parent == node.Path.Parent)
-            .ToList();
+            .Where(n => n.Path.Parent == node.Path.Parent);
 
         return brothers;
     }

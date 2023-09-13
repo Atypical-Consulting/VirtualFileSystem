@@ -49,7 +49,7 @@ public partial record VFS
             .ToString();
     }
     
-    internal void AddToIndex(IVirtualFileSystemNode node)
+    private void AddToIndex(IVirtualFileSystemNode node)
     {
         var added = Index.TryAdd(node.Path.Value, node);
 

@@ -17,7 +17,7 @@ public abstract record VFSPath
     /// <param name="path">The path to the file system entry.</param>
     /// <exception cref="ArgumentNullException">Thrown when the path is null.</exception>
     /// <exception cref="ArgumentException">Thrown when the path is invalid.</exception>
-    public VFSPath(string path)
+    protected VFSPath(string path)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
         if (string.IsNullOrWhiteSpace(path))
@@ -125,7 +125,7 @@ public abstract record VFSPath
     /// </summary>
     /// <param name="path">The path to clean.</param>
     /// <returns>The cleaned path.</returns>
-    private string CleanVFSPathInput(string path)
+    private static string CleanVFSPathInput(string path)
     {
         // clean up the path
         var cleanPath = path.Trim();

@@ -16,12 +16,12 @@ public interface IDirectoryNode : IVirtualFileSystemNode
     /// <summary>
     ///     Gets the child directories of the node.
     /// </summary>
-    ReadOnlyCollection<IDirectoryNode> Directories { get; }
+    IEnumerable<IDirectoryNode> Directories { get; }
 
     /// <summary>
     ///     Gets the child files of the node.
     /// </summary>
-    ReadOnlyCollection<IFileNode> Files { get; }
+    IEnumerable<IFileNode> Files { get; }
     
     /// <summary>
     ///     Adds a child directory to the current directory.

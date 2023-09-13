@@ -6,7 +6,7 @@
 Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath').
 
 ```csharp
-public VFSPath(string path);
+protected VFSPath(string path);
 ```
 #### Parameters
 
