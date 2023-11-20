@@ -6,7 +6,7 @@
 
 namespace VirtualFileSystem.UnitTests.Models;
 
-public class RootNodeTests
+public static class RootNodeTests
 {
     public class Constructor
     {
@@ -14,7 +14,7 @@ public class RootNodeTests
         public void Constructor_create_a_root_node()
         {
             // Arrange
-            const string expectedPath = @"vfs://";
+            const string expectedPath = "vfs://";
 
             // Act
             var rootNode = new RootNode();

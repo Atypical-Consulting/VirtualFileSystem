@@ -3,13 +3,11 @@
 
 ## VFS.ToString() Method
 
-Returns the index as an ASCII tree.
+Returns a string that represents the current object.
 
 ```csharp
 public override string ToString();
 ```
 
 #### Returns
-[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')  
-The index as an ASCII tree.  
-The root directory is always the first line.
+[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')

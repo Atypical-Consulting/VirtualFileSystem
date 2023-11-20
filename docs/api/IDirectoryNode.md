@@ -14,8 +14,8 @@ Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode
 
 Derived  
 &#8627; [IRootNode](IRootNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IRootNode')  
-&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode')  
-&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode')
+&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.DirectoryNode')  
+&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')
 
@@ -26,5 +26,5 @@ Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualF
 
 | Methods | |
 | :--- | :--- |
-| [AddChild(IDirectoryNode)](IDirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)') | Adds a child directory to the current directory. |
-| [AddChild(IFileNode)](IDirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)') | Adds a child file to the current directory. |
+| [AddChild(IVirtualFileSystemNode)](IDirectoryNode.AddChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | x<br/>                Adds a child node to the current directory. |
+| [RemoveChild(IVirtualFileSystemNode)](IDirectoryNode.RemoveChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.RemoveChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Removes a child node from the current directory. |

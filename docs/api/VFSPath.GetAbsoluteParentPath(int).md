@@ -9,7 +9,7 @@ The depth of a file is the depth of its parent directory plus one.
 The depth of a directory is the depth of its parent directory plus one.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Abstractions.VFSPath GetAbsoluteParentPath(int depthFromRoot);
+public Atypical.VirtualFileSystem.Core.VFSDirectoryPath GetAbsoluteParentPath(int depthFromRoot);
 ```
 #### Parameters
 
@@ -20,7 +20,7 @@ public Atypical.VirtualFileSystem.Core.Abstractions.VFSPath GetAbsoluteParentPat
 The depth of the parent directory from the root directory.
 
 #### Returns
-[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')  
+[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')  
 The absolute path of the parent directory with depth [depthFromRoot](VFSPath.GetAbsoluteParentPath(int).md#Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int).depthFromRoot 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int).depthFromRoot').
 
 #### Exceptions

@@ -19,5 +19,6 @@ public class VirtualFileSystemFactory : IVirtualFileSystemFactory
     }
 
     /// <inheritdoc />
-    public IVirtualFileSystem CreateFileSystem() => new VFS();
+    public IVirtualFileSystem CreateFileSystem()
+        => new VFS();
 }

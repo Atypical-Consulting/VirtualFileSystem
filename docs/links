@@ -1,92 +1,98 @@
 https://github.com/Atypical-Consulting/VirtualFileSystem/blob/master/docs/
+P:Atypical.VirtualFileSystem.Core.DirectoryNode.Directories|DirectoryNode.Directories.md|Directories
+P:Atypical.VirtualFileSystem.Core.DirectoryNode.Files|DirectoryNode.Files.md|Files
+P:Atypical.VirtualFileSystem.Core.DirectoryNode.IsDirectory|DirectoryNode.IsDirectory.md|IsDirectory
+P:Atypical.VirtualFileSystem.Core.DirectoryNode.IsFile|DirectoryNode.IsFile.md|IsFile
+M:Atypical.VirtualFileSystem.Core.DirectoryNode.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|DirectoryNode.DirectoryNode(VFSDirectoryPath).md|DirectoryNode(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|DirectoryNode.AddChild(IVirtualFileSystemNode).md|AddChild(IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.DirectoryNode.RemoveChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|DirectoryNode.RemoveChild(IVirtualFileSystemNode).md|RemoveChild(IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.DirectoryNode.ToString|DirectoryNode.ToString().md|ToString()
+N:Atypical.VirtualFileSystem.Core|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core|Atypical.VirtualFileSystem.Core
+T:Atypical.VirtualFileSystem.Core.DirectoryNode|DirectoryNode.md|DirectoryNode
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor|VirtualFileSystemException.VirtualFileSystemException().md|VirtualFileSystemException()
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String)|VirtualFileSystemException.VirtualFileSystemException(string).md|VirtualFileSystemException(string)
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String,System.Exception)|VirtualFileSystemException.VirtualFileSystemException(string,Exception).md|VirtualFileSystemException(string, Exception)
+T:Atypical.VirtualFileSystem.Core.VirtualFileSystemException|VirtualFileSystemException.md|VirtualFileSystemException
+P:Atypical.VirtualFileSystem.Core.FileNode.Content|FileNode.Content.md|Content
+P:Atypical.VirtualFileSystem.Core.FileNode.IsDirectory|FileNode.IsDirectory.md|IsDirectory
+P:Atypical.VirtualFileSystem.Core.FileNode.IsFile|FileNode.IsFile.md|IsFile
+M:Atypical.VirtualFileSystem.Core.FileNode.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|FileNode.FileNode(VFSFilePath,string).md|FileNode(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.FileNode.ToString|FileNode.ToString().md|ToString()
+T:Atypical.VirtualFileSystem.Core.FileNode|FileNode.md|FileNode
+M:Atypical.VirtualFileSystem.Core.RootNode.#ctor|RootNode.RootNode().md|RootNode()
+M:Atypical.VirtualFileSystem.Core.RootNode.ToString|RootNode.ToString().md|ToString()
+T:Atypical.VirtualFileSystem.Core.RootNode|RootNode.md|RootNode
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.#ctor(System.String)|VFSDirectoryPath.VFSDirectoryPath(string).md|VFSDirectoryPath(string)
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.ToString|VFSDirectoryPath.ToString().md|ToString()
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)~System.String|VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md|implicit operator string(VFSDirectoryPath)
+T:Atypical.VirtualFileSystem.Core.VFSDirectoryPath|VFSDirectoryPath.md|VFSDirectoryPath
+M:Atypical.VirtualFileSystem.Core.VFSFilePath.#ctor(System.String)|VFSFilePath.VFSFilePath(string).md|VFSFilePath(string)
+M:Atypical.VirtualFileSystem.Core.VFSFilePath.ToString|VFSFilePath.ToString().md|ToString()
+M:Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit(Atypical.VirtualFileSystem.Core.VFSFilePath)~System.String|VFSFilePath.implicitoperatorstring(VFSFilePath).md|implicit operator string(VFSFilePath)
+T:Atypical.VirtualFileSystem.Core.VFSFilePath|VFSFilePath.md|VFSFilePath
+P:Atypical.VirtualFileSystem.Core.VFSIndex.RawIndex|VFSIndex.RawIndex.md|RawIndex
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Keys|VFSIndex.Keys.md|Keys
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Values|VFSIndex.Values.md|Values
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Count|VFSIndex.Count.md|Count
+P:Atypical.VirtualFileSystem.Core.VFSIndex.IsEmpty|VFSIndex.IsEmpty.md|IsEmpty
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Directories|VFSIndex.Directories.md|Directories
+P:Atypical.VirtualFileSystem.Core.VFSIndex.DirectoriesCount|VFSIndex.DirectoriesCount.md|DirectoriesCount
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Files|VFSIndex.Files.md|Files
+P:Atypical.VirtualFileSystem.Core.VFSIndex.FilesCount|VFSIndex.FilesCount.md|FilesCount
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.this[VFSFilePath].md|this[VFSFilePath]
+P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.this[VFSDirectoryPath].md|this[VFSDirectoryPath]
+M:Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSIndex.Remove(VFSPath).md|Remove(VFSPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode@)|VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md|TryGetValue(VFSPath, IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSIndex.ContainsKey(VFSPath).md|ContainsKey(VFSPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md|TryAdd(VFSPath, IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md|GetPathsStartingWith(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.ToString|VFSIndex.ToString().md|ToString()
+T:Atypical.VirtualFileSystem.Core.VFSIndex|VFSIndex.md|VFSIndex
+M:Atypical.VirtualFileSystem.Core.VFSRootPath.#ctor|VFSRootPath.VFSRootPath().md|VFSRootPath()
+M:Atypical.VirtualFileSystem.Core.VFSRootPath.ToString|VFSRootPath.ToString().md|ToString()
+M:Atypical.VirtualFileSystem.Core.VFSRootPath.op_Implicit(Atypical.VirtualFileSystem.Core.VFSRootPath)~System.String|VFSRootPath.implicitoperatorstring(VFSRootPath).md|implicit operator string(VFSRootPath)
+T:Atypical.VirtualFileSystem.Core.VFSRootPath|VFSRootPath.md|VFSRootPath
+F:Atypical.VirtualFileSystem.Core.VFSNodeType.Directory|VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.Directory|Directory
+F:Atypical.VirtualFileSystem.Core.VFSNodeType.File|VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.File|File
+T:Atypical.VirtualFileSystem.Core.VFSNodeType|VFSNodeType.md|VFSNodeType
+F:Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH|VFS.ROOT_PATH.md|ROOT_PATH
+F:Atypical.VirtualFileSystem.Core.VFS.DIRECTORY_SEPARATOR|VFS.DIRECTORY_SEPARATOR.md|DIRECTORY_SEPARATOR
 P:Atypical.VirtualFileSystem.Core.VFS.Root|VFS.Root.md|Root
+P:Atypical.VirtualFileSystem.Core.VFS.RootPath|VFS.RootPath.md|RootPath
 P:Atypical.VirtualFileSystem.Core.VFS.Index|VFS.Index.md|Index
-M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories|VFS.FindDirectories().md|FindDirectories()
+P:Atypical.VirtualFileSystem.Core.VFS.Directories|VFS.Directories.md|Directories
+P:Atypical.VirtualFileSystem.Core.VFS.Files|VFS.Files.md|Files
+P:Atypical.VirtualFileSystem.Core.VFS.IsEmpty|VFS.IsEmpty.md|IsEmpty
+M:Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFS.CreateDirectory(VFSDirectoryPath).md|CreateDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFS.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFS.DeleteDirectory(VFSDirectoryPath).md|DeleteDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFS.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.VFSFilePath)|VFS.MoveFile(VFSFilePath,VFSFilePath).md|MoveFile(VFSFilePath, VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFS.RenameFile(VFSFilePath,string).md|RenameFile(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|VFS.FindDirectories(Func_IDirectoryNode,bool_).md|FindDirectories(Func<IDirectoryNode,bool>)
 M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)|VFS.FindDirectories(Regex).md|FindDirectories(Regex)
-M:Atypical.VirtualFileSystem.Core.VFS.SelectDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|VFS.SelectDirectories(Func_IDirectoryNode,bool_).md|SelectDirectories(Func<IDirectoryNode,bool>)
-M:Atypical.VirtualFileSystem.Core.VFS.FindFiles|VFS.FindFiles().md|FindFiles()
+M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|VFS.FindFiles(Func_IFileNode,bool_).md|FindFiles(Func<IFileNode,bool>)
 M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|VFS.FindFiles(Regex).md|FindFiles(Regex)
-M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(System.String)|VFS.GetDirectory(string).md|GetDirectory(string)
-M:Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|VFS.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
-M:Atypical.VirtualFileSystem.Core.VFS.GetFile(System.String)|VFS.GetFile(string).md|GetFile(string)
-M:Atypical.VirtualFileSystem.Core.VFS.GetRootPath|VFS.GetRootPath().md|GetRootPath()
+M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFS.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.VFS.GetTree|VFS.GetTree().md|GetTree()
-M:Atypical.VirtualFileSystem.Core.VFS.IsEmpty|VFS.IsEmpty().md|IsEmpty()
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(System.String,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(string,IDirectoryNode).md|TryGetDirectory(string, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
-M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(System.String,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(string,IFileNode).md|TryGetFile(string, IFileNode)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.CreateDirectory(VFSDirectoryPath).md|CreateDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(System.String)|VFS.CreateDirectory(string).md|CreateDirectory(string)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|VFS.DeleteDirectory(VFSDirectoryPath).md|DeleteDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(System.String)|VFS.DeleteDirectory(string).md|DeleteDirectory(string)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,System.String)|VFS.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
-M:Atypical.VirtualFileSystem.Core.VFS.CreateFile(System.String,System.String)|VFS.CreateFile(string,string).md|CreateFile(string, string)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|VFS.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
-M:Atypical.VirtualFileSystem.Core.VFS.DeleteFile(System.String)|VFS.DeleteFile(string).md|DeleteFile(string)
+M:Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFS.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
 M:Atypical.VirtualFileSystem.Core.VFS.#ctor|VFS.VFS().md|VFS()
 M:Atypical.VirtualFileSystem.Core.VFS.ToString|VFS.ToString().md|ToString()
-N:Atypical.VirtualFileSystem.Core|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core|Atypical.VirtualFileSystem.Core
 T:Atypical.VirtualFileSystem.Core.VFS|VFS.md|VFS
-F:Atypical.VirtualFileSystem.Core.VFSConstants.ROOT_PATH|VFSConstants.ROOT_PATH.md|ROOT_PATH
-F:Atypical.VirtualFileSystem.Core.VFSConstants.DIRECTORY_SEPARATOR|VFSConstants.DIRECTORY_SEPARATOR.md|DIRECTORY_SEPARATOR
-F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_CLEAR|VFSConstants.STR_INDENT_CLEAR.md|STR_INDENT_CLEAR
-F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_ENTRY_MIDDLE|VFSConstants.STR_INDENT_ENTRY_MIDDLE.md|STR_INDENT_ENTRY_MIDDLE
-F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_ENTRY_LAST|VFSConstants.STR_INDENT_ENTRY_LAST.md|STR_INDENT_ENTRY_LAST
-F:Atypical.VirtualFileSystem.Core.VFSConstants.STR_INDENT_FILL|VFSConstants.STR_INDENT_FILL.md|STR_INDENT_FILL
-T:Atypical.VirtualFileSystem.Core.VFSConstants|VFSConstants.md|VFSConstants
-M:Atypical.VirtualFileSystem.Core.VFSIndex.#ctor|VFSIndex.VFSIndex().md|VFSIndex()
-T:Atypical.VirtualFileSystem.Core.VFSIndex|VFSIndex.md|VFSIndex
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.#ctor|VirtualFileSystemFactory.VirtualFileSystemFactory().md|VirtualFileSystemFactory()
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem|VirtualFileSystemFactory.CreateFileSystem().md|CreateFileSystem()
 T:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory|VirtualFileSystemFactory.md|VirtualFileSystemFactory
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath.#ctor(System.String)|VFSDirectoryPath.VFSDirectoryPath(string).md|VFSDirectoryPath(string)
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath.ToString|VFSDirectoryPath.ToString().md|ToString()
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath.op_Implicit(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)~System.String|VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md|implicit operator string(VFSDirectoryPath)
-N:Atypical.VirtualFileSystem.Core.ValueObjects|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.ValueObjects|Atypical.VirtualFileSystem.Core.ValueObjects
-T:Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath|VFSDirectoryPath.md|VFSDirectoryPath
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath.#ctor(System.String)|VFSFilePath.VFSFilePath(string).md|VFSFilePath(string)
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath.ToString|VFSFilePath.ToString().md|ToString()
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath.op_Implicit(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)~System.String|VFSFilePath.implicitoperatorstring(VFSFilePath).md|implicit operator string(VFSFilePath)
-T:Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath|VFSFilePath.md|VFSFilePath
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.#ctor|VFSRootPath.VFSRootPath().md|VFSRootPath()
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.ToString|VFSRootPath.ToString().md|ToString()
-M:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.op_Implicit(Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath)~System.String|VFSRootPath.implicitoperatorstring(VFSRootPath).md|implicit operator string(VFSRootPath)
-T:Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath|VFSRootPath.md|VFSRootPath
 M:Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions.AddVirtualFileSystem(Microsoft.Extensions.DependencyInjection.IServiceCollection)|ServiceCollectionExtensions.AddVirtualFileSystem(thisIServiceCollection).md|AddVirtualFileSystem(this IServiceCollection)
 N:Atypical.VirtualFileSystem.Core.Services|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Services|Atypical.VirtualFileSystem.Core.Services
 T:Atypical.VirtualFileSystem.Core.Services.ServiceCollectionExtensions|ServiceCollectionExtensions.md|ServiceCollectionExtensions
-P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Path|DirectoryNode.Path.md|Path
-P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Directories|DirectoryNode.Directories.md|Directories
-P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.Files|DirectoryNode.Files.md|Files
-P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsDirectory|DirectoryNode.IsDirectory.md|IsDirectory
-P:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.IsFile|DirectoryNode.IsFile.md|IsFile
-M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.#ctor(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|DirectoryNode.DirectoryNode(VFSDirectoryPath).md|DirectoryNode(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)|DirectoryNode.AddChild(IDirectoryNode).md|AddChild(IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)|DirectoryNode.AddChild(IFileNode).md|AddChild(IFileNode)
-M:Atypical.VirtualFileSystem.Core.Models.DirectoryNode.ToString|DirectoryNode.ToString().md|ToString()
-N:Atypical.VirtualFileSystem.Core.Models|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models|Atypical.VirtualFileSystem.Core.Models
-T:Atypical.VirtualFileSystem.Core.Models.DirectoryNode|DirectoryNode.md|DirectoryNode
-P:Atypical.VirtualFileSystem.Core.Models.FileNode.Path|FileNode.Path.md|Path
-P:Atypical.VirtualFileSystem.Core.Models.FileNode.Content|FileNode.Content.md|Content
-P:Atypical.VirtualFileSystem.Core.Models.FileNode.IsDirectory|FileNode.IsDirectory.md|IsDirectory
-P:Atypical.VirtualFileSystem.Core.Models.FileNode.IsFile|FileNode.IsFile.md|IsFile
-M:Atypical.VirtualFileSystem.Core.Models.FileNode.#ctor(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,System.String)|FileNode.FileNode(VFSFilePath,string).md|FileNode(VFSFilePath, string)
-M:Atypical.VirtualFileSystem.Core.Models.FileNode.ToString|FileNode.ToString().md|ToString()
-T:Atypical.VirtualFileSystem.Core.Models.FileNode|FileNode.md|FileNode
-M:Atypical.VirtualFileSystem.Core.Models.RootNode.#ctor|RootNode.RootNode().md|RootNode()
-M:Atypical.VirtualFileSystem.Core.Models.RootNode.ToString|RootNode.ToString().md|ToString()
-T:Atypical.VirtualFileSystem.Core.Models.RootNode|RootNode.md|RootNode
-M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor|VFSException.VFSException().md|VFSException()
-M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String)|VFSException.VFSException(string).md|VFSException(string)
-M:Atypical.VirtualFileSystem.Core.Exceptions.VFSException.#ctor(System.String,System.Exception)|VFSException.VFSException(string,Exception).md|VFSException(string, Exception)
-N:Atypical.VirtualFileSystem.Core.Exceptions|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Exceptions|Atypical.VirtualFileSystem.Core.Exceptions
-T:Atypical.VirtualFileSystem.Core.Exceptions.VFSException|VFSException.md|VFSException
 P:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Directories|IDirectoryNode.Directories.md|Directories
 P:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Files|IDirectoryNode.Files.md|Files
-M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)|IDirectoryNode.AddChild(IDirectoryNode).md|AddChild(IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)|IDirectoryNode.AddChild(IFileNode).md|AddChild(IFileNode)
+M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|IDirectoryNode.AddChild(IVirtualFileSystemNode).md|AddChild(IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.RemoveChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|IDirectoryNode.RemoveChild(IVirtualFileSystemNode).md|RemoveChild(IVirtualFileSystemNode)
 N:Atypical.VirtualFileSystem.Core.Contracts|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts|Atypical.VirtualFileSystem.Core.Contracts
 T:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode|IDirectoryNode.md|IDirectoryNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content|IFileNode.Content.md|Content
@@ -94,28 +100,23 @@ T:Atypical.VirtualFileSystem.Core.Contracts.IFileNode|IFileNode.md|IFileNode
 T:Atypical.VirtualFileSystem.Core.Contracts.IRootNode|IRootNode.md|IRootNode
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root|IVirtualFileSystem.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index|IVirtualFileSystem.Index.md|Index
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty().md|IsEmpty()
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetRootPath|IVirtualFileSystem.GetRootPath().md|GetRootPath()
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(System.String)|IVirtualFileSystem.GetDirectory(string).md|GetDirectory(string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(System.String,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(string,IDirectoryNode).md|TryGetDirectory(string, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|IVirtualFileSystem.CreateDirectory(VFSDirectoryPath).md|CreateDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(System.String)|IVirtualFileSystem.CreateDirectory(string).md|CreateDirectory(string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath)|IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath).md|DeleteDirectory(VFSDirectoryPath)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(System.String)|IVirtualFileSystem.DeleteDirectory(string).md|DeleteDirectory(string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories|IVirtualFileSystem.FindDirectories().md|FindDirectories()
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.SelectDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|IVirtualFileSystem.SelectDirectories(Func_IDirectoryNode,bool_).md|SelectDirectories(Func<IDirectoryNode,bool>)
+P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty.md|IsEmpty
+P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RootPath|IVirtualFileSystem.RootPath.md|RootPath
+P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Directories|IVirtualFileSystem.Directories.md|Directories
+P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Files|IVirtualFileSystem.Files.md|Files
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|IVirtualFileSystem.CreateDirectory(VFSDirectoryPath).md|CreateDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath).md|DeleteDirectory(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|IVirtualFileSystem.FindDirectories(Func_IDirectoryNode,bool_).md|FindDirectories(Func<IDirectoryNode,bool>)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindDirectories(Regex).md|FindDirectories(Regex)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|IVirtualFileSystem.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(System.String)|IVirtualFileSystem.GetFile(string).md|GetFile(string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|IVirtualFileSystem.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(System.String,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|IVirtualFileSystem.TryGetFile(string,IFileNode).md|TryGetFile(string, IFileNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath,System.String)|IVirtualFileSystem.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(System.String,System.String)|IVirtualFileSystem.CreateFile(string,string).md|CreateFile(string, string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypical.VirtualFileSystem.Core.ValueObjects.VFSFilePath)|IVirtualFileSystem.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(System.String)|IVirtualFileSystem.DeleteFile(string).md|DeleteFile(string)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles|IVirtualFileSystem.FindFiles().md|FindFiles()
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|IVirtualFileSystem.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|IVirtualFileSystem.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|IVirtualFileSystem.CreateFile(VFSFilePath,string).md|CreateFile(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|IVirtualFileSystem.DeleteFile(VFSFilePath).md|DeleteFile(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|IVirtualFileSystem.RenameFile(VFSFilePath,string).md|RenameFile(VFSFilePath, string)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.VFSFilePath)|IVirtualFileSystem.MoveFile(VFSFilePath,VFSFilePath).md|MoveFile(VFSFilePath, VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|IVirtualFileSystem.FindFiles(Func_IFileNode,bool_).md|FindFiles(Func<IFileNode,bool>)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindFiles(Regex).md|FindFiles(Regex)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree|IVirtualFileSystem.GetTree().md|GetTree()
 T:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem|IVirtualFileSystem.md|IVirtualFileSystem
@@ -136,6 +137,7 @@ P:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.LastWriteTime|VFSNode.Las
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.IsDirectory|VFSNode.IsDirectory.md|IsDirectory
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.IsFile|VFSNode.IsFile.md|IsFile
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.#ctor(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSNode.VFSNode(VFSPath).md|VFSNode(VFSPath)
+M:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.UpdatePath(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSNode.UpdatePath(VFSPath).md|UpdatePath(VFSPath)
 N:Atypical.VirtualFileSystem.Core.Abstractions|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions|Atypical.VirtualFileSystem.Core.Abstractions
 T:Atypical.VirtualFileSystem.Core.Abstractions.VFSNode|VFSNode.md|VFSNode
 P:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Value|VFSPath.Value.md|Value
@@ -147,5 +149,7 @@ P:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Name|VFSPath.Name.md|Name
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.#ctor(System.String)|VFSPath.VFSPath(string).md|VFSPath(string)
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Equals(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSPath.Equals(VFSPath).md|Equals(VFSPath)
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(System.Int32)|VFSPath.GetAbsoluteParentPath(int).md|GetAbsoluteParentPath(int)
+M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)|VFSPath.IsMatch(Regex).md|IsMatch(Regex)
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetHashCode|VFSPath.GetHashCode().md|GetHashCode()
+M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.StartsWith(System.String)|VFSPath.StartsWith(string).md|StartsWith(string)
 T:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath|VFSPath.md|VFSPath

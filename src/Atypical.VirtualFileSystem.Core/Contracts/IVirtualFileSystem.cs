@@ -30,13 +30,25 @@ public interface IVirtualFileSystem
     ///     Indicates whether the file system is empty.
     ///     This is the case if the root directory is empty.
     /// </summary>
-    bool IsEmpty();
-    
+    bool IsEmpty { get; }
+
     /// <summary>
     ///     Gets the path of the root directory.
     /// </summary>
-    /// <returns>The path of the root directory.</returns>
-    VFSPath GetRootPath();
+    /// <value>The path of the root directory.</value>
+    VFSPath RootPath { get; }
+    
+    /// <summary>
+    ///     Finds all directory nodes.
+    /// </summary>
+    /// <value>The directory nodes.</value>
+    IEnumerable<IDirectoryNode> Directories { get; }
+    
+    /// <summary>
+    ///     Finds all file nodes.
+    /// </summary>
+    /// <value>The file nodes.</value>
+    IEnumerable<IFileNode> Files { get; }
 
     /// <summary>
     ///     Gets a directory node by its path.
@@ -45,14 +57,6 @@ public interface IVirtualFileSystem
     /// <param name="directoryPath">The path of the directory node.</param>
     /// <returns>The directory node.</returns>
     IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath);
-
-    /// <summary>
-    ///     Gets a file node by its path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="directoryPath">The path of the file node.</param>
-    /// <returns>The file node.</returns>
-    IDirectoryNode GetDirectory(string directoryPath);
 
     /// <summary>
     ///     Try to get a directory node by its path.
@@ -66,31 +70,12 @@ public interface IVirtualFileSystem
     bool TryGetDirectory(VFSDirectoryPath directoryPath, out IDirectoryNode? directory);
 
     /// <summary>
-    ///     Try to get a directory node by its path.
-    ///     The path must be absolute.
-    ///     If the directory node does not exist, this method returns <c>false</c>
-    ///     and <paramref name="directory" /> is set to <c>null</c>.
-    /// </summary>
-    /// <param name="directoryPath">The path of the directory node.</param>
-    /// <param name="directory">The directory node.</param>
-    /// <returns><c>true</c> if the directory node exists; otherwise, <c>false</c>.</returns>
-    bool TryGetDirectory(string directoryPath, out IDirectoryNode? directory);
-
-    /// <summary>
     ///     Creates a directory node at the specified path.
     ///     The path must be absolute.
     /// </summary>
     /// <param name="directoryPath">The path of the directory node.</param>
     /// <returns>The file system.</returns>
     IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath);
-
-    /// <summary>
-    ///     Creates a directory node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="directoryPath">The path of the directory node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem CreateDirectory(string directoryPath);
 
     /// <summary>
     ///     Deletes a directory node at the specified path.
@@ -101,25 +86,11 @@ public interface IVirtualFileSystem
     IVirtualFileSystem DeleteDirectory(VFSDirectoryPath directoryPath);
 
     /// <summary>
-    ///     Deletes a directory node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="directoryPath">The path of the directory node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem DeleteDirectory(string directoryPath);
-
-    /// <summary>
-    ///     Finds all directory nodes.
-    /// </summary>
-    /// <returns>The directory nodes.</returns>
-    IEnumerable<IDirectoryNode> FindDirectories();
-
-    /// <summary>
     ///     Finds all directory nodes that match the specified predicate.
     /// </summary>
     /// <param name="predicate">The predicate.</param>
     /// <returns>The directory nodes.</returns>
-    IEnumerable<IDirectoryNode> SelectDirectories(
+    IEnumerable<IDirectoryNode> FindDirectories(
         Func<IDirectoryNode, bool> predicate);
 
     /// <summary>
@@ -139,14 +110,6 @@ public interface IVirtualFileSystem
     IFileNode GetFile(VFSFilePath filePath);
 
     /// <summary>
-    ///     Gets a file node by its path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <returns>The file node.</returns>
-    IFileNode GetFile(string filePath);
-
-    /// <summary>
     ///     Try to get a file node by its path.
     ///     The path must be absolute.
     /// </summary>
@@ -154,15 +117,6 @@ public interface IVirtualFileSystem
     /// <param name="file">The file node.</param>
     /// <returns><c>true</c> if the file node exists; otherwise, <c>false</c>.</returns>
     bool TryGetFile(VFSFilePath filePath, out IFileNode? file);
-
-    /// <summary>
-    ///     Try to get a file node by its path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <param name="file">The file node.</param>
-    /// <returns><c>true</c> if the file node exists; otherwise, <c>false</c>.</returns>
-    bool TryGetFile(string filePath, out IFileNode? file);
 
     /// <summary>
     ///     Creates a file node at the specified path.
@@ -174,15 +128,6 @@ public interface IVirtualFileSystem
     IVirtualFileSystem CreateFile(VFSFilePath filePath, string? content = null);
 
     /// <summary>
-    ///     Creates a file node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <param name="content">The content of the file node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem CreateFile(string filePath, string? content = null);
-
-    /// <summary>
     ///     Deletes a file node at the specified path.
     ///     The path must be absolute.
     /// </summary>
@@ -190,19 +135,31 @@ public interface IVirtualFileSystem
     /// <returns>The file system.</returns>
     IVirtualFileSystem DeleteFile(VFSFilePath filePath);
 
+    // RenameFile
     /// <summary>
-    ///     Deletes a file node at the specified path.
+    ///     Renames a file node at the specified path.
     ///     The path must be absolute.
     /// </summary>
     /// <param name="filePath">The path of the file node.</param>
+    /// <param name="newName">The new name of the file node.</param>
     /// <returns>The file system.</returns>
-    IVirtualFileSystem DeleteFile(string filePath);
+    IVirtualFileSystem RenameFile(VFSFilePath filePath, string newName);
 
     /// <summary>
-    ///     Finds all file nodes.
+    ///     Moves a file node from the source path to the destination path.
+    ///     Both paths must be absolute.
     /// </summary>
+    /// <param name="sourceFilePath">The source path of the file node.</param>
+    /// <param name="destinationFilePath">The destination path of the file node.</param>
+    /// <returns>The file system.</returns>
+    IVirtualFileSystem MoveFile(VFSFilePath sourceFilePath, VFSFilePath destinationFilePath);
+
+    /// <summary>
+    ///     Finds all file nodes that match the specified predicate.
+    /// </summary>
+    /// <param name="predicate">The predicate.</param>
     /// <returns>The file nodes.</returns>
-    IEnumerable<IFileNode> FindFiles();
+    IEnumerable<IFileNode> FindFiles(Func<IFileNode, bool> predicate);
 
     /// <summary>
     ///     Finds all file nodes that match the specified regular expression.

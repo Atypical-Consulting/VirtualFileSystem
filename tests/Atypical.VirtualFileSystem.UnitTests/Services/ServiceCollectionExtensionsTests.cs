@@ -4,13 +4,11 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-using Atypical.VirtualFileSystem.Core.Contracts;
-using Atypical.VirtualFileSystem.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace VirtualFileSystem.UnitTests.Services;
 
-public class ServiceCollectionExtensionsTests
+public static class ServiceCollectionExtensionsTests
 {
     public class MethodAddVirtualFileSystem
     {

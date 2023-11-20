@@ -6,7 +6,7 @@
 Gets the creation time of the node.
 
 ```csharp
-public abstract Atypical.VirtualFileSystem.Core.Abstractions.VFSPath Path { get; }
+public Atypical.VirtualFileSystem.Core.Abstractions.VFSPath Path { get; set; }
 ```
 
 Implements [Path](IVirtualFileSystemNode.Path.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode.Path')

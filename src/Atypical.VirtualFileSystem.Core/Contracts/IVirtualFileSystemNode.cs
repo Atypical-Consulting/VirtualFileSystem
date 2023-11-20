@@ -56,4 +56,10 @@ public interface IVirtualFileSystemNode
     ///     Indicates whether the node is a file.
     /// </summary>
     bool IsFile { get; }
+
+    /// <summary>
+    ///     Updates the path of the node.
+    /// </summary>
+    /// <param name="path">The new path of the node.</param>
+    internal IVirtualFileSystemNode UpdatePath(VFSPath path);
 }
