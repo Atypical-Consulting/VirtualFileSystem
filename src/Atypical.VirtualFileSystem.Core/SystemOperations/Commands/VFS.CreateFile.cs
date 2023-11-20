@@ -9,15 +9,11 @@ public partial record VFS
             ThrowCannotCreateDirectoryWithoutParent();
 
         var file = new FileNode(filePath, content);
-        this.AddToIndex(file);
+        AddToIndex(file);
 
-        this.TryGetDirectory(filePath.Parent, out var parent);
+        TryGetDirectory(filePath.Parent, out var parent);
         parent?.AddChild(file);
 
         return this;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateFile(string,string?)" />
-    public IVirtualFileSystem CreateFile(string filePath, string? content = null)
-        => CreateFile(new VFSFilePath(filePath), content);
 }

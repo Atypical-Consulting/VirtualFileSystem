@@ -2,11 +2,12 @@
 
 public partial record VFS
 {
-    /// <inheritdoc cref="IVirtualFileSystem.FindFiles()" />
-    public IEnumerable<IFileNode> FindFiles()
-        => this.Index.Values.OfType<IFileNode>();
+    /// <inheritdoc cref="IVirtualFileSystem.FindFiles(Func{IFileNode,bool})" />
+    public IEnumerable<IFileNode> FindFiles(
+        Func<IFileNode, bool> predicate)
+        => Index.Files.Where(predicate);
 
     /// <inheritdoc cref="IVirtualFileSystem.FindFiles(Regex)" />
     public IEnumerable<IFileNode> FindFiles(Regex regexPattern)
-        => FindFiles().Where(f => regexPattern.IsMatch(f.Path.Value));
+        => FindFiles(f => f.Path.IsMatch(regexPattern));
 }

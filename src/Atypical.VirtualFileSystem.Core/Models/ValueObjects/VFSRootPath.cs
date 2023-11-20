@@ -17,7 +17,8 @@ public record VFSRootPath()
     ///     The string representation of the root directory is the constant <see cref="ROOT_PATH" />.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString() => Value;
+    public override string ToString()
+        => Value;
 
     /// <summary>
     ///     Implicit conversion to string
@@ -25,5 +26,6 @@ public record VFSRootPath()
     /// </summary>
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
-    public static implicit operator string(VFSRootPath path) => path.Value;
+    public static implicit operator string(VFSRootPath path)
+        => path.Value;
 }

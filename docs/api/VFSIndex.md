@@ -3,10 +3,7 @@
 
 ## VFSIndex Class
 
-Represents the index of the virtual file system.  
-- a vfs index is a dictionary of vfs paths and vfs nodes  
-- the vfs index is used to store the nodes of the virtual file system  
-This class cannot be inherited.
+Represents the index of the virtual file system.
 
 ```csharp
 public sealed class VFSIndex
@@ -14,6 +11,35 @@ public sealed class VFSIndex
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; VFSIndex
 
-| Constructors | |
+### Remarks
+The vfs index is a dictionary of vfs paths and vfs nodes.  
+The vfs index is used to store the nodes of the virtual file system.  
+The vfs index is sorted by the vfs paths.  
+The vfs index is case insensitive.  
+This class cannot be inherited.
+
+| Properties | |
 | :--- | :--- |
-| [VFSIndex()](VFSIndex.VFSIndex().md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex()') | Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.<br/>- the vfs index is a dictionary of vfs paths and vfs nodes<br/>- the vfs index is used to store the nodes of the virtual file system<br/>- the vfs index is sorted by the vfs paths<br/>- the vfs index is case insensitive |
+| [Count](VFSIndex.Count.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Count') | Gets the total count of nodes in the index. |
+| [Directories](VFSIndex.Directories.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Directories') | Gets the directories in the index. |
+| [DirectoriesCount](VFSIndex.DirectoriesCount.md 'Atypical.VirtualFileSystem.Core.VFSIndex.DirectoriesCount') | Gets the count of directories in the index. |
+| [Files](VFSIndex.Files.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Files') | Gets the files in the index. |
+| [FilesCount](VFSIndex.FilesCount.md 'Atypical.VirtualFileSystem.Core.VFSIndex.FilesCount') | Gets the count of files in the index. |
+| [IsEmpty](VFSIndex.IsEmpty.md 'Atypical.VirtualFileSystem.Core.VFSIndex.IsEmpty') | Gets a value indicating whether the index is empty. |
+| [Keys](VFSIndex.Keys.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Keys') | Gets the keys of the raw index. |
+| [RawIndex](VFSIndex.RawIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex.RawIndex') | Gets the raw index of the virtual file system. |
+| [this[VFSDirectoryPath]](VFSIndex.this[VFSDirectoryPath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSDirectoryPath]') | Gets or sets the node at the specified directory path. |
+| [this[VFSFilePath]](VFSIndex.this[VFSFilePath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSFilePath]') | Gets or sets the node at the specified file path. |
+| [this[string]](VFSIndex.this[string].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[string]') | Gets or sets the node at the specified path. |
+| [Values](VFSIndex.Values.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Values') | Gets the values of the raw index. |
+
+| Methods | |
+| :--- | :--- |
+| [ContainsKey(string)](VFSIndex.ContainsKey(string).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(string)') | Determines whether the index contains the specified key. |
+| [GetDirectory(VFSDirectoryPath)](VFSIndex.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Gets the directory node at the specified directory path. |
+| [GetFile(VFSFilePath)](VFSIndex.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)') | Gets the file node at the specified file path. |
+| [GetPathsStartingWith(VFSDirectoryPath)](VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Gets the paths starting with the specified directory path. |
+| [Remove(string)](VFSIndex.Remove(string).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(string)') | Removes the node with the specified key. |
+| [ToString()](VFSIndex.ToString().md 'Atypical.VirtualFileSystem.Core.VFSIndex.ToString()') | Returns a string that represents the current object. |
+| [TryAdd(string, IVirtualFileSystemNode)](VFSIndex.TryAdd(string,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(string, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to add the specified node to the index. |
+| [TryGetValue(string, IVirtualFileSystemNode)](VFSIndex.TryGetValue(string,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(string, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to get the value associated with the specified key. |

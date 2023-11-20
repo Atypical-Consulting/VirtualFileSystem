@@ -36,65 +36,44 @@
     This is the character used to separate directory names.
   - **[ROOT_PATH](VFS.ROOT_PATH.md 'Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH')** `Field` The root path.  
     This is the path used to identify the root directory.
+  - **[Directories](VFS.Directories.md 'Atypical.VirtualFileSystem.Core.VFS.Directories')** `Property` Finds all directory nodes.
+  - **[Files](VFS.Files.md 'Atypical.VirtualFileSystem.Core.VFS.Files')** `Property` Finds all file nodes.
   - **[Index](VFS.Index.md 'Atypical.VirtualFileSystem.Core.VFS.Index')** `Property` Gets the file index of the file system.  
     Basically, this is a dictionary that maps file paths to file nodes.  
     This is useful for quickly finding a file node by its path.
+  - **[IsEmpty](VFS.IsEmpty.md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty')** `Property` Indicates whether the file system is empty.  
+    This is the case if the root directory is empty.
   - **[Root](VFS.Root.md 'Atypical.VirtualFileSystem.Core.VFS.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
+  - **[RootPath](VFS.RootPath.md 'Atypical.VirtualFileSystem.Core.VFS.RootPath')** `Property` Gets the path of the root directory.
   - **[CreateDirectory(VFSDirectoryPath)](VFS.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
-    The path must be absolute.
-  - **[CreateDirectory(string)](VFS.CreateDirectory(string).md 'Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(string)')** `Method` Creates a directory node at the specified path.  
     The path must be absolute.
   - **[CreateFile(VFSFilePath, string)](VFS.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Creates a file node at the specified path.  
     The path must be absolute.
-  - **[CreateFile(string, string)](VFS.CreateFile(string,string).md 'Atypical.VirtualFileSystem.Core.VFS.CreateFile(string, string)')** `Method` Creates a file node at the specified path.  
-    The path must be absolute.
   - **[DeleteDirectory(VFSDirectoryPath)](VFS.DeleteDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Deletes a directory node at the specified path.  
-    The path must be absolute.
-  - **[DeleteDirectory(string)](VFS.DeleteDirectory(string).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(string)')** `Method` Deletes a directory node at the specified path.  
     The path must be absolute.
   - **[DeleteFile(VFSFilePath)](VFS.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Deletes a file node at the specified path.  
     The path must be absolute.
-  - **[DeleteFile(string)](VFS.DeleteFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteFile(string)')** `Method` Deletes a file node at the specified path.  
-    The path must be absolute.
-  - **[FindDirectories()](VFS.FindDirectories().md 'Atypical.VirtualFileSystem.Core.VFS.FindDirectories()')** `Method` Finds all directory nodes.
+  - **[FindDirectories(Func&lt;IDirectoryNode,bool&gt;)](VFS.FindDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
   - **[FindDirectories(Regex)](VFS.FindDirectories(Regex).md 'Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)')** `Method` Finds all directory nodes that match the specified regular expression.  
     The regular expression must be relative to the root directory.
-  - **[FindFiles()](VFS.FindFiles().md 'Atypical.VirtualFileSystem.Core.VFS.FindFiles()')** `Method` Finds all file nodes.
+  - **[FindFiles(Func&lt;IFileNode,bool&gt;)](VFS.FindFiles(Func_IFileNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IFileNode,bool>)')** `Method` Finds all file nodes that match the specified predicate.
   - **[FindFiles(Regex)](VFS.FindFiles(Regex).md 'Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)')** `Method` Finds all file nodes that match the specified regular expression.
   - **[GetDirectory(VFSDirectoryPath)](VFS.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets a directory node by its path.  
     The path must be absolute.
-  - **[GetDirectory(string)](VFS.GetDirectory(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetDirectory(string)')** `Method` Gets a file node by its path.  
-    The path must be absolute.
   - **[GetFile(VFSFilePath)](VFS.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
-  - **[GetFile(string)](VFS.GetFile(string).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(string)')** `Method` Gets a file node by its path.  
-    The path must be absolute.
-  - **[GetRootPath()](VFS.GetRootPath().md 'Atypical.VirtualFileSystem.Core.VFS.GetRootPath()')** `Method` Gets the path of the root directory.
   - **[GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()')** `Method` Gets the tree of the file system.
-  - **[IsEmpty()](VFS.IsEmpty().md 'Atypical.VirtualFileSystem.Core.VFS.IsEmpty()')** `Method` Indicates whether the file system is empty.  
-    This is the case if the root directory is empty.
   - **[MoveFile(VFSFilePath, VFSFilePath)](VFS.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
-    Both paths must be absolute.
-  - **[MoveFile(string, string)](VFS.MoveFile(string,string).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(string, string)')** `Method` Moves a file node from the source path to the destination path.  
     Both paths must be absolute.
   - **[RenameFile(VFSFilePath, string)](VFS.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
     The path must be absolute.
-  - **[RenameFile(string, string)](VFS.RenameFile(string,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(string, string)')** `Method` Renames a file node at the specified path.  
-    The path must be absolute.
-  - **[SelectDirectories(Func&lt;IDirectoryNode,bool&gt;)](VFS.SelectDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.SelectDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
-  - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns the index as an ASCII tree.
+  - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns a string that represents the current object.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
     If the directory node does not exist, this method returns `false`  
     and directory is set to `null`.
-  - **[TryGetDirectory(string, IDirectoryNode)](VFS.TryGetDirectory(string,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(string, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
-    The path must be absolute.  
-    If the directory node does not exist, this method returns `false`  
-    and directory is set to `null`.
   - **[TryGetFile(VFSFilePath, IFileNode)](VFS.TryGetFile(VFSFilePath,IFileNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Try to get a file node by its path.  
-    The path must be absolute.
-  - **[TryGetFile(string, IFileNode)](VFS.TryGetFile(string,IFileNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetFile(string, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Try to get a file node by its path.  
     The path must be absolute.
 - **[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')** `Class` Represents a directory in the virtual file system.  
   A directory is a first-class citizen in the virtual file system.  
@@ -113,15 +92,27 @@
     The file path is relative to the root of the virtual file system.
   - **[implicit operator string(VFSFilePath)](VFSFilePath.implicitoperatorstring(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') as a string.
-- **[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')** `Class` Represents the index of the virtual file system.  
-  - a vfs index is a dictionary of vfs paths and vfs nodes  
-  - the vfs index is used to store the nodes of the virtual file system  
-  This class cannot be inherited.
-  - **[VFSIndex()](VFSIndex.VFSIndex().md 'Atypical.VirtualFileSystem.Core.VFSIndex.VFSIndex()')** `Constructor` Initializes a new instance of the [VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex') class.  
-    - the vfs index is a dictionary of vfs paths and vfs nodes  
-    - the vfs index is used to store the nodes of the virtual file system  
-    - the vfs index is sorted by the vfs paths  
-    - the vfs index is case insensitive
+- **[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')** `Class` Represents the index of the virtual file system.
+  - **[Count](VFSIndex.Count.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Count')** `Property` Gets the total count of nodes in the index.
+  - **[Directories](VFSIndex.Directories.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Directories')** `Property` Gets the directories in the index.
+  - **[DirectoriesCount](VFSIndex.DirectoriesCount.md 'Atypical.VirtualFileSystem.Core.VFSIndex.DirectoriesCount')** `Property` Gets the count of directories in the index.
+  - **[Files](VFSIndex.Files.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Files')** `Property` Gets the files in the index.
+  - **[FilesCount](VFSIndex.FilesCount.md 'Atypical.VirtualFileSystem.Core.VFSIndex.FilesCount')** `Property` Gets the count of files in the index.
+  - **[IsEmpty](VFSIndex.IsEmpty.md 'Atypical.VirtualFileSystem.Core.VFSIndex.IsEmpty')** `Property` Gets a value indicating whether the index is empty.
+  - **[Keys](VFSIndex.Keys.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Keys')** `Property` Gets the keys of the raw index.
+  - **[RawIndex](VFSIndex.RawIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex.RawIndex')** `Property` Gets the raw index of the virtual file system.
+  - **[this[VFSDirectoryPath]](VFSIndex.this[VFSDirectoryPath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSDirectoryPath]')** `Property` Gets or sets the node at the specified directory path.
+  - **[this[VFSFilePath]](VFSIndex.this[VFSFilePath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSFilePath]')** `Property` Gets or sets the node at the specified file path.
+  - **[this[string]](VFSIndex.this[string].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[string]')** `Property` Gets or sets the node at the specified path.
+  - **[Values](VFSIndex.Values.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Values')** `Property` Gets the values of the raw index.
+  - **[ContainsKey(string)](VFSIndex.ContainsKey(string).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(string)')** `Method` Determines whether the index contains the specified key.
+  - **[GetDirectory(VFSDirectoryPath)](VFSIndex.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets the directory node at the specified directory path.
+  - **[GetFile(VFSFilePath)](VFSIndex.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets the file node at the specified file path.
+  - **[GetPathsStartingWith(VFSDirectoryPath)](VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets the paths starting with the specified directory path.
+  - **[Remove(string)](VFSIndex.Remove(string).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(string)')** `Method` Removes the node with the specified key.
+  - **[ToString()](VFSIndex.ToString().md 'Atypical.VirtualFileSystem.Core.VFSIndex.ToString()')** `Method` Returns a string that represents the current object.
+  - **[TryAdd(string, IVirtualFileSystemNode)](VFSIndex.TryAdd(string,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(string, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to add the specified node to the index.
+  - **[TryGetValue(string, IVirtualFileSystemNode)](VFSIndex.TryGetValue(string,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(string, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to get the value associated with the specified key.
 - **[VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath')** `Class` Represents the root directory of the virtual file system.
   - **[VFSRootPath()](VFSRootPath.VFSRootPath().md 'Atypical.VirtualFileSystem.Core.VFSRootPath.VFSRootPath()')** `Constructor` Represents the root directory of the virtual file system.
   - **[ToString()](VFSRootPath.ToString().md 'Atypical.VirtualFileSystem.Core.VFSRootPath.ToString()')** `Method` Returns a string that represents the current object.  
@@ -170,6 +161,7 @@
     The depth of a file is the depth of its parent directory plus one.  
     The depth of a directory is the depth of its parent directory plus one.
   - **[GetHashCode()](VFSPath.GetHashCode().md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetHashCode()')** `Method` Serves as the default hash function.
+  - **[IsMatch(Regex)](VFSPath.IsMatch(Regex).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)')** `Method` Indicates whether the specified regular expression finds a match in the path.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts'></a>
 
@@ -190,64 +182,43 @@
 - **[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')** `Interface` Represents a virtual file system.  
   This is the main entry point for all operations on the file system.  
   You can get an instance of this interface by calling [CreateFileSystem()](IVirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory.CreateFileSystem()').
+  - **[Directories](IVirtualFileSystem.Directories.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Directories')** `Property` Finds all directory nodes.
+  - **[Files](IVirtualFileSystem.Files.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Files')** `Property` Finds all file nodes.
   - **[Index](IVirtualFileSystem.Index.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index')** `Property` Gets the file index of the file system.  
     Basically, this is a dictionary that maps file paths to file nodes.  
     This is useful for quickly finding a file node by its path.
+  - **[IsEmpty](IVirtualFileSystem.IsEmpty.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty')** `Property` Indicates whether the file system is empty.  
+    This is the case if the root directory is empty.
   - **[Root](IVirtualFileSystem.Root.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
+  - **[RootPath](IVirtualFileSystem.RootPath.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RootPath')** `Property` Gets the path of the root directory.
   - **[CreateDirectory(VFSDirectoryPath)](IVirtualFileSystem.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
-    The path must be absolute.
-  - **[CreateDirectory(string)](IVirtualFileSystem.CreateDirectory(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(string)')** `Method` Creates a directory node at the specified path.  
     The path must be absolute.
   - **[CreateFile(VFSFilePath, string)](IVirtualFileSystem.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Creates a file node at the specified path.  
     The path must be absolute.
-  - **[CreateFile(string, string)](IVirtualFileSystem.CreateFile(string,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(string, string)')** `Method` Creates a file node at the specified path.  
-    The path must be absolute.
   - **[DeleteDirectory(VFSDirectoryPath)](IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Deletes a directory node at the specified path.  
-    The path must be absolute.
-  - **[DeleteDirectory(string)](IVirtualFileSystem.DeleteDirectory(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(string)')** `Method` Deletes a directory node at the specified path.  
     The path must be absolute.
   - **[DeleteFile(VFSFilePath)](IVirtualFileSystem.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Deletes a file node at the specified path.  
     The path must be absolute.
-  - **[DeleteFile(string)](IVirtualFileSystem.DeleteFile(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(string)')** `Method` Deletes a file node at the specified path.  
-    The path must be absolute.
-  - **[FindDirectories()](IVirtualFileSystem.FindDirectories().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories()')** `Method` Finds all directory nodes.
+  - **[FindDirectories(Func&lt;IDirectoryNode,bool&gt;)](IVirtualFileSystem.FindDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
   - **[FindDirectories(Regex)](IVirtualFileSystem.FindDirectories(Regex).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)')** `Method` Finds all directory nodes that match the specified regular expression.  
     The regular expression must be relative to the root directory.
-  - **[FindFiles()](IVirtualFileSystem.FindFiles().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles()')** `Method` Finds all file nodes.
+  - **[FindFiles(Func&lt;IFileNode,bool&gt;)](IVirtualFileSystem.FindFiles(Func_IFileNode,bool_).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IFileNode,bool>)')** `Method` Finds all file nodes that match the specified predicate.
   - **[FindFiles(Regex)](IVirtualFileSystem.FindFiles(Regex).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)')** `Method` Finds all file nodes that match the specified regular expression.
   - **[GetDirectory(VFSDirectoryPath)](IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets a directory node by its path.  
     The path must be absolute.
-  - **[GetDirectory(string)](IVirtualFileSystem.GetDirectory(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(string)')** `Method` Gets a file node by its path.  
-    The path must be absolute.
   - **[GetFile(VFSFilePath)](IVirtualFileSystem.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
-  - **[GetFile(string)](IVirtualFileSystem.GetFile(string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(string)')** `Method` Gets a file node by its path.  
-    The path must be absolute.
-  - **[GetRootPath()](IVirtualFileSystem.GetRootPath().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetRootPath()')** `Method` Gets the path of the root directory.
   - **[GetTree()](IVirtualFileSystem.GetTree().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree()')** `Method` Gets the tree of the file system.
-  - **[IsEmpty()](IVirtualFileSystem.IsEmpty().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty()')** `Method` Indicates whether the file system is empty.  
-    This is the case if the root directory is empty.
   - **[MoveFile(VFSFilePath, VFSFilePath)](IVirtualFileSystem.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
-    Both paths must be absolute.
-  - **[MoveFile(string, string)](IVirtualFileSystem.MoveFile(string,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(string, string)')** `Method` Moves a file node from the source path to the destination path.  
     Both paths must be absolute.
   - **[RenameFile(VFSFilePath, string)](IVirtualFileSystem.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
     The path must be absolute.
-  - **[RenameFile(string, string)](IVirtualFileSystem.RenameFile(string,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(string, string)')** `Method` Renames a file node at the specified path.  
-    The path must be absolute.
-  - **[SelectDirectories(Func&lt;IDirectoryNode,bool&gt;)](IVirtualFileSystem.SelectDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.SelectDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
     If the directory node does not exist, this method returns `false`  
     and directory is set to `null`.
-  - **[TryGetDirectory(string, IDirectoryNode)](IVirtualFileSystem.TryGetDirectory(string,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(string, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
-    The path must be absolute.  
-    If the directory node does not exist, this method returns `false`  
-    and directory is set to `null`.
   - **[TryGetFile(VFSFilePath, IFileNode)](IVirtualFileSystem.TryGetFile(VFSFilePath,IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Try to get a file node by its path.  
-    The path must be absolute.
-  - **[TryGetFile(string, IFileNode)](IVirtualFileSystem.TryGetFile(string,IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(string, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Try to get a file node by its path.  
     The path must be absolute.
 - **[IVirtualFileSystemFactory](IVirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory')** `Interface` Represents a factory for creating [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem') instances.  
   This interface is implemented by the [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory') class.

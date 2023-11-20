@@ -22,7 +22,7 @@ public record VFSDirectoryPath : VFSPath
         : base(path)
     {
         var lastSegment = Value.Split('/').Last();
-        if (lastSegment.Contains('.') && !lastSegment.StartsWith("."))
+        if (lastSegment.Contains('.') && !lastSegment.StartsWith('.'))
             ThrowArgumentHasFileExtension(path);
     }
 

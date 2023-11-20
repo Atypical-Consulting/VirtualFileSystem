@@ -7,9 +7,9 @@ public partial record VFS
     {
         var sb = new StringBuilder();
 
-        sb.AppendLine(this.Root.Name);
+        sb.AppendLine(Root.Name);
 
-        foreach (var node in this.Index.Values)
+        foreach (var node in Index.Values)
         {
             var depth = node.Path.Depth;
 
@@ -21,7 +21,7 @@ public partial record VFS
 
             while (depth > 1)
             {
-                var parent = node.Path.GetAbsoluteParentPath(1).Value;
+                var parent = node.Path.GetAbsoluteParentPath(1);
                 var isLastNodeOfLevelParent = GetBrothers(GetDirectory(parent)).Last() == GetDirectory(parent);
 
                 sb.Append(isLastNodeOfLevelParent ? STR_INDENT_CLEAR : STR_INDENT_FILL);
@@ -43,7 +43,7 @@ public partial record VFS
     /// <returns>All brothers of the node</returns>
     private IEnumerable<IVirtualFileSystemNode> GetBrothers(IVirtualFileSystemNode node)
     {
-        var brothers = this.Index.Values
+        var brothers = Index.Values
             .Where(n => n.Path.Parent == node.Path.Parent);
 
         return brothers;

@@ -17,10 +17,4 @@ public partial record VFS
 
         return this;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystem.MoveFile(string, string)" />
-    public IVirtualFileSystem MoveFile(
-        string sourceFilePath,
-        string destinationFilePath)
-        => MoveFile(new VFSFilePath(sourceFilePath), new VFSFilePath(destinationFilePath));
 }

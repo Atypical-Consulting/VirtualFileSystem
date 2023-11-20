@@ -10,19 +10,16 @@ public partial record VFS
             ThrowCannotDeleteRootDirectory();
 
         // try to get the directory
-        var found = this.TryGetDirectory(directoryPath, out _);
+        var found = TryGetDirectory(directoryPath, out _);
         if (!found)
             ThrowVirtualDirectoryNotFound(directoryPath);
 
         // find the path and its children in the index
-        var paths = this.Index.Keys
-            .Where(p => p.StartsWith(directoryPath.Value))
-            .OrderByDescending(p => p.Length)
-            .ToList();
+        var paths = Index.GetPathsStartingWith(directoryPath);
 
         // remove the paths from the index
         foreach (var p in paths)
-            this.Index.Remove(p);
+            Index.Remove(p);
 
         return this;
     }

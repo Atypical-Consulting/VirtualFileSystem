@@ -37,7 +37,7 @@ public abstract record VFSPath
 
         if (vfsPath.Split(DIRECTORY_SEPARATOR + DIRECTORY_SEPARATOR).Length > 2)
             ThrowArgumentHasInvalidFormat(vfsPath);
-        
+
         Value = vfsPath;
 
         // set parent path
@@ -133,7 +133,7 @@ public abstract record VFSPath
         // if is root path, return it
         if (cleanPath is ROOT_PATH or "")
             return cleanPath;
-        
+
         // replace backslashes with forward slashes
         cleanPath = cleanPath.Replace('\\', '/');
 
@@ -157,26 +157,40 @@ public abstract record VFSPath
     /// <param name="depthFromRoot">The depth of the parent directory from the root directory.</param>
     /// <returns>The absolute path of the parent directory with depth <paramref name="depthFromRoot" />.</returns>
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the depth is negative.</exception>
-    public VFSPath GetAbsoluteParentPath(int depthFromRoot)
+    public VFSDirectoryPath GetAbsoluteParentPath(int depthFromRoot)
     {
         if (depthFromRoot < 0)
             ThrowDepthFromRootMustBeGreaterThanOrEqualToZero(depthFromRoot);
 
         if (IsRoot)
-            return this;
+            return this as VFSDirectoryPath
+                   ?? throw new VirtualFileSystemException("The root path is not a directory path.");
 
         var path = this;
-        while (path!.Depth > depthFromRoot) path = path.Parent;
+        while (path!.Depth > depthFromRoot)
+            path = path.Parent;
 
-        return path;
+        return path as VFSDirectoryPath
+               ?? throw new VirtualFileSystemException("The parent path is not a directory path.");
     }
+    
+    /// <summary>
+    ///     Indicates whether the specified regular expression finds a match in the path.
+    /// </summary>
+    /// <param name="regex">The regular expression to match.</param>
+    /// <returns>
+    ///     <see langword="true" /> if the regular expression finds a match; otherwise, <see langword="false" />.
+    /// </returns>
+    public bool IsMatch(Regex regex)
+        => regex.IsMatch(Value);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
-    public override int GetHashCode() => Value.GetHashCode();
-    
+    public override int GetHashCode()
+        => Value.GetHashCode();
+
     [DoesNotReturn]
     private static void ThrowArgumentHasRelativePathSegment(string vfsPath)
     {
@@ -193,16 +207,16 @@ public abstract record VFSPath
 
         throw new VirtualFileSystemException(message, new ArgumentException(message));
     }
-    
+
     [DoesNotReturn]
     private static void ThrowDepthFromRootMustBeGreaterThanOrEqualToZero(int depthFromRoot)
     {
-        var message = $"""
-            The depth from root must be greater than or equal to 0.
-            Actual value: {depthFromRoot}.
-            """;
-        
+        var message =
+            $"""
+             The depth from root must be greater than or equal to 0.
+             Actual value: {depthFromRoot}.
+             """;
+
         throw new VirtualFileSystemException(message);
     }
 }
-

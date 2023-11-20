@@ -12,9 +12,9 @@ public partial record VFS
             ThrowCannotCreateDirectoryWithoutParent();
 
         var directory = new DirectoryNode(directoryPath);
-        this.AddToIndex(directory);
+        AddToIndex(directory);
 
-        this.TryGetDirectory(directoryPath.Parent, out var parent);
+        TryGetDirectory(directoryPath.Parent, out var parent);
         parent?.AddChild(directory);
 
         return this;

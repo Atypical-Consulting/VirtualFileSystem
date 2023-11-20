@@ -25,5 +25,6 @@ public record RootNode
     ///     For <see cref="RootNode" /> this is always the constant string <cref see="ROOT_PATH" />.
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => Path.ToString();
+    public override string ToString()
+        => Path.ToString();
 }

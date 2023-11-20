@@ -16,8 +16,4 @@ public partial record VFS
             return false;
         }
     }
-
-    /// <inheritdoc cref="IVirtualFileSystem.TryGetDirectory(string,out IDirectoryNode?)" />
-    public bool TryGetDirectory(string path, out IDirectoryNode? directory)
-        => TryGetDirectory(new VFSDirectoryPath(path), out directory);
 }

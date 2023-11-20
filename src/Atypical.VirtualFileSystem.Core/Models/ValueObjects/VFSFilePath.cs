@@ -27,7 +27,8 @@ public record VFSFilePath : VFSPath
     ///     The file path is relative to the root of the virtual file system.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString() => Value;
+    public override string ToString()
+        => Value;
 
     /// <summary>
     ///     Implicit conversion to string
@@ -35,5 +36,6 @@ public record VFSFilePath : VFSPath
     /// </summary>
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
-    public static implicit operator string(VFSFilePath path) => path.Value;
+    public static implicit operator string(VFSFilePath path)
+        => path.Value;
 }

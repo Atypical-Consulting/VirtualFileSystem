@@ -23,31 +23,26 @@ public partial record VFS : IVirtualFileSystem
 
     /// <inheritdoc cref="IVirtualFileSystem.Root" />
     public IRootNode Root { get; }
+    
+    /// <inheritdoc cref="IVirtualFileSystem.RootPath" />
+    public VFSPath RootPath
+        => Root.Path;
 
     /// <inheritdoc cref="IVirtualFileSystem.Index" />
     public VFSIndex Index { get; }
-
-    /// <summary>
-    ///     Returns the index as an ASCII tree.
-    /// </summary>
-    /// <returns>
-    ///     The index as an ASCII tree.
-    ///     <para />
-    ///     The root directory is always the first line.
-    /// </returns>
-    public override string ToString()
-    {
-        var files = Index.Values.Count(x => x.IsFile);
-        var directories = Index.Values.Count(x => x.IsDirectory);
-
-        return new StringBuilder()
-            .Append("VFS:")
-            .Append($" {files} files")
-            .Append(',')
-            .Append($" {directories} directories")
-            .ToString();
-    }
     
+    /// <inheritdoc cref="IVirtualFileSystem.Directories" />
+    public IEnumerable<IDirectoryNode> Directories
+        => Index.Directories;
+    
+    /// <inheritdoc cref="IVirtualFileSystem.Files" />
+    public IEnumerable<IFileNode> Files
+        => Index.Files;
+    
+    /// <inheritdoc cref="IVirtualFileSystem.IsEmpty" />
+    public bool IsEmpty
+        => Index.IsEmpty;
+
     private void AddToIndex(IVirtualFileSystemNode node)
     {
         var added = Index.TryAdd(node.Path.Value, node);
@@ -60,4 +55,10 @@ public partial record VFS : IVirtualFileSystem
             && node.Path.Parent != Root.Path)
             CreateDirectory(node.Path.Parent);
     }
+
+    /// <summary>
+    ///     Returns a string that represents the current object.
+    /// </summary> 
+    public override string ToString()
+        => Index.ToString();
 }

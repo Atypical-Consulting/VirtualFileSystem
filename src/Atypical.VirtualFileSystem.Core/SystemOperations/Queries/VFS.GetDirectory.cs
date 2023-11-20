@@ -6,10 +6,6 @@ public partial record VFS
     public IDirectoryNode GetDirectory(VFSDirectoryPath directoryPath)
         // if the path is the root path, return the root node
         => directoryPath.IsRoot
-            ? this.Root
-            : (IDirectoryNode)this.Index[directoryPath];
-
-    /// <inheritdoc cref="IVirtualFileSystem.GetDirectory(string)" />
-    public IDirectoryNode GetDirectory(string directoryPath)
-        => GetDirectory(new VFSDirectoryPath(directoryPath));
+            ? Root
+            : Index.GetDirectory(directoryPath);
 }

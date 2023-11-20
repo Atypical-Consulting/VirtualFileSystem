@@ -42,5 +42,6 @@ public record FileNode
     ///     Returns a string that represents the path of the file.
     /// </summary>
     /// <returns>A string that represents the path of the file.</returns>
-    public override string ToString() => Path.ToString();
+    public override string ToString()
+        => Path.ToString();
 }
