@@ -3,7 +3,7 @@
 /// <summary>
 /// Provides helper methods for throwing exceptions related to the virtual file system.
 /// </summary>
-public partial record VFS : IVirtualFileSystem
+public partial record VFS
 {
     /// <summary>
     /// Throws a VFSException indicating that a virtual file was not found.

@@ -9,7 +9,7 @@ namespace Atypical.VirtualFileSystem.Core;
 /// <summary>
 ///     Constants used by the Virtual File System.
 /// </summary>
-public partial record VFS : IVirtualFileSystem
+public partial record VFS
 {
     /// <summary>
     ///     The root path.
