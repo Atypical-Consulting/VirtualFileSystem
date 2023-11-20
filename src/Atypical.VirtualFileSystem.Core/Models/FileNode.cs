@@ -4,7 +4,7 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-namespace Atypical.VirtualFileSystem.Core.Models;
+namespace Atypical.VirtualFileSystem.Core;
 
 /// <summary>
 ///     Represents a file in the virtual file system.
@@ -26,9 +26,6 @@ public record FileNode
         Path = filePath;
         Content = content ?? string.Empty;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystemNode.Path" />
-    public override VFSFilePath Path { get; }
 
     /// <inheritdoc cref="IFileNode.Content" />
     public string Content { get; set; }

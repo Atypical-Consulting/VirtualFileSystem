@@ -1,19 +1,19 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.ValueObjects](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.ValueObjects 'Atypical.VirtualFileSystem.Core.ValueObjects').[VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath')
 
 ## VFSRootPath.implicit operator string(VFSRootPath) Operator
 
 Implicit conversion to string  
-This allows you to use a [VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath') as a string.
+This allows you to use a [VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath') as a string.
 
 ```csharp
-public static string implicit operator string(Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath path);
+public static string implicit operator string(Atypical.VirtualFileSystem.Core.VFSRootPath path);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath.op_Implicitstring(Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath).path'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSRootPath.op_Implicitstring(Atypical.VirtualFileSystem.Core.VFSRootPath).path'></a>
 
-`path` [VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.ValueObjects.VFSRootPath')
+`path` [VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath')
 
 The path to convert.
 

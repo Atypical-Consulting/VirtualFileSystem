@@ -12,7 +12,7 @@ Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode
 ```
 
 Derived  
-&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.Models.FileNode')
+&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')
 

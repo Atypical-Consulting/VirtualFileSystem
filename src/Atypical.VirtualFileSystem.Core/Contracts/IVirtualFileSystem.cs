@@ -198,6 +198,43 @@ public interface IVirtualFileSystem
     /// <returns>The file system.</returns>
     IVirtualFileSystem DeleteFile(string filePath);
 
+    // RenameFile
+    /// <summary>
+    ///     Renames a file node at the specified path.
+    ///     The path must be absolute.
+    /// </summary>
+    /// <param name="filePath">The path of the file node.</param>
+    /// <param name="newName">The new name of the file node.</param>
+    /// <returns>The file system.</returns>
+    IVirtualFileSystem RenameFile(VFSFilePath filePath, string newName);
+    
+    /// <summary>
+    ///     Renames a file node at the specified path.
+    ///     The path must be absolute.
+    /// </summary>
+    /// <param name="filePath">The path of the file node.</param>
+    /// <param name="newName">The new name of the file node.</param>
+    /// <returns>The file system.</returns>
+    IVirtualFileSystem RenameFile(string filePath, string newName);
+
+    /// <summary>
+    ///     Moves a file node from the source path to the destination path.
+    ///     Both paths must be absolute.
+    /// </summary>
+    /// <param name="sourceFilePath">The source path of the file node.</param>
+    /// <param name="destinationFilePath">The destination path of the file node.</param>
+    /// <returns>The file system.</returns>
+    IVirtualFileSystem MoveFile(VFSFilePath sourceFilePath, VFSFilePath destinationFilePath);
+
+    /// <summary>
+    ///     Moves a file node from the source path to the destination path.
+    ///     Both paths must be absolute.
+    /// </summary>
+    /// <param name="sourceFilePath">The source path of the file node.</param>
+    /// <param name="destinationFilePath">The destination path of the file node.</param>
+    /// <returns>The file system.</returns>
+    IVirtualFileSystem MoveFile(string sourceFilePath, string destinationFilePath);
+
     /// <summary>
     ///     Finds all file nodes.
     /// </summary>

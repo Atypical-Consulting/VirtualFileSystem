@@ -15,8 +15,8 @@ public static class DirectoryNodeTests
         {
             // Arrange
             var directoryPath = new VFSDirectoryPath("test");
-            const string expectedPath = @"vfs://test";
-            const string expectedParentPath = @"vfs://";
+            const string expectedPath = "vfs://test";
+            const string expectedParentPath = "vfs://";
 
             // Act
             var directoryNode = new DirectoryNode(directoryPath);

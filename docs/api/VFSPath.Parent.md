@@ -6,8 +6,8 @@
 Gets the path of the parent directory.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath? Parent { get; }
+public Atypical.VirtualFileSystem.Core.VFSDirectoryPath? Parent { get; }
 ```
 
 #### Property Value
-[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.ValueObjects.VFSDirectoryPath')
+[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')

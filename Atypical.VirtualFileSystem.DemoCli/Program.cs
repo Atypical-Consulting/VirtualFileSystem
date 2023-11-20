@@ -1,8 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Atypical.VirtualFileSystem.Core;
-using Atypical.VirtualFileSystem.DemoCli;
-using Spectre.Console;
+﻿using Atypical.VirtualFileSystem.Core;
+using Atypical.VirtualFileSystem.DemoCli.Extensions;
 
 // Create a virtual file system
 var factory = new VirtualFileSystemFactory();
@@ -17,20 +14,26 @@ AnsiConsole.Write(
 // Create a directory structure
 vfs.CreateDirectory("/heroes");
 vfs.CreateFile("/heroes/ironman.txt", "Tony Stark");
-vfs.CreateFile("/heroes/captainamerica.txt", "Steve Rogers");
+vfs.CreateFile("/heroes/captain_america.txt", "Steve Rogers");
 vfs.CreateFile("/heroes/hulk.txt", "Bruce Banner");
 vfs.CreateFile("/heroes/thor.txt", "Thor Odinson");
-vfs.CreateFile("/heroes/blackwidow.txt", "Natasha Romanoff");
+vfs.CreateFile("/heroes/black_widow.txt", "Natasha Romanoff");
 vfs.CreateDirectory("/villains");
 vfs.CreateFile("/villains/loki.txt", "Loki Laufeyson");
 vfs.CreateFile("/villains/ultron.txt", "Ultron");
 vfs.CreateFile("/villains/killmonger.txt", "N'Jadaka");
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
 
-// use spectre console to display a tree view of the file system
-var tree = new Tree("Marvel Universe");
+// Rename a file
+vfs.RenameFile("/heroes/ironman.txt", "tony_stark.txt");
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
 
-// Start with the root node
-tree.FillTree(vfs.Root);
+// Move a file
+vfs.MoveFile("/heroes/tony_stark.txt", "/villains/tony_stark.txt");
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
 
-// Display the tree
-AnsiConsole.Write(tree);
+// Delete a file
+vfs.DeleteFile("/villains/tony_stark.txt");
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+
+return;

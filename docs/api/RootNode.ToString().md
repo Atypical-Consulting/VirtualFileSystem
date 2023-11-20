@@ -1,10 +1,10 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical.VirtualFileSystem.Core.Models').[RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode')
 
 ## RootNode.ToString() Method
 
 Returns a string that represents the current object.  
-For [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode') this is always the constant string <cref see="ROOT_PATH"/>.
+For [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode') this is always the constant string <cref see="ROOT_PATH"/>.
 
 ```csharp
 public override string ToString();

@@ -4,7 +4,7 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-namespace Atypical.VirtualFileSystem.Core.Models;
+namespace Atypical.VirtualFileSystem.Core;
 
 /// <summary>
 ///     Represents a directory in the virtual file system.
@@ -12,8 +12,8 @@ namespace Atypical.VirtualFileSystem.Core.Models;
 public record DirectoryNode
     : VFSNode, IDirectoryNode
 {
-    private readonly List<IDirectoryNode> _directories = new();
-    private readonly List<IFileNode> _files = new();
+    private readonly List<IDirectoryNode> _directories = [];
+    private readonly List<IFileNode> _files = [];
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DirectoryNode" /> class.
@@ -27,9 +27,6 @@ public record DirectoryNode
     {
         Path = directoryPath;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystemNode.Path" />
-    public override VFSDirectoryPath Path { get; }
 
     /// <inheritdoc cref="IDirectoryNode.Directories" />
     public IEnumerable<IDirectoryNode> Directories

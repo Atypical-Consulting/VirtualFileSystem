@@ -15,8 +15,8 @@ System.IEquatable<Atypical.VirtualFileSystem.Core.Abstractions.VFSNode>
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; VFSNode
 
 Derived  
-&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode')  
-&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.Models.FileNode')
+&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.DirectoryNode')  
+&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 
@@ -32,3 +32,7 @@ Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualF
 | [LastAccessTime](VFSNode.LastAccessTime.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.LastAccessTime') | Gets the last access time of the node. |
 | [LastWriteTime](VFSNode.LastWriteTime.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.LastWriteTime') | Gets the last write time of the node. |
 | [Path](VFSNode.Path.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.Path') | Gets the creation time of the node. |
+
+| Methods | |
+| :--- | :--- |
+| [UpdatePath(VFSPath)](VFSNode.UpdatePath(VFSPath).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.UpdatePath(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)') | Updates the path of the node. |

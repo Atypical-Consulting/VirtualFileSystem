@@ -15,9 +15,9 @@ Derived
 &#8627; [IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode')  
 &#8627; [IFileNode](IFileNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode')  
 &#8627; [IRootNode](IRootNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IRootNode')  
-&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.Models.DirectoryNode')  
-&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.Models.FileNode')  
-&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode')
+&#8627; [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.DirectoryNode')  
+&#8627; [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode')  
+&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode')
 
 | Properties | |
 | :--- | :--- |

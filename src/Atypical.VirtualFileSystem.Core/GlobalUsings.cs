@@ -11,7 +11,4 @@ global using System.Text;
 global using System.Text.RegularExpressions;
 global using Atypical.VirtualFileSystem.Core.Abstractions;
 global using Atypical.VirtualFileSystem.Core.Contracts;
-global using Atypical.VirtualFileSystem.Core.Exceptions;
-global using Atypical.VirtualFileSystem.Core.Models;
-global using Atypical.VirtualFileSystem.Core.ValueObjects;
-global using static Atypical.VirtualFileSystem.Core.VFSConstants;
+global using static Atypical.VirtualFileSystem.Core.VFS;

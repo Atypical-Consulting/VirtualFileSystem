@@ -181,7 +181,7 @@ public abstract record VFSPath
     private static void ThrowArgumentHasRelativePathSegment(string vfsPath)
     {
         var message = $"The path '{vfsPath}' contains a relative path segment.";
-        throw new VFSException(message, new ArgumentException(message));
+        throw new VirtualFileSystemException(message, new ArgumentException(message));
     }
 
     [DoesNotReturn]
@@ -191,7 +191,7 @@ public abstract record VFSPath
             ? $"The path '{vfsPath}' is invalid."
             : "An empty path is invalid.";
 
-        throw new VFSException(message, new ArgumentException(message));
+        throw new VirtualFileSystemException(message, new ArgumentException(message));
     }
     
     [DoesNotReturn]
@@ -202,7 +202,7 @@ public abstract record VFSPath
             Actual value: {depthFromRoot}.
             """;
         
-        throw new VFSException(message);
+        throw new VirtualFileSystemException(message);
     }
 }
 

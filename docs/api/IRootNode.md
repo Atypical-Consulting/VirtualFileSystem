@@ -13,6 +13,6 @@ Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode
 ```
 
 Derived  
-&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.Models.RootNode')
+&#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode')
 
 Implements [IDirectoryNode](IDirectoryNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode'), [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')

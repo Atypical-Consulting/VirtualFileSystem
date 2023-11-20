@@ -10,8 +10,7 @@ namespace Atypical.VirtualFileSystem.Core.Abstractions;
 ///     Represents a node in a virtual file system.
 ///     A node can be a file or a directory.
 /// </summary>
-public abstract record VFSNode
-    : IVirtualFileSystemNode
+public abstract record VFSNode : IVirtualFileSystemNode
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="VFSNode" /> class.
@@ -24,13 +23,14 @@ public abstract record VFSNode
 
         // set timestamps
         var now = DateTime.UtcNow;
+        Path = path;
         CreationTime = now;
         LastAccessTime = now;
         LastWriteTime = now;
     }
 
     /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime" />
-    public abstract VFSPath Path { get; }
+    public VFSPath Path { get; init; }
 
     /// <inheritdoc cref="IVirtualFileSystemNode.CreationTime" />
     public DateTimeOffset CreationTime { get; }
@@ -39,11 +39,21 @@ public abstract record VFSNode
     public DateTimeOffset LastAccessTime { get; }
 
     /// <inheritdoc cref="IVirtualFileSystemNode.LastWriteTime" />
-    public DateTimeOffset LastWriteTime { get; }
+    public DateTimeOffset LastWriteTime { get; private init; }
 
     /// <inheritdoc cref="IVirtualFileSystemNode.IsDirectory" />
     public abstract bool IsDirectory { get; }
 
     /// <inheritdoc cref="IVirtualFileSystemNode.IsFile" />
     public abstract bool IsFile { get; }
+
+    /// <inheritdoc cref="IVirtualFileSystemNode.UpdatePath" />
+    public virtual IVirtualFileSystemNode UpdatePath(VFSPath path)
+    {
+        ArgumentNullException.ThrowIfNull(path);
+        return this with {
+            Path = path,
+            LastWriteTime = DateTime.UtcNow
+        };
+    }
 }
