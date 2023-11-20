@@ -217,8 +217,6 @@
   - **[VFSException(string, Exception)](VFSException.VFSException(string,Exception).md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException.VFSException(string, System.Exception)')** `Constructor` Initializes a new instance of the [VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException') class with a message and an inner exception that is the cause  
     of this exception.
   - **[VFSException(string)](VFSException.VFSException(string).md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException.VFSException(string)')** `Constructor` Initializes a new instance of the [VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException') class with a message that describes the error.
-  - **[VFSException(SerializationInfo, StreamingContext)](VFSException.VFSException(SerializationInfo,StreamingContext).md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException.VFSException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)')** `Constructor` Initializes a new instance of the [VFSException](VFSException.md 'Atypical.VirtualFileSystem.Core.Exceptions.VFSException') class with a specified error message and a reference to the  
-    inner exception that is the cause of this exception.
 
 <a name='Atypical.VirtualFileSystem.Core.Models'></a>
 

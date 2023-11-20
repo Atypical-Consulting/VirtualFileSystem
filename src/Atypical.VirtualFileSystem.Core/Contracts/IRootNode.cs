@@ -10,6 +10,4 @@ namespace Atypical.VirtualFileSystem.Core.Contracts;
 ///     Represents the root of a virtual file system.
 ///     This is the entry point for all operations on the file system.
 /// </summary>
-public interface IRootNode : IDirectoryNode
-{
-}
+public interface IRootNode : IDirectoryNode;
