@@ -47,3 +47,8 @@ AnsiConsole.WriteLine("Delete a directory:");
 vfs.DeleteDirectory(new VFSDirectoryPath("/villains"));
 AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
 AnsiConsole.WriteLine();
+
+AnsiConsole.WriteLine("Move a directory:");
+vfs.MoveDirectory(new VFSDirectoryPath("/heroes"), new VFSDirectoryPath("/avengers"));
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();
