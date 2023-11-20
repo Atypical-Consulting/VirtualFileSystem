@@ -24,16 +24,26 @@ vfs.CreateFile(new VFSFilePath("/villains/loki.txt"), "Loki Laufeyson");
 vfs.CreateFile(new VFSFilePath("/villains/ultron.txt"), "Ultron");
 vfs.CreateFile(new VFSFilePath("/villains/killmonger.txt"), "N'Jadaka");
 
+AnsiConsole.WriteLine("Initial directory structure:");
 AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();
 
-// Rename a file
+AnsiConsole.WriteLine("Rename a file:");
 vfs.RenameFile(new VFSFilePath("/heroes/ironman.txt"), "tony_stark.txt");
 AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();
 
-// Move a file
+AnsiConsole.WriteLine("Move a file:");
 vfs.MoveFile(new VFSFilePath("/heroes/tony_stark.txt"), new VFSFilePath("/villains/tony_stark.txt"));
 AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();
 
-// Delete a file
+AnsiConsole.WriteLine("Delete a file:");
 vfs.DeleteFile(new VFSFilePath("/villains/tony_stark.txt"));
 AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();
+
+AnsiConsole.WriteLine("Delete a directory:");
+vfs.DeleteDirectory(new VFSDirectoryPath("/villains"));
+AnsiConsole.Write(new Tree("Marvel Universe").FillTree(vfs));
+AnsiConsole.WriteLine();

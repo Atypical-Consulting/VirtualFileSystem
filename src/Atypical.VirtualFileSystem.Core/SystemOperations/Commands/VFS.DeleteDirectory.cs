@@ -10,9 +10,12 @@ public partial record VFS
             ThrowCannotDeleteRootDirectory();
 
         // try to get the directory
-        var found = TryGetDirectory(directoryPath, out _);
-        if (!found)
+        if (!Index.TryGetValue(directoryPath, out var directoryNode))
             ThrowVirtualDirectoryNotFound(directoryPath);
+
+        // Remove the directory from its parent directory
+        if (TryGetDirectory(directoryPath.Parent, out var parent))
+            parent.RemoveChild(directoryNode);
 
         // find the path and its children in the index
         var paths = Index.GetPathsStartingWith(directoryPath);

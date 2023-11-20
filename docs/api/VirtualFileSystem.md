@@ -14,8 +14,9 @@
   - **[Files](DirectoryNode.Files.md 'Atypical.VirtualFileSystem.Core.DirectoryNode.Files')** `Property` Gets the child files of the node.
   - **[IsDirectory](DirectoryNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.DirectoryNode.IsDirectory')** `Property` Indicates whether the node is a directory.
   - **[IsFile](DirectoryNode.IsFile.md 'Atypical.VirtualFileSystem.Core.DirectoryNode.IsFile')** `Property` Indicates whether the node is a file.
-  - **[AddChild(IDirectoryNode)](DirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Adds a child directory to the current directory.
-  - **[AddChild(IFileNode)](DirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Adds a child file to the current directory.
+  - **[AddChild(IVirtualFileSystemNode)](DirectoryNode.AddChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.DirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` x  
+                    Adds a child node to the current directory.
+  - **[RemoveChild(IVirtualFileSystemNode)](DirectoryNode.RemoveChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.DirectoryNode.RemoveChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Removes a child node from the current directory.
   - **[ToString()](DirectoryNode.ToString().md 'Atypical.VirtualFileSystem.Core.DirectoryNode.ToString()')** `Method` Returns a string that represents the path of the directory.
 - **[FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode')** `Class` Represents a file in the virtual file system.
   - **[FileNode(VFSFilePath, string)](FileNode.FileNode(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.FileNode.FileNode(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Constructor` Initializes a new instance of the [FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode') class.  
@@ -126,6 +127,9 @@
 - **[VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory')** `Class` Represents a factory for creating [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem') instances.
   - **[VirtualFileSystemFactory()](VirtualFileSystemFactory.VirtualFileSystemFactory().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.VirtualFileSystemFactory()')** `Constructor` Initializes a new instance of the [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory') class.
   - **[CreateFileSystem()](VirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem()')** `Method` Creates a new instance of [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem').
+- **[VFSNodeType](VFSNodeType.md 'Atypical.VirtualFileSystem.Core.VFSNodeType')** `Enum` Represents a node type in a virtual file system.
+  - **[Directory](VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.Directory 'Atypical.VirtualFileSystem.Core.VFSNodeType.Directory')** `Field` The node is a directory.
+  - **[File](VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.File 'Atypical.VirtualFileSystem.Core.VFSNodeType.File')** `Field` The node is a file.
 
 <a name='Atypical.VirtualFileSystem.Core.Abstractions'></a>
 
@@ -171,8 +175,9 @@
   It is not a representation of a directory on a physical file system.
   - **[Directories](IDirectoryNode.Directories.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Directories')** `Property` Gets the child directories of the node.
   - **[Files](IDirectoryNode.Files.md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.Files')** `Property` Gets the child files of the node.
-  - **[AddChild(IDirectoryNode)](IDirectoryNode.AddChild(IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Adds a child directory to the current directory.
-  - **[AddChild(IFileNode)](IDirectoryNode.AddChild(IFileNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Adds a child file to the current directory.
+  - **[AddChild(IVirtualFileSystemNode)](IDirectoryNode.AddChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.AddChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` x  
+                    Adds a child node to the current directory.
+  - **[RemoveChild(IVirtualFileSystemNode)](IDirectoryNode.RemoveChild(IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode.RemoveChild(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Removes a child node from the current directory.
 - **[IFileNode](IFileNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode')** `Interface` Represents a file in a virtual file system.  
   This is the base interface for all file types.
   - **[Content](IFileNode.Content.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content')** `Property` Gets the content of the file as a string.  

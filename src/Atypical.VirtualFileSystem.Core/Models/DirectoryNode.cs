@@ -44,13 +44,27 @@ public record DirectoryNode
     public override bool IsFile
         => false;
 
-    /// <inheritdoc cref="IDirectoryNode.AddChild(IDirectoryNode)" />
-    public void AddChild(IDirectoryNode directory)
-        => _directories.Add(directory);
+    /// <inheritdoc cref="IDirectoryNode.AddChild(IVirtualFileSystemNode)" />
+    public void AddChild(IVirtualFileSystemNode node)
+    {
+        if (node.IsDirectory)
+            _directories.Add((IDirectoryNode) node);
+        else if (node.IsFile)
+            _files.Add((IFileNode) node);
+        else
+            throw new InvalidOperationException("Cannot add a node that is neither a file nor a directory.");
+    }
 
-    /// <inheritdoc cref="IDirectoryNode.AddChild(IFileNode)" />
-    public void AddChild(IFileNode file)
-        => _files.Add(file);
+    /// <inheritdoc cref="IDirectoryNode.RemoveChild(IVirtualFileSystemNode)" />
+    public void RemoveChild(IVirtualFileSystemNode node)
+    {
+        if (node.IsDirectory)
+            _directories.Remove((IDirectoryNode) node);
+        else if (node.IsFile)
+            _files.Remove((IFileNode) node);
+        else
+            throw new InvalidOperationException("Cannot remove a node that is neither a file nor a directory.");
+    }
 
     /// <summary>
     ///     Returns a string that represents the path of the directory.

@@ -9,7 +9,7 @@ If the directory node does not exist, this method returns `false`
 and [directory](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md#Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode).directory 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode).directory') is set to `null`.
 
 ```csharp
-public bool TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath directoryPath, out Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode? directory);
+public bool TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath? directoryPath, out Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode? directory);
 ```
 #### Parameters
 

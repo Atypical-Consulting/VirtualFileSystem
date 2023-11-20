@@ -23,15 +23,15 @@ public interface IDirectoryNode : IVirtualFileSystemNode
     /// </summary>
     IEnumerable<IFileNode> Files { get; }
     
-    /// <summary>
-    ///     Adds a child directory to the current directory.
+    /// <summary>x
+    ///     Adds a child node to the current directory.
     /// </summary>
-    /// <param name="directory">The child directory to add.</param>
-    void AddChild(IDirectoryNode directory);
+    /// <param name="node">The child node to add.</param>
+    void AddChild(IVirtualFileSystemNode node);
     
     /// <summary>
-    ///     Adds a child file to the current directory.
+    ///     Removes a child node from the current directory.
     /// </summary>
-    /// <param name="file">The child file to add.</param>
-    void AddChild(IFileNode file);
+    /// <param name="node">The child node to remove.</param>
+    void RemoveChild(IVirtualFileSystemNode node);
 }

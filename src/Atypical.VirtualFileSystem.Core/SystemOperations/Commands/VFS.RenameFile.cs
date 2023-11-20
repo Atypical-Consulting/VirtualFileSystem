@@ -10,17 +10,21 @@ public partial record VFS
         if (!Index.TryGetValue(filePath, out var fileNode))
             ThrowVirtualFileNotFound(filePath);
 
+        // Remove the file from its old parent directory
+        if (TryGetDirectory(filePath.Parent, out var oldParent))
+            oldParent.RemoveChild(fileNode);
+
         // update the file node with the new path
         var newFilePath = new VFSFilePath($"{filePath.Parent}/{newName}");
         var updatedFileNode = fileNode.UpdatePath(newFilePath);
-        
+
+        // Add the file to its new parent directory
+        if (TryGetDirectory(newFilePath.Parent, out var newParent))
+            newParent.AddChild(updatedFileNode);
+
         // update the index
         Index.Remove(filePath);
         Index[newFilePath] = updatedFileNode;
-        
-        // update the parent directory
-        var parentDirectoryPath = filePath.Parent;
-        var parentDirectoryNode = Index[parentDirectoryPath];
 
         return this;
     }
