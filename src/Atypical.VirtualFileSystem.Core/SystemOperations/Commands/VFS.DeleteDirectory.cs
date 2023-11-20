@@ -23,8 +23,4 @@ public partial record VFS
 
         return this;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteDirectory(string)" />
-    public IVirtualFileSystem DeleteDirectory(string directoryPath)
-        => DeleteDirectory(new VFSDirectoryPath(directoryPath));
 }

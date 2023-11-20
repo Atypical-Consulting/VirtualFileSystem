@@ -19,8 +19,4 @@ public partial record VFS
 
         return this;
     }
-
-    /// <inheritdoc cref="IVirtualFileSystem.CreateDirectory(string)" />
-    public IVirtualFileSystem CreateDirectory(string directoryPath)
-        => CreateDirectory(new VFSDirectoryPath(directoryPath));
 }
