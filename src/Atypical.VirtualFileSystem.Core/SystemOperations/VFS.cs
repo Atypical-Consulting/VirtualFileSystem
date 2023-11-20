@@ -45,13 +45,13 @@ public partial record VFS : IVirtualFileSystem
 
     private void AddToIndex(IVirtualFileSystemNode node)
     {
-        var added = Index.TryAdd(node.Path.Value, node);
+        var added = Index.TryAdd(node.Path, node);
 
         if (!added)
             ThrowVirtualNodeAlreadyExists(node);
 
         if (node.Path.Parent is not null 
-            && !Index.ContainsKey(node.Path.Parent.Value)
+            && !Index.ContainsKey(node.Path.Parent)
             && node.Path.Parent != Root.Path)
             CreateDirectory(node.Path.Parent);
     }

@@ -16,7 +16,7 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         vfs.IsEmpty.Should().BeFalse();
         vfs.Index.RawIndex.Should().NotBeEmpty();
         vfs.Index.RawIndex.Should().HaveCount(1);
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1");
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
         vfs.Root.IsDirectory.Should().BeTrue();
         vfs.Root.IsFile.Should().BeFalse();
         vfs.Root.Path.Value.Should().Be("vfs://");
@@ -36,17 +36,17 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         // Assert
         vfs.Index.RawIndex.Should().NotBeEmpty();
         vfs.Index.RawIndex.Should().HaveCount(3); // dir1 + dir2 + dir3
-        vfs.Index.RawIndex.Should().ContainKey(directoryPath.Value);
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2/dir3");
+        vfs.Index.RawIndex.Should().ContainKey(directoryPath);
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
             
-        vfs.Index["vfs://dir1"].Should().BeAssignableTo<IDirectoryNode>();
-        vfs.Index["vfs://dir1/dir2"].Should().BeAssignableTo<IDirectoryNode>();
-        vfs.Index["vfs://dir1/dir2/dir3"].Should().BeAssignableTo<IDirectoryNode>();
+        vfs.Index[new VFSDirectoryPath("vfs://dir1")].Should().BeAssignableTo<IDirectoryNode>();
+        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2")].Should().BeAssignableTo<IDirectoryNode>();
+        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].Should().BeAssignableTo<IDirectoryNode>();
             
-        vfs.Index["vfs://dir1"].As<IDirectoryNode>().Directories.Should().NotBeEmpty();
-        vfs.Index["vfs://dir1"].As<IDirectoryNode>().Directories.Should().HaveCount(1);
+        vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().NotBeEmpty();
+        vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().HaveCount(1);
     }
 
     [Fact]

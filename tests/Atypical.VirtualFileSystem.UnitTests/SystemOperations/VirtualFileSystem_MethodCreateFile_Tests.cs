@@ -16,7 +16,7 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         vfs.IsEmpty.Should().BeFalse();
         vfs.Index.RawIndex.Should().NotBeEmpty();
         vfs.Index.RawIndex.Should().HaveCount(1);
-        vfs.Index.RawIndex.Should().ContainKey("vfs://file.txt");
+        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://file.txt"));
         vfs.Root.Files.Should().NotBeEmpty();
         vfs.Root.Files.Should().HaveCount(1);
     }
@@ -35,10 +35,10 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         vfs.IsEmpty.Should().BeFalse();
         vfs.Index.RawIndex.Should().NotBeEmpty();
         vfs.Index.RawIndex.Should().HaveCount(4); // dir1 + dir2 + dir3 + file.txt
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2/dir3");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2/dir3/file.txt");
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
         vfs.Root.Directories.Should().NotBeEmpty();
         vfs.Root.Directories.Should().HaveCount(1);
     }

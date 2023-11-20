@@ -9,7 +9,7 @@ namespace Atypical.VirtualFileSystem.Core.Abstractions;
 /// <summary>
 ///     Represents a file system entry (file or directory) in the virtual file system.
 /// </summary>
-public abstract record VFSPath
+public abstract record VFSPath : IComparable
 {
     /// <summary>
     ///     Creates a new instance of <see cref="VFSPath" />.
@@ -191,6 +191,19 @@ public abstract record VFSPath
     public override int GetHashCode()
         => Value.GetHashCode();
 
+    /// <inheritdoc/>
+    public int CompareTo(object? obj)
+    {
+        if (obj is null)
+            return 1;
+
+        if (obj is not VFSPath other)
+            throw new ArgumentException($"Object must be of type {nameof(VFSPath)}");
+
+        return string.Compare(Value, other.Value, StringComparison.Ordinal);
+    }
+
+
     [DoesNotReturn]
     private static void ThrowArgumentHasRelativePathSegment(string vfsPath)
     {
@@ -219,4 +232,14 @@ public abstract record VFSPath
 
         throw new VirtualFileSystemException(message);
     }
+
+    /// <summary>
+    ///     Determines whether the path starts with the specified path.
+    /// </summary>
+    /// <param name="searchTerm">The beginning of the path.</param>
+    /// <returns>
+    ///     <see langword="true" /> if the path starts with the specified path; otherwise, <see langword="false" />.
+    /// </returns>
+    public bool StartsWith(string searchTerm)
+        => Value.StartsWith(searchTerm);
 }

@@ -41,11 +41,10 @@ P:Atypical.VirtualFileSystem.Core.VFSIndex.Files|VFSIndex.Files.md|Files
 P:Atypical.VirtualFileSystem.Core.VFSIndex.FilesCount|VFSIndex.FilesCount.md|FilesCount
 P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.this[VFSFilePath].md|this[VFSFilePath]
 P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.this[VFSDirectoryPath].md|this[VFSDirectoryPath]
-P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(System.String)|VFSIndex.this[string].md|this[string]
-M:Atypical.VirtualFileSystem.Core.VFSIndex.Remove(System.String)|VFSIndex.Remove(string).md|Remove(string)
-M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(System.String,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode@)|VFSIndex.TryGetValue(string,IVirtualFileSystemNode).md|TryGetValue(string, IVirtualFileSystemNode)
-M:Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(System.String)|VFSIndex.ContainsKey(string).md|ContainsKey(string)
-M:Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(System.String,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|VFSIndex.TryAdd(string,IVirtualFileSystemNode).md|TryAdd(string, IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSIndex.Remove(VFSPath).md|Remove(VFSPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode@)|VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md|TryGetValue(VFSPath, IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)|VFSIndex.ContainsKey(VFSPath).md|ContainsKey(VFSPath)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md|TryAdd(VFSPath, IVirtualFileSystemNode)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md|GetPathsStartingWith(VFSDirectoryPath)
@@ -149,4 +148,5 @@ M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Equals(Atypical.VirtualFi
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(System.Int32)|VFSPath.GetAbsoluteParentPath(int).md|GetAbsoluteParentPath(int)
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)|VFSPath.IsMatch(Regex).md|IsMatch(Regex)
 M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetHashCode|VFSPath.GetHashCode().md|GetHashCode()
+M:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.StartsWith(System.String)|VFSPath.StartsWith(string).md|StartsWith(string)
 T:Atypical.VirtualFileSystem.Core.Abstractions.VFSPath|VFSPath.md|VFSPath

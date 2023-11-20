@@ -20,25 +20,25 @@ namespace Atypical.VirtualFileSystem.Core;
 /// </remarks>
 public sealed class VFSIndex
 {
-    private readonly SortedDictionary<string, IVirtualFileSystemNode> _index
-        = new(StringComparer.OrdinalIgnoreCase);
+    private readonly SortedDictionary<VFSPath, IVirtualFileSystemNode> _index
+        = new(new VFSPathComparer());
     
     /// <summary>
     /// Gets the raw index of the virtual file system.
     /// </summary>
-    public ImmutableSortedDictionary<string, IVirtualFileSystemNode> RawIndex
+    public ImmutableSortedDictionary<VFSPath, IVirtualFileSystemNode> RawIndex
         => _index.ToImmutableSortedDictionary();
 
     /// <summary>
     /// Gets the keys of the raw index.
     /// </summary>
-    public IEnumerable<string> Keys
+    public IEnumerable<VFSPath> Keys
         => _index.Keys;
 
     /// <summary>
     /// Gets the values of the raw index.
     /// </summary>
-    public SortedDictionary<string, IVirtualFileSystemNode>.ValueCollection Values
+    public SortedDictionary<VFSPath, IVirtualFileSystemNode>.ValueCollection Values
         => _index.Values;
 
     /// <summary>
@@ -82,8 +82,8 @@ public sealed class VFSIndex
     /// </summary>
     public IVirtualFileSystemNode this[VFSFilePath filePath]
     {
-        get => _index[filePath.Value];
-        set => _index[filePath.Value] = value;
+        get => _index[filePath];
+        set => _index[filePath] = value;
     }
 
     /// <summary>
@@ -91,41 +91,32 @@ public sealed class VFSIndex
     /// </summary>
     public IVirtualFileSystemNode this[VFSDirectoryPath directoryPath]
     {
-        get => _index[directoryPath.Value];
-        set => _index[directoryPath.Value] = value;
-    }
-
-    /// <summary>
-    /// Gets or sets the node at the specified path.
-    /// </summary>
-    public IVirtualFileSystemNode this[string path]
-    {
-        get => _index[path];
-        set => _index[path] = value;
+        get => _index[directoryPath];
+        set => _index[directoryPath] = value;
     }
 
     /// <summary>
     /// Removes the node with the specified key.
     /// </summary>
-    public void Remove(string key)
+    public void Remove(VFSPath key)
         => _index.Remove(key);
 
     /// <summary>
     /// Tries to get the value associated with the specified key.
     /// </summary>
-    public bool TryGetValue(string key, out IVirtualFileSystemNode value)
+    public bool TryGetValue(VFSPath key, [MaybeNullWhen(false)] out IVirtualFileSystemNode value)
         => _index.TryGetValue(key, out value);
 
     /// <summary>
     /// Determines whether the index contains the specified key.
     /// </summary>
-    public bool ContainsKey(string key)
+    public bool ContainsKey(VFSPath key)
         => _index.ContainsKey(key);
 
     /// <summary>
     /// Tries to add the specified node to the index.
     /// </summary>
-    public bool TryAdd(string pathValue, IVirtualFileSystemNode node)
+    public bool TryAdd(VFSPath pathValue, IVirtualFileSystemNode node)
         => _index.TryAdd(pathValue, node);
 
     /// <summary>
@@ -143,10 +134,10 @@ public sealed class VFSIndex
     /// <summary>
     /// Gets the paths starting with the specified directory path.
     /// </summary>
-    public ImmutableArray<string> GetPathsStartingWith(VFSDirectoryPath directoryPath)
+    public ImmutableArray<VFSPath> GetPathsStartingWith(VFSDirectoryPath directoryPath)
         => Keys
             .Where(p => p.StartsWith(directoryPath.Value))
-            .OrderByDescending(p => p.Length)
+            .OrderByDescending(p => p.Value.Length)
             .ToImmutableArray();
 
     /// <summary>

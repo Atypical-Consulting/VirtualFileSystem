@@ -11,7 +11,7 @@ public partial record VFS
             ThrowVirtualFileNotFound(filePath);
 
         // remove the file from the index
-        Index.Remove(filePath.Value);
+        Index.Remove(filePath);
 
         return this;
     }

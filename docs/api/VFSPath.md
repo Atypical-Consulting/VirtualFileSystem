@@ -7,6 +7,7 @@ Represents a file system entry (file or directory) in the virtual file system.
 
 ```csharp
 public abstract class VFSPath :
+System.IComparable,
 System.IEquatable<Atypical.VirtualFileSystem.Core.Abstractions.VFSPath>
 ```
 
@@ -16,7 +17,7 @@ Derived
 &#8627; [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')  
 &#8627; [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')
 
-Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
+Implements [System.IComparable](https://docs.microsoft.com/en-us/dotnet/api/System.IComparable 'System.IComparable'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 
 | Constructors | |
 | :--- | :--- |
@@ -37,3 +38,4 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 | [GetAbsoluteParentPath(int)](VFSPath.GetAbsoluteParentPath(int).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int)') | Gets the absolute path of the parent directory with depth [depthFromRoot](VFSPath.GetAbsoluteParentPath(int).md#Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int).depthFromRoot 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int).depthFromRoot').<br/>The root directory has a depth of 0.<br/>The depth of a file is the depth of its parent directory plus one.<br/>The depth of a directory is the depth of its parent directory plus one. |
 | [GetHashCode()](VFSPath.GetHashCode().md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetHashCode()') | Serves as the default hash function. |
 | [IsMatch(Regex)](VFSPath.IsMatch(Regex).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)') | Indicates whether the specified regular expression finds a match in the path. |
+| [StartsWith(string)](VFSPath.StartsWith(string).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.StartsWith(string)') | Determines whether the path starts with the specified path. |

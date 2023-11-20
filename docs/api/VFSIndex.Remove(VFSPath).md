@@ -1,15 +1,15 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
 ### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')
 
-## VFSIndex.Remove(string) Method
+## VFSIndex.Remove(VFSPath) Method
 
 Removes the node with the specified key.
 
 ```csharp
-public void Remove(string key);
+public void Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath key);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.Remove(string).key'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath).key'></a>
 
-`key` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')

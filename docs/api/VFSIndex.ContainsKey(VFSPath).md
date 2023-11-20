@@ -1,18 +1,18 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
 ### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')
 
-## VFSIndex.ContainsKey(string) Method
+## VFSIndex.ContainsKey(VFSPath) Method
 
 Determines whether the index contains the specified key.
 
 ```csharp
-public bool ContainsKey(string key);
+public bool ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath key);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(string).key'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath).key'></a>
 
-`key` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
 
 #### Returns
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')

@@ -16,7 +16,7 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
 
         // Assert
         vfs.Index.Count.Should().Be(indexLength);
-        vfs.Index.RawIndex.Should().ContainKey("vfs://new_file.txt");
+        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://new_file.txt"));
     }
         
     [Fact]
@@ -31,7 +31,7 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
 
         // Assert
-        vfs.Index["vfs://new_file.txt"].Path.Value
+        vfs.Index[new VFSFilePath("vfs://new_file.txt")].Path.Value
             .Should().Be("vfs://new_file.txt");
     }
         
@@ -42,17 +42,17 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         var vfs = CreateVFS();
         var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
         vfs.CreateFile(filePath);
-        var creationTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].CreationTime;
-        var lastAccessTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].LastAccessTime;
-        var lastWriteTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].LastWriteTime;
+        var creationTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].CreationTime;
+        var lastAccessTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastAccessTime;
+        var lastWriteTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastWriteTime;
 
         // Act
         vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
 
         // Assert
-        vfs.Index["vfs://new_file.txt"].CreationTime.Should().Be(creationTime);
-        vfs.Index["vfs://new_file.txt"].LastAccessTime.Should().Be(lastAccessTime);
-        vfs.Index["vfs://new_file.txt"].LastWriteTime.Should().NotBe(lastWriteTime);
+        vfs.Index[new VFSFilePath("vfs://new_file.txt")].CreationTime.Should().Be(creationTime);
+        vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
+        vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
     }
 
     [Fact]

@@ -17,9 +17,9 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
 
         // Assert
         vfs.Index.Count.Should().Be(indexLength);
-        vfs.Index.RawIndex.Should().NotContainKey("vfs://dir1/dir2/dir3/file.txt");
-        vfs.Index.RawIndex.Should().ContainKey("vfs://dir1/dir2/dir3/new_file.txt");
-        vfs.Index["vfs://dir1/dir2/dir3/new_file.txt"].IsFile.Should().BeTrue();
+        vfs.Index.RawIndex.Should().NotContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
+        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt"));
+        vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].IsFile.Should().BeTrue();
         vfs.GetTree().Should().NotBe(tree);
     }
         
@@ -35,7 +35,7 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         vfs.RenameFile(filePath, "new_file.txt");
 
         // Assert
-        vfs.Index["vfs://dir1/dir2/dir3/new_file.txt"].Path.Value
+        vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].Path.Value
             .Should().Be("vfs://dir1/dir2/dir3/new_file.txt");
     }
         
@@ -46,18 +46,18 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         var vfs = CreateVFS();
         var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
         vfs.CreateFile(filePath);
-        var creationTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].CreationTime;
-        var lastAccessTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].LastAccessTime;
-        var lastWriteTime = vfs.Index["vfs://dir1/dir2/dir3/file.txt"].LastWriteTime;
+        var creationTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].CreationTime;
+        var lastAccessTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastAccessTime;
+        var lastWriteTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastWriteTime;
 
         // Act
         Thread.Sleep(100);
         vfs.RenameFile(filePath, "new_file.txt");
 
         // Assert
-        vfs.Index["vfs://dir1/dir2/dir3/new_file.txt"].CreationTime.Should().Be(creationTime);
-        vfs.Index["vfs://dir1/dir2/dir3/new_file.txt"].LastAccessTime.Should().Be(lastAccessTime);
-        vfs.Index["vfs://dir1/dir2/dir3/new_file.txt"].LastWriteTime.Should().NotBe(lastWriteTime);
+        vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].CreationTime.Should().Be(creationTime);
+        vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
+        vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
     }
         
     [Fact]
