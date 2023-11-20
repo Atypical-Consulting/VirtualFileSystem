@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace VirtualFileSystem.UnitTests.Services;
 
-public class ServiceCollectionExtensionsTests
+public static class ServiceCollectionExtensionsTests
 {
     public class MethodAddVirtualFileSystem
     {

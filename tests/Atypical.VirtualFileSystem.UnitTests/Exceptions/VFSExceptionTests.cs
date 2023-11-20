@@ -1,6 +1,6 @@
 ﻿namespace VirtualFileSystem.UnitTests.Exceptions;
 
-public class VFSExceptionTests
+public static class VFSExceptionTests
 {
     public class Constructor
     {

@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace VirtualFileSystem.UnitTests.Models;
 
-public class VirtualFileSystemTests
+public static class VirtualFileSystemTests
 {
     public class Constructor
     {

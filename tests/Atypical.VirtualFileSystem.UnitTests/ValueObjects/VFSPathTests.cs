@@ -2,7 +2,7 @@
 
 namespace VirtualFileSystem.UnitTests.ValueObjects;
 
-public class VFSPathTests
+public static class VFSPathTests
 {
     public class Equality
     {

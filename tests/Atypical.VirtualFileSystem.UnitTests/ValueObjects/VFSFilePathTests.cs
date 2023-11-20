@@ -6,7 +6,7 @@
 
 namespace VirtualFileSystem.UnitTests.ValueObjects;
 
-public class VFSFilePathTests
+public static class VFSFilePathTests
 {
     public class Constructor
     {

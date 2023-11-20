@@ -6,7 +6,7 @@
 
 namespace VirtualFileSystem.UnitTests.Models;
 
-public class VirtualFileSystemFactoryTests
+public static class VirtualFileSystemFactoryTests
 {
     public class Constructor
     {

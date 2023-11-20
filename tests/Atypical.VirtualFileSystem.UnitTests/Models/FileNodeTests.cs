@@ -6,7 +6,7 @@
 
 namespace VirtualFileSystem.UnitTests.Models;
 
-public class FileNodeTests
+public static class FileNodeTests
 {
     public class Constructor
     {
