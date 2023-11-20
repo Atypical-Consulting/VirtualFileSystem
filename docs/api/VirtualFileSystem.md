@@ -65,6 +65,7 @@
   - **[GetFile(VFSFilePath)](VFS.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()')** `Method` Gets the tree of the file system.
+  - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](VFS.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
   - **[MoveFile(VFSFilePath, VFSFilePath)](VFS.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
     Both paths must be absolute.
   - **[RenameFile(VFSFilePath, string)](VFS.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
@@ -215,6 +216,7 @@
   - **[GetFile(VFSFilePath)](IVirtualFileSystem.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetTree()](IVirtualFileSystem.GetTree().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree()')** `Method` Gets the tree of the file system.
+  - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](IVirtualFileSystem.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
   - **[MoveFile(VFSFilePath, VFSFilePath)](IVirtualFileSystem.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
     Both paths must be absolute.
   - **[RenameFile(VFSFilePath, string)](IVirtualFileSystem.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
