@@ -1,13 +1,17 @@
 ﻿using Atypical.VirtualFileSystem.Core;
 using Atypical.VirtualFileSystem.Core.Contracts;
 using Atypical.VirtualFileSystem.DemoCli.Extensions;
+using Atypical.VirtualFileSystem.DemoCli.WIP;
 
 // Create a virtual file system
 var factory = new VirtualFileSystemFactory();
 var vfs = factory.CreateFileSystem();
 
+// Add UNDO/REDO functionality
+var changeHistory = new ChangeHistory(vfs);
+
 // Subscribe to VFS events
-SubscribeToVFSEvents(vfs);
+SubscribeToWriteVFSEvents(vfs);
 
 // Display a banner
 AnsiConsole.Write(
@@ -16,71 +20,77 @@ AnsiConsole.Write(
         .Color(Color.Gold1));
 
 // Create a directory structure
-WriteSectionHeader("INITIAL DIRECTORY STRUCTURE");
+ProcessStep(vfs, "CREATE A FILE STRUCTURE", () =>
+{
+    vfs.CreateDirectory(new VFSDirectoryPath("/heroes"));
+    vfs.CreateFile(new VFSFilePath("/heroes/ironman.txt"), "Tony Stark");
+    vfs.CreateFile(new VFSFilePath("/heroes/captain_america.txt"), "Steve Rogers");
+    vfs.CreateFile(new VFSFilePath("/heroes/hulk.txt"), "Bruce Banner");
+    vfs.CreateFile(new VFSFilePath("/heroes/thor.txt"), "Thor Odinson");
+    vfs.CreateFile(new VFSFilePath("/heroes/black_widow.txt"), "Natasha Romanoff");
 
-vfs.CreateDirectory(new VFSDirectoryPath("/heroes"));
-vfs.CreateFile(new VFSFilePath("/heroes/ironman.txt"), "Tony Stark");
-vfs.CreateFile(new VFSFilePath("/heroes/captain_america.txt"), "Steve Rogers");
-vfs.CreateFile(new VFSFilePath("/heroes/hulk.txt"), "Bruce Banner");
-vfs.CreateFile(new VFSFilePath("/heroes/thor.txt"), "Thor Odinson");
-vfs.CreateFile(new VFSFilePath("/heroes/black_widow.txt"), "Natasha Romanoff");
-
-vfs.CreateDirectory(new VFSDirectoryPath("/villains"));
-vfs.CreateFile(new VFSFilePath("/villains/loki.txt"), "Loki Laufeyson");
-vfs.CreateFile(new VFSFilePath("/villains/ultron.txt"), "Ultron");
-vfs.CreateFile(new VFSFilePath("/villains/thanos.txt"), "Thanos");
-
-WriteTree(vfs);
+    vfs.CreateDirectory(new VFSDirectoryPath("/villains"));
+    vfs.CreateFile(new VFSFilePath("/villains/loki.txt"), "Loki Laufeyson");
+    vfs.CreateFile(new VFSFilePath("/villains/ultron.txt"), "Ultron");
+    vfs.CreateFile(new VFSFilePath("/villains/thanos.txt"), "Thanos");
+});
 
 // Rename a file
-WriteSectionHeader("RENAME FILE");
-vfs.RenameFile(new VFSFilePath("/heroes/ironman.txt"), "tony_stark.txt");
-WriteTree(vfs);
+ProcessStep(vfs, "RENAME A FILE", 
+    () => vfs.RenameFile(new VFSFilePath("/heroes/ironman.txt"), "tommy_stark.txt"));
+
+// UNDO
+ProcessStep(vfs, "UNDO", () => changeHistory.Undo());
+
+// REDO
+ProcessStep(vfs, "REDO", () => changeHistory.Redo());
 
 // Move a file
-WriteSectionHeader("MOVE FILE");
-vfs.MoveFile(new VFSFilePath("/heroes/tony_stark.txt"), new VFSFilePath("/villains/tony_stark.txt"));
-WriteTree(vfs);
+ProcessStep(vfs, "MOVE A FILE",
+    () => vfs.MoveFile(new VFSFilePath("/heroes/tony_stark.txt"), new VFSFilePath("/villains/tony_stark.txt")));
 
 // Delete a file
-WriteSectionHeader("DELETE FILE");
-vfs.DeleteFile(new VFSFilePath("/villains/tony_stark.txt"));
-WriteTree(vfs);
+ProcessStep(vfs, "DELETE A FILE",
+    () => vfs.DeleteFile(new VFSFilePath("/villains/tony_stark.txt")));
 
 // Delete a directory
-WriteSectionHeader("DELETE DIRECTORY");
-vfs.DeleteDirectory(new VFSDirectoryPath("/villains"));
-WriteTree(vfs);
+ProcessStep(vfs, "DELETE DIRECTORY",
+    () => vfs.DeleteDirectory(new VFSDirectoryPath("/villains")));
 
 // Move a directory
-WriteSectionHeader("MOVE DIRECTORY");
-vfs.MoveDirectory(new VFSDirectoryPath("/heroes"), new VFSDirectoryPath("/avengers"));
-WriteTree(vfs);
+ProcessStep(vfs, "MOVE DIRECTORY",
+    () => vfs.MoveDirectory(new VFSDirectoryPath("/heroes"), new VFSDirectoryPath("/avengers")));
 
 // Rename a directory
 // TODO: fix rename directory
-// WriteSectionHeader("RENAME DIRECTORY");
-// vfs.RenameDirectory(new VFSDirectoryPath("/avengers"), new VFSDirectoryPath("/heroes"));
-// WriteTree(vfs);
+// ProcessStep(vfs, "RENAME DIRECTORY",
+//     () => vfs.RenameDirectory(new VFSDirectoryPath("/avengers"), new VFSDirectoryPath("/heroes")));
 return;
 
-void SubscribeToVFSEvents(IVirtualFileSystem virtualFileSystem)
+void SubscribeToWriteVFSEvents(IVirtualFileSystem virtualFileSystem)
 {
-    virtualFileSystem.DirectoryCreated += createdArgs => OnChange(virtualFileSystem, createdArgs);
-    virtualFileSystem.FileCreated      += createdArgs => OnChange(virtualFileSystem, createdArgs);
-    virtualFileSystem.DirectoryDeleted += deletedArgs => OnChange(virtualFileSystem, deletedArgs);
-    virtualFileSystem.FileDeleted      += deletedArgs => OnChange(virtualFileSystem, deletedArgs);
-    virtualFileSystem.DirectoryMoved   += movedArgs   => OnChange(virtualFileSystem, movedArgs);
-    virtualFileSystem.FileMoved        += movedArgs   => OnChange(virtualFileSystem, movedArgs);
-    virtualFileSystem.DirectoryRenamed += renamedArgs => OnChange(virtualFileSystem, renamedArgs);
-    virtualFileSystem.FileRenamed      += renamedArgs => OnChange(virtualFileSystem, renamedArgs);
+    virtualFileSystem.DirectoryCreated += OnChange;
+    virtualFileSystem.FileCreated      += OnChange;
+    virtualFileSystem.DirectoryDeleted += OnChange;
+    virtualFileSystem.FileDeleted      += OnChange;
+    virtualFileSystem.DirectoryMoved   += OnChange;
+    virtualFileSystem.FileMoved        += OnChange;
+    virtualFileSystem.DirectoryRenamed += OnChange;
+    virtualFileSystem.FileRenamed      += OnChange;
     return;
 
-    static void OnChange(object? sender, VFSEventArgs args)
+    static void OnChange(VFSEventArgs args)
     {
         AnsiConsole.Write(new Markup($"  - {args.MessageWithMarkup}"));
         AnsiConsole.WriteLine();
     }
+}
+
+void ProcessStep(IVirtualFileSystem virtualFileSystem, string sectionHeader, Action action)
+{
+    WriteSectionHeader(sectionHeader);
+    action();
+    WriteTree(virtualFileSystem);
 }
 
 void WriteSectionHeader(string header = "")

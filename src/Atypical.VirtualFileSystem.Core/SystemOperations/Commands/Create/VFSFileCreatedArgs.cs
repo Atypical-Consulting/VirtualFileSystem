@@ -15,9 +15,11 @@ public sealed class VFSFileCreatedArgs : VFSEventArgs
     /// Initializes a new instance of the <see cref="VFSFileCreatedArgs"/> class.
     /// </summary>
     /// <param name="path">The path of the created file.</param>
-    public VFSFileCreatedArgs(VFSFilePath path)
+    /// <param name="content">The content of the created file.</param>
+    public VFSFileCreatedArgs(VFSFilePath path, string content)
     {
         Path = path;
+        Content = content;
         Timestamp = DateTimeOffset.Now;
     }
     
@@ -25,6 +27,11 @@ public sealed class VFSFileCreatedArgs : VFSEventArgs
     /// Gets the path of the created file.
     /// </summary>
     public VFSFilePath Path { get; }
+    
+    /// <summary>
+    /// Gets the content of the created file.
+    /// </summary>
+    public string Content { get; }
 
     /// <summary>
     /// Gets the timestamp when the file was created.

@@ -45,7 +45,7 @@ public partial record VFS
         TryGetDirectory(filePath.Parent, out var parent);
         parent?.AddChild(file);
         
-        FileCreated?.Invoke(new VFSFileCreatedArgs(filePath));
+        FileCreated?.Invoke(new VFSFileCreatedArgs(filePath, content ?? string.Empty));
         return this;
     }
 }

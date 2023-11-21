@@ -88,8 +88,8 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         vfs.DirectoryRenamed += args => 
         {
             eventRaised = true;
-            args.SourcePath.Should().Be(directoryPath);
-            args.DestinationPath.Value.Should().Be("vfs://dir1/dir2/new_dir");
+            args.Path.Should().Be(directoryPath);
+            args.NewName.Should().Be("new_dir");
         };
 
         // Act

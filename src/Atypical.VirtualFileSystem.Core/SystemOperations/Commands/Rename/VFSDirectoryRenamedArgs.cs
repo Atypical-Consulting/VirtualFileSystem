@@ -14,24 +14,31 @@ public sealed class VFSDirectoryRenamedArgs : VFSEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="VFSDirectoryRenamedArgs"/> class.
     /// </summary>
-    /// <param name="sourcePath">The old path of the renamed directory.</param>
-    /// <param name="destinationPath">The new path of the renamed directory.</param>
-    public VFSDirectoryRenamedArgs(VFSDirectoryPath sourcePath, VFSDirectoryPath destinationPath)
+    /// <param name="path">The path of the renamed directory.</param>
+    /// <param name="oldName">The old name of the renamed directory.</param>
+    /// <param name="newName">The new name of the renamed directory.</param>
+    public VFSDirectoryRenamedArgs(VFSDirectoryPath path, string oldName, string newName)
     {
-        SourcePath = sourcePath;
-        DestinationPath = destinationPath;
+        Path = path;
+        OldName = oldName;
+        NewName = newName;
         Timestamp = DateTimeOffset.Now;
     }
 
     /// <summary>
     /// Gets the old path of the renamed directory.
     /// </summary>
-    public VFSDirectoryPath SourcePath { get; }
+    public VFSDirectoryPath Path { get; }
+    
+    /// <summary>
+    /// Gets the old name of the renamed directory.
+    /// </summary>
+    public string OldName { get; }
 
     /// <summary>
-    /// Gets the new path of the renamed directory.
+    /// Gets the new name of the renamed file.
     /// </summary>
-    public VFSDirectoryPath DestinationPath { get; }
+    public string NewName { get; }
 
     /// <summary>
     /// Gets the timestamp when the directory was renamed.
@@ -44,11 +51,11 @@ public sealed class VFSDirectoryRenamedArgs : VFSEventArgs
 
     /// <inheritdoc />
     public override string Message
-        => string.Format(MessageTemplate, SourcePath, DestinationPath, Timestamp);
+        => string.Format(MessageTemplate, Path, NewName, Timestamp);
 
     /// <inheritdoc />
     public override string MessageWithMarkup
-        => ToMarkup("blue", SourcePath, DestinationPath, Timestamp);
+        => ToMarkup("blue", Path, NewName, Timestamp);
 
     /// <inheritdoc />
     public override string ToString()
