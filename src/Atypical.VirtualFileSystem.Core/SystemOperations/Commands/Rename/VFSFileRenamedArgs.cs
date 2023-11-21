@@ -14,24 +14,31 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="VFSFileRenamedArgs"/> class.
     /// </summary>
-    /// <param name="sourcePath">The old path of the renamed file.</param>
-    /// <param name="destinationPath">The new path of the renamed file.</param>
-    public VFSFileRenamedArgs(VFSFilePath sourcePath, VFSFilePath destinationPath)
+    /// <param name="path">The path of the renamed file.</param>
+    /// <param name="oldName">The old name of the renamed file.</param>
+    /// <param name="newName">The new name of the renamed file.</param>
+    public VFSFileRenamedArgs(VFSFilePath path, string oldName, string newName)
     {
-        SourcePath = sourcePath;
-        DestinationPath = destinationPath;
+        Path = path;
+        OldName = oldName;
+        NewName = newName;
         Timestamp = DateTimeOffset.Now;
     }
 
     /// <summary>
     /// Gets the source path of the renamed file.
     /// </summary>
-    public VFSFilePath SourcePath { get; }
+    public VFSFilePath Path { get; }
+    
+    /// <summary>
+    /// Gets the old name of the renamed file.
+    /// </summary>
+    public string OldName { get; }
 
     /// <summary>
-    /// Gets the destination path of the renamed file.
+    /// Gets the new name of the renamed file.
     /// </summary>
-    public VFSFilePath DestinationPath { get; }
+    public string NewName { get; }
 
     /// <summary>
     /// Gets the timestamp when the file was renamed.
@@ -44,11 +51,11 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
 
     /// <inheritdoc />
     public override string Message
-        => string.Format(MessageTemplate, SourcePath, DestinationPath, Timestamp);
+        => string.Format(MessageTemplate, Path, NewName, Timestamp);
 
     /// <inheritdoc />
     public override string MessageWithMarkup
-        => ToMarkup("blue", SourcePath, DestinationPath, Timestamp);
+        => ToMarkup("blue", Path, NewName, Timestamp);
 
     /// <inheritdoc />
     public override string ToString()

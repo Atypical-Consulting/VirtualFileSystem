@@ -25,8 +25,8 @@ public class FileSystemWatcher : IFileSystemWatcher
         _timer = new Timer(CheckForChanges, null, Timeout.Infinite, Timeout.Infinite);
         
         _fileSystem.FileCreated += OnFileCreated;
-        // _fileSystem.FileDeleted += OnFileDeleted;
         _fileSystem.DirectoryCreated += OnDirectoryCreated;
+        // _fileSystem.FileDeleted += OnFileDeleted;
         // _fileSystem.DirectoryDeleted += OnDirectoryDeleted;
     }
 

@@ -1,12 +1,12 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
 ### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs')
 
-## VFSFileRenamedArgs.DestinationPath Property
+## VFSFileRenamedArgs.Path Property
 
-Gets the destination path of the renamed file.
+Gets the source path of the renamed file.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.VFSFilePath DestinationPath { get; }
+public Atypical.VirtualFileSystem.Core.VFSFilePath Path { get; }
 ```
 
 #### Property Value

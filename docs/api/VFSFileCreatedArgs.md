@@ -13,10 +13,11 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Constructors | |
 | :--- | :--- |
-| [VFSFileCreatedArgs(VFSFilePath)](VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)') | Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class. |
+| [VFSFileCreatedArgs(VFSFilePath, string)](VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, string)') | Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class. |
 
 | Properties | |
 | :--- | :--- |
+| [Content](VFSFileCreatedArgs.Content.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Content') | Gets the content of the created file. |
 | [Message](VFSFileCreatedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Message') | Gets the message. |
 | [MessageTemplate](VFSFileCreatedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageTemplate') | Gets the message template. |
 | [MessageWithMarkup](VFSFileCreatedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageWithMarkup') | Gets the message with markup. |
