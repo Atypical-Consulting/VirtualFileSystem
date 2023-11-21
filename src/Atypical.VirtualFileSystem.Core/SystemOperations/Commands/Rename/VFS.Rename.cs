@@ -32,18 +32,19 @@ public partial record VFS
             oldParent.RemoveChild(directoryNode);
 
         // update the directory node with the new path
-        var newDirectoryPath = new VFSDirectoryPath($"{directoryPath.Parent}/{newName}");
-        var updatedDirectoryNode = directoryNode.UpdatePath(newDirectoryPath);
+        var oldName = directoryNode.Name;
+        var newPath = new VFSDirectoryPath($"{directoryPath.Parent}/{newName}");
+        var updatedDirectoryNode = directoryNode.UpdatePath(newPath);
 
         // Add the directory to its old parent directory with the new name
-        if (TryGetDirectory(newDirectoryPath.Parent, out var newParent))
+        if (TryGetDirectory(newPath.Parent, out var newParent))
             newParent.AddChild(updatedDirectoryNode);
 
         // update the index
         Index.Remove(directoryPath);
-        Index[newDirectoryPath] = updatedDirectoryNode;
+        Index[newPath] = updatedDirectoryNode;
 
-        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, newDirectoryPath));
+        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, oldName, newName));
         return this;
     }
     
@@ -60,6 +61,7 @@ public partial record VFS
             oldParent.RemoveChild(fileNode);
 
         // update the file node with the new path
+        var oldName = fileNode.Name;
         var newFilePath = new VFSFilePath($"{filePath.Parent}/{newName}");
         var updatedFileNode = fileNode.UpdatePath(newFilePath);
 
@@ -71,7 +73,7 @@ public partial record VFS
         Index.Remove(filePath);
         Index[newFilePath] = updatedFileNode;
 
-        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, newFilePath));
+        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, oldName, newFilePath));
         return this;
     }
 }
