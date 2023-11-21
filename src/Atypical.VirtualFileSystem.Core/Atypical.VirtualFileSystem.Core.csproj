@@ -45,11 +45,12 @@
       <RepositoryType>git</RepositoryType>
       <RepositoryBranch>main</RepositoryBranch>
       <PackageReleaseNotes>
-        ## Changes
-        - Get a summary from the ToString method @phmatray (#35)
-        - Add some unit tests @phmatray (#34)
-        - Add method to IVirtualFileSystem + comments and test @phmatray (#33)
-        - Create Directory.Build.props @phmatray (#32)
+          ## 🚀 Features
+          - feature: add events @phmatray (#68)
+          - feature: add move directory @phmatray (#67)
+
+          ## ✅ Tests
+          - test: add tests for checking if an event is raised @phmatray (#69)
       </PackageReleaseNotes>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <PackageLanguage>en-US</PackageLanguage>
