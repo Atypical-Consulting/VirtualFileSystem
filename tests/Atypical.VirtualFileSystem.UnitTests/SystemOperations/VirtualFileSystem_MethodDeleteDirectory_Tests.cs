@@ -64,4 +64,26 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
             .Throw<VirtualFileSystemException>()
             .WithMessage("Cannot delete the root directory.");
     }
+    
+    [Fact]
+    public void DeleteDirectory_raises_a_DirectoryDeleted_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        VFSDirectoryPath directoryPath = new("dir1");
+        vfs.CreateDirectory(directoryPath);
+        bool eventRaised = false;
+
+        vfs.DirectoryDeleted += args => 
+        {
+            eventRaised = true;
+            args.Path.Should().Be(directoryPath);
+        };
+
+        // Act
+        vfs.DeleteDirectory(directoryPath);
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }

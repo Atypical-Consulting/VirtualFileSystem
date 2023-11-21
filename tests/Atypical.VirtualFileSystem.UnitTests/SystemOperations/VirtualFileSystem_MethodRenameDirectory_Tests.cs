@@ -75,4 +75,27 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
             .Throw<VirtualFileSystemException>()
             .WithMessage("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
     }
+    
+    [Fact]
+    public void RenameDirectory_raises_a_DirectoryRenamed_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
+        vfs.CreateDirectory(directoryPath);
+        bool eventRaised = false;
+
+        vfs.DirectoryRenamed += args => 
+        {
+            eventRaised = true;
+            args.SourcePath.Should().Be(directoryPath);
+            args.DestinationPath.Value.Should().Be("vfs://dir1/dir2/new_dir");
+        };
+
+        // Act
+        vfs.RenameDirectory(directoryPath, "new_dir");
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }
