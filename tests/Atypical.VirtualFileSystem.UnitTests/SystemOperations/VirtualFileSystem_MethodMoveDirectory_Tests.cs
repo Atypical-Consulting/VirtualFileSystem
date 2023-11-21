@@ -70,4 +70,27 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
             .Throw<VirtualFileSystemException>()
             .WithMessage("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
     }
+
+    [Fact]
+    public void MoveDirectory_raises_a_DirectoryMoved_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
+        vfs.CreateDirectory(directoryPath);
+        bool eventRaised = false;
+
+        vfs.DirectoryMoved += args => 
+        {
+            eventRaised = true;
+            args.SourcePath.Should().Be(directoryPath);
+            args.DestinationPath.Should().Be(new VFSDirectoryPath("new_dir"));
+        };
+
+        // Act
+        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }

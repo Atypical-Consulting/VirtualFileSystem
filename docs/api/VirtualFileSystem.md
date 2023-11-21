@@ -119,11 +119,11 @@
     This allows you to use a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath') as a string.
 - **[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs')** `Class` Provides data for the DirectoryRenamed event.
   - **[VFSDirectoryRenamedArgs(VFSDirectoryPath, VFSDirectoryPath)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class.
+  - **[DestinationPath](VFSDirectoryRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.DestinationPath')** `Property` Gets the new path of the renamed directory.
   - **[Message](VFSDirectoryRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSDirectoryRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSDirectoryRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
-  - **[NewPath](VFSDirectoryRenamedArgs.NewPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewPath')** `Property` Gets the new path of the renamed directory.
-  - **[OldPath](VFSDirectoryRenamedArgs.OldPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.OldPath')** `Property` Gets the old path of the renamed directory.
+  - **[SourcePath](VFSDirectoryRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.SourcePath')** `Property` Gets the old path of the renamed directory.
   - **[Timestamp](VFSDirectoryRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Timestamp')** `Property` Gets the timestamp when the directory was renamed.
 - **[VFSEventArgs](VFSEventArgs.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs')** `Class` Represents the base class for all VFS event arguments.
   - **[Message](VFSEventArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.Message')** `Property` Gets the message.
@@ -162,11 +162,11 @@
     This allows you to use a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') as a string.
 - **[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs')** `Class` Provides data for the FileRenamed event.
   - **[VFSFileRenamedArgs(VFSFilePath, VFSFilePath)](VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs') class.
+  - **[DestinationPath](VFSFileRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.DestinationPath')** `Property` Gets the destination path of the renamed file.
   - **[Message](VFSFileRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSFileRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSFileRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
-  - **[NewPath](VFSFileRenamedArgs.NewPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewPath')** `Property` Gets the new path of the renamed file.
-  - **[OldPath](VFSFileRenamedArgs.OldPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldPath')** `Property` Gets the old path of the renamed file.
+  - **[SourcePath](VFSFileRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.SourcePath')** `Property` Gets the source path of the renamed file.
   - **[Timestamp](VFSFileRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Timestamp')** `Property` Gets the timestamp when the file was renamed.
 - **[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')** `Class` Represents the index of the virtual file system.
   - **[Count](VFSIndex.Count.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Count')** `Property` Gets the total count of nodes in the index.

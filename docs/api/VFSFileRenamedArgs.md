@@ -17,9 +17,9 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Properties | |
 | :--- | :--- |
+| [DestinationPath](VFSFileRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.DestinationPath') | Gets the destination path of the renamed file. |
 | [Message](VFSFileRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Message') | Gets the message. |
 | [MessageTemplate](VFSFileRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageTemplate') | Gets the message template. |
 | [MessageWithMarkup](VFSFileRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageWithMarkup') | Gets the message with markup. |
-| [NewPath](VFSFileRenamedArgs.NewPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewPath') | Gets the new path of the renamed file. |
-| [OldPath](VFSFileRenamedArgs.OldPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldPath') | Gets the old path of the renamed file. |
+| [SourcePath](VFSFileRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.SourcePath') | Gets the source path of the renamed file. |
 | [Timestamp](VFSFileRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Timestamp') | Gets the timestamp when the file was renamed. |

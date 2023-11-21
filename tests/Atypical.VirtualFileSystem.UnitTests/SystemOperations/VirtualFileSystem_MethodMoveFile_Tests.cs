@@ -70,4 +70,27 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
             .Throw<VirtualFileSystemException>()
             .WithMessage("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
     }
+
+    [Fact]
+    public void MoveFile_raises_a_FileMoved_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
+        vfs.CreateFile(filePath);
+        bool eventRaised = false;
+
+        vfs.FileMoved += args => 
+        {
+            eventRaised = true;
+            args.SourcePath.Should().Be(filePath);
+            args.DestinationPath.Should().Be(new VFSFilePath("new_file.txt"));
+        };
+
+        // Act
+        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }

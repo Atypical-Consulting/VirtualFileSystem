@@ -14,24 +14,24 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="VFSFileRenamedArgs"/> class.
     /// </summary>
-    /// <param name="oldPath">The old path of the renamed file.</param>
-    /// <param name="newPath">The new path of the renamed file.</param>
-    public VFSFileRenamedArgs(VFSFilePath oldPath, VFSFilePath newPath)
+    /// <param name="sourcePath">The old path of the renamed file.</param>
+    /// <param name="destinationPath">The new path of the renamed file.</param>
+    public VFSFileRenamedArgs(VFSFilePath sourcePath, VFSFilePath destinationPath)
     {
-        OldPath = oldPath;
-        NewPath = newPath;
+        SourcePath = sourcePath;
+        DestinationPath = destinationPath;
         Timestamp = DateTimeOffset.Now;
     }
 
     /// <summary>
-    /// Gets the old path of the renamed file.
+    /// Gets the source path of the renamed file.
     /// </summary>
-    public VFSFilePath OldPath { get; }
+    public VFSFilePath SourcePath { get; }
 
     /// <summary>
-    /// Gets the new path of the renamed file.
+    /// Gets the destination path of the renamed file.
     /// </summary>
-    public VFSFilePath NewPath { get; }
+    public VFSFilePath DestinationPath { get; }
 
     /// <summary>
     /// Gets the timestamp when the file was renamed.
@@ -44,11 +44,11 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
 
     /// <inheritdoc />
     public override string Message
-        => string.Format(MessageTemplate, OldPath, NewPath, Timestamp);
+        => string.Format(MessageTemplate, SourcePath, DestinationPath, Timestamp);
 
     /// <inheritdoc />
     public override string MessageWithMarkup
-        => ToMarkup("blue", OldPath, NewPath, Timestamp);
+        => ToMarkup("blue", SourcePath, DestinationPath, Timestamp);
 
     /// <inheritdoc />
     public override string ToString()
