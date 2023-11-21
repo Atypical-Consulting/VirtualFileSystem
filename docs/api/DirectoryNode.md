@@ -6,13 +6,13 @@
 Represents a directory in the virtual file system.
 
 ```csharp
-public class DirectoryNode : Atypical.VirtualFileSystem.Core.Abstractions.VFSNode,
+public class DirectoryNode : Atypical.VirtualFileSystem.Core.VFSNode,
 Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,
 Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode,
 System.IEquatable<Atypical.VirtualFileSystem.Core.DirectoryNode>
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode') &#129106; DirectoryNode
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode') &#129106; DirectoryNode
 
 Derived  
 &#8627; [RootNode](RootNode.md 'Atypical.VirtualFileSystem.Core.RootNode')

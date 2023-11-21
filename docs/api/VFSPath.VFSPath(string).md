@@ -1,16 +1,16 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Abstractions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions 'Atypical.VirtualFileSystem.Core.Abstractions').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
 
 ## VFSPath(string) Constructor
 
-Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath').
+Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath').
 
 ```csharp
 protected VFSPath(string path);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPath(string).path'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSPath.VFSPath(string).path'></a>
 
 `path` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 

@@ -23,7 +23,7 @@ The path of the file node.
 
 The content of the file node.
 
-Implements [CreateFile(VFSFilePath, string)](IVirtualFileSystem.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')
+Implements [CreateFile(VFSFilePath, string)](IVFSCreate.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')
 
 #### Returns
 [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  

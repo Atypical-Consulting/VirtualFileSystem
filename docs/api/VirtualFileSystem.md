@@ -68,6 +68,7 @@
   - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](VFS.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
   - **[MoveFile(VFSFilePath, VFSFilePath)](VFS.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
     Both paths must be absolute.
+  - **[RenameDirectory(VFSDirectoryPath, string)](VFS.RenameDirectory(VFSDirectoryPath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string)')** `Method` Renames a directory.
   - **[RenameFile(VFSFilePath, string)](VFS.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
     The path must be absolute.
   - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns a string that represents the current object.
@@ -77,6 +78,36 @@
     and directory is set to `null`.
   - **[TryGetFile(VFSFilePath, IFileNode)](VFS.TryGetFile(VFSFilePath,IFileNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Try to get a file node by its path.  
     The path must be absolute.
+  - **[DirectoryCreated](VFS.DirectoryCreated.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryCreated')** `Event` Event triggered when a directory is created.
+  - **[DirectoryDeleted](VFS.DirectoryDeleted.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryDeleted')** `Event` Event triggered when a directory is deleted.
+  - **[DirectoryMoved](VFS.DirectoryMoved.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryMoved')** `Event` Event triggered when a directory is moved.
+  - **[DirectoryRenamed](VFS.DirectoryRenamed.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryRenamed')** `Event` Event triggered when a directory is renamed.
+  - **[FileCreated](VFS.FileCreated.md 'Atypical.VirtualFileSystem.Core.VFS.FileCreated')** `Event` Event triggered when a file is created.
+  - **[FileDeleted](VFS.FileDeleted.md 'Atypical.VirtualFileSystem.Core.VFS.FileDeleted')** `Event` Event triggered when a file is deleted.
+  - **[FileMoved](VFS.FileMoved.md 'Atypical.VirtualFileSystem.Core.VFS.FileMoved')** `Event` Event triggered when a file is moved.
+  - **[FileRenamed](VFS.FileRenamed.md 'Atypical.VirtualFileSystem.Core.VFS.FileRenamed')** `Event` Event triggered when a file is renamed.
+- **[VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs')** `Class` Provides data for the DirectoryCreated event.
+  - **[VFSDirectoryCreatedArgs(VFSDirectoryPath)](VFSDirectoryCreatedArgs.VFSDirectoryCreatedArgs(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.VFSDirectoryCreatedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs') class.
+  - **[Message](VFSDirectoryCreatedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSDirectoryCreatedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSDirectoryCreatedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[Path](VFSDirectoryCreatedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.Path')** `Property` Gets the path of the created directory.
+  - **[Timestamp](VFSDirectoryCreatedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryCreatedArgs.Timestamp')** `Property` Gets the timestamp when the directory was created.
+- **[VFSDirectoryDeletedArgs](VFSDirectoryDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs')** `Class` Provides data for the DirectoryDeleted event.
+  - **[VFSDirectoryDeletedArgs(VFSDirectoryPath)](VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryDeletedArgs](VFSDirectoryDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs') class.
+  - **[Message](VFSDirectoryDeletedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSDirectoryDeletedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSDirectoryDeletedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[Path](VFSDirectoryDeletedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Path')** `Property` Gets the path of the deleted directory.
+  - **[Timestamp](VFSDirectoryDeletedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Timestamp')** `Property` Gets the timestamp when the directory was deleted.
+- **[VFSDirectoryMovedArgs](VFSDirectoryMovedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs')** `Class` Provides data for the DirectoryMoved event.
+  - **[VFSDirectoryMovedArgs(VFSDirectoryPath, VFSDirectoryPath)](VFSDirectoryMovedArgs.VFSDirectoryMovedArgs(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.VFSDirectoryMovedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryMovedArgs](VFSDirectoryMovedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs') class.
+  - **[DestinationPath](VFSDirectoryMovedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.DestinationPath')** `Property` Gets the destination path of the moved directory.
+  - **[Message](VFSDirectoryMovedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSDirectoryMovedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSDirectoryMovedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[SourcePath](VFSDirectoryMovedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.SourcePath')** `Property` Gets the source path of the moved directory.
+  - **[Timestamp](VFSDirectoryMovedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.Timestamp')** `Property` Gets the timestamp when the directory was moved.
 - **[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')** `Class` Represents a directory in the virtual file system.  
   A directory is a first-class citizen in the virtual file system.  
   It can contain files and other directories.
@@ -86,6 +117,41 @@
     The string representation of the directory path is the path itself.
   - **[implicit operator string(VFSDirectoryPath)](VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath') as a string.
+- **[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs')** `Class` Provides data for the DirectoryRenamed event.
+  - **[VFSDirectoryRenamedArgs(VFSDirectoryPath, VFSDirectoryPath)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class.
+  - **[Message](VFSDirectoryRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSDirectoryRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSDirectoryRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[NewPath](VFSDirectoryRenamedArgs.NewPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewPath')** `Property` Gets the new path of the renamed directory.
+  - **[OldPath](VFSDirectoryRenamedArgs.OldPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.OldPath')** `Property` Gets the old path of the renamed directory.
+  - **[Timestamp](VFSDirectoryRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Timestamp')** `Property` Gets the timestamp when the directory was renamed.
+- **[VFSEventArgs](VFSEventArgs.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs')** `Class` Represents the base class for all VFS event arguments.
+  - **[Message](VFSEventArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSEventArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSEventArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[ToMarkup(string, object[])](VFSEventArgs.ToMarkup(string,object[]).md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.ToMarkup(string, object[])')** `Method` Transforms a message into a markup message with the specified color.
+- **[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs')** `Class` Provides data for the FileCreated event.
+  - **[VFSFileCreatedArgs(VFSFilePath)](VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class.
+  - **[Message](VFSFileCreatedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSFileCreatedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSFileCreatedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[Path](VFSFileCreatedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Path')** `Property` Gets the path of the created file.
+  - **[Timestamp](VFSFileCreatedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Timestamp')** `Property` Gets the timestamp when the file was created.
+- **[VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs')** `Class` Provides data for the FileDeleted event.
+  - **[VFSFileDeletedArgs(VFSFilePath)](VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs') class.
+  - **[Message](VFSFileDeletedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSFileDeletedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSFileDeletedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[Path](VFSFileDeletedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Path')** `Property` Gets the path of the deleted file.
+  - **[Timestamp](VFSFileDeletedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Timestamp')** `Property` Gets the timestamp when the file was deleted.
+- **[VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs')** `Class` Provides data for the FileMoved event.
+  - **[VFSFileMovedArgs(VFSFilePath, VFSFilePath)](VFSFileMovedArgs.VFSFileMovedArgs(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.VFSFileMovedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs') class.
+  - **[DestinationPath](VFSFileMovedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.DestinationPath')** `Property` Gets the destination path of the moved file.
+  - **[Message](VFSFileMovedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSFileMovedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSFileMovedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[SourcePath](VFSFileMovedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.SourcePath')** `Property` Gets the source path of the moved file.
+  - **[Timestamp](VFSFileMovedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileMovedArgs.Timestamp')** `Property` Gets the timestamp when the file was moved.
 - **[VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')** `Class` Represents a file system entry in the virtual file system.  
   A file is a first-class citizen in the virtual file system.
   - **[VFSFilePath(string)](VFSFilePath.VFSFilePath(string).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.VFSFilePath(string)')** `Constructor` Initializes a new instance of the [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') class.  
@@ -94,6 +160,14 @@
     The file path is relative to the root of the virtual file system.
   - **[implicit operator string(VFSFilePath)](VFSFilePath.implicitoperatorstring(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') as a string.
+- **[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs')** `Class` Provides data for the FileRenamed event.
+  - **[VFSFileRenamedArgs(VFSFilePath, VFSFilePath)](VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs') class.
+  - **[Message](VFSFileRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Message')** `Property` Gets the message.
+  - **[MessageTemplate](VFSFileRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageTemplate')** `Property` Gets the message template.
+  - **[MessageWithMarkup](VFSFileRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
+  - **[NewPath](VFSFileRenamedArgs.NewPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewPath')** `Property` Gets the new path of the renamed file.
+  - **[OldPath](VFSFileRenamedArgs.OldPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldPath')** `Property` Gets the old path of the renamed file.
+  - **[Timestamp](VFSFileRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Timestamp')** `Property` Gets the timestamp when the file was renamed.
 - **[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')** `Class` Represents the index of the virtual file system.
   - **[Count](VFSIndex.Count.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Count')** `Property` Gets the total count of nodes in the index.
   - **[Directories](VFSIndex.Directories.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Directories')** `Property` Gets the directories in the index.
@@ -106,14 +180,46 @@
   - **[this[VFSDirectoryPath]](VFSIndex.this[VFSDirectoryPath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSDirectoryPath]')** `Property` Gets or sets the node at the specified directory path.
   - **[this[VFSFilePath]](VFSIndex.this[VFSFilePath].md 'Atypical.VirtualFileSystem.Core.VFSIndex.this[Atypical.VirtualFileSystem.Core.VFSFilePath]')** `Property` Gets or sets the node at the specified file path.
   - **[Values](VFSIndex.Values.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Values')** `Property` Gets the values of the raw index.
-  - **[ContainsKey(VFSPath)](VFSIndex.ContainsKey(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)')** `Method` Determines whether the index contains the specified key.
+  - **[ContainsKey(VFSPath)](VFSIndex.ContainsKey(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.VFSPath)')** `Method` Determines whether the index contains the specified key.
   - **[GetDirectory(VFSDirectoryPath)](VFSIndex.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets the directory node at the specified directory path.
   - **[GetFile(VFSFilePath)](VFSIndex.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets the file node at the specified file path.
   - **[GetPathsStartingWith(VFSDirectoryPath)](VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Gets the paths starting with the specified directory path.
-  - **[Remove(VFSPath)](VFSIndex.Remove(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)')** `Method` Removes the node with the specified key.
+  - **[Remove(VFSPath)](VFSIndex.Remove(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath)')** `Method` Removes the node with the specified key.
   - **[ToString()](VFSIndex.ToString().md 'Atypical.VirtualFileSystem.Core.VFSIndex.ToString()')** `Method` Returns a string that represents the current object.
-  - **[TryAdd(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to add the specified node to the index.
-  - **[TryGetValue(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to get the value associated with the specified key.
+  - **[TryAdd(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to add the specified node to the index.
+  - **[TryGetValue(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to get the value associated with the specified key.
+- **[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode')** `Class` Represents a node in a virtual file system.  
+  A node can be a file or a directory.
+  - **[VFSNode(VFSPath)](VFSNode.VFSNode(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSNode.VFSNode(Atypical.VirtualFileSystem.Core.VFSPath)')** `Constructor` Initializes a new instance of the [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode') class.  
+    This constructor is used by derived classes.
+  - **[CreationTime](VFSNode.CreationTime.md 'Atypical.VirtualFileSystem.Core.VFSNode.CreationTime')** `Property` Gets the creation time of the node.
+  - **[IsDirectory](VFSNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.VFSNode.IsDirectory')** `Property` Indicates whether the node is a directory.
+  - **[IsFile](VFSNode.IsFile.md 'Atypical.VirtualFileSystem.Core.VFSNode.IsFile')** `Property` Indicates whether the node is a file.
+  - **[LastAccessTime](VFSNode.LastAccessTime.md 'Atypical.VirtualFileSystem.Core.VFSNode.LastAccessTime')** `Property` Gets the last access time of the node.
+  - **[LastWriteTime](VFSNode.LastWriteTime.md 'Atypical.VirtualFileSystem.Core.VFSNode.LastWriteTime')** `Property` Gets the last write time of the node.
+  - **[Path](VFSNode.Path.md 'Atypical.VirtualFileSystem.Core.VFSNode.Path')** `Property` Gets the creation time of the node.
+  - **[UpdatePath(VFSPath)](VFSNode.UpdatePath(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSNode.UpdatePath(Atypical.VirtualFileSystem.Core.VFSPath)')** `Method` Updates the path of the node.
+- **[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')** `Class` Represents a file system entry (file or directory) in the virtual file system.
+  - **[VFSPath(string)](VFSPath.VFSPath(string).md 'Atypical.VirtualFileSystem.Core.VFSPath.VFSPath(string)')** `Constructor` Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath').
+  - **[Depth](VFSPath.Depth.md 'Atypical.VirtualFileSystem.Core.VFSPath.Depth')** `Property` Gets the depth of the file system entry.  
+    The root directory has a depth of 0.  
+    The depth of a file is the depth of its parent directory plus one.  
+    The depth of a directory is the depth of its parent directory plus one.
+  - **[HasParent](VFSPath.HasParent.md 'Atypical.VirtualFileSystem.Core.VFSPath.HasParent')** `Property` Indicates whether the path has a parent directory.
+  - **[IsRoot](VFSPath.IsRoot.md 'Atypical.VirtualFileSystem.Core.VFSPath.IsRoot')** `Property` Gets a value indicating whether the directory is the root directory.
+  - **[Name](VFSPath.Name.md 'Atypical.VirtualFileSystem.Core.VFSPath.Name')** `Property` Gets the name of the file system entry.  
+    The name of the root directory is [ROOT_PATH](VFS.ROOT_PATH.md 'Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH').  
+    The name of a file is the name of the file with its extension.
+  - **[Parent](VFSPath.Parent.md 'Atypical.VirtualFileSystem.Core.VFSPath.Parent')** `Property` Gets the path of the parent directory.
+  - **[Value](VFSPath.Value.md 'Atypical.VirtualFileSystem.Core.VFSPath.Value')** `Property` Gets the path of the file system entry with the VFS prefix.
+  - **[Equals(VFSPath)](VFSPath.Equals(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSPath.Equals(Atypical.VirtualFileSystem.Core.VFSPath)')** `Method` Indicates whether the current object is equal to another object of the same type.
+  - **[GetAbsoluteParentPath(int)](VFSPath.GetAbsoluteParentPath(int).md 'Atypical.VirtualFileSystem.Core.VFSPath.GetAbsoluteParentPath(int)')** `Method` Gets the absolute path of the parent directory with depth depthFromRoot.  
+    The root directory has a depth of 0.  
+    The depth of a file is the depth of its parent directory plus one.  
+    The depth of a directory is the depth of its parent directory plus one.
+  - **[GetHashCode()](VFSPath.GetHashCode().md 'Atypical.VirtualFileSystem.Core.VFSPath.GetHashCode()')** `Method` Serves as the default hash function.
+  - **[IsMatch(Regex)](VFSPath.IsMatch(Regex).md 'Atypical.VirtualFileSystem.Core.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)')** `Method` Indicates whether the specified regular expression finds a match in the path.
+  - **[StartsWith(string)](VFSPath.StartsWith(string).md 'Atypical.VirtualFileSystem.Core.VFSPath.StartsWith(string)')** `Method` Determines whether the path starts with the specified path.
 - **[VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath')** `Class` Represents the root directory of the virtual file system.
   - **[VFSRootPath()](VFSRootPath.VFSRootPath().md 'Atypical.VirtualFileSystem.Core.VFSRootPath.VFSRootPath()')** `Constructor` Represents the root directory of the virtual file system.
   - **[ToString()](VFSRootPath.ToString().md 'Atypical.VirtualFileSystem.Core.VFSRootPath.ToString()')** `Method` Returns a string that represents the current object.  
@@ -128,45 +234,6 @@
 - **[VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory')** `Class` Represents a factory for creating [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem') instances.
   - **[VirtualFileSystemFactory()](VirtualFileSystemFactory.VirtualFileSystemFactory().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.VirtualFileSystemFactory()')** `Constructor` Initializes a new instance of the [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory') class.
   - **[CreateFileSystem()](VirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem()')** `Method` Creates a new instance of [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem').
-- **[VFSNodeType](VFSNodeType.md 'Atypical.VirtualFileSystem.Core.VFSNodeType')** `Enum` Represents a node type in a virtual file system.
-  - **[Directory](VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.Directory 'Atypical.VirtualFileSystem.Core.VFSNodeType.Directory')** `Field` The node is a directory.
-  - **[File](VFSNodeType.md#Atypical.VirtualFileSystem.Core.VFSNodeType.File 'Atypical.VirtualFileSystem.Core.VFSNodeType.File')** `Field` The node is a file.
-
-<a name='Atypical.VirtualFileSystem.Core.Abstractions'></a>
-
-## Atypical.VirtualFileSystem.Core.Abstractions Namespace
-- **[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode')** `Class` Represents a node in a virtual file system.  
-  A node can be a file or a directory.
-  - **[VFSNode(VFSPath)](VFSNode.VFSNode(VFSPath).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.VFSNode(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)')** `Constructor` Initializes a new instance of the [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode') class.  
-    This constructor is used by derived classes.
-  - **[CreationTime](VFSNode.CreationTime.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.CreationTime')** `Property` Gets the creation time of the node.
-  - **[IsDirectory](VFSNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.IsDirectory')** `Property` Indicates whether the node is a directory.
-  - **[IsFile](VFSNode.IsFile.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.IsFile')** `Property` Indicates whether the node is a file.
-  - **[LastAccessTime](VFSNode.LastAccessTime.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.LastAccessTime')** `Property` Gets the last access time of the node.
-  - **[LastWriteTime](VFSNode.LastWriteTime.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.LastWriteTime')** `Property` Gets the last write time of the node.
-  - **[Path](VFSNode.Path.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.Path')** `Property` Gets the creation time of the node.
-  - **[UpdatePath(VFSPath)](VFSNode.UpdatePath(VFSPath).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode.UpdatePath(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)')** `Method` Updates the path of the node.
-- **[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')** `Class` Represents a file system entry (file or directory) in the virtual file system.
-  - **[VFSPath(string)](VFSPath.VFSPath(string).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.VFSPath(string)')** `Constructor` Creates a new instance of [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath').
-  - **[Depth](VFSPath.Depth.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Depth')** `Property` Gets the depth of the file system entry.  
-    The root directory has a depth of 0.  
-    The depth of a file is the depth of its parent directory plus one.  
-    The depth of a directory is the depth of its parent directory plus one.
-  - **[HasParent](VFSPath.HasParent.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.HasParent')** `Property` Indicates whether the path has a parent directory.
-  - **[IsRoot](VFSPath.IsRoot.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsRoot')** `Property` Gets a value indicating whether the directory is the root directory.
-  - **[Name](VFSPath.Name.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Name')** `Property` Gets the name of the file system entry.  
-    The name of the root directory is [ROOT_PATH](VFS.ROOT_PATH.md 'Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH').  
-    The name of a file is the name of the file with its extension.
-  - **[Parent](VFSPath.Parent.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Parent')** `Property` Gets the path of the parent directory.
-  - **[Value](VFSPath.Value.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Value')** `Property` Gets the path of the file system entry with the VFS prefix.
-  - **[Equals(VFSPath)](VFSPath.Equals(VFSPath).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.Equals(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)')** `Method` Indicates whether the current object is equal to another object of the same type.
-  - **[GetAbsoluteParentPath(int)](VFSPath.GetAbsoluteParentPath(int).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetAbsoluteParentPath(int)')** `Method` Gets the absolute path of the parent directory with depth depthFromRoot.  
-    The root directory has a depth of 0.  
-    The depth of a file is the depth of its parent directory plus one.  
-    The depth of a directory is the depth of its parent directory plus one.
-  - **[GetHashCode()](VFSPath.GetHashCode().md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.GetHashCode()')** `Method` Serves as the default hash function.
-  - **[IsMatch(Regex)](VFSPath.IsMatch(Regex).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex)')** `Method` Indicates whether the specified regular expression finds a match in the path.
-  - **[StartsWith(string)](VFSPath.StartsWith(string).md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.StartsWith(string)')** `Method` Determines whether the path starts with the specified path.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts'></a>
 
@@ -185,6 +252,33 @@
     The encoding is in UTF-8.
 - **[IRootNode](IRootNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IRootNode')** `Interface` Represents the root of a virtual file system.  
   This is the entry point for all operations on the file system.
+- **[IVFSCreate](IVFSCreate.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate')** `Interface` Represents the creation operations of the virtual file system.
+  - **[CreateDirectory(VFSDirectoryPath)](IVFSCreate.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
+    The path must be absolute.
+  - **[CreateFile(VFSFilePath, string)](IVFSCreate.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Creates a file node at the specified path.  
+    The path must be absolute.
+  - **[DirectoryCreated](IVFSCreate.DirectoryCreated.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.DirectoryCreated')** `Event` Event triggered when a directory is created.
+  - **[FileCreated](IVFSCreate.FileCreated.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.FileCreated')** `Event` Event triggered when a file is created.
+- **[IVFSDelete](IVFSDelete.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete')** `Interface` Represents the deletion operations of the virtual file system.
+  - **[DeleteDirectory(VFSDirectoryPath)](IVFSDelete.DeleteDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Deletes a directory node at the specified path.  
+    The path must be absolute.
+  - **[DeleteFile(VFSFilePath)](IVFSDelete.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Deletes a file node at the specified path.  
+    The path must be absolute.
+  - **[DirectoryDeleted](IVFSDelete.DirectoryDeleted.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.DirectoryDeleted')** `Event` Event triggered when a directory is deleted.
+  - **[FileDeleted](IVFSDelete.FileDeleted.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.FileDeleted')** `Event` Event triggered when a file is deleted.
+- **[IVFSMove](IVFSMove.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove')** `Interface` Represents the move operations of the virtual file system.
+  - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](IVFSMove.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
+  - **[MoveFile(VFSFilePath, VFSFilePath)](IVFSMove.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
+    Both paths must be absolute.
+  - **[DirectoryMoved](IVFSMove.DirectoryMoved.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove.DirectoryMoved')** `Event` Event triggered when a directory is moved.
+  - **[FileMoved](IVFSMove.FileMoved.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove.FileMoved')** `Event` Event triggered when a file is moved.
+- **[IVFSRename](IVFSRename.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename')** `Interface` Represents the rename operations of the virtual file system.
+  - **[RenameDirectory(VFSDirectoryPath, string)](IVFSRename.RenameDirectory(VFSDirectoryPath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string)')** `Method` Renames a directory node at the specified path.  
+    The path must be absolute.
+  - **[RenameFile(VFSFilePath, string)](IVFSRename.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
+    The path must be absolute.
+  - **[DirectoryRenamed](IVFSRename.DirectoryRenamed.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.DirectoryRenamed')** `Event` Event triggered when a directory is renamed.
+  - **[FileRenamed](IVFSRename.FileRenamed.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.FileRenamed')** `Event` Event triggered when a file is renamed.
 - **[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')** `Interface` Represents a virtual file system.  
   This is the main entry point for all operations on the file system.  
   You can get an instance of this interface by calling [CreateFileSystem()](IVirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory.CreateFileSystem()').
@@ -198,14 +292,6 @@
   - **[Root](IVirtualFileSystem.Root.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
   - **[RootPath](IVirtualFileSystem.RootPath.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RootPath')** `Property` Gets the path of the root directory.
-  - **[CreateDirectory(VFSDirectoryPath)](IVirtualFileSystem.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
-    The path must be absolute.
-  - **[CreateFile(VFSFilePath, string)](IVirtualFileSystem.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Creates a file node at the specified path.  
-    The path must be absolute.
-  - **[DeleteDirectory(VFSDirectoryPath)](IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Deletes a directory node at the specified path.  
-    The path must be absolute.
-  - **[DeleteFile(VFSFilePath)](IVirtualFileSystem.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Deletes a file node at the specified path.  
-    The path must be absolute.
   - **[FindDirectories(Func&lt;IDirectoryNode,bool&gt;)](IVirtualFileSystem.FindDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
   - **[FindDirectories(Regex)](IVirtualFileSystem.FindDirectories(Regex).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)')** `Method` Finds all directory nodes that match the specified regular expression.  
     The regular expression must be relative to the root directory.
@@ -216,11 +302,6 @@
   - **[GetFile(VFSFilePath)](IVirtualFileSystem.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetTree()](IVirtualFileSystem.GetTree().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree()')** `Method` Gets the tree of the file system.
-  - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](IVirtualFileSystem.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
-  - **[MoveFile(VFSFilePath, VFSFilePath)](IVirtualFileSystem.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
-    Both paths must be absolute.
-  - **[RenameFile(VFSFilePath, string)](IVirtualFileSystem.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
-    The path must be absolute.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
     If the directory node does not exist, this method returns `false`  

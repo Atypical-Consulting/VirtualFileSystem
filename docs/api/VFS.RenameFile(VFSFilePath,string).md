@@ -23,7 +23,7 @@ The path of the file node.
 
 The new name of the file node.
 
-Implements [RenameFile(VFSFilePath, string)](IVirtualFileSystem.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')
+Implements [RenameFile(VFSFilePath, string)](IVFSRename.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')
 
 #### Returns
 [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  

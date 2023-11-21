@@ -1,5 +1,5 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Abstractions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions 'Atypical.VirtualFileSystem.Core.Abstractions').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
 
 ## VFSPath.StartsWith(string) Method
 
@@ -10,7 +10,7 @@ public bool StartsWith(string searchTerm);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.StartsWith(string).searchTerm'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSPath.StartsWith(string).searchTerm'></a>
 
 `searchTerm` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
 

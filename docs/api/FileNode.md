@@ -6,13 +6,13 @@
 Represents a file in the virtual file system.
 
 ```csharp
-public class FileNode : Atypical.VirtualFileSystem.Core.Abstractions.VFSNode,
+public class FileNode : Atypical.VirtualFileSystem.Core.VFSNode,
 Atypical.VirtualFileSystem.Core.Contracts.IFileNode,
 Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode,
 System.IEquatable<Atypical.VirtualFileSystem.Core.FileNode>
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode') &#129106; FileNode
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode') &#129106; FileNode
 
 Implements [IFileNode](IFileNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IFileNode'), [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[FileNode](FileNode.md 'Atypical.VirtualFileSystem.Core.FileNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 

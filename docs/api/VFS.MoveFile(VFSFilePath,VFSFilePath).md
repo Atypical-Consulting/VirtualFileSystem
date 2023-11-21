@@ -23,7 +23,7 @@ The source path of the file node.
 
 The destination path of the file node.
 
-Implements [MoveFile(VFSFilePath, VFSFilePath)](IVirtualFileSystem.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')
+Implements [MoveFile(VFSFilePath, VFSFilePath)](IVFSMove.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')
 
 #### Returns
 [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  

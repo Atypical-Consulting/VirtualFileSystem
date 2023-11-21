@@ -31,12 +31,14 @@
       <PackageLicenseFile>LICENSE</PackageLicenseFile>
       <PackageReadmeFile>README.md</PackageReadmeFile>
       <Authors>Philippe Matray</Authors>
+      <Company>Atypical Consulting SRL</Company>
+      <Product>Virtual File System</Product>
       <Description>
         A virtual file system implementation in modern C#.
         When writing applications in .NET, you often need to write or read the contents of a file. .NET provides `System.IO` namespace dedicated to this purpose. But how do we deal with the filesystem when testing our code?
         "Virtual File System" is an attempt to solve this problem. Currently, this library is at an early stage of development. If you need additional functionality, I invite you to open an issue to discuss it.
       </Description>
-      <PackageTags>virtual filesystem;testing;core;net7</PackageTags>
+      <PackageTags>virtual filesystem;testing;core;net8</PackageTags>
       <Copyright>Copyright (c) 2022-2023 Atypical Consulting SRL</Copyright>
       <PackageProjectUrl>https://github.com/Atypical-Consulting/VirtualFileSystem</PackageProjectUrl>
       <RepositoryUrl>https://github.com/Atypical-Consulting/VirtualFileSystem.git</RepositoryUrl>
@@ -49,6 +51,8 @@
         - Add method to IVirtualFileSystem + comments and test @phmatray (#33)
         - Create Directory.Build.props @phmatray (#32)
       </PackageReleaseNotes>
+      <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+      <PackageLanguage>en-US</PackageLanguage>
     </PropertyGroup>
 
 </Project>

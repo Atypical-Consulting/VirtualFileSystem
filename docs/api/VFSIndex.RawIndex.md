@@ -6,8 +6,8 @@
 Gets the raw index of the virtual file system.
 
 ```csharp
-public System.Collections.Immutable.ImmutableSortedDictionary<Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode> RawIndex { get; }
+public System.Collections.Immutable.ImmutableSortedDictionary<Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode> RawIndex { get; }
 ```
 
 #### Property Value
-[System.Collections.Immutable.ImmutableSortedDictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')[IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')
+[System.Collections.Immutable.ImmutableSortedDictionary&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')[,](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')[IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableSortedDictionary-2 'System.Collections.Immutable.ImmutableSortedDictionary`2')

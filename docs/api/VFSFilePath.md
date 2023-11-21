@@ -7,11 +7,11 @@ Represents a file system entry in the virtual file system.
 A file is a first-class citizen in the virtual file system.
 
 ```csharp
-public class VFSFilePath : Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,
+public class VFSFilePath : Atypical.VirtualFileSystem.Core.VFSPath,
 System.IEquatable<Atypical.VirtualFileSystem.Core.VFSFilePath>
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath') &#129106; VFSFilePath
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath') &#129106; VFSFilePath
 
 Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 

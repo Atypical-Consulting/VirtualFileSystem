@@ -59,4 +59,25 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
             .Throw<VirtualFileSystemException>()
             .WithMessage("The node 'vfs://dir1/dir2/dir3/file.txt' already exists in the index.");
     }
+    
+    [Fact]
+    public void CreateFile_raises_a_FileCreated_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        VFSFilePath filePath = new("file.txt");
+        bool eventRaised = false;
+
+        vfs.FileCreated += args => 
+        {
+            eventRaised = true;
+            args.Path.Should().Be(filePath);
+        };
+
+        // Act
+        vfs.CreateFile(filePath);
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }

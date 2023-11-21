@@ -80,4 +80,25 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
             .Throw<VirtualFileSystemException>()
             .WithMessage("Cannot create the root directory.");
     }
+
+    [Fact]
+    public void CreateDirectory_raises_a_DirectoryCreated_event()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        VFSDirectoryPath directoryPath = new("dir1");
+        bool eventRaised = false;
+
+        vfs.DirectoryCreated += (args) => 
+        {
+            eventRaised = true;
+            args.Path.Should().Be(directoryPath);
+        };
+
+        // Act
+        vfs.CreateDirectory(directoryPath);
+
+        // Assert
+        eventRaised.Should().BeTrue();
+    }
 }

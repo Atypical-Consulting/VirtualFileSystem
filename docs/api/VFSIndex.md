@@ -34,11 +34,11 @@ This class cannot be inherited.
 
 | Methods | |
 | :--- | :--- |
-| [ContainsKey(VFSPath)](VFSIndex.ContainsKey(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)') | Determines whether the index contains the specified key. |
+| [ContainsKey(VFSPath)](VFSIndex.ContainsKey(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.VFSPath)') | Determines whether the index contains the specified key. |
 | [GetDirectory(VFSDirectoryPath)](VFSIndex.GetDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Gets the directory node at the specified directory path. |
 | [GetFile(VFSFilePath)](VFSIndex.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)') | Gets the file node at the specified file path. |
 | [GetPathsStartingWith(VFSDirectoryPath)](VFSIndex.GetPathsStartingWith(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Gets the paths starting with the specified directory path. |
-| [Remove(VFSPath)](VFSIndex.Remove(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath)') | Removes the node with the specified key. |
+| [Remove(VFSPath)](VFSIndex.Remove(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath)') | Removes the node with the specified key. |
 | [ToString()](VFSIndex.ToString().md 'Atypical.VirtualFileSystem.Core.VFSIndex.ToString()') | Returns a string that represents the current object. |
-| [TryAdd(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to add the specified node to the index. |
-| [TryGetValue(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to get the value associated with the specified key. |
+| [TryAdd(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to add the specified node to the index. |
+| [TryGetValue(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)') | Tries to get the value associated with the specified key. |

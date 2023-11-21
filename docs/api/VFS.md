@@ -8,12 +8,16 @@ Constants used by the Virtual File System.
 ```csharp
 public class VFS :
 Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,
+Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate,
+Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete,
+Atypical.VirtualFileSystem.Core.Contracts.IVFSMove,
+Atypical.VirtualFileSystem.Core.Contracts.IVFSRename,
 System.IEquatable<Atypical.VirtualFileSystem.Core.VFS>
 ```
 
 Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; VFS
 
-Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFS](VFS.md 'Atypical.VirtualFileSystem.Core.VFS')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
+Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem'), [IVFSCreate](IVFSCreate.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate'), [IVFSDelete](IVFSDelete.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete'), [IVFSMove](IVFSMove.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSMove'), [IVFSRename](IVFSRename.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSRename'), [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')[VFS](VFS.md 'Atypical.VirtualFileSystem.Core.VFS')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System.IEquatable`1')
 
 | Constructors | |
 | :--- | :--- |
@@ -48,7 +52,19 @@ Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSyste
 | [GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()') | Gets the tree of the file system. |
 | [MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](VFS.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Moves a directory from one location to another. |
 | [MoveFile(VFSFilePath, VFSFilePath)](VFS.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)') | Moves a file node from the source path to the destination path.<br/>Both paths must be absolute. |
+| [RenameDirectory(VFSDirectoryPath, string)](VFS.RenameDirectory(VFSDirectoryPath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string)') | Renames a directory. |
 | [RenameFile(VFSFilePath, string)](VFS.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)') | Renames a file node at the specified path.<br/>The path must be absolute. |
 | [ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()') | Returns a string that represents the current object. |
 | [TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)') | Try to get a directory node by its path.<br/>The path must be absolute.<br/>If the directory node does not exist, this method returns `false`<br/>and [directory](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md#Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode).directory 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode).directory') is set to `null`. |
 | [TryGetFile(VFSFilePath, IFileNode)](VFS.TryGetFile(VFSFilePath,IFileNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)') | Try to get a file node by its path.<br/>The path must be absolute. |
+
+| Events | |
+| :--- | :--- |
+| [DirectoryCreated](VFS.DirectoryCreated.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryCreated') | Event triggered when a directory is created. |
+| [DirectoryDeleted](VFS.DirectoryDeleted.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryDeleted') | Event triggered when a directory is deleted. |
+| [DirectoryMoved](VFS.DirectoryMoved.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryMoved') | Event triggered when a directory is moved. |
+| [DirectoryRenamed](VFS.DirectoryRenamed.md 'Atypical.VirtualFileSystem.Core.VFS.DirectoryRenamed') | Event triggered when a directory is renamed. |
+| [FileCreated](VFS.FileCreated.md 'Atypical.VirtualFileSystem.Core.VFS.FileCreated') | Event triggered when a file is created. |
+| [FileDeleted](VFS.FileDeleted.md 'Atypical.VirtualFileSystem.Core.VFS.FileDeleted') | Event triggered when a file is deleted. |
+| [FileMoved](VFS.FileMoved.md 'Atypical.VirtualFileSystem.Core.VFS.FileMoved') | Event triggered when a file is moved. |
+| [FileRenamed](VFS.FileRenamed.md 'Atypical.VirtualFileSystem.Core.VFS.FileRenamed') | Event triggered when a file is renamed. |

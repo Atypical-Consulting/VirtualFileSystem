@@ -17,7 +17,7 @@ public Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem DeleteFile(A
 
 The path of the file node.
 
-Implements [DeleteFile(VFSFilePath)](IVirtualFileSystem.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')
+Implements [DeleteFile(VFSFilePath)](IVFSDelete.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')
 
 #### Returns
 [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  
