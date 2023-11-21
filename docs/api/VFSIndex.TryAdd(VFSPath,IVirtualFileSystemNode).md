@@ -6,15 +6,15 @@
 Tries to add the specified node to the index.
 
 ```csharp
-public bool TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath pathValue, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode node);
+public bool TryAdd(Atypical.VirtualFileSystem.Core.VFSPath pathValue, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode node);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).pathValue'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).pathValue'></a>
 
-`pathValue` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+`pathValue` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).node'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).node'></a>
 
 `node` [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')
 

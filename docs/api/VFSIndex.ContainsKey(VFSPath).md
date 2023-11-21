@@ -6,13 +6,13 @@
 Determines whether the index contains the specified key.
 
 ```csharp
-public bool ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath key);
+public bool ContainsKey(Atypical.VirtualFileSystem.Core.VFSPath key);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath).key'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.VFSPath).key'></a>
 
-`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
 
 #### Returns
 [System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')

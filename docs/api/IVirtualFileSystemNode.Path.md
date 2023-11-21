@@ -9,9 +9,9 @@ For example, the path of the node with the path "./temp/file.txt" is "./temp/fil
 The path of the node with the path "./temp/" is "./temp/".
 
 ```csharp
-Atypical.VirtualFileSystem.Core.Abstractions.VFSPath Path { get; }
+Atypical.VirtualFileSystem.Core.VFSPath Path { get; }
 ```
 
 #### Property Value
-[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')  
+[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')  
 The full path of the node.

@@ -8,11 +8,11 @@ A directory is a first-class citizen in the virtual file system.
 It can contain files and other directories.
 
 ```csharp
-public class VFSDirectoryPath : Atypical.VirtualFileSystem.Core.Abstractions.VFSPath,
+public class VFSDirectoryPath : Atypical.VirtualFileSystem.Core.VFSPath,
 System.IEquatable<Atypical.VirtualFileSystem.Core.VFSDirectoryPath>
 ```
 
-Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath') &#129106; VFSDirectoryPath
+Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System.Object') &#129106; [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath') &#129106; VFSDirectoryPath
 
 Derived  
 &#8627; [VFSRootPath](VFSRootPath.md 'Atypical.VirtualFileSystem.Core.VFSRootPath')

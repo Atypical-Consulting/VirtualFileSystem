@@ -6,11 +6,11 @@
 Gets the path of the root directory.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Abstractions.VFSPath RootPath { get; }
+public Atypical.VirtualFileSystem.Core.VFSPath RootPath { get; }
 ```
 
 Implements [RootPath](IVirtualFileSystem.RootPath.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.RootPath')
 
 #### Property Value
-[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')  
+[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')  
 The path of the root directory.

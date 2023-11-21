@@ -12,6 +12,8 @@ namespace Atypical.VirtualFileSystem.Core.Contracts;
 ///     You can get an instance of this interface by calling <see cref="IVirtualFileSystemFactory.CreateFileSystem" />.
 /// </summary>
 public interface IVirtualFileSystem
+    : IVFSCreate, IVFSDelete, // CRUD operations
+        IVFSMove, IVFSRename
 {
     /// <summary>
     ///     Gets the root directory of the file system.
@@ -70,22 +72,6 @@ public interface IVirtualFileSystem
     bool TryGetDirectory(VFSDirectoryPath directoryPath, out IDirectoryNode? directory);
 
     /// <summary>
-    ///     Creates a directory node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="directoryPath">The path of the directory node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath);
-
-    /// <summary>
-    ///     Deletes a directory node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="directoryPath">The path of the directory node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem DeleteDirectory(VFSDirectoryPath directoryPath);
-
-    /// <summary>
     ///     Finds all directory nodes that match the specified predicate.
     /// </summary>
     /// <param name="predicate">The predicate.</param>
@@ -117,50 +103,6 @@ public interface IVirtualFileSystem
     /// <param name="file">The file node.</param>
     /// <returns><c>true</c> if the file node exists; otherwise, <c>false</c>.</returns>
     bool TryGetFile(VFSFilePath filePath, out IFileNode? file);
-
-    /// <summary>
-    ///     Creates a file node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <param name="content">The content of the file node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem CreateFile(VFSFilePath filePath, string? content = null);
-
-    /// <summary>
-    ///     Deletes a file node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem DeleteFile(VFSFilePath filePath);
-
-    // RenameFile
-    /// <summary>
-    ///     Renames a file node at the specified path.
-    ///     The path must be absolute.
-    /// </summary>
-    /// <param name="filePath">The path of the file node.</param>
-    /// <param name="newName">The new name of the file node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem RenameFile(VFSFilePath filePath, string newName);
-
-    /// <summary>
-    /// Moves a directory from one location to another.
-    /// </summary>
-    /// <param name="sourceDirectoryPath">The source directory path.</param>
-    /// <param name="destinationDirectoryPath">The destination directory path.</param>
-    /// <returns>The virtual file system.</returns>
-    IVirtualFileSystem MoveDirectory(VFSDirectoryPath sourceDirectoryPath, VFSDirectoryPath destinationDirectoryPath);
-    
-    /// <summary>
-    ///     Moves a file node from the source path to the destination path.
-    ///     Both paths must be absolute.
-    /// </summary>
-    /// <param name="sourceFilePath">The source path of the file node.</param>
-    /// <param name="destinationFilePath">The destination path of the file node.</param>
-    /// <returns>The file system.</returns>
-    IVirtualFileSystem MoveFile(VFSFilePath sourceFilePath, VFSFilePath destinationFilePath);
 
     /// <summary>
     ///     Finds all file nodes that match the specified predicate.

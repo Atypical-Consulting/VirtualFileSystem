@@ -1,5 +1,5 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Abstractions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions 'Atypical.VirtualFileSystem.Core.Abstractions').[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSNode')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode')
 
 ## VFSNode.IsDirectory Property
 

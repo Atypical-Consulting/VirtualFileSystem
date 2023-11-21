@@ -1,5 +1,5 @@
 #### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Abstractions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Abstractions 'Atypical.VirtualFileSystem.Core.Abstractions').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
 
 ## VFSPath.IsMatch(Regex) Method
 
@@ -10,7 +10,7 @@ public bool IsMatch(System.Text.RegularExpressions.Regex regex);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Abstractions.VFSPath.IsMatch(System.Text.RegularExpressions.Regex).regex'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSPath.IsMatch(System.Text.RegularExpressions.Regex).regex'></a>
 
 `regex` [System.Text.RegularExpressions.Regex](https://docs.microsoft.com/en-us/dotnet/api/System.Text.RegularExpressions.Regex 'System.Text.RegularExpressions.Regex')
 

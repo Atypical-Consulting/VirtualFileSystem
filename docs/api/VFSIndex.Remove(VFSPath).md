@@ -6,10 +6,10 @@
 Removes the node with the specified key.
 
 ```csharp
-public void Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath key);
+public void Remove(Atypical.VirtualFileSystem.Core.VFSPath key);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.Abstractions.VFSPath).key'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath).key'></a>
 
-`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.Abstractions.VFSPath')
+`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
