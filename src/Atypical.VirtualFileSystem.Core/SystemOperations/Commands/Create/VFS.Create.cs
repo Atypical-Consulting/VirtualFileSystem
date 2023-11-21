@@ -14,7 +14,7 @@ public partial record VFS
     /// <inheritdoc cref="IVFSCreate.FileCreated" />
     public event Action<VFSFileCreatedArgs>? FileCreated;
     
-    /// <inheritdoc cref="IVirtualFileSystem.CreateDirectory(VFSDirectoryPath)" />
+    /// <inheritdoc cref="IVFSCreate.CreateDirectory(VFSDirectoryPath)" />
     public IVirtualFileSystem CreateDirectory(VFSDirectoryPath directoryPath)
     {
         if (directoryPath.IsRoot)
@@ -33,7 +33,7 @@ public partial record VFS
         return this;
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.CreateFile(VFSFilePath,string?)" />
+    /// <inheritdoc cref="IVFSCreate.CreateFile(VFSFilePath,string?)" />
     public IVirtualFileSystem CreateFile(VFSFilePath filePath, string? content = null)
     {
         if (filePath.Parent is null)

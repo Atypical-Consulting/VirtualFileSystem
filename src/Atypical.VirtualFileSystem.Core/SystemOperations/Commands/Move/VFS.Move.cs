@@ -14,7 +14,7 @@ public partial record VFS
     /// <inheritdoc cref="IVFSMove.FileMoved" />
     public event Action<VFSFileMovedArgs>? FileMoved;
     
-    /// <inheritdoc cref="IVirtualFileSystem.MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)" />
+    /// <inheritdoc cref="IVFSMove.MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)" />
     public IVirtualFileSystem MoveDirectory(
         VFSDirectoryPath sourceDirectoryPath,
         VFSDirectoryPath destinationDirectoryPath)
@@ -39,7 +39,7 @@ public partial record VFS
         return this;
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.MoveFile(VFSFilePath, VFSFilePath)" />
+    /// <inheritdoc cref="IVFSMove.MoveFile(VFSFilePath, VFSFilePath)" />
     public IVirtualFileSystem MoveFile(
         VFSFilePath sourceFilePath,
         VFSFilePath destinationFilePath)

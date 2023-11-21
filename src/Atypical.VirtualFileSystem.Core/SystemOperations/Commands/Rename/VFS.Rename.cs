@@ -47,7 +47,7 @@ public partial record VFS
         return this;
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.RenameFile(VFSFilePath, string)" />
+    /// <inheritdoc cref="IVFSRename.RenameFile(VFSFilePath, string)" />
     public IVirtualFileSystem RenameFile(
         VFSFilePath filePath,
         string newName)

@@ -14,7 +14,7 @@ public partial record VFS
     /// <inheritdoc cref="IVFSDelete.FileDeleted" />
     public event Action<VFSFileDeletedArgs>? FileDeleted;
     
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteDirectory(VFSDirectoryPath)" />
+    /// <inheritdoc cref="IVFSDelete.DeleteDirectory(VFSDirectoryPath)" />
     public IVirtualFileSystem DeleteDirectory(VFSDirectoryPath directoryPath)
     {
         // cannot delete the root directory
@@ -40,7 +40,7 @@ public partial record VFS
         return this;
     }
     
-    /// <inheritdoc cref="IVirtualFileSystem.DeleteFile(VFSFilePath)" />
+    /// <inheritdoc cref="IVFSDelete.DeleteFile(VFSFilePath)" />
     public IVirtualFileSystem DeleteFile(VFSFilePath filePath)
     {
         if (!Index.TryGetValue(filePath, out var fileNode))

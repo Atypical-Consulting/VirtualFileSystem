@@ -47,6 +47,14 @@
   - **[Root](VFS.Root.md 'Atypical.VirtualFileSystem.Core.VFS.Root')** `Property` Gets the root directory of the file system.  
     This is the entry point for all operations on the file system.
   - **[RootPath](VFS.RootPath.md 'Atypical.VirtualFileSystem.Core.VFS.RootPath')** `Property` Gets the path of the root directory.
+  - **[CreateDirectory(VFSDirectoryPath)](VFS.CreateDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.CreateDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Creates a directory node at the specified path.  
+    The path must be absolute.
+  - **[CreateFile(VFSFilePath, string)](VFS.CreateFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Creates a file node at the specified path.  
+    The path must be absolute.
+  - **[DeleteDirectory(VFSDirectoryPath)](VFS.DeleteDirectory(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Deletes a directory node at the specified path.  
+    The path must be absolute.
+  - **[DeleteFile(VFSFilePath)](VFS.DeleteFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Deletes a file node at the specified path.  
+    The path must be absolute.
   - **[FindDirectories(Func&lt;IDirectoryNode,bool&gt;)](VFS.FindDirectories(Func_IDirectoryNode,bool_).md 'Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool>)')** `Method` Finds all directory nodes that match the specified predicate.
   - **[FindDirectories(Regex)](VFS.FindDirectories(Regex).md 'Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)')** `Method` Finds all directory nodes that match the specified regular expression.  
     The regular expression must be relative to the root directory.
@@ -57,7 +65,12 @@
   - **[GetFile(VFSFilePath)](VFS.GetFile(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Gets a file node by its path.  
     The path must be absolute.
   - **[GetTree()](VFS.GetTree().md 'Atypical.VirtualFileSystem.Core.VFS.GetTree()')** `Method` Gets the tree of the file system.
+  - **[MoveDirectory(VFSDirectoryPath, VFSDirectoryPath)](VFS.MoveDirectory(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Method` Moves a directory from one location to another.
+  - **[MoveFile(VFSFilePath, VFSFilePath)](VFS.MoveFile(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Method` Moves a file node from the source path to the destination path.  
+    Both paths must be absolute.
   - **[RenameDirectory(VFSDirectoryPath, string)](VFS.RenameDirectory(VFSDirectoryPath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string)')** `Method` Renames a directory.
+  - **[RenameFile(VFSFilePath, string)](VFS.RenameFile(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Method` Renames a file node at the specified path.  
+    The path must be absolute.
   - **[ToString()](VFS.ToString().md 'Atypical.VirtualFileSystem.Core.VFS.ToString()')** `Method` Returns a string that represents the current object.
   - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](VFS.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFS.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Try to get a directory node by its path.  
     The path must be absolute.  
