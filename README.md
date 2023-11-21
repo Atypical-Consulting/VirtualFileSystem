@@ -62,7 +62,19 @@ creating files on the hard drive.
 - [x] Create a virtual file system
 - [x] Create a virtual file or directory
 - [x] Print the contents of a virtual file system as a tree
-- [ ] ...
+- [x] Delete a virtual file or directory
+- [x] Move a virtual file or directory
+- [x] Rename a virtual file or directory
+- [x] Read and write content to a virtual file
+- [ ] Copy a virtual file or directory (planned)
+- [ ] Check if a virtual file or directory exists (planned)
+- [ ] Get the size of a virtual file or directory (planned)
+- [x] Get the creation, access, and modification times of a virtual file or directory
+- [x] Support for events (file created, file deleted, etc.)
+- [ ] Support for custom metadata on files and directories
+- [ ] Support for file and directory permissions (planned)
+- [ ] Support for symbolic links (planned)
+- ...
 
 ## 📄 Documentation
 
@@ -77,23 +89,23 @@ discuss it.
 
 ### 📋 Prerequisites
 
-- .NET 6.0
+- .NET 6.0 (supported versions: 6.x to 8.x)
 - A C# IDE (Visual Studio, Rider, etc.)
 - A C# compiler (dotnet CLI, etc.)
 
 ### 🚀 We use the latest C# features
 
-This library targets .NET 7.0 and uses the latest C# features. It is written in C# 11.0 and uses the new `init`
-properties, `record` types, `switch` expressions, `using` declarations, and more.
+This library targets .NET 8.0 and uses the latest C# features. It is written in C# 12.0 and uses the new `init`
+properties, `record` types, `switch` expressions, `using` declarations and more.
 
-I invite you to read the [C# 11.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11) to
+I invite you to read the [C# 12.0 documentation](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12) to
 learn more about these features.
 
 ### 📦 NuGet
 
-VirtualFileSystem is available on [NuGet](https://www.nuget.org/packages/VirtualFileSystem/).
+VirtualFileSystem is available on [NuGet](https://www.nuget.org/packages/Atypical.VirtualFileSystem).
 
-You can install it using the .NET Core CLI:
+You can install it using the .NET CLI:
 
 ```bash
 dotnet add package Atypical.VirtualFileSystem
