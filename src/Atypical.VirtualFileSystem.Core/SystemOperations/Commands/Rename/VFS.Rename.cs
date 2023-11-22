@@ -24,7 +24,7 @@ public partial record VFS
         VFSDirectoryPath directoryPath,
         string newName)
     {
-        if (!Index.TryGetValue(directoryPath, out var directoryNode))
+        if (!Index.TryGetDirectory(directoryPath, out var directoryNode))
             ThrowVirtualDirectoryNotFound(directoryPath);
 
         // Remove the directory from its old parent directory
@@ -53,7 +53,7 @@ public partial record VFS
         VFSFilePath filePath,
         string newName)
     {
-        if (!Index.TryGetValue(filePath, out var fileNode))
+        if (!Index.TryGetFile(filePath, out var fileNode))
             ThrowVirtualFileNotFound(filePath);
 
         // Remove the file from its old parent directory

@@ -16,6 +16,12 @@ public interface IVirtualFileSystem
         IVFSMove, IVFSRename
 {
     /// <summary>
+    ///     Gets the change history of the file system.
+    /// </summary>
+    /// <value>The change history.</value>
+    IChangeHistory ChangeHistory { get; }
+    
+    /// <summary>
     ///     Gets the root directory of the file system.
     ///     This is the entry point for all operations on the file system.
     /// </summary>

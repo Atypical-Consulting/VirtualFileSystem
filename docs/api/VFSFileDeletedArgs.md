@@ -13,10 +13,11 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Constructors | |
 | :--- | :--- |
-| [VFSFileDeletedArgs(VFSFilePath)](VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)') | Initializes a new instance of the [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs') class. |
+| [VFSFileDeletedArgs(VFSFilePath, string)](VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, string)') | Initializes a new instance of the [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs') class. |
 
 | Properties | |
 | :--- | :--- |
+| [Content](VFSFileDeletedArgs.Content.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Content') | Gets the content of the deleted file. |
 | [Message](VFSFileDeletedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Message') | Gets the message. |
 | [MessageTemplate](VFSFileDeletedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageTemplate') | Gets the message template. |
 | [MessageWithMarkup](VFSFileDeletedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageWithMarkup') | Gets the message with markup. |

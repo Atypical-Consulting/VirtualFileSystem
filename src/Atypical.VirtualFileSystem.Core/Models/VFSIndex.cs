@@ -102,10 +102,40 @@ public sealed class VFSIndex
         => _index.Remove(key);
 
     /// <summary>
-    /// Tries to get the value associated with the specified key.
+    /// Tries to get the directory node at the specified directory path.
     /// </summary>
-    public bool TryGetValue(VFSPath key, [MaybeNullWhen(false)] out IVirtualFileSystemNode value)
-        => _index.TryGetValue(key, out value);
+    /// <param name="directoryPath">The directory path.</param>
+    /// <param name="directoryNode">The directory node.</param>
+    /// <returns><c>true</c> if the directory node exists; otherwise, <c>false</c>.</returns>
+    public bool TryGetDirectory(VFSDirectoryPath directoryPath, [MaybeNullWhen(false)] out IDirectoryNode directoryNode)
+    {
+        if (_index.TryGetValue(directoryPath, out var node))
+        {
+            directoryNode = (IDirectoryNode)node;
+            return true;
+        }
+
+        directoryNode = null;
+        return false;
+    }
+    
+    /// <summary>
+    /// Tries to get the file node at the specified file path.
+    /// </summary>
+    /// <param name="filePath">The file path.</param>
+    /// <param name="fileNode">The file node.</param>
+    /// <returns><c>true</c> if the file node exists; otherwise, <c>false</c>.</returns>
+    public bool TryGetFile(VFSFilePath filePath, [MaybeNullWhen(false)] out IFileNode fileNode)
+    {
+        if (_index.TryGetValue(filePath, out var node))
+        {
+            fileNode = (IFileNode)node;
+            return true;
+        }
+
+        fileNode = null;
+        return false;
+    }
 
     /// <summary>
     /// Determines whether the index contains the specified key.

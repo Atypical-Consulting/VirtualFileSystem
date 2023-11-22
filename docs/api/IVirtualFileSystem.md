@@ -22,6 +22,7 @@ Implements [IVFSCreate](IVFSCreate.md 'Atypical.VirtualFileSystem.Core.Contracts
 
 | Properties | |
 | :--- | :--- |
+| [ChangeHistory](IVirtualFileSystem.ChangeHistory.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.ChangeHistory') | Gets the change history of the file system. |
 | [Directories](IVirtualFileSystem.Directories.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Directories') | Finds all directory nodes. |
 | [Files](IVirtualFileSystem.Files.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Files') | Finds all file nodes. |
 | [Index](IVirtualFileSystem.Index.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index') | Gets the file index of the file system.<br/>Basically, this is a dictionary that maps file paths to file nodes.<br/>This is useful for quickly finding a file node by its path. |

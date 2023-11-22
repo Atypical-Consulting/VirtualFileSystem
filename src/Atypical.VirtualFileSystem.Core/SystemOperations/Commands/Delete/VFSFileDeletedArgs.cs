@@ -15,9 +15,11 @@ public sealed class VFSFileDeletedArgs : VFSEventArgs
     /// Initializes a new instance of the <see cref="VFSFileDeletedArgs"/> class.
     /// </summary>
     /// <param name="path">The path of the deleted file.</param>
-    public VFSFileDeletedArgs(VFSFilePath path)
+    /// <param name="content">The content of the deleted file.</param>
+    public VFSFileDeletedArgs(VFSFilePath path, string content)
     {
         Path = path;
+        Content = content;
         Timestamp = DateTimeOffset.Now;
     }
 
@@ -25,6 +27,11 @@ public sealed class VFSFileDeletedArgs : VFSEventArgs
     /// Gets the path of the deleted file.
     /// </summary>
     public VFSFilePath Path { get; }
+    
+    /// <summary>
+    /// Gets the content of the deleted file.
+    /// </summary>
+    public string Content { get; }
 
     /// <summary>
     /// Gets the timestamp when the file was deleted.

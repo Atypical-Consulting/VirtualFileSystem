@@ -30,6 +30,7 @@ Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSyste
 
 | Properties | |
 | :--- | :--- |
+| [ChangeHistory](VFS.ChangeHistory.md 'Atypical.VirtualFileSystem.Core.VFS.ChangeHistory') | Gets the change history of the file system. |
 | [Directories](VFS.Directories.md 'Atypical.VirtualFileSystem.Core.VFS.Directories') | Finds all directory nodes. |
 | [Files](VFS.Files.md 'Atypical.VirtualFileSystem.Core.VFS.Files') | Finds all file nodes. |
 | [Index](VFS.Index.md 'Atypical.VirtualFileSystem.Core.VFS.Index') | Gets the file index of the file system.<br/>Basically, this is a dictionary that maps file paths to file nodes.<br/>This is useful for quickly finding a file node by its path. |
