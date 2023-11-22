@@ -15,3 +15,5 @@ public void AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs change);
 `change` [VFSEventArgs](VFSEventArgs.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs')
 
 The change to add.
+
+Implements [AddChange(VFSEventArgs)](IChangeHistory.AddChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')

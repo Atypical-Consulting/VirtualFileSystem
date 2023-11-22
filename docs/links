@@ -197,6 +197,7 @@ T:Atypical.VirtualFileSystem.Core.ChangeHistory|ChangeHistory.md|ChangeHistory
 P:Atypical.VirtualFileSystem.Core.IChangeHistory.UndoStack|IChangeHistory.UndoStack.md|UndoStack
 P:Atypical.VirtualFileSystem.Core.IChangeHistory.RedoStack|IChangeHistory.RedoStack.md|RedoStack
 M:Atypical.VirtualFileSystem.Core.IChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|IChangeHistory.OnChange(VFSEventArgs).md|OnChange(VFSEventArgs)
+M:Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|IChangeHistory.AddChange(VFSEventArgs).md|AddChange(VFSEventArgs)
 M:Atypical.VirtualFileSystem.Core.IChangeHistory.Undo|IChangeHistory.Undo().md|Undo()
 M:Atypical.VirtualFileSystem.Core.IChangeHistory.Redo|IChangeHistory.Redo().md|Redo()
 T:Atypical.VirtualFileSystem.Core.IChangeHistory|IChangeHistory.md|IChangeHistory

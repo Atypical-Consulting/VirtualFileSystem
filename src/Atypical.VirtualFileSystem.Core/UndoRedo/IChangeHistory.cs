@@ -22,6 +22,12 @@ public interface IChangeHistory
     void OnChange(VFSEventArgs args);
 
     /// <summary>
+    /// Adds a change to the history.
+    /// </summary>
+    /// <param name="change">The change to add.</param>
+    void AddChange(VFSEventArgs change);
+
+    /// <summary>
     /// Undoes the most recent change.
     /// </summary>
     /// <returns>The virtual file system after the undo operation.</returns>

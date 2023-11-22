@@ -1,4 +1,4 @@
-namespace VirtualFileSystem.UnitTests.SystemOperations;
+namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTestsBase
 {
@@ -97,5 +97,25 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
 
         // Assert
         eventRaised.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void RenameDirectory_adds_a_change_to_the_ChangeHistory()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
+        vfs.CreateDirectory(directoryPath);
+
+        // Act
+        vfs.RenameDirectory(directoryPath, "new_dir");
+
+        // Retrieve the change from the UndoStack
+        var change = vfs.ChangeHistory.UndoStack.First();
+        
+        // Assert
+        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }
