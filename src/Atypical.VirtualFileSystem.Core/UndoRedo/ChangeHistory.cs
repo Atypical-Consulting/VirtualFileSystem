@@ -12,6 +12,7 @@ public sealed class ChangeHistory
     private readonly Stack<VFSEventArgs> _undoStack = new();
     private readonly Stack<VFSEventArgs> _redoStack = new();
     private bool _disposed;
+    private bool _undoingOrRedoing;
 
     /// <inheritdoc see="IChangeHistory.UndoStack" />
     public IReadOnlyCollection<VFSEventArgs> UndoStack
@@ -84,12 +85,14 @@ public sealed class ChangeHistory
     
     /// <inheritdoc see="IChangeHistory.OnChange" />
     public void OnChange(VFSEventArgs args)
-        => AddChange(args);
+    {
+        if (_undoingOrRedoing)
+            return;
 
-    /// <summary>
-    /// Adds a change to the history.
-    /// </summary>
-    /// <param name="change">The change to add.</param>
+        AddChange(args);
+    }
+
+    /// <inheritdoc see="IChangeHistory.AddChange" />
     public void AddChange(VFSEventArgs change)
     {
         _undoStack.Push(change);
@@ -101,6 +104,8 @@ public sealed class ChangeHistory
     {
         if (!_undoStack.TryPop(out var change))
             return _vfs;
+        
+        _undoingOrRedoing = true;
         
         // Perform the undo operation based on the type of change
         // /!\ Be vigilant about the inverse of each operation
@@ -137,7 +142,8 @@ public sealed class ChangeHistory
             default:
                 throw new ArgumentOutOfRangeException(nameof(change));
         }
-            
+        
+        _undoingOrRedoing = false;
         _redoStack.Push(change);
 
         return _vfs;
@@ -148,6 +154,8 @@ public sealed class ChangeHistory
     {
         if (!_redoStack.TryPop(out var change))
             return _vfs;
+        
+        _undoingOrRedoing = true;
         
         // Perform the redo operation based on the type of change
         switch (change)
@@ -179,8 +187,10 @@ public sealed class ChangeHistory
             default:
                 throw new ArgumentOutOfRangeException(nameof(change));
         }
-
+        
+        _undoingOrRedoing = false;
         _undoStack.Push(change);
+        
         return _vfs;
     }
 }

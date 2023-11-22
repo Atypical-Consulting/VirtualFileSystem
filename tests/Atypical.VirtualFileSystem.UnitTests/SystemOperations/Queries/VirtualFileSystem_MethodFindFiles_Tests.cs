@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace VirtualFileSystem.UnitTests.SystemOperations;
+namespace VirtualFileSystem.UnitTests.SystemOperations.Queries;
 
 public class VirtualFileSystem_MethodFindFiles_Tests : VirtualFileSystemTestsBase
 {

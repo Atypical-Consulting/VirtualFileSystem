@@ -7,15 +7,15 @@ public class ChangeHistoryTests
     {
         // Arrange
         var vfs = new VFS();
-        var changeHistory = new ChangeHistory(vfs);
-        var change = new VFSFileCreatedArgs(new VFSFilePath("file.txt"), "content");
+        var filePath = new VFSFilePath("file.txt");
+        var change = new VFSFileCreatedArgs(filePath, "content");
 
         // Act
-        changeHistory.AddChange(change);
+        vfs.ChangeHistory.AddChange(change);
 
         // Assert
-        changeHistory.UndoStack.Should().Contain(change);
-        changeHistory.RedoStack.Should().NotContain(change);
+        vfs.ChangeHistory.UndoStack.Should().Contain(change);
+        vfs.ChangeHistory.RedoStack.Should().NotContain(change);
     }
 
     [Fact]
@@ -23,24 +23,21 @@ public class ChangeHistoryTests
     {
         // Arrange
         var vfs = new VFS();
-        var changeHistory = new ChangeHistory(vfs);
         var filePath = new VFSFilePath("file.txt");
         var change = new VFSFileCreatedArgs(filePath, "content");
-        vfs.CreateFile(filePath); // Ensure the file is created and added to the index
+        vfs.ChangeHistory.AddChange(change);
 
         // Check if the file exists in the index
         if (!vfs.Index.ContainsKey(filePath))
             throw new Exception($"The file '{filePath}' was not properly created.");
 
-        changeHistory.AddChange(change);
-
         // Act
-        changeHistory.Undo();
+        vfs.ChangeHistory.Undo();
 
         // Assert
-        changeHistory.UndoStack.Should().BeEmpty();
-        changeHistory.RedoStack.Should().Contain(change);
-        changeHistory.RedoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.UndoStack.Should().BeEmpty();
+        vfs.ChangeHistory.RedoStack.Should().ContainEquivalentOf(change);
+        vfs.ChangeHistory.RedoStack.Should().HaveCount(1);
     }
 
     [Fact]
@@ -48,7 +45,6 @@ public class ChangeHistoryTests
     {
         // Arrange
         var vfs = new VFS();
-        var changeHistory = new ChangeHistory(vfs);
         var filePath = new VFSFilePath("file.txt");
         var change = new VFSFileCreatedArgs(filePath, "content");
         vfs.CreateFile(filePath);
@@ -57,16 +53,16 @@ public class ChangeHistoryTests
         if (!vfs.Index.ContainsKey(filePath))
             throw new Exception($"The file '{filePath}' was not properly created.");
         
-        changeHistory.AddChange(change);
-        changeHistory.Undo();
+        // vfs.ChangeHistory.AddChange(change);
+        vfs.ChangeHistory.Undo();
 
         // Act
-        changeHistory.Redo();
+        vfs.ChangeHistory.Redo();
 
         // Assert
-        changeHistory.RedoStack.Should().BeEmpty();
-        changeHistory.UndoStack.Should().Contain(change);
-        changeHistory.UndoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
     }
 
     [Fact]

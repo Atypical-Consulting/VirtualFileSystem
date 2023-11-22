@@ -1,4 +1,4 @@
-namespace VirtualFileSystem.UnitTests.SystemOperations;
+namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
 {
@@ -92,5 +92,25 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
 
         // Assert
         eventRaised.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void MoveFile_adds_a_change_to_the_ChangeHistory()
+    {
+        // Arrange
+        var vfs = CreateVFS();
+        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
+        vfs.CreateFile(filePath);
+
+        // Act
+        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+
+        // Retrieve the change from the UndoStack
+        var change = vfs.ChangeHistory.UndoStack.First();
+        
+        // Assert
+        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

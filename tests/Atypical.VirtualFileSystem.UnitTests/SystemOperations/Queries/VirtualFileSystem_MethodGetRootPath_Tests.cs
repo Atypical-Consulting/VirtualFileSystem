@@ -1,4 +1,4 @@
-namespace VirtualFileSystem.UnitTests.SystemOperations;
+namespace VirtualFileSystem.UnitTests.SystemOperations.Queries;
 
 public class VirtualFileSystem_MethodGetRootPath_Tests : VirtualFileSystemTestsBase
 {

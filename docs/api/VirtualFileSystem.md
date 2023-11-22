@@ -254,6 +254,7 @@
 - **[IChangeHistory](IChangeHistory.md 'Atypical.VirtualFileSystem.Core.IChangeHistory')** `Interface` Represents a history of changes in a virtual file system.
   - **[RedoStack](IChangeHistory.RedoStack.md 'Atypical.VirtualFileSystem.Core.IChangeHistory.RedoStack')** `Property` Gets the redo stack.
   - **[UndoStack](IChangeHistory.UndoStack.md 'Atypical.VirtualFileSystem.Core.IChangeHistory.UndoStack')** `Property` Gets the undo stack.
+  - **[AddChange(VFSEventArgs)](IChangeHistory.AddChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Adds a change to the history.
   - **[OnChange(VFSEventArgs)](IChangeHistory.OnChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Handles the change event from the virtual file system.
   - **[Redo()](IChangeHistory.Redo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Redo()')** `Method` Redoes the most recent undone change.
   - **[Undo()](IChangeHistory.Undo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Undo()')** `Method` Undoes the most recent change.

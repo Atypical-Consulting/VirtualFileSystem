@@ -19,6 +19,7 @@ Derived
 
 | Methods | |
 | :--- | :--- |
+| [AddChange(VFSEventArgs)](IChangeHistory.AddChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)') | Adds a change to the history. |
 | [OnChange(VFSEventArgs)](IChangeHistory.OnChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)') | Handles the change event from the virtual file system. |
 | [Redo()](IChangeHistory.Redo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Redo()') | Redoes the most recent undone change. |
 | [Undo()](IChangeHistory.Undo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Undo()') | Undoes the most recent change. |
