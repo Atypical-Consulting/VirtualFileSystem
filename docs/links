@@ -68,7 +68,8 @@ P:Atypical.VirtualFileSystem.Core.VFSIndex.FilesCount|VFSIndex.FilesCount.md|Fil
 P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.this[VFSFilePath].md|this[VFSFilePath]
 P:Atypical.VirtualFileSystem.Core.VFSIndex.Item(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSIndex.this[VFSDirectoryPath].md|this[VFSDirectoryPath]
 M:Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath)|VFSIndex.Remove(VFSPath).md|Remove(VFSPath)
-M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode@)|VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md|TryGetValue(VFSPath, IVirtualFileSystemNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|VFSIndex.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
+M:Atypical.VirtualFileSystem.Core.VFSIndex.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|VFSIndex.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.ContainsKey(Atypical.VirtualFileSystem.Core.VFSPath)|VFSIndex.ContainsKey(VFSPath).md|ContainsKey(VFSPath)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)|VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md|TryAdd(VFSPath, IVirtualFileSystemNode)
 M:Atypical.VirtualFileSystem.Core.VFSIndex.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSIndex.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
@@ -78,6 +79,7 @@ M:Atypical.VirtualFileSystem.Core.VFSIndex.ToString|VFSIndex.ToString().md|ToStr
 T:Atypical.VirtualFileSystem.Core.VFSIndex|VFSIndex.md|VFSIndex
 F:Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH|VFS.ROOT_PATH.md|ROOT_PATH
 F:Atypical.VirtualFileSystem.Core.VFS.DIRECTORY_SEPARATOR|VFS.DIRECTORY_SEPARATOR.md|DIRECTORY_SEPARATOR
+P:Atypical.VirtualFileSystem.Core.VFS.ChangeHistory|VFS.ChangeHistory.md|ChangeHistory
 P:Atypical.VirtualFileSystem.Core.VFS.Root|VFS.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.VFS.RootPath|VFS.RootPath.md|RootPath
 P:Atypical.VirtualFileSystem.Core.VFS.Index|VFS.Index.md|Index
@@ -135,11 +137,12 @@ P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.MessageWithMarkup|VFSD
 M:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(VFSDirectoryPath).md|VFSDirectoryDeletedArgs(VFSDirectoryPath)
 T:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs|VFSDirectoryDeletedArgs.md|VFSDirectoryDeletedArgs
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Path|VFSFileDeletedArgs.Path.md|Path
+P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Content|VFSFileDeletedArgs.Content.md|Content
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Timestamp|VFSFileDeletedArgs.Timestamp.md|Timestamp
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageTemplate|VFSFileDeletedArgs.MessageTemplate.md|MessageTemplate
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Message|VFSFileDeletedArgs.Message.md|Message
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageWithMarkup|VFSFileDeletedArgs.MessageWithMarkup.md|MessageWithMarkup
-M:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath).md|VFSFileDeletedArgs(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath,string).md|VFSFileDeletedArgs(VFSFilePath, string)
 T:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs|VFSFileDeletedArgs.md|VFSFileDeletedArgs
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.SourcePath|VFSDirectoryMovedArgs.SourcePath.md|SourcePath
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.DestinationPath|VFSDirectoryMovedArgs.DestinationPath.md|DestinationPath
@@ -180,6 +183,23 @@ P:Atypical.VirtualFileSystem.Core.VFSEventArgs.Message|VFSEventArgs.Message.md|M
 P:Atypical.VirtualFileSystem.Core.VFSEventArgs.MessageWithMarkup|VFSEventArgs.MessageWithMarkup.md|MessageWithMarkup
 M:Atypical.VirtualFileSystem.Core.VFSEventArgs.ToMarkup(System.String,System.Object[])|VFSEventArgs.ToMarkup(string,object[]).md|ToMarkup(string, object[])
 T:Atypical.VirtualFileSystem.Core.VFSEventArgs|VFSEventArgs.md|VFSEventArgs
+P:Atypical.VirtualFileSystem.Core.ChangeHistory.UndoStack|ChangeHistory.UndoStack.md|UndoStack
+P:Atypical.VirtualFileSystem.Core.ChangeHistory.RedoStack|ChangeHistory.RedoStack.md|RedoStack
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.#ctor(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem)|ChangeHistory.ChangeHistory(IVirtualFileSystem).md|ChangeHistory(IVirtualFileSystem)
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Finalize|ChangeHistory.~ChangeHistory().md|~ChangeHistory()
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose|ChangeHistory.Dispose().md|Dispose()
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(System.Boolean)|ChangeHistory.Dispose(bool).md|Dispose(bool)
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|ChangeHistory.OnChange(VFSEventArgs).md|OnChange(VFSEventArgs)
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|ChangeHistory.AddChange(VFSEventArgs).md|AddChange(VFSEventArgs)
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Undo|ChangeHistory.Undo().md|Undo()
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Redo|ChangeHistory.Redo().md|Redo()
+T:Atypical.VirtualFileSystem.Core.ChangeHistory|ChangeHistory.md|ChangeHistory
+P:Atypical.VirtualFileSystem.Core.IChangeHistory.UndoStack|IChangeHistory.UndoStack.md|UndoStack
+P:Atypical.VirtualFileSystem.Core.IChangeHistory.RedoStack|IChangeHistory.RedoStack.md|RedoStack
+M:Atypical.VirtualFileSystem.Core.IChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|IChangeHistory.OnChange(VFSEventArgs).md|OnChange(VFSEventArgs)
+M:Atypical.VirtualFileSystem.Core.IChangeHistory.Undo|IChangeHistory.Undo().md|Undo()
+M:Atypical.VirtualFileSystem.Core.IChangeHistory.Redo|IChangeHistory.Redo().md|Redo()
+T:Atypical.VirtualFileSystem.Core.IChangeHistory|IChangeHistory.md|IChangeHistory
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.#ctor|VirtualFileSystemFactory.VirtualFileSystemFactory().md|VirtualFileSystemFactory()
 M:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem|VirtualFileSystemFactory.CreateFileSystem().md|CreateFileSystem()
 T:Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory|VirtualFileSystemFactory.md|VirtualFileSystemFactory
@@ -195,6 +215,7 @@ T:Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode|IDirectoryNode.md|IDi
 P:Atypical.VirtualFileSystem.Core.Contracts.IFileNode.Content|IFileNode.Content.md|Content
 T:Atypical.VirtualFileSystem.Core.Contracts.IFileNode|IFileNode.md|IFileNode
 T:Atypical.VirtualFileSystem.Core.Contracts.IRootNode|IRootNode.md|IRootNode
+P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.ChangeHistory|IVirtualFileSystem.ChangeHistory.md|ChangeHistory
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Root|IVirtualFileSystem.Root.md|Root
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index|IVirtualFileSystem.Index.md|Index
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.IsEmpty|IVirtualFileSystem.IsEmpty.md|IsEmpty

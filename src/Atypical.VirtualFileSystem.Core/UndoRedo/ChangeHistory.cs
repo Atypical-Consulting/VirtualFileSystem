@@ -1,14 +1,30 @@
-using Atypical.VirtualFileSystem.Core;
-using Atypical.VirtualFileSystem.Core.Contracts;
+using System.Collections.Immutable;
 
-namespace Atypical.VirtualFileSystem.DemoCli.WIP;
+namespace Atypical.VirtualFileSystem.Core;
 
-public class ChangeHistory
+/// <summary>
+/// Represents a history of changes in a virtual file system.
+/// </summary>
+public sealed class ChangeHistory
+    : IChangeHistory, IDisposable
 {
     private readonly IVirtualFileSystem _vfs;
     private readonly Stack<VFSEventArgs> _undoStack = new();
     private readonly Stack<VFSEventArgs> _redoStack = new();
+    private bool _disposed;
+
+    /// <inheritdoc see="IChangeHistory.UndoStack" />
+    public IReadOnlyCollection<VFSEventArgs> UndoStack
+        => ImmutableList<VFSEventArgs>.Empty.AddRange(_undoStack);
     
+    /// <inheritdoc see="IChangeHistory.RedoStack" />
+    public IReadOnlyCollection<VFSEventArgs> RedoStack
+        => ImmutableList<VFSEventArgs>.Empty.AddRange(_redoStack);
+    
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ChangeHistory"/> class.
+    /// </summary>
+    /// <param name="vfs">The virtual file system to track changes of.</param>
     public ChangeHistory(IVirtualFileSystem vfs)
     {
         _vfs = vfs;
@@ -24,17 +40,63 @@ public class ChangeHistory
         _vfs.FileRenamed += OnChange;
     }
     
-    private void OnChange(VFSEventArgs args)
+    /// <summary>
+    /// Finalizes an instance of the <see cref="ChangeHistory"/> class.
+    /// </summary>
+    ~ChangeHistory()
     {
-        AddChange(args);
+        Dispose(false);
+    }
+
+    /// <summary>
+    /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Releases the unmanaged resources used by the <see cref="ChangeHistory"/> and optionally releases the managed resources.
+    /// </summary>
+    /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+    public void Dispose(bool disposing)
+    {
+        if (_disposed)
+            return;
+        
+        if (disposing)
+        {
+            // Unsubscribe from VFS events
+            _vfs.DirectoryCreated -= OnChange;
+            _vfs.FileCreated -= OnChange;
+            _vfs.DirectoryDeleted -= OnChange;
+            _vfs.FileDeleted -= OnChange;
+            _vfs.DirectoryMoved -= OnChange;
+            _vfs.FileMoved -= OnChange;
+            _vfs.DirectoryRenamed -= OnChange;
+            _vfs.FileRenamed -= OnChange;
+        }
+
+        _disposed = true;
     }
     
+    /// <inheritdoc see="IChangeHistory.OnChange" />
+    public void OnChange(VFSEventArgs args)
+        => AddChange(args);
+
+    /// <summary>
+    /// Adds a change to the history.
+    /// </summary>
+    /// <param name="change">The change to add.</param>
     public void AddChange(VFSEventArgs change)
     {
         _undoStack.Push(change);
         _redoStack.Clear(); // Once a new change is made, the redo stack is cleared
     }
 
+    /// <inheritdoc see="IChangeHistory.Undo" />
     public IVirtualFileSystem Undo()
     {
         if (!_undoStack.TryPop(out var change))
@@ -81,6 +143,7 @@ public class ChangeHistory
         return _vfs;
     }
 
+    /// <inheritdoc see="IChangeHistory.Redo" />
     public IVirtualFileSystem Redo()
     {
         if (!_redoStack.TryPop(out var change))
