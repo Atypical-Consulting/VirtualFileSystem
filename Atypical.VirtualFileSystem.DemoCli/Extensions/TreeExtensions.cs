@@ -4,7 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-using Atypical.VirtualFileSystem.Core.Contracts;
 using Spectre.Console.Rendering;
 
 namespace Atypical.VirtualFileSystem.DemoCli.Extensions;
