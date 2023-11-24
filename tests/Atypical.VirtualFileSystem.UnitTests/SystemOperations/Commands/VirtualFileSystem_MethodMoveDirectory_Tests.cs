@@ -2,36 +2,39 @@ namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTestsBase
 {
+    private readonly IVirtualFileSystem _vfs = CreateVFS();
+    private readonly VFSDirectoryPath _directoryPath = new("dir1/dir2/dir3");
+    private readonly VFSDirectoryPath _newDirectoryPath = new("new_dir");
+    
+    private void Act()
+        => _vfs.MoveDirectory(_directoryPath, _newDirectoryPath);
+
     [Fact]
     public void MoveDirectory_moves_a_directory()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        var indexLength = vfs.Index.Count;
+        _vfs.CreateDirectory(_directoryPath);
+        var indexLength = _vfs.Index.Count;
 
         // Act
-        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        Act();
 
         // Assert
-        vfs.Index.Count.Should().Be(indexLength);
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://new_dir"));
+        _vfs.Index.Count.Should().Be(indexLength);
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://new_dir"));
     }
 
     [Fact]
     public void MoveDirectory_updates_the_directory_path()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
+        _vfs.CreateDirectory(_directoryPath);
 
         // Act
-        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        Act();
 
         // Assert
-        vfs.Index[new VFSDirectoryPath("vfs://new_dir")].Path.Value
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].Path.Value
             .Should().Be("vfs://new_dir");
     }
 
@@ -39,31 +42,25 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
     public void MoveDirectory_updates_the_last_write_time()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        var creationTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].CreationTime;
-        var lastAccessTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastAccessTime;
-        var lastWriteTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastWriteTime;
+        _vfs.CreateDirectory(_directoryPath);
+        var creationTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].CreationTime;
+        var lastAccessTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastAccessTime;
+        var lastWriteTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastWriteTime;
 
         // Act
-        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        Act();
 
         // Assert
-        vfs.Index[new VFSDirectoryPath("vfs://new_dir")].CreationTime.Should().Be(creationTime);
-        vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastAccessTime.Should().Be(lastAccessTime);
-        vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].CreationTime.Should().Be(creationTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastAccessTime.Should().Be(lastAccessTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
     }
 
     [Fact]
     public void MoveDirectory_throws_an_exception_if_the_directory_does_not_exist()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-
         // Act
-        Action action = () => vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        var action = Act;
 
         // Assert
         action.Should()
@@ -75,20 +72,18 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
     public void MoveDirectory_raises_a_DirectoryMoved_event()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        bool eventRaised = false;
+        _vfs.CreateDirectory(_directoryPath);
+        var eventRaised = false;
 
-        vfs.DirectoryMoved += args => 
+        _vfs.DirectoryMoved += args => 
         {
             eventRaised = true;
-            args.SourcePath.Should().Be(directoryPath);
-            args.DestinationPath.Should().Be(new VFSDirectoryPath("new_dir"));
+            args.SourcePath.Should().Be(_directoryPath);
+            args.DestinationPath.Should().Be(_newDirectoryPath);
         };
 
         // Act
-        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        Act();
 
         // Assert
         eventRaised.Should().BeTrue();
@@ -98,19 +93,17 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
     public void MoveDirectory_adds_a_change_to_the_ChangeHistory()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
+        _vfs.CreateDirectory(_directoryPath);
 
         // Act
-        vfs.MoveDirectory(directoryPath, new VFSDirectoryPath("new_dir"));
+        Act();
 
         // Retrieve the change from the UndoStack
-        var change = vfs.ChangeHistory.UndoStack.First();
+        var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

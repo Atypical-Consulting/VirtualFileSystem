@@ -2,63 +2,62 @@ namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTestsBase
 {
+    private readonly IVirtualFileSystem _vfs = CreateVFS();
+    private VFSDirectoryPath _directoryPath = new("dir1");
+
+    private void Act()
+        => _vfs.CreateDirectory(_directoryPath);
+    
     [Fact]
     public void CreateDirectory_creates_a_directory()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        VFSDirectoryPath directoryPath = new("dir1");
-
         // Act
-        vfs.CreateDirectory(directoryPath);
+        Act();
 
         // Assert
-        vfs.IsEmpty.Should().BeFalse();
-        vfs.Index.RawIndex.Should().NotBeEmpty();
-        vfs.Index.RawIndex.Should().HaveCount(1);
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        vfs.Root.IsDirectory.Should().BeTrue();
-        vfs.Root.IsFile.Should().BeFalse();
-        vfs.Root.Path.Value.Should().Be("vfs://");
-        vfs.Root.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(1));
+        _vfs.IsEmpty.Should().BeFalse();
+        _vfs.Index.RawIndex.Should().NotBeEmpty();
+        _vfs.Index.RawIndex.Should().HaveCount(1);
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Root.IsDirectory.Should().BeTrue();
+        _vfs.Root.IsFile.Should().BeFalse();
+        _vfs.Root.Path.Value.Should().Be("vfs://");
+        _vfs.Root.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(1));
     }
 
     [Fact]
     public void CreateDirectory_creates_a_directory_and_its_parents()
     {
         // Arrange
-        var vfs = CreateVFS();
-        VFSDirectoryPath directoryPath = new("dir1/dir2/dir3");
+        _directoryPath = new("dir1/dir2/dir3");
 
         // Act
-        vfs.CreateDirectory(directoryPath);
+        Act();
 
         // Assert
-        vfs.Index.RawIndex.Should().NotBeEmpty();
-        vfs.Index.RawIndex.Should().HaveCount(3); // dir1 + dir2 + dir3
-        vfs.Index.RawIndex.Should().ContainKey(directoryPath);
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.Should().NotBeEmpty();
+        _vfs.Index.RawIndex.Should().HaveCount(3); // dir1 + dir2 + dir3
+        _vfs.Index.RawIndex.Should().ContainKey(_directoryPath);
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
             
-        vfs.Index[new VFSDirectoryPath("vfs://dir1")].Should().BeAssignableTo<IDirectoryNode>();
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2")].Should().BeAssignableTo<IDirectoryNode>();
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].Should().BeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].Should().BeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2")].Should().BeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].Should().BeAssignableTo<IDirectoryNode>();
             
-        vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().NotBeEmpty();
-        vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().HaveCount(1);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().NotBeEmpty();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().HaveCount(1);
     }
 
     [Fact]
     public void CreateDirectory_throws_an_exception_if_the_directory_already_exists()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1");
-        vfs.CreateDirectory(directoryPath);
+        Act();
 
         // Act
-        Action action = () => vfs.CreateDirectory(directoryPath);
+        var action = Act;
 
         // Assert
         action.Should()
@@ -69,11 +68,8 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
     [Fact]
     public void CreateDirectory_throws_an_exception_if_the_path_is_the_root_directory()
     {
-        // Arrange
-        var vfs = CreateVFS();
-
         // Act
-        Action action = () => vfs.CreateDirectory(new VFSRootPath());
+        Action action = () => _vfs.CreateDirectory(new VFSRootPath());
 
         // Assert
         action.Should()
@@ -85,18 +81,16 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
     public void CreateDirectory_raises_a_DirectoryCreated_event()
     {
         // Arrange
-        var vfs = CreateVFS();
-        VFSDirectoryPath directoryPath = new("dir1");
-        bool eventRaised = false;
+        var eventRaised = false;
 
-        vfs.DirectoryCreated += (args) => 
+        _vfs.DirectoryCreated += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(directoryPath);
+            args.Path.Should().Be(_directoryPath);
         };
 
         // Act
-        vfs.CreateDirectory(directoryPath);
+        Act();
 
         // Assert
         eventRaised.Should().BeTrue();
@@ -105,19 +99,15 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
     [Fact]
     public void CreateDirectory_adds_a_change_to_the_ChangeHistory()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1");
-
         // Act
-        vfs.CreateDirectory(directoryPath);
+        Act();
 
         // Retrieve the change from the UndoStack
-        var change = vfs.ChangeHistory.UndoStack.First();
+        var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

@@ -2,57 +2,57 @@ namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBase
 {
+    private readonly IVirtualFileSystem _vfs = CreateVFS();
+    private VFSFilePath _filePath = new("file.txt");
+    
+    private void Act()
+        => _vfs.CreateFile(_filePath);
+    
     [Fact]
     public void CreateFile_creates_a_file()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        VFSFilePath filePath = new("file.txt");
-
         // Act
-        vfs.CreateFile(filePath);
+        Act();
             
         // Assert
-        vfs.IsEmpty.Should().BeFalse();
-        vfs.Index.RawIndex.Should().NotBeEmpty();
-        vfs.Index.RawIndex.Should().HaveCount(1);
-        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://file.txt"));
-        vfs.Root.Files.Should().NotBeEmpty();
-        vfs.Root.Files.Should().HaveCount(1);
+        _vfs.IsEmpty.Should().BeFalse();
+        _vfs.Index.RawIndex.Should().NotBeEmpty();
+        _vfs.Index.RawIndex.Should().HaveCount(1);
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://file.txt"));
+        _vfs.Root.Files.Should().NotBeEmpty();
+        _vfs.Root.Files.Should().HaveCount(1);
     }
 
     [Fact]
     public void CreateFile_creates_a_file_and_its_parents()
     {
         // Arrange
-        var vfs = CreateVFS();
-        VFSFilePath filePath = new("dir1/dir2/dir3/file.txt");
+        _filePath = new("dir1/dir2/dir3/file.txt");
             
         // Act
-        vfs.CreateFile(filePath);
+        Act();
             
         // Assert
-        vfs.IsEmpty.Should().BeFalse();
-        vfs.Index.RawIndex.Should().NotBeEmpty();
-        vfs.Index.RawIndex.Should().HaveCount(4); // dir1 + dir2 + dir3 + file.txt
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
-        vfs.Root.Directories.Should().NotBeEmpty();
-        vfs.Root.Directories.Should().HaveCount(1);
+        _vfs.IsEmpty.Should().BeFalse();
+        _vfs.Index.RawIndex.Should().NotBeEmpty();
+        _vfs.Index.RawIndex.Should().HaveCount(4); // dir1 + dir2 + dir3 + file.txt
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
+        _vfs.Root.Directories.Should().NotBeEmpty();
+        _vfs.Root.Directories.Should().HaveCount(1);
     }
 
     [Fact]
     public void CreateFile_throws_an_exception_if_the_file_already_exists()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
+        _filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
+        Act();
 
         // Act
-        Action action = () => vfs.CreateFile(filePath);
+        var action = Act;
 
         // Assert
         action.Should()
@@ -64,18 +64,16 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
     public void CreateFile_raises_a_FileCreated_event()
     {
         // Arrange
-        var vfs = CreateVFS();
-        VFSFilePath filePath = new("file.txt");
-        bool eventRaised = false;
+        var eventRaised = false;
 
-        vfs.FileCreated += args => 
+        _vfs.FileCreated += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(filePath);
+            args.Path.Should().Be(_filePath);
         };
 
         // Act
-        vfs.CreateFile(filePath);
+        Act();
 
         // Assert
         eventRaised.Should().BeTrue();
@@ -84,19 +82,15 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
     [Fact]
     public void CreateFile_adds_a_change_to_the_ChangeHistory()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("file.txt");
-
         // Act
-        vfs.CreateFile(filePath);
+        Act();
 
         // Retrieve the change from the UndoStack
-        var change = vfs.ChangeHistory.UndoStack.First();
+        var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

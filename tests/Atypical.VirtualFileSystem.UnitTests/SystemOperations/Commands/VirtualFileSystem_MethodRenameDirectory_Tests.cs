@@ -2,40 +2,43 @@ namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTestsBase
 {
+    private readonly IVirtualFileSystem _vfs = CreateVFS();
+    private readonly VFSDirectoryPath _directoryPath = new("dir1/dir2/dir3");
+    private readonly VFSDirectoryPath _newDirectoryPath = new("new_dir");
+    
+    private void Act()
+        => _vfs.RenameDirectory(_directoryPath, _newDirectoryPath);
+
     [Fact]
     public void RenameDirectory_renames_a_directory()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        var indexLength = vfs.Index.Count;
-        var tree = vfs.GetTree();
+        _vfs.CreateDirectory(_directoryPath);
+        var indexLength = _vfs.Index.Count;
+        var tree = _vfs.GetTree();
 
         // Act
-        vfs.RenameDirectory(directoryPath, "new_dir");
+        Act();
 
         // Assert
-        vfs.Index.Count.Should().Be(indexLength);
-        vfs.Index.RawIndex.Should().NotContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
-        vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].IsDirectory.Should().BeTrue();
-        vfs.GetTree().Should().NotBe(tree);
+        _vfs.Index.Count.Should().Be(indexLength);
+        _vfs.Index.RawIndex.Should().NotContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].IsDirectory.Should().BeTrue();
+        _vfs.GetTree().Should().NotBe(tree);
     }
         
     [Fact]
     public void RenameDirectory_updates_the_directory_path()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
+        _vfs.CreateDirectory(_directoryPath);
 
         // Act
-        vfs.RenameDirectory(directoryPath, "new_dir");
+        Act();
 
         // Assert
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].Path.Value
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].Path.Value
             .Should().Be("vfs://dir1/dir2/new_dir");
     }
         
@@ -43,32 +46,26 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
     public void RenameDirectory_updates_the_last_write_time()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        var creationTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].CreationTime;
-        var lastAccessTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastAccessTime;
-        var lastWriteTime = vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastWriteTime;
+        _vfs.CreateDirectory(_directoryPath);
+        var creationTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].CreationTime;
+        var lastAccessTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastAccessTime;
+        var lastWriteTime = _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].LastWriteTime;
 
         // Act
         Thread.Sleep(100);
-        vfs.RenameDirectory(directoryPath, "new_dir");
+        Act();
 
         // Assert
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].CreationTime.Should().Be(creationTime);
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastAccessTime.Should().Be(lastAccessTime);
-        vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].CreationTime.Should().Be(creationTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastAccessTime.Should().Be(lastAccessTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
     }
     
     [Fact]
     public void RenameDirectory_throws_an_exception_if_the_directory_does_not_exist()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-
         // Act
-        Action action = () => vfs.RenameDirectory(directoryPath, "new_dir");
+        Action action = () => Act();
 
         // Assert
         action.Should()
@@ -80,20 +77,18 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
     public void RenameDirectory_raises_a_DirectoryRenamed_event()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
-        bool eventRaised = false;
+        _vfs.CreateDirectory(_directoryPath);
+        var eventRaised = false;
 
-        vfs.DirectoryRenamed += args => 
+        _vfs.DirectoryRenamed += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(directoryPath);
+            args.Path.Should().Be(_directoryPath);
             args.NewName.Should().Be("new_dir");
         };
 
         // Act
-        vfs.RenameDirectory(directoryPath, "new_dir");
+        Act();
 
         // Assert
         eventRaised.Should().BeTrue();
@@ -103,19 +98,17 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
     public void RenameDirectory_adds_a_change_to_the_ChangeHistory()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var directoryPath = new VFSDirectoryPath("dir1/dir2/dir3");
-        vfs.CreateDirectory(directoryPath);
+        _vfs.CreateDirectory(_directoryPath);
 
         // Act
-        vfs.RenameDirectory(directoryPath, "new_dir");
+        Act();
 
         // Retrieve the change from the UndoStack
-        var change = vfs.ChangeHistory.UndoStack.First();
+        var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }
