@@ -2,36 +2,36 @@ namespace VirtualFileSystem.UnitTests.SystemOperations.Commands;
 
 public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
 {
+    private readonly IVirtualFileSystem _vfs = CreateVFS();
+    private readonly VFSFilePath _filePath = new("dir1/dir2/dir3/file.txt");
+    private readonly VFSFilePath _newFilePath = new("new_file.txt");
+    
     [Fact]
     public void MoveFile_moves_a_file()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
-        var indexLength = vfs.Index.Count;
+        _vfs.CreateFile(_filePath);
+        var indexLength = _vfs.Index.Count;
 
         // Act
-        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        vfs.Index.Count.Should().Be(indexLength);
-        vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://new_file.txt"));
+        _vfs.Index.Count.Should().Be(indexLength);
+        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://new_file.txt"));
     }
         
     [Fact]
     public void MoveFile_updates_the_file_path()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
+        _vfs.CreateFile(_filePath);
 
         // Act
-        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        vfs.Index[new VFSFilePath("vfs://new_file.txt")].Path.Value
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].Path.Value
             .Should().Be("vfs://new_file.txt");
     }
         
@@ -39,31 +39,25 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
     public void MoveFile_updates_the_last_write_time()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
-        var creationTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].CreationTime;
-        var lastAccessTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastAccessTime;
-        var lastWriteTime = vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastWriteTime;
+        _vfs.CreateFile(_filePath);
+        var creationTime = _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].CreationTime;
+        var lastAccessTime = _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastAccessTime;
+        var lastWriteTime = _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/file.txt")].LastWriteTime;
 
         // Act
-        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        vfs.Index[new VFSFilePath("vfs://new_file.txt")].CreationTime.Should().Be(creationTime);
-        vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
-        vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].CreationTime.Should().Be(creationTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
     }
 
     [Fact]
     public void MoveFile_throws_an_exception_if_the_file_does_not_exist()
     {
-        // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-
         // Act
-        Action action = () => vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        Action action = () => _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
         action.Should()
@@ -75,20 +69,18 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
     public void MoveFile_raises_a_FileMoved_event()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
-        bool eventRaised = false;
+        _vfs.CreateFile(_filePath);
+        var eventRaised = false;
 
-        vfs.FileMoved += args => 
+        _vfs.FileMoved += args => 
         {
             eventRaised = true;
-            args.SourcePath.Should().Be(filePath);
-            args.DestinationPath.Should().Be(new VFSFilePath("new_file.txt"));
+            args.SourcePath.Should().Be(_filePath);
+            args.DestinationPath.Should().Be(_newFilePath);
         };
 
         // Act
-        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
         eventRaised.Should().BeTrue();
@@ -98,19 +90,17 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
     public void MoveFile_adds_a_change_to_the_ChangeHistory()
     {
         // Arrange
-        var vfs = CreateVFS();
-        var filePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
-        vfs.CreateFile(filePath);
+        _vfs.CreateFile(_filePath);
 
         // Act
-        vfs.MoveFile(filePath, new VFSFilePath("new_file.txt"));
+        _vfs.MoveFile(_filePath, _newFilePath);
 
         // Retrieve the change from the UndoStack
-        var change = vfs.ChangeHistory.UndoStack.First();
+        var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }
