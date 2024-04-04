@@ -45,12 +45,16 @@
       <RepositoryType>git</RepositoryType>
       <RepositoryBranch>main</RepositoryBranch>
       <PackageReleaseNotes>
-          ## 🚀 Features
-          - feature: add events @phmatray (#68)
-          - feature: add move directory @phmatray (#67)
+        ## Changes
 
-          ## ✅ Tests
-          - test: add tests for checking if an event is raised @phmatray (#69)
+        - build(deps): bump JetBrains/qodana-action from 2023.2 to 2023.3 @dependabot (#85)
+        - build(deps): bump actions/setup-dotnet from 3 to 4 @dependabot (#83)
+        - build(deps): bump release-drafter/release-drafter from 5 to 6 @dependabot (#84)
+        - build(deps): bump actions/checkout from 3 to 4 @dependabot (#86)
+        - build(deps): bump actions/cache from 3 to 4 @dependabot (#87)
+        - Features/undo redo @phmatray (#82)
+        - upgrade dependencies @phmatray (#80)
+        - build(deps): bump Spectre.Console from 0.47.0 to 0.48.0 @dependabot (#70)
       </PackageReleaseNotes>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <PackageLanguage>en-US</PackageLanguage>

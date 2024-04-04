@@ -10,9 +10,9 @@
   <!-- Versioning -->
   <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
   <PropertyGroup>
-    <Version>0.3.0</Version>
-    <AssemblyVersion>0.3.0</AssemblyVersion>
-    <FileVersion>0.3.0</FileVersion>
-    <InformationalVersion>0.3.0</InformationalVersion>
+    <Version>0.4.0</Version>
+    <AssemblyVersion>0.4.0</AssemblyVersion>
+    <FileVersion>0.4.0</FileVersion>
+    <InformationalVersion>0.4.0</InformationalVersion>
   </PropertyGroup>
 </Project>
