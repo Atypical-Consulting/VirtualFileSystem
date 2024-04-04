@@ -13,13 +13,14 @@ Inheritance [System.Object](https://docs.microsoft.com/en-us/dotnet/api/System.O
 
 | Constructors | |
 | :--- | :--- |
-| [VFSDirectoryRenamedArgs(VFSDirectoryPath, VFSDirectoryPath)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class. |
+| [VFSDirectoryRenamedArgs(VFSDirectoryPath, string, string)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string, string)') | Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class. |
 
 | Properties | |
 | :--- | :--- |
-| [DestinationPath](VFSDirectoryRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.DestinationPath') | Gets the new path of the renamed directory. |
 | [Message](VFSDirectoryRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Message') | Gets the message. |
 | [MessageTemplate](VFSDirectoryRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageTemplate') | Gets the message template. |
 | [MessageWithMarkup](VFSDirectoryRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageWithMarkup') | Gets the message with markup. |
-| [SourcePath](VFSDirectoryRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.SourcePath') | Gets the old path of the renamed directory. |
+| [NewName](VFSDirectoryRenamedArgs.NewName.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewName') | Gets the new name of the renamed file. |
+| [OldName](VFSDirectoryRenamedArgs.OldName.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.OldName') | Gets the old name of the renamed directory. |
+| [Path](VFSDirectoryRenamedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Path') | Gets the old path of the renamed directory. |
 | [Timestamp](VFSDirectoryRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Timestamp') | Gets the timestamp when the directory was renamed. |

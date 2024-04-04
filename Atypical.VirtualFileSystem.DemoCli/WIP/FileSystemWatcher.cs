@@ -4,9 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-using Atypical.VirtualFileSystem.Core;
-using Atypical.VirtualFileSystem.Core.Contracts;
-
 namespace Atypical.VirtualFileSystem.DemoCli.WIP;
 
 public class FileSystemWatcher : IFileSystemWatcher
@@ -25,8 +22,8 @@ public class FileSystemWatcher : IFileSystemWatcher
         _timer = new Timer(CheckForChanges, null, Timeout.Infinite, Timeout.Infinite);
         
         _fileSystem.FileCreated += OnFileCreated;
-        // _fileSystem.FileDeleted += OnFileDeleted;
         _fileSystem.DirectoryCreated += OnDirectoryCreated;
+        // _fileSystem.FileDeleted += OnFileDeleted;
         // _fileSystem.DirectoryDeleted += OnDirectoryDeleted;
     }
 

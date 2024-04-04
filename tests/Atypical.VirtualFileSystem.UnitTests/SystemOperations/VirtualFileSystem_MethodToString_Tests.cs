@@ -8,13 +8,13 @@ public class VirtualFileSystem_MethodToString_Tests : VirtualFileSystemTestsBase
         // Arrange
         const string expected = "VFS: 3 files, 3 directories";
 
-        var vfs = new VFS()
-            .CreateFile(new VFSFilePath("file1.txt"))
-            .CreateFile(new VFSFilePath("file2.txt"))
-            .CreateFile(new VFSFilePath("file3.txt"))
-            .CreateDirectory(new VFSDirectoryPath("dir1"))
-            .CreateDirectory(new VFSDirectoryPath("dir2"))
-            .CreateDirectory(new VFSDirectoryPath("dir3"));
+        var vfs = new VFS();
+        vfs.CreateFile(new VFSFilePath("file1.txt"));
+        vfs.CreateFile(new VFSFilePath("file2.txt"));
+        vfs.CreateFile(new VFSFilePath("file3.txt"));
+        vfs.CreateDirectory(new VFSDirectoryPath("dir1"));
+        vfs.CreateDirectory(new VFSDirectoryPath("dir2"));
+        vfs.CreateDirectory(new VFSDirectoryPath("dir3"));
 
         // Act
         var result = vfs.ToString();

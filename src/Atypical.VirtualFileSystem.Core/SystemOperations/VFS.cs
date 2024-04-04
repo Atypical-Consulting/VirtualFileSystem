@@ -17,9 +17,13 @@ public partial record VFS : IVirtualFileSystem
     /// </summary>
     public VFS()
     {
+        ChangeHistory = new ChangeHistory(this);
         Root = new RootNode();
         Index = new VFSIndex();
     }
+
+    /// <inheritdoc cref="IVirtualFileSystem.ChangeHistory" />
+    public IChangeHistory ChangeHistory { get; }
 
     /// <inheritdoc cref="IVirtualFileSystem.Root" />
     public IRootNode Root { get; }

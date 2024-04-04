@@ -6,6 +6,17 @@
 <a name='Atypical.VirtualFileSystem.Core'></a>
 
 ## Atypical.VirtualFileSystem.Core Namespace
+- **[ChangeHistory](ChangeHistory.md 'Atypical.VirtualFileSystem.Core.ChangeHistory')** `Class` Represents a history of changes in a virtual file system.
+  - **[ChangeHistory(IVirtualFileSystem)](ChangeHistory.ChangeHistory(IVirtualFileSystem).md 'Atypical.VirtualFileSystem.Core.ChangeHistory.ChangeHistory(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem)')** `Constructor` Initializes a new instance of the [ChangeHistory](ChangeHistory.md 'Atypical.VirtualFileSystem.Core.ChangeHistory') class.
+  - **[RedoStack](ChangeHistory.RedoStack.md 'Atypical.VirtualFileSystem.Core.ChangeHistory.RedoStack')** `Property` Gets the redo stack.
+  - **[UndoStack](ChangeHistory.UndoStack.md 'Atypical.VirtualFileSystem.Core.ChangeHistory.UndoStack')** `Property` Gets the undo stack.
+  - **[~ChangeHistory()](ChangeHistory.~ChangeHistory().md 'Atypical.VirtualFileSystem.Core.ChangeHistory.~ChangeHistory()')** `Method` Finalizes an instance of the [ChangeHistory](ChangeHistory.md 'Atypical.VirtualFileSystem.Core.ChangeHistory') class.
+  - **[AddChange(VFSEventArgs)](ChangeHistory.AddChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.ChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Adds a change to the history.
+  - **[Dispose()](ChangeHistory.Dispose().md 'Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose()')** `Method` Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  - **[Dispose(bool)](ChangeHistory.Dispose(bool).md 'Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(bool)')** `Method` Releases the unmanaged resources used by the [ChangeHistory](ChangeHistory.md 'Atypical.VirtualFileSystem.Core.ChangeHistory') and optionally releases the managed resources.
+  - **[OnChange(VFSEventArgs)](ChangeHistory.OnChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.ChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Handles the change event from the virtual file system.
+  - **[Redo()](ChangeHistory.Redo().md 'Atypical.VirtualFileSystem.Core.ChangeHistory.Redo()')** `Method` Redoes the most recent undone change.
+  - **[Undo()](ChangeHistory.Undo().md 'Atypical.VirtualFileSystem.Core.ChangeHistory.Undo()')** `Method` Undoes the most recent change.
 - **[DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.DirectoryNode')** `Class` Represents a directory in the virtual file system.
   - **[DirectoryNode(VFSDirectoryPath)](DirectoryNode.DirectoryNode(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.DirectoryNode.DirectoryNode(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [DirectoryNode](DirectoryNode.md 'Atypical.VirtualFileSystem.Core.DirectoryNode') class.  
     Creates a new directory node.  
@@ -37,6 +48,7 @@
     This is the character used to separate directory names.
   - **[ROOT_PATH](VFS.ROOT_PATH.md 'Atypical.VirtualFileSystem.Core.VFS.ROOT_PATH')** `Field` The root path.  
     This is the path used to identify the root directory.
+  - **[ChangeHistory](VFS.ChangeHistory.md 'Atypical.VirtualFileSystem.Core.VFS.ChangeHistory')** `Property` Gets the change history of the file system.
   - **[Directories](VFS.Directories.md 'Atypical.VirtualFileSystem.Core.VFS.Directories')** `Property` Finds all directory nodes.
   - **[Files](VFS.Files.md 'Atypical.VirtualFileSystem.Core.VFS.Files')** `Property` Finds all file nodes.
   - **[Index](VFS.Index.md 'Atypical.VirtualFileSystem.Core.VFS.Index')** `Property` Gets the file index of the file system.  
@@ -118,12 +130,13 @@
   - **[implicit operator string(VFSDirectoryPath)](VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath') as a string.
 - **[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs')** `Class` Provides data for the DirectoryRenamed event.
-  - **[VFSDirectoryRenamedArgs(VFSDirectoryPath, VFSDirectoryPath)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Constructor` Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class.
-  - **[DestinationPath](VFSDirectoryRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.DestinationPath')** `Property` Gets the new path of the renamed directory.
+  - **[VFSDirectoryRenamedArgs(VFSDirectoryPath, string, string)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, string, string)')** `Constructor` Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs') class.
   - **[Message](VFSDirectoryRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSDirectoryRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSDirectoryRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
-  - **[SourcePath](VFSDirectoryRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.SourcePath')** `Property` Gets the old path of the renamed directory.
+  - **[NewName](VFSDirectoryRenamedArgs.NewName.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewName')** `Property` Gets the new name of the renamed file.
+  - **[OldName](VFSDirectoryRenamedArgs.OldName.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.OldName')** `Property` Gets the old name of the renamed directory.
+  - **[Path](VFSDirectoryRenamedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Path')** `Property` Gets the old path of the renamed directory.
   - **[Timestamp](VFSDirectoryRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Timestamp')** `Property` Gets the timestamp when the directory was renamed.
 - **[VFSEventArgs](VFSEventArgs.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs')** `Class` Represents the base class for all VFS event arguments.
   - **[Message](VFSEventArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.Message')** `Property` Gets the message.
@@ -131,14 +144,16 @@
   - **[MessageWithMarkup](VFSEventArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.MessageWithMarkup')** `Property` Gets the message with markup.
   - **[ToMarkup(string, object[])](VFSEventArgs.ToMarkup(string,object[]).md 'Atypical.VirtualFileSystem.Core.VFSEventArgs.ToMarkup(string, object[])')** `Method` Transforms a message into a markup message with the specified color.
 - **[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs')** `Class` Provides data for the FileCreated event.
-  - **[VFSFileCreatedArgs(VFSFilePath)](VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class.
+  - **[VFSFileCreatedArgs(VFSFilePath, string)](VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Constructor` Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class.
+  - **[Content](VFSFileCreatedArgs.Content.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Content')** `Property` Gets the content of the created file.
   - **[Message](VFSFileCreatedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSFileCreatedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSFileCreatedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
   - **[Path](VFSFileCreatedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Path')** `Property` Gets the path of the created file.
   - **[Timestamp](VFSFileCreatedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.Timestamp')** `Property` Gets the timestamp when the file was created.
 - **[VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs')** `Class` Provides data for the FileDeleted event.
-  - **[VFSFileDeletedArgs(VFSFilePath)](VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs') class.
+  - **[VFSFileDeletedArgs(VFSFilePath, string)](VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath,string).md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, string)')** `Constructor` Initializes a new instance of the [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs') class.
+  - **[Content](VFSFileDeletedArgs.Content.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Content')** `Property` Gets the content of the deleted file.
   - **[Message](VFSFileDeletedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSFileDeletedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSFileDeletedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
@@ -161,12 +176,13 @@
   - **[implicit operator string(VFSFilePath)](VFSFilePath.implicitoperatorstring(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') as a string.
 - **[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs')** `Class` Provides data for the FileRenamed event.
-  - **[VFSFileRenamedArgs(VFSFilePath, VFSFilePath)](VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Constructor` Initializes a new instance of the [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs') class.
-  - **[DestinationPath](VFSFileRenamedArgs.DestinationPath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.DestinationPath')** `Property` Gets the destination path of the renamed file.
+  - **[VFSFileRenamedArgs(VFSFilePath, string, string)](VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,string,string).md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath, string, string)')** `Constructor` Initializes a new instance of the [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs') class.
   - **[Message](VFSFileRenamedArgs.Message.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Message')** `Property` Gets the message.
   - **[MessageTemplate](VFSFileRenamedArgs.MessageTemplate.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageTemplate')** `Property` Gets the message template.
   - **[MessageWithMarkup](VFSFileRenamedArgs.MessageWithMarkup.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageWithMarkup')** `Property` Gets the message with markup.
-  - **[SourcePath](VFSFileRenamedArgs.SourcePath.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.SourcePath')** `Property` Gets the source path of the renamed file.
+  - **[NewName](VFSFileRenamedArgs.NewName.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewName')** `Property` Gets the new name of the renamed file.
+  - **[OldName](VFSFileRenamedArgs.OldName.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldName')** `Property` Gets the old name of the renamed file.
+  - **[Path](VFSFileRenamedArgs.Path.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Path')** `Property` Gets the source path of the renamed file.
   - **[Timestamp](VFSFileRenamedArgs.Timestamp.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Timestamp')** `Property` Gets the timestamp when the file was renamed.
 - **[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')** `Class` Represents the index of the virtual file system.
   - **[Count](VFSIndex.Count.md 'Atypical.VirtualFileSystem.Core.VFSIndex.Count')** `Property` Gets the total count of nodes in the index.
@@ -187,7 +203,8 @@
   - **[Remove(VFSPath)](VFSIndex.Remove(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath)')** `Method` Removes the node with the specified key.
   - **[ToString()](VFSIndex.ToString().md 'Atypical.VirtualFileSystem.Core.VFSIndex.ToString()')** `Method` Returns a string that represents the current object.
   - **[TryAdd(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryAdd(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to add the specified node to the index.
-  - **[TryGetValue(VFSPath, IVirtualFileSystemNode)](VFSIndex.TryGetValue(VFSPath,IVirtualFileSystemNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetValue(Atypical.VirtualFileSystem.Core.VFSPath, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode)')** `Method` Tries to get the value associated with the specified key.
+  - **[TryGetDirectory(VFSDirectoryPath, IDirectoryNode)](VFSIndex.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode)')** `Method` Tries to get the directory node at the specified directory path.
+  - **[TryGetFile(VFSFilePath, IFileNode)](VFSIndex.TryGetFile(VFSFilePath,IFileNode).md 'Atypical.VirtualFileSystem.Core.VFSIndex.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath, Atypical.VirtualFileSystem.Core.Contracts.IFileNode)')** `Method` Tries to get the file node at the specified file path.
 - **[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode')** `Class` Represents a node in a virtual file system.  
   A node can be a file or a directory.
   - **[VFSNode(VFSPath)](VFSNode.VFSNode(VFSPath).md 'Atypical.VirtualFileSystem.Core.VFSNode.VFSNode(Atypical.VirtualFileSystem.Core.VFSPath)')** `Constructor` Initializes a new instance of the [VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode') class.  
@@ -234,6 +251,13 @@
 - **[VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory')** `Class` Represents a factory for creating [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem') instances.
   - **[VirtualFileSystemFactory()](VirtualFileSystemFactory.VirtualFileSystemFactory().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.VirtualFileSystemFactory()')** `Constructor` Initializes a new instance of the [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory') class.
   - **[CreateFileSystem()](VirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.VirtualFileSystemFactory.CreateFileSystem()')** `Method` Creates a new instance of [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem').
+- **[IChangeHistory](IChangeHistory.md 'Atypical.VirtualFileSystem.Core.IChangeHistory')** `Interface` Represents a history of changes in a virtual file system.
+  - **[RedoStack](IChangeHistory.RedoStack.md 'Atypical.VirtualFileSystem.Core.IChangeHistory.RedoStack')** `Property` Gets the redo stack.
+  - **[UndoStack](IChangeHistory.UndoStack.md 'Atypical.VirtualFileSystem.Core.IChangeHistory.UndoStack')** `Property` Gets the undo stack.
+  - **[AddChange(VFSEventArgs)](IChangeHistory.AddChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Adds a change to the history.
+  - **[OnChange(VFSEventArgs)](IChangeHistory.OnChange(VFSEventArgs).md 'Atypical.VirtualFileSystem.Core.IChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)')** `Method` Handles the change event from the virtual file system.
+  - **[Redo()](IChangeHistory.Redo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Redo()')** `Method` Redoes the most recent undone change.
+  - **[Undo()](IChangeHistory.Undo().md 'Atypical.VirtualFileSystem.Core.IChangeHistory.Undo()')** `Method` Undoes the most recent change.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts'></a>
 
@@ -282,6 +306,7 @@
 - **[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')** `Interface` Represents a virtual file system.  
   This is the main entry point for all operations on the file system.  
   You can get an instance of this interface by calling [CreateFileSystem()](IVirtualFileSystemFactory.CreateFileSystem().md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory.CreateFileSystem()').
+  - **[ChangeHistory](IVirtualFileSystem.ChangeHistory.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.ChangeHistory')** `Property` Gets the change history of the file system.
   - **[Directories](IVirtualFileSystem.Directories.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Directories')** `Property` Finds all directory nodes.
   - **[Files](IVirtualFileSystem.Files.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Files')** `Property` Finds all file nodes.
   - **[Index](IVirtualFileSystem.Index.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Index')** `Property` Gets the file index of the file system.  

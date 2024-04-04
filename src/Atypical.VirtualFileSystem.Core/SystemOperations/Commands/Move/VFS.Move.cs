@@ -19,7 +19,7 @@ public partial record VFS
         VFSDirectoryPath sourceDirectoryPath,
         VFSDirectoryPath destinationDirectoryPath)
     {
-        if (!Index.TryGetValue(sourceDirectoryPath, out var directoryNode))
+        if (!Index.TryGetDirectory(sourceDirectoryPath, out var directoryNode))
             ThrowVirtualDirectoryNotFound(sourceDirectoryPath);
 
         // Remove the directory from its old parent directory
@@ -44,7 +44,7 @@ public partial record VFS
         VFSFilePath sourceFilePath,
         VFSFilePath destinationFilePath)
     {
-        if (!Index.TryGetValue(sourceFilePath, out var fileNode))
+        if (!Index.TryGetFile(sourceFilePath, out var fileNode))
             ThrowVirtualFileNotFound(sourceFilePath);
 
         // Remove the file from its old parent directory
