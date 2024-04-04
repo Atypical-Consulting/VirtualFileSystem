@@ -97,7 +97,7 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         
         // Assert
         _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(2);
         _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

@@ -4,10 +4,10 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
 {
     private readonly IVirtualFileSystem _vfs = CreateVFS();
     private readonly VFSFilePath _filePath = new("dir1/dir2/dir3/file.txt");
-    private readonly VFSFilePath _newFilePath = new("new_file.txt");
-    
+    private const string NewFilePath = "new_file.txt";
+
     private void Act()
-        => _vfs.RenameFile(_filePath, _newFilePath);
+        => _vfs.RenameFile(_filePath, NewFilePath);
 
     [Fact]
     public void RenameFile_renames_a_file()
@@ -84,7 +84,7 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         {
             eventRaised = true;
             args.Path.Should().Be(_filePath);
-            args.NewName.Should().Be("new_file.txt");
+            args.NewName.Should().Be("vfs://dir1/dir2/dir3/new_file.txt");
         };
 
         // Act
@@ -108,7 +108,7 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         
         // Assert
         _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(5);
         _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

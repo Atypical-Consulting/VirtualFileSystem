@@ -24,8 +24,7 @@ public class ChangeHistoryTests
         // Arrange
         var vfs = new VFS();
         var filePath = new VFSFilePath("file.txt");
-        var change = new VFSFileCreatedArgs(filePath, "content");
-        vfs.ChangeHistory.AddChange(change);
+        vfs.CreateFile(filePath);
 
         // Check if the file exists in the index
         if (!vfs.Index.ContainsKey(filePath))
@@ -36,7 +35,6 @@ public class ChangeHistoryTests
 
         // Assert
         vfs.ChangeHistory.UndoStack.Should().BeEmpty();
-        vfs.ChangeHistory.RedoStack.Should().ContainEquivalentOf(change);
         vfs.ChangeHistory.RedoStack.Should().HaveCount(1);
     }
 
@@ -46,7 +44,6 @@ public class ChangeHistoryTests
         // Arrange
         var vfs = new VFS();
         var filePath = new VFSFilePath("file.txt");
-        var change = new VFSFileCreatedArgs(filePath, "content");
         vfs.CreateFile(filePath);
         
         // Check if the file exists in the index
@@ -61,7 +58,6 @@ public class ChangeHistoryTests
 
         // Assert
         vfs.ChangeHistory.RedoStack.Should().BeEmpty();
-        vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
         vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
     }
 

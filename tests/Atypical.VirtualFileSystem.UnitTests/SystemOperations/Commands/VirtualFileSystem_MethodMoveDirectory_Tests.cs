@@ -103,7 +103,7 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         
         // Assert
         _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(4);
         _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }

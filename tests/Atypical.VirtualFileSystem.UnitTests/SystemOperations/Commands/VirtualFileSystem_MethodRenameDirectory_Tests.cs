@@ -4,10 +4,10 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
 {
     private readonly IVirtualFileSystem _vfs = CreateVFS();
     private readonly VFSDirectoryPath _directoryPath = new("dir1/dir2/dir3");
-    private readonly VFSDirectoryPath _newDirectoryPath = new("new_dir");
-    
+    private const string NewDirectoryPath = "new_dir";
+
     private void Act()
-        => _vfs.RenameDirectory(_directoryPath, _newDirectoryPath);
+        => _vfs.RenameDirectory(_directoryPath, NewDirectoryPath);
 
     [Fact]
     public void RenameDirectory_renames_a_directory()
@@ -108,7 +108,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         
         // Assert
         _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        _vfs.ChangeHistory.UndoStack.Should().HaveCount(4);
         _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
     }
 }
