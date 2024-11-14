@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-2023, Atypical Consulting SRL
+﻿// Copyright (c) 2022-2024, Atypical Consulting SRL
 // All rights reserved... but seriously, we're open to sharing if you ask nicely!
 // 
 // This source code is licensed under the BSD-style license found in the

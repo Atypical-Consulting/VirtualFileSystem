@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LangVersion>12</LangVersion>
@@ -10,9 +10,9 @@
   <!-- Versioning -->
   <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
   <PropertyGroup>
-    <Version>0.4.0</Version>
-    <AssemblyVersion>0.4.0</AssemblyVersion>
-    <FileVersion>0.4.0</FileVersion>
-    <InformationalVersion>0.4.0</InformationalVersion>
+    <Version>0.5.0</Version>
+    <AssemblyVersion>0.5.0</AssemblyVersion>
+    <FileVersion>0.5.0</FileVersion>
+    <InformationalVersion>0.5.0</InformationalVersion>
   </PropertyGroup>
 </Project>
