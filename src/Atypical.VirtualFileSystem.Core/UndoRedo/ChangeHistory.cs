@@ -117,7 +117,6 @@ public sealed class ChangeHistory
             case VFSDirectoryDeletedArgs directoryDeleted:
                 // For directory deleted, you need to restore the directory. 
                 // However, the VFSDirectoryDeletedArgs does not contain enough information to restore the directory.
-                // You may need to modify your event args to contain more information or change your design.
                 throw new NotImplementedException();
             case VFSDirectoryMovedArgs directoryMoved:
                 _vfs.MoveDirectory(directoryMoved.DestinationPath, directoryMoved.SourcePath);
@@ -131,7 +130,6 @@ public sealed class ChangeHistory
             case VFSFileDeletedArgs fileDeleted:
                 // For file deleted, you need to restore the file. 
                 // However, the VFSFileDeletedArgs does not contain enough information to restore the file.
-                // You may need to modify your event args to contain more information or change your design.
                 throw new NotImplementedException();
             case VFSFileMovedArgs fileMoved:
                 _vfs.MoveFile(fileMoved.DestinationPath, fileMoved.SourcePath);

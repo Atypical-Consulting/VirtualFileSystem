@@ -37,13 +37,13 @@ public class DemonstrateVFS : Command
 
         // Rename a file
         ProcessStep(vfs, "RENAME A FILE",
-            () => vfs.RenameFile(new VFSFilePath("/heroes/ironman.txt"), "tommy_stark.txt"));
+            () => vfs.RenameFile(new VFSFilePath("/heroes/ironman.txt"), "tony_stark.txt"));
 
         // UNDO
-        ProcessStep(vfs, "UNDO", () => vfs.ChangeHistory.Undo());
+        // ProcessStep(vfs, "UNDO", () => vfs.ChangeHistory.Undo());
 
         // REDO
-        ProcessStep(vfs, "REDO", () => vfs.ChangeHistory.Redo());
+        // ProcessStep(vfs, "REDO", () => vfs.ChangeHistory.Redo());
 
         // Move a file
         ProcessStep(vfs, "MOVE A FILE",
@@ -73,14 +73,16 @@ public class DemonstrateVFS : Command
         IVirtualFileSystem virtualFileSystem,
         Action<VFSEventArgs> action)
     {
-        virtualFileSystem.DirectoryCreated += action;
-        virtualFileSystem.FileCreated      += action;
-        virtualFileSystem.DirectoryDeleted += action;
-        virtualFileSystem.FileDeleted      += action;
-        virtualFileSystem.DirectoryMoved   += action;
-        virtualFileSystem.FileMoved        += action;
-        virtualFileSystem.DirectoryRenamed += action;
-        virtualFileSystem.FileRenamed      += action;
+        // ReSharper disable ConvertClosureToMethodGroup
+        virtualFileSystem.DirectoryCreated += args => action(args);
+        virtualFileSystem.FileCreated      += args => action(args);
+        virtualFileSystem.DirectoryDeleted += args => action(args);
+        virtualFileSystem.FileDeleted      += args => action(args);
+        virtualFileSystem.DirectoryMoved   += args => action(args);
+        virtualFileSystem.FileMoved        += args => action(args);
+        virtualFileSystem.DirectoryRenamed += args => action(args);
+        virtualFileSystem.FileRenamed      += args => action(args);
+        // ReSharper restore ConvertClosureToMethodGroup
     }
 
     private static void OnChange(VFSEventArgs args)
