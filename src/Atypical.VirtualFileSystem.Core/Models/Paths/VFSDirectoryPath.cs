@@ -39,7 +39,21 @@ public record VFSDirectoryPath : VFSPath
     /// </summary>
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
-    public static implicit operator string(VFSDirectoryPath path) => path.Value;
+    public static implicit operator string(VFSDirectoryPath path)
+    {
+        return path.Value;
+    }
+
+    /// <summary>
+    ///     Implicit conversion from string.
+    ///     This allows you to use a string as a <see cref="VFSDirectoryPath" />.
+    /// </summary>
+    /// <param name="path">The path to convert.</param>
+    /// <returns>The directory path.</returns>
+    public static implicit operator VFSDirectoryPath(string path)
+    {
+        return new VFSDirectoryPath(path);
+    }
     
     [DoesNotReturn]
     private static void ThrowArgumentHasFileExtension(string path)

@@ -127,6 +127,8 @@
     The file path is relative to the root of the virtual file system.
   - **[ToString()](VFSDirectoryPath.ToString().md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.ToString()')** `Method` Returns a string that represents the current object.  
     The string representation of the directory path is the path itself.
+  - **[implicit operator VFSDirectoryPath(string)](VFSDirectoryPath.implicitoperatorVFSDirectoryPath(string).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit Atypical.VirtualFileSystem.Core.VFSDirectoryPath(string)')** `Operator` Implicit conversion from string.  
+    This allows you to use a string as a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath').
   - **[implicit operator string(VFSDirectoryPath)](VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath') as a string.
 - **[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs')** `Class` Provides data for the DirectoryRenamed event.
@@ -173,6 +175,8 @@
     The file path is relative to the root of the virtual file system.
   - **[ToString()](VFSFilePath.ToString().md 'Atypical.VirtualFileSystem.Core.VFSFilePath.ToString()')** `Method` Returns a string that represents the current object.  
     The file path is relative to the root of the virtual file system.
+  - **[implicit operator VFSFilePath(string)](VFSFilePath.implicitoperatorVFSFilePath(string).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit Atypical.VirtualFileSystem.Core.VFSFilePath(string)')** `Operator` Implicit conversion from string.  
+    This allows you to use a string as a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath').
   - **[implicit operator string(VFSFilePath)](VFSFilePath.implicitoperatorstring(VFSFilePath).md 'Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSFilePath)')** `Operator` Implicit conversion to string  
     This allows you to use a [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath') as a string.
 - **[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs')** `Class` Provides data for the FileRenamed event.

@@ -5,7 +5,7 @@ var app = new CommandApp();
 
 app.Configure(config =>
 {
-    config.AddCommand<DemonstrateVFS>("demo");
+    config.AddCommand<BugDeleteFolder>("demo");
 });
 
 app.Run(args);

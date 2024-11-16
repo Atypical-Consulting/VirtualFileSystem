@@ -37,5 +37,18 @@ public record VFSFilePath : VFSPath
     /// <param name="path">The path to convert.</param>
     /// <returns>The string representation of the path.</returns>
     public static implicit operator string(VFSFilePath path)
-        => path.Value;
+    {
+        return path.Value;
+    }
+    
+    /// <summary>
+    ///     Implicit conversion from string.
+    ///     This allows you to use a string as a <see cref="VFSFilePath" />.
+    /// </summary>
+    /// <param name="path">The path to convert.</param>
+    /// <returns>The file path.</returns>
+    public static implicit operator VFSFilePath(string path)
+    {
+        return new VFSFilePath(path);
+    }
 }

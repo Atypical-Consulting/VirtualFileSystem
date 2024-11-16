@@ -29,4 +29,5 @@ Implements [System.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/S
 
 | Operators | |
 | :--- | :--- |
+| [implicit operator VFSDirectoryPath(string)](VFSDirectoryPath.implicitoperatorVFSDirectoryPath(string).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit Atypical.VirtualFileSystem.Core.VFSDirectoryPath(string)') | Implicit conversion from string.<br/>This allows you to use a string as a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath'). |
 | [implicit operator string(VFSDirectoryPath)](VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit string(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)') | Implicit conversion to string<br/>This allows you to use a [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath') as a string. |

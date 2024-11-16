@@ -34,10 +34,12 @@ T:Atypical.VirtualFileSystem.Core.VFSNode|VFSNode.md|VFSNode
 M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.#ctor(System.String)|VFSDirectoryPath.VFSDirectoryPath(string).md|VFSDirectoryPath(string)
 M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.ToString|VFSDirectoryPath.ToString().md|ToString()
 M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)~System.String|VFSDirectoryPath.implicitoperatorstring(VFSDirectoryPath).md|implicit operator string(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryPath.op_Implicit(System.String)~Atypical.VirtualFileSystem.Core.VFSDirectoryPath|VFSDirectoryPath.implicitoperatorVFSDirectoryPath(string).md|implicit operator VFSDirectoryPath(string)
 T:Atypical.VirtualFileSystem.Core.VFSDirectoryPath|VFSDirectoryPath.md|VFSDirectoryPath
 M:Atypical.VirtualFileSystem.Core.VFSFilePath.#ctor(System.String)|VFSFilePath.VFSFilePath(string).md|VFSFilePath(string)
 M:Atypical.VirtualFileSystem.Core.VFSFilePath.ToString|VFSFilePath.ToString().md|ToString()
 M:Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit(Atypical.VirtualFileSystem.Core.VFSFilePath)~System.String|VFSFilePath.implicitoperatorstring(VFSFilePath).md|implicit operator string(VFSFilePath)
+M:Atypical.VirtualFileSystem.Core.VFSFilePath.op_Implicit(System.String)~Atypical.VirtualFileSystem.Core.VFSFilePath|VFSFilePath.implicitoperatorVFSFilePath(string).md|implicit operator VFSFilePath(string)
 T:Atypical.VirtualFileSystem.Core.VFSFilePath|VFSFilePath.md|VFSFilePath
 P:Atypical.VirtualFileSystem.Core.VFSPath.Value|VFSPath.Value.md|Value
 P:Atypical.VirtualFileSystem.Core.VFSPath.Parent|VFSPath.Parent.md|Parent
