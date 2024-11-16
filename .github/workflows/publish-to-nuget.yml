@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Cache NuGet packages
         uses: actions/cache@v4
@@ -48,7 +48,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Run Test
         run: dotnet test --configuration $BUILD_CONFIG --no-build --verbosity normal --framework net7.0
@@ -71,7 +71,7 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.x
+          dotnet-version: 9.x
 
       - name: Publish to NuGet
         if: startsWith(github.ref, 'refs/tags')
