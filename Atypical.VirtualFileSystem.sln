@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{EB224BFD-23D3-41CE-AA5E-FE2D69D78B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.DemoCli", "Atypical.VirtualFileSystem.DemoCli\Atypical.VirtualFileSystem.DemoCli.csproj", "{40DD51CE-1F1B-466E-9177-05C9401FF81B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.DemoCli", "src\Atypical.VirtualFileSystem.DemoCli\Atypical.VirtualFileSystem.DemoCli.csproj", "{40DD51CE-1F1B-466E-9177-05C9401FF81B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

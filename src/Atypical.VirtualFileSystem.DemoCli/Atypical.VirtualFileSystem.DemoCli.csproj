@@ -10,7 +10,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
+      <ProjectReference Include="..\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
     </ItemGroup>
 
 </Project>
