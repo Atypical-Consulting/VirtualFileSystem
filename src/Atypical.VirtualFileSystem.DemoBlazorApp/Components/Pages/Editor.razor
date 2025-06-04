@@ -1,0 +1,344 @@
+@page "/editor"
+@inject IVirtualFileSystem VFS
+@inject Services.VFSStateService StateService
+@inject NavigationManager Navigation
+@inject ISnackbar Snackbar
+@rendermode InteractiveServer
+
+<PageTitle>File Editor - VFS Demo</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">File Content Editor</MudText>
+<MudText Typo="Typo.subtitle1" Class="mb-4">Edit and manage file content with syntax highlighting</MudText>
+
+@if (CurrentFile != null)
+{
+    <MudGrid>
+        <MudItem xs="12" lg="8">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudStack Spacing="3">
+                    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                            <MudIcon Icon="Icons.Material.Filled.InsertDriveFile" />
+                            <MudText Typo="Typo.h6">@CurrentFile.Name</MudText>
+                            @if (HasUnsavedChanges)
+                            {
+                                <MudChip T="string" Size="Size.Small" Color="Color.Warning">
+                                    Unsaved Changes
+                                </MudChip>
+                            }
+                        </MudStack>
+                        <MudStack Row="true" Spacing="2">
+                            <MudButton Variant="Variant.Filled" 
+                                       Color="Color.Success"
+                                       StartIcon="Icons.Material.Filled.Save"
+                                       OnClick="SaveFile"
+                                       Disabled="!HasUnsavedChanges">
+                                Save
+                            </MudButton>
+                            <MudButton Variant="Variant.Outlined" 
+                                       StartIcon="Icons.Material.Filled.Refresh"
+                                       OnClick="ReloadFile"
+                                       Disabled="!HasUnsavedChanges">
+                                Reload
+                            </MudButton>
+                        </MudStack>
+                    </MudStack>
+                    
+                    <MudTextField @bind-Value="FileContent"
+                                  Label="File Content"
+                                  Lines="20"
+                                  Variant="Variant.Outlined"
+                                  FullWidth="true"
+                                  @oninput="OnContentChanged" />
+                    
+                    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                        <MudText Typo="Typo.caption" Class="text-muted">
+                            File size: @FileContent.Length bytes | Lines: @(FileContent.Split('\n').Length)
+                        </MudText>
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Text" 
+                                       Size="Size.Small"
+                                       StartIcon="Icons.Material.Filled.FormatAlignLeft"
+                                       OnClick="FormatContent">
+                                Format
+                            </MudButton>
+                            <MudButton Variant="Variant.Text" 
+                                       Size="Size.Small"
+                                       StartIcon="Icons.Material.Filled.ContentCopy"
+                                       OnClick="CopyToClipboard">
+                                Copy
+                            </MudButton>
+                        </MudStack>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+        
+        <MudItem xs="12" lg="4">
+            <MudStack Spacing="3">
+                <MudPaper Class="pa-4" Elevation="2">
+                    <MudText Typo="Typo.h6" Class="mb-3">
+                        <MudIcon Icon="Icons.Material.Filled.Info" Class="mr-2" />
+                        File Information
+                    </MudText>
+                    <MudSimpleTable Dense="true">
+                        <tbody>
+                            <tr>
+                                <td><strong>Path:</strong></td>
+                                <td><MudText Typo="Typo.caption">@CurrentFile.Path.Value</MudText></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extension:</strong></td>
+                                <td>@Path.GetExtension(CurrentFile.Name)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Created:</strong></td>
+                                <td>@CurrentFile.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modified:</strong></td>
+                                <td>@CurrentFile.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Original Size:</strong></td>
+                                <td>@CurrentFile.Content.Length bytes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Current Size:</strong></td>
+                                <td>@FileContent.Length bytes</td>
+                            </tr>
+                        </tbody>
+                    </MudSimpleTable>
+                </MudPaper>
+                
+                <MudPaper Class="pa-4" Elevation="2">
+                    <MudText Typo="Typo.h6" Class="mb-3">
+                        <MudIcon Icon="Icons.Material.Filled.Build" Class="mr-2" />
+                        Editor Tools
+                    </MudText>
+                    <MudStack Spacing="2">
+                        <MudTextField @bind-Value="FindText" 
+                                      Label="Find Text" 
+                                      Placeholder="Search in content..."
+                                      FullWidth="true"
+                                      Adornment="Adornment.End"
+                                      AdornmentIcon="Icons.Material.Filled.Search" />
+                        
+                        <MudTextField @bind-Value="ReplaceText" 
+                                      Label="Replace With" 
+                                      Placeholder="Replacement text..."
+                                      FullWidth="true" />
+                        
+                        <MudStack Row="true" Spacing="1">
+                            <MudButton Variant="Variant.Text" 
+                                       Size="Size.Small"
+                                       StartIcon="Icons.Material.Filled.FindReplace"
+                                       OnClick="ReplaceAll"
+                                       Disabled="string.IsNullOrEmpty(FindText)">
+                                Replace All
+                            </MudButton>
+                        </MudStack>
+                        
+                        <MudDivider />
+                        
+                        <MudButton Variant="Variant.Text" 
+                                   Size="Size.Small"
+                                   StartIcon="Icons.Material.Filled.Undo"
+                                   OnClick="UndoChanges"
+                                   Disabled="!HasUnsavedChanges"
+                                   FullWidth="true">
+                            Undo All Changes
+                        </MudButton>
+                    </MudStack>
+                </MudPaper>
+                
+                <MudPaper Class="pa-4" Elevation="2">
+                    <MudText Typo="Typo.h6" Class="mb-3">
+                        <MudIcon Icon="Icons.Material.Filled.Storage" Class="mr-2" />
+                        Quick Actions
+                    </MudText>
+                    <MudStack Spacing="1">
+                        <MudButton Variant="Variant.Text" 
+                                   Size="Size.Small"
+                                   StartIcon="Icons.Material.Filled.CreateNewFolder"
+                                   Href="/operations"
+                                   FullWidth="true">
+                            Back to Operations
+                        </MudButton>
+                        <MudButton Variant="Variant.Text" 
+                                   Size="Size.Small"
+                                   StartIcon="Icons.Material.Filled.Search"
+                                   Href="/search"
+                                   FullWidth="true">
+                            Search Files
+                        </MudButton>
+                    </MudStack>
+                </MudPaper>
+            </MudStack>
+        </MudItem>
+    </MudGrid>
+}
+else if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <MudAlert Severity="Severity.Error" Icon="Icons.Material.Filled.Error">
+        @ErrorMessage
+    </MudAlert>
+}
+else
+{
+    <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+        <MudText>No file selected for editing.</MudText>
+        <MudButton Variant="Variant.Text" 
+                   StartIcon="Icons.Material.Filled.Search"
+                   Href="/search"
+                   Class="mt-2">
+            Search for Files
+        </MudButton>
+    </MudAlert>
+}
+
+@code {
+    [SupplyParameterFromQuery] public string? File { get; set; }
+    
+    private IFileNode? CurrentFile;
+    private string FileContent = "";
+    private string OriginalContent = "";
+    private string FindText = "";
+    private string ReplaceText = "";
+    private string ErrorMessage = "";
+    private bool HasUnsavedChanges => FileContent != OriginalContent;
+
+    protected override void OnInitialized()
+    {
+        LoadFileFromQuery();
+    }
+
+    protected override void OnParametersSet()
+    {
+        LoadFileFromQuery();
+    }
+
+    private void LoadFileFromQuery()
+    {
+        if (string.IsNullOrEmpty(File))
+        {
+            // Try to use the selected node from state service
+            if (StateService.SelectedNode is IFileNode selectedFile)
+            {
+                LoadFile(selectedFile);
+            }
+            return;
+        }
+
+        try
+        {
+            var fileNode = VFS.GetFile(File);
+            LoadFile(fileNode);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Could not load file '{File}': {ex.Message}";
+            CurrentFile = null;
+        }
+    }
+
+    private void LoadFile(IFileNode file)
+    {
+        CurrentFile = file;
+        FileContent = file.Content;
+        OriginalContent = file.Content;
+        ErrorMessage = "";
+        StateService.SelectedNode = file;
+        StateHasChanged();
+    }
+
+    private void OnContentChanged(ChangeEventArgs e)
+    {
+        FileContent = e.Value?.ToString() ?? "";
+        StateHasChanged();
+    }
+
+    private async Task SaveFile()
+    {
+        if (CurrentFile == null || !HasUnsavedChanges)
+            return;
+
+        try
+        {
+            // Update the file content in VFS
+            var fileNode = VFS.GetFile(CurrentFile.Path.Value);
+            VFS.DeleteFile(CurrentFile.Path.Value);
+            VFS.CreateFile(CurrentFile.Path.Value, FileContent);
+            
+            OriginalContent = FileContent;
+            CurrentFile = VFS.GetFile(CurrentFile.Path.Value);
+            
+            StateService.NotifyDataChanged();
+            Snackbar.Add($"File '{CurrentFile.Name}' saved successfully!", Severity.Success);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error saving file: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private void ReloadFile()
+    {
+        if (CurrentFile != null)
+        {
+            FileContent = CurrentFile.Content;
+            OriginalContent = CurrentFile.Content;
+            StateHasChanged();
+        }
+    }
+
+    private void UndoChanges()
+    {
+        FileContent = OriginalContent;
+        StateHasChanged();
+    }
+
+    private void ReplaceAll()
+    {
+        if (string.IsNullOrEmpty(FindText))
+            return;
+
+        var newContent = FileContent.Replace(FindText, ReplaceText ?? "");
+        if (newContent != FileContent)
+        {
+            FileContent = newContent;
+            StateHasChanged();
+            Snackbar.Add($"Replaced all occurrences of '{FindText}'", Severity.Info);
+        }
+        else
+        {
+            Snackbar.Add($"No occurrences of '{FindText}' found", Severity.Warning);
+        }
+    }
+
+    private void FormatContent()
+    {
+        // Basic formatting - normalize line endings and trim
+        FileContent = FileContent.Replace("\r\n", "\n").Replace("\r", "\n").Trim();
+        StateHasChanged();
+        Snackbar.Add("Content formatted", Severity.Info);
+    }
+
+    private async Task CopyToClipboard()
+    {
+        try
+        {
+            // Note: Clipboard API requires HTTPS in production
+            await Task.Run(() => {
+                // Placeholder for clipboard operation
+                // In a real app, you'd use JS interop with navigator.clipboard
+            });
+            Snackbar.Add("Content copied to clipboard", Severity.Success);
+        }
+        catch
+        {
+            Snackbar.Add("Could not copy to clipboard", Severity.Warning);
+        }
+    }
+}

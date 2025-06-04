@@ -1,0 +1,262 @@
+@page "/history"
+@inject IVirtualFileSystem VFS
+@inject Services.VFSStateService StateService
+@inject ISnackbar Snackbar
+@rendermode InteractiveServer
+
+<PageTitle>Change History - VFS Demo</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">Change History</MudText>
+<MudText Typo="Typo.subtitle1" Class="mb-4">View and manage the complete history of file system operations</MudText>
+
+<MudGrid>
+    <MudItem xs="12" lg="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="Icons.Material.Filled.Undo" Class="mr-2" />
+                    Undo Stack (@VFS.ChangeHistory.UndoStack.Count)
+                </MudText>
+                <MudButton Variant="Variant.Outlined" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Undo"
+                           OnClick="UndoOperation"
+                           Disabled="!VFS.ChangeHistory.UndoStack.Any()">
+                    Undo
+                </MudButton>
+            </MudStack>
+            
+            @if (VFS.ChangeHistory.UndoStack.Any())
+            {
+                <div style="max-height: 400px; overflow-y: auto;">
+                    @foreach (var (operation, index) in VFS.ChangeHistory.UndoStack.Reverse().Select((op, i) => (op, i)))
+                    {
+                        <MudCard Class="mb-2" Elevation="@(index == 0 ? 2 : 1)">
+                            <MudCardContent Class="pa-3">
+                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                    <MudStack Spacing="1">
+                                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                            <MudIcon Icon="@GetOperationIcon(operation)" 
+                                                     Color="@GetOperationColor(operation)" />
+                                            <MudText Typo="Typo.body1">@GetOperationDescription(operation)</MudText>
+                                            @if (index == 0)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Color="Color.Warning">
+                                                    Next to Undo
+                                                </MudChip>
+                                            }
+                                        </MudStack>
+                                        <MudText Typo="Typo.caption" Class="text-muted">
+                                            @operation.GetType().Name
+                                        </MudText>
+                                    </MudStack>
+                                </MudStack>
+                            </MudCardContent>
+                        </MudCard>
+                    }
+                </div>
+            }
+            else
+            {
+                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                    No operations to undo.
+                </MudAlert>
+            }
+        </MudPaper>
+    </MudItem>
+    
+    <MudItem xs="12" lg="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
+                <MudText Typo="Typo.h6">
+                    <MudIcon Icon="Icons.Material.Filled.Redo" Class="mr-2" />
+                    Redo Stack (@VFS.ChangeHistory.RedoStack.Count)
+                </MudText>
+                <MudButton Variant="Variant.Outlined" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Redo"
+                           OnClick="RedoOperation"
+                           Disabled="!VFS.ChangeHistory.RedoStack.Any()">
+                    Redo
+                </MudButton>
+            </MudStack>
+            
+            @if (VFS.ChangeHistory.RedoStack.Any())
+            {
+                <div style="max-height: 400px; overflow-y: auto;">
+                    @foreach (var (operation, index) in VFS.ChangeHistory.RedoStack.Reverse().Select((op, i) => (op, i)))
+                    {
+                        <MudCard Class="mb-2" Elevation="@(index == VFS.ChangeHistory.RedoStack.Count - 1 ? 2 : 1)">
+                            <MudCardContent Class="pa-3">
+                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                    <MudStack Spacing="1">
+                                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                            <MudIcon Icon="@GetOperationIcon(operation)" 
+                                                     Color="@GetOperationColor(operation)" />
+                                            <MudText Typo="Typo.body1">@GetOperationDescription(operation)</MudText>
+                                            @if (index == VFS.ChangeHistory.RedoStack.Count - 1)
+                                            {
+                                                <MudChip T="string" Size="Size.Small" Color="Color.Success">
+                                                    Next to Redo
+                                                </MudChip>
+                                            }
+                                        </MudStack>
+                                        <MudText Typo="Typo.caption" Class="text-muted">
+                                            @operation.GetType().Name
+                                        </MudText>
+                                    </MudStack>
+                                </MudStack>
+                            </MudCardContent>
+                        </MudCard>
+                    }
+                </div>
+            }
+            else
+            {
+                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                    No operations to redo.
+                </MudAlert>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<MudPaper Class="pa-4 mt-4" Elevation="2">
+    <MudText Typo="Typo.h6" Class="mb-3">
+        <MudIcon Icon="Icons.Material.Filled.Analytics" Class="mr-2" />
+        History Statistics
+    </MudText>
+    
+    <MudGrid>
+        <MudItem xs="6" sm="3">
+            <MudCard Elevation="1">
+                <MudCardContent Class="text-center">
+                    <MudText Typo="Typo.h5" Color="Color.Warning">@VFS.ChangeHistory.UndoStack.Count</MudText>
+                    <MudText Typo="Typo.body2">Undo Operations</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudCard Elevation="1">
+                <MudCardContent Class="text-center">
+                    <MudText Typo="Typo.h5" Color="Color.Success">@VFS.ChangeHistory.RedoStack.Count</MudText>
+                    <MudText Typo="Typo.body2">Redo Operations</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudCard Elevation="1">
+                <MudCardContent Class="text-center">
+                    <MudText Typo="Typo.h5" Color="Color.Info">@(VFS.ChangeHistory.UndoStack.Count + VFS.ChangeHistory.RedoStack.Count)</MudText>
+                    <MudText Typo="Typo.body2">Total Operations</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="6" sm="3">
+            <MudCard Elevation="1">
+                <MudCardContent Class="text-center">
+                    <MudText Typo="Typo.h5" Color="Color.Primary">@GetOperationTypeCount()</MudText>
+                    <MudText Typo="Typo.body2">Operation Types</MudText>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StateService.OnDataChanged += StateHasChanged;
+    }
+
+    private async Task UndoOperation()
+    {
+        try
+        {
+            if (VFS.ChangeHistory.UndoStack.Any())
+            {
+                VFS.ChangeHistory.Undo();
+                StateService.NotifyDataChanged();
+                Snackbar.Add("Operation undone successfully!", Severity.Info);
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error during undo: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task RedoOperation()
+    {
+        try
+        {
+            if (VFS.ChangeHistory.RedoStack.Any())
+            {
+                VFS.ChangeHistory.Redo();
+                StateService.NotifyDataChanged();
+                Snackbar.Add("Operation redone successfully!", Severity.Success);
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error during redo: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private string GetOperationIcon(VFSEventArgs operation)
+    {
+        return operation switch
+        {
+            VFSFileCreatedArgs => Icons.Material.Filled.NoteAdd,
+            VFSDirectoryCreatedArgs => Icons.Material.Filled.CreateNewFolder,
+            VFSFileDeletedArgs => Icons.Material.Filled.DeleteSweep,
+            VFSDirectoryDeletedArgs => Icons.Material.Filled.FolderDelete,
+            VFSFileMovedArgs => Icons.Material.Filled.DriveFileMove,
+            VFSDirectoryMovedArgs => Icons.Material.Filled.FolderOpen,
+            VFSFileRenamedArgs => Icons.Material.Filled.DriveFileRenameOutline,
+            VFSDirectoryRenamedArgs => Icons.Material.Filled.DriveFileRenameOutline,
+            _ => Icons.Material.Filled.History
+        };
+    }
+
+    private Color GetOperationColor(VFSEventArgs operation)
+    {
+        return operation switch
+        {
+            VFSFileCreatedArgs or VFSDirectoryCreatedArgs => Color.Success,
+            VFSFileDeletedArgs or VFSDirectoryDeletedArgs => Color.Error,
+            VFSFileMovedArgs or VFSDirectoryMovedArgs => Color.Info,
+            VFSFileRenamedArgs or VFSDirectoryRenamedArgs => Color.Warning,
+            _ => Color.Default
+        };
+    }
+
+    private string GetOperationDescription(VFSEventArgs operation)
+    {
+        return operation switch
+        {
+            VFSFileCreatedArgs fileCreated => $"Created file: {Path.GetFileName(fileCreated.Path.Value)}",
+            VFSDirectoryCreatedArgs dirCreated => $"Created directory: {Path.GetFileName(dirCreated.Path.Value)}",
+            VFSFileDeletedArgs fileDeleted => $"Deleted file: {Path.GetFileName(fileDeleted.Path.Value)}",
+            VFSDirectoryDeletedArgs dirDeleted => $"Deleted directory: {Path.GetFileName(dirDeleted.Path.Value)}",
+            VFSFileMovedArgs fileMoved => $"Moved file: {Path.GetFileName(fileMoved.SourcePath.Value)} → {Path.GetFileName(fileMoved.DestinationPath.Value)}",
+            VFSDirectoryMovedArgs dirMoved => $"Moved directory: {Path.GetFileName(dirMoved.SourcePath.Value)} → {Path.GetFileName(dirMoved.DestinationPath.Value)}",
+            VFSFileRenamedArgs fileRenamed => $"Renamed file: {fileRenamed.OldName} → {fileRenamed.NewName}",
+            VFSDirectoryRenamedArgs dirRenamed => $"Renamed directory: {dirRenamed.OldName} → {dirRenamed.NewName}",
+            _ => "Unknown operation"
+        };
+    }
+
+    private int GetOperationTypeCount()
+    {
+        var allOperations = VFS.ChangeHistory.UndoStack.Concat(VFS.ChangeHistory.RedoStack);
+        return allOperations.Select(op => op.GetType()).Distinct().Count();
+    }
+
+    public void Dispose()
+    {
+        StateService.OnDataChanged -= StateHasChanged;
+    }
+}

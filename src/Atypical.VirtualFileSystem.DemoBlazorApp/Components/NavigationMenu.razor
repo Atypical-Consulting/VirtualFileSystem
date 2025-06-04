@@ -1,0 +1,73 @@
+@rendermode InteractiveServer
+
+<MudNavMenu>
+    <MudNavLink Icon="Icons.Material.Filled.Dashboard" 
+                Href="/" 
+                Match="NavLinkMatch.All">
+        Dashboard
+    </MudNavLink>
+    
+    <MudNavGroup>
+        <TitleContent>
+            <div style="display: flex; align-items: center">
+                <MudIcon Icon="Icons.Material.Filled.Folder" Class="mr-3"></MudIcon>
+                File Operations
+            </div>
+        </TitleContent>
+        <ChildContent>
+            <MudNavLink Icon="Icons.Material.Filled.CreateNewFolder" 
+                        Href="/operations">
+                Create & Manage
+            </MudNavLink>
+            <MudNavLink Icon="Icons.Material.Filled.Search" 
+                        Href="/search">
+                Search Files
+            </MudNavLink>
+            <MudNavLink Icon="Icons.Material.Filled.Edit" 
+                        Href="/editor">
+                File Editor
+            </MudNavLink>
+        </ChildContent>
+    </MudNavGroup>
+    
+    <MudNavGroup>
+        <TitleContent>
+            <div style="display: flex; align-items: center">
+                <MudIcon Icon="Icons.Material.Filled.Settings" Class="mr-3"></MudIcon>
+                System
+            </div>
+        </TitleContent>
+        <ChildContent>
+            <MudNavLink Icon="Icons.Material.Filled.History" 
+                        Href="/history">
+                Change History
+            </MudNavLink>
+            <MudNavLink Icon="Icons.Material.Filled.Event" 
+                        Href="/events">
+                Event Log
+            </MudNavLink>
+            <MudNavLink Icon="Icons.Material.Filled.Analytics" 
+                        Href="/analytics">
+                Analytics
+            </MudNavLink>
+        </ChildContent>
+    </MudNavGroup>
+    
+    <MudDivider Class="my-2" />
+    
+    <MudNavLink Icon="Icons.Material.Filled.Code" 
+                Href="https://github.com/Atypical-Consulting/VirtualFileSystem" 
+                Target="_blank">
+        Source Code
+    </MudNavLink>
+    
+    <MudNavLink Icon="Icons.Material.Filled.Description" 
+                Href="/docs" 
+                Target="_blank">
+        Documentation
+    </MudNavLink>
+</MudNavMenu>
+
+@code {
+    // Navigation menu component - no state management needed
+}

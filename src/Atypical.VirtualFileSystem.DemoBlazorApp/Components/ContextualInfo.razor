@@ -1,0 +1,351 @@
+@inject IVirtualFileSystem VFS
+@inject Services.VFSStateService StateService
+@rendermode InteractiveServer
+
+<div class="pa-4">
+    <MudStack Spacing="3">
+        <!-- VFS Statistics -->
+        <MudPaper Class="pa-3" Elevation="1">
+            <MudText Typo="Typo.h6" Class="mb-2">
+                <MudIcon Icon="Icons.Material.Filled.Assessment" Class="mr-2" />
+                VFS Statistics
+            </MudText>
+            <MudSimpleTable Dense="true">
+                <tbody>
+                    <tr>
+                        <td><strong>Total Files:</strong></td>
+                        <td>@VFS.Index.FilesCount</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Directories:</strong></td>
+                        <td>@VFS.Index.DirectoriesCount</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Items:</strong></td>
+                        <td>@VFS.Index.Count</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Is Empty:</strong></td>
+                        <td>@(VFS.IsEmpty ? "Yes" : "No")</td>
+                    </tr>
+                </tbody>
+            </MudSimpleTable>
+        </MudPaper>
+
+        <!-- Selected Item Info -->
+        @if (StateService.SelectedNode != null)
+        {
+            <MudPaper Class="pa-3" Elevation="1">
+                <MudText Typo="Typo.h6" Class="mb-2">
+                    <MudIcon Icon="@GetNodeIcon(StateService.SelectedNode)" Class="mr-2" />
+                    Selected: @StateService.SelectedNode.Name
+                </MudText>
+                <MudSimpleTable Dense="true">
+                    <tbody>
+                        <tr>
+                            <td><strong>Type:</strong></td>
+                            <td>@(StateService.SelectedNode.IsDirectory ? "Directory" : "File")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Path:</strong></td>
+                            <td><MudText Typo="Typo.caption">@StateService.SelectedNode.Path.Value</MudText></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Created:</strong></td>
+                            <td>@StateService.SelectedNode.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Modified:</strong></td>
+                            <td>@StateService.SelectedNode.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accessed:</strong></td>
+                            <td>@StateService.SelectedNode.LastAccessTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        </tr>
+                        @if (StateService.SelectedNode is IFileNode fileNode)
+                        {
+                            <tr>
+                                <td><strong>Size:</strong></td>
+                                <td>@fileNode.Content.Length bytes</td>
+                            </tr>
+                        }
+                        else if (StateService.SelectedNode is IDirectoryNode dirNode)
+                        {
+                            <tr>
+                                <td><strong>Files:</strong></td>
+                                <td>@dirNode.Files.Count()</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Subdirs:</strong></td>
+                                <td>@dirNode.Directories.Count()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+            </MudPaper>
+        }
+
+        <!-- History Info -->
+        <MudPaper Class="pa-3" Elevation="1">
+            <MudText Typo="Typo.h6" Class="mb-2">
+                <MudIcon Icon="Icons.Material.Filled.History" Class="mr-2" />
+                Change History
+            </MudText>
+            <MudSimpleTable Dense="true">
+                <tbody>
+                    <tr>
+                        <td><strong>Undo Stack:</strong></td>
+                        <td>@VFS.ChangeHistory.UndoStack.Count</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Redo Stack:</strong></td>
+                        <td>@VFS.ChangeHistory.RedoStack.Count</td>
+                    </tr>
+                </tbody>
+            </MudSimpleTable>
+            
+            <MudStack Row="true" Class="mt-2" Spacing="1">
+                <MudButton Variant="Variant.Outlined" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Undo"
+                           OnClick="Undo"
+                           Disabled="!VFS.ChangeHistory.UndoStack.Any()">
+                    Undo
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Redo"
+                           OnClick="Redo"
+                           Disabled="!VFS.ChangeHistory.RedoStack.Any()">
+                    Redo
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+
+        <!-- Recent Events -->
+        <MudPaper Class="pa-3" Elevation="1">
+            <MudText Typo="Typo.h6" Class="mb-2">
+                <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
+                Recent Events
+            </MudText>
+            @if (RecentEvents.Any())
+            {
+                <MudStack Spacing="1">
+                    @foreach (var eventEntry in RecentEvents.Take(5))
+                    {
+                        <MudChip T="string" Size="Size.Small" 
+                                 Color="@GetEventColor(eventEntry.Event)"
+                                 Variant="Variant.Text">
+                            @GetEventDescription(eventEntry.Event)
+                        </MudChip>
+                    }
+                </MudStack>
+            }
+            else
+            {
+                <MudText Typo="Typo.caption" Class="text-muted">No recent events</MudText>
+            }
+        </MudPaper>
+
+        <!-- Quick Actions -->
+        <MudPaper Class="pa-3" Elevation="1">
+            <MudText Typo="Typo.h6" Class="mb-2">
+                <MudIcon Icon="Icons.Material.Filled.Speed" Class="mr-2" />
+                Quick Actions
+            </MudText>
+            <MudStack Spacing="1">
+                <MudButton Variant="Variant.Text" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.AutoFixHigh"
+                           OnClick="CreateSampleData"
+                           FullWidth="true">
+                    Create Sample Data
+                </MudButton>
+                <MudButton Variant="Variant.Text" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Clear"
+                           OnClick="ClearFileSystem"
+                           FullWidth="true"
+                           Disabled="VFS.IsEmpty">
+                    Clear All Files
+                </MudButton>
+                <MudButton Variant="Variant.Text" 
+                           Size="Size.Small"
+                           StartIcon="Icons.Material.Filled.Refresh"
+                           OnClick="RefreshInfo"
+                           FullWidth="true">
+                    Refresh Info
+                </MudButton>
+            </MudStack>
+        </MudPaper>
+    </MudStack>
+</div>
+
+@code {
+    [Parameter] public IVirtualFileSystemNode? SelectedNode { get; set; }
+    [Parameter] public EventCallback OnDataChanged { get; set; }
+
+    private List<EventEntry> RecentEvents = new();
+
+    protected override void OnInitialized()
+    {
+        // Subscribe to VFS events
+        VFS.FileCreated += OnFileCreated;
+        VFS.FileDeleted += OnFileDeleted;
+        VFS.FileMoved += OnFileMoved;
+        VFS.FileRenamed += OnFileRenamed;
+        VFS.DirectoryCreated += OnDirectoryCreated;
+        VFS.DirectoryDeleted += OnDirectoryDeleted;
+        VFS.DirectoryMoved += OnDirectoryMoved;
+        VFS.DirectoryRenamed += OnDirectoryRenamed;
+    }
+
+    private void OnFileCreated(VFSFileCreatedArgs e) => AddEvent(e);
+    private void OnFileDeleted(VFSFileDeletedArgs e) => AddEvent(e);
+    private void OnFileMoved(VFSFileMovedArgs e) => AddEvent(e);
+    private void OnFileRenamed(VFSFileRenamedArgs e) => AddEvent(e);
+    private void OnDirectoryCreated(VFSDirectoryCreatedArgs e) => AddEvent(e);
+    private void OnDirectoryDeleted(VFSDirectoryDeletedArgs e) => AddEvent(e);
+    private void OnDirectoryMoved(VFSDirectoryMovedArgs e) => AddEvent(e);
+    private void OnDirectoryRenamed(VFSDirectoryRenamedArgs e) => AddEvent(e);
+
+    private void AddEvent(VFSEventArgs eventArgs)
+    {
+        RecentEvents.Insert(0, new EventEntry
+        {
+            Event = eventArgs,
+            Timestamp = DateTime.Now
+        });
+        
+        // Keep only last 10 events
+        if (RecentEvents.Count > 10)
+        {
+            RecentEvents.RemoveAt(RecentEvents.Count - 1);
+        }
+        
+        InvokeAsync(StateHasChanged);
+    }
+
+    private string GetNodeIcon(IVirtualFileSystemNode node)
+    {
+        return node.IsDirectory ? Icons.Material.Filled.Folder : Icons.Material.Filled.InsertDriveFile;
+    }
+
+    private Color GetEventColor(VFSEventArgs eventArgs)
+    {
+        return eventArgs switch
+        {
+            VFSFileCreatedArgs or VFSDirectoryCreatedArgs => Color.Success,
+            VFSFileDeletedArgs or VFSDirectoryDeletedArgs => Color.Error,
+            VFSFileMovedArgs or VFSDirectoryMovedArgs => Color.Info,
+            VFSFileRenamedArgs or VFSDirectoryRenamedArgs => Color.Warning,
+            _ => Color.Default
+        };
+    }
+
+    private string GetEventDescription(VFSEventArgs eventArgs)
+    {
+        return eventArgs switch
+        {
+            VFSFileCreatedArgs fileCreated => $"Created: {Path.GetFileName(fileCreated.Path.Value)}",
+            VFSDirectoryCreatedArgs dirCreated => $"Created: {Path.GetFileName(dirCreated.Path.Value)}/",
+            VFSFileDeletedArgs fileDeleted => $"Deleted: {Path.GetFileName(fileDeleted.Path.Value)}",
+            VFSDirectoryDeletedArgs dirDeleted => $"Deleted: {Path.GetFileName(dirDeleted.Path.Value)}/",
+            VFSFileMovedArgs fileMoved => $"Moved: {Path.GetFileName(fileMoved.SourcePath.Value)}",
+            VFSDirectoryMovedArgs dirMoved => $"Moved: {Path.GetFileName(dirMoved.SourcePath.Value)}/",
+            VFSFileRenamedArgs fileRenamed => $"Renamed: {fileRenamed.OldName} → {fileRenamed.NewName}",
+            VFSDirectoryRenamedArgs dirRenamed => $"Renamed: {dirRenamed.OldName} → {dirRenamed.NewName}",
+            _ => "Unknown operation"
+        };
+    }
+
+    private async Task Undo()
+    {
+        if (VFS.ChangeHistory.UndoStack.Any())
+        {
+            VFS.ChangeHistory.Undo();
+            await OnDataChanged.InvokeAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task Redo()
+    {
+        if (VFS.ChangeHistory.RedoStack.Any())
+        {
+            VFS.ChangeHistory.Redo();
+            await OnDataChanged.InvokeAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task CreateSampleData()
+    {
+        try
+        {
+            VFS.CreateDirectory("/docs")
+               .CreateDirectory("/src")
+               .CreateDirectory("/tests")
+               .CreateFile("/docs/readme.txt", "# Welcome to VFS Demo\n\nThis is a sample readme file.")
+               .CreateFile("/docs/changelog.md", "# Changelog\n\n## v1.0.0\n- Initial release")
+               .CreateFile("/src/main.cs", "using System;\n\nnamespace Demo\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello VFS!\");\n        }\n    }\n}")
+               .CreateFile("/tests/test.cs", "using Xunit;\n\npublic class Tests\n{\n    [Fact]\n    public void Test1()\n    {\n        Assert.True(true);\n    }\n}");
+
+            await OnDataChanged.InvokeAsync();
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            // Handle error silently for now
+        }
+    }
+
+    private async Task ClearFileSystem()
+    {
+        try
+        {
+            var allFiles = VFS.Files.ToList();
+            var allDirectories = VFS.Directories.ToList();
+
+            foreach (var file in allFiles)
+            {
+                VFS.DeleteFile(file.Path.Value);
+            }
+
+            foreach (var directory in allDirectories.OrderByDescending(d => d.Path.Depth))
+            {
+                VFS.DeleteDirectory(directory.Path.Value);
+            }
+
+            await OnDataChanged.InvokeAsync();
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            // Handle error silently for now
+        }
+    }
+
+    private void RefreshInfo()
+    {
+        StateHasChanged();
+    }
+
+    private record EventEntry
+    {
+        public required VFSEventArgs Event { get; init; }
+        public required DateTime Timestamp { get; init; }
+    }
+
+    public void Dispose()
+    {
+        VFS.FileCreated -= OnFileCreated;
+        VFS.FileDeleted -= OnFileDeleted;
+        VFS.FileMoved -= OnFileMoved;
+        VFS.FileRenamed -= OnFileRenamed;
+        VFS.DirectoryCreated -= OnDirectoryCreated;
+        VFS.DirectoryDeleted -= OnDirectoryDeleted;
+        VFS.DirectoryMoved -= OnDirectoryMoved;
+        VFS.DirectoryRenamed -= OnDirectoryRenamed;
+    }
+}

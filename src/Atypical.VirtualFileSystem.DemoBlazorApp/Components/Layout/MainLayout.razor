@@ -7,17 +7,58 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudIconButton Icon="Icons.Material.Filled.Menu" 
+                       Color="Color.Inherit" 
+                       Edge="Edge.Start" 
+                       OnClick="@(() => DrawerToggle())" />
         <MudSpacer />
         <MudText Typo="Typo.h6">Atypical Virtual File System Demo</MudText>
         <MudSpacer />
+        <MudIconButton Icon="Icons.Material.Filled.Info" 
+                       Color="Color.Inherit" 
+                       Edge="Edge.End"
+                       OnClick="@(() => RightDrawerToggle())" />
     </MudAppBar>
+    
+    <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <MudDrawerHeader Class="mud-theme-primary">
+            <MudText Typo="Typo.h6" Class="mud-primary-text">Navigation</MudText>
+        </MudDrawerHeader>
+        <NavigationMenu />
+    </MudDrawer>
+    
+    <MudDrawer @bind-Open="RightDrawerOpen" 
+               Anchor="Anchor.End" 
+               ClipMode="DrawerClipMode.Always" 
+               Elevation="2" 
+               Width="400px">
+        <MudDrawerHeader Class="mud-theme-secondary">
+            <MudText Typo="Typo.h6" Class="mud-secondary-text">Information</MudText>
+        </MudDrawerHeader>
+        <ContextualInfo />
+    </MudDrawer>
+    
     <MudMainContent>
         <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+
+@code {
+    private bool DrawerOpen = true;
+    private bool RightDrawerOpen;
+
+    private void DrawerToggle()
+    {
+        DrawerOpen = !DrawerOpen;
+    }
+    
+    private void RightDrawerToggle()
+    {
+        RightDrawerOpen = !RightDrawerOpen;
+    }
+}
 
 <div id="blazor-error-ui" data-nosnippet>
   An unhandled error has occurred.

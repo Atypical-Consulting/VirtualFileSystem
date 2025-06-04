@@ -14,6 +14,9 @@ builder.Services.AddMudServices();
 // Add Virtual File System
 builder.Services.AddVirtualFileSystem();
 
+// Add State Service
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.VFSStateService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

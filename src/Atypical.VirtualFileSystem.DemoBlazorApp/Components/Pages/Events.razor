@@ -1,0 +1,155 @@
+@page "/events"
+@inject IVirtualFileSystem VFS
+@inject Services.VFSStateService StateService
+@rendermode InteractiveServer
+
+<PageTitle>Event Log - VFS Demo</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">Event Log</MudText>
+<MudText Typo="Typo.subtitle1" Class="mb-4">Real-time monitoring of all virtual file system events</MudText>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
+            Live Event Stream (@EventHistory.Count events)
+        </MudText>
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Outlined" 
+                       Size="Size.Small"
+                       StartIcon="Icons.Material.Filled.Clear"
+                       OnClick="ClearEvents"
+                       Disabled="!EventHistory.Any()">
+                Clear Log
+            </MudButton>
+        </MudStack>
+    </MudStack>
+
+    @if (!EventHistory.Any())
+    {
+        <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+            No events recorded yet. Perform some file operations to see events appear here in real-time.
+            <div class="mt-2">
+                <MudButton Variant="Variant.Text" 
+                           StartIcon="Icons.Material.Filled.Build"
+                           Href="/operations">
+                    Go to Operations
+                </MudButton>
+            </div>
+        </MudAlert>
+    }
+    else
+    {
+        <div style="max-height: 600px; overflow-y: auto; border: 1px solid var(--mud-palette-divider);" class="pa-2">
+            @foreach (var eventEntry in EventHistory.AsEnumerable().Reverse())
+            {
+                <MudCard Class="mb-2" Elevation="1">
+                    <MudCardContent Class="pa-3">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                            <MudIcon Icon="@GetEventIcon(eventEntry.Event)" 
+                                     Color="@GetEventColor(eventEntry.Event)" />
+                            <MudStack Spacing="0">
+                                <MudText Typo="Typo.body1">@eventEntry.Event.Message</MudText>
+                                <MudText Typo="Typo.caption" Class="text-muted">
+                                    @eventEntry.Timestamp.ToString("HH:mm:ss.fff")
+                                </MudText>
+                            </MudStack>
+                        </MudStack>
+                    </MudCardContent>
+                </MudCard>
+            }
+        </div>
+        
+        <MudText Typo="Typo.caption" Class="text-muted mt-3">
+            Showing @EventHistory.Count events
+        </MudText>
+    }
+</MudPaper>
+
+@code {
+    private List<EventEntry> EventHistory = new();
+
+    protected override void OnInitialized()
+    {
+        VFS.FileCreated += OnFileCreated;
+        VFS.FileDeleted += OnFileDeleted;
+        VFS.FileMoved += OnFileMoved;
+        VFS.FileRenamed += OnFileRenamed;
+        VFS.DirectoryCreated += OnDirectoryCreated;
+        VFS.DirectoryDeleted += OnDirectoryDeleted;
+        VFS.DirectoryMoved += OnDirectoryMoved;
+        VFS.DirectoryRenamed += OnDirectoryRenamed;
+    }
+
+    private void OnFileCreated(VFSFileCreatedArgs e) => AddEvent(e);
+    private void OnFileDeleted(VFSFileDeletedArgs e) => AddEvent(e);
+    private void OnFileMoved(VFSFileMovedArgs e) => AddEvent(e);
+    private void OnFileRenamed(VFSFileRenamedArgs e) => AddEvent(e);
+    private void OnDirectoryCreated(VFSDirectoryCreatedArgs e) => AddEvent(e);
+    private void OnDirectoryDeleted(VFSDirectoryDeletedArgs e) => AddEvent(e);
+    private void OnDirectoryMoved(VFSDirectoryMovedArgs e) => AddEvent(e);
+    private void OnDirectoryRenamed(VFSDirectoryRenamedArgs e) => AddEvent(e);
+
+    private async void AddEvent(VFSEventArgs eventArgs)
+    {
+        EventHistory.Add(new EventEntry
+        {
+            Event = eventArgs,
+            Timestamp = DateTime.Now
+        });
+        
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void ClearEvents()
+    {
+        EventHistory.Clear();
+        StateHasChanged();
+    }
+
+    private string GetEventIcon(VFSEventArgs eventArgs)
+    {
+        return eventArgs switch
+        {
+            VFSFileCreatedArgs => Icons.Material.Filled.NoteAdd,
+            VFSDirectoryCreatedArgs => Icons.Material.Filled.CreateNewFolder,
+            VFSFileDeletedArgs => Icons.Material.Filled.DeleteSweep,
+            VFSDirectoryDeletedArgs => Icons.Material.Filled.FolderDelete,
+            VFSFileMovedArgs => Icons.Material.Filled.DriveFileMove,
+            VFSDirectoryMovedArgs => Icons.Material.Filled.FolderOpen,
+            VFSFileRenamedArgs => Icons.Material.Filled.DriveFileRenameOutline,
+            VFSDirectoryRenamedArgs => Icons.Material.Filled.DriveFileRenameOutline,
+            _ => Icons.Material.Filled.Event
+        };
+    }
+
+    private Color GetEventColor(VFSEventArgs eventArgs)
+    {
+        return eventArgs switch
+        {
+            VFSFileCreatedArgs or VFSDirectoryCreatedArgs => Color.Success,
+            VFSFileDeletedArgs or VFSDirectoryDeletedArgs => Color.Error,
+            VFSFileMovedArgs or VFSDirectoryMovedArgs => Color.Info,
+            VFSFileRenamedArgs or VFSDirectoryRenamedArgs => Color.Warning,
+            _ => Color.Default
+        };
+    }
+
+    private record EventEntry
+    {
+        public required VFSEventArgs Event { get; init; }
+        public required DateTime Timestamp { get; init; }
+    }
+
+    public void Dispose()
+    {
+        VFS.FileCreated -= OnFileCreated;
+        VFS.FileDeleted -= OnFileDeleted;
+        VFS.FileMoved -= OnFileMoved;
+        VFS.FileRenamed -= OnFileRenamed;
+        VFS.DirectoryCreated -= OnDirectoryCreated;
+        VFS.DirectoryDeleted -= OnDirectoryDeleted;
+        VFS.DirectoryMoved -= OnDirectoryMoved;
+        VFS.DirectoryRenamed -= OnDirectoryRenamed;
+    }
+}

@@ -4,70 +4,86 @@
 
 <PageTitle>VFS Demo</PageTitle>
 
-<MudText Typo="Typo.h4" GutterBottom="true">Virtual File System Demo</MudText>
-<MudText Typo="Typo.subtitle1" Class="mb-4">Interactive demo of the Atypical Virtual File System library</MudText>
+<MudText Typo="Typo.h3" GutterBottom="true">Virtual File System Dashboard</MudText>
+<MudText Typo="Typo.subtitle1" Class="mb-4">Interactive demonstration of the Atypical VFS library with real-time operations</MudText>
 
 <MudGrid>
-    <MudItem xs="12" md="8">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">File Explorer</MudText>
-            <FileExplorer @ref="FileExplorerRef" OnNodeSelected="OnNodeSelected" />
+    <MudItem xs="12" lg="6">
+        <MudPaper Class="pa-4" Elevation="2" Style="height: 600px;">
+            <MudText Typo="Typo.h6" Class="mb-3">
+                <MudIcon Icon="Icons.Material.Filled.AccountTree" Class="mr-2" />
+                File Explorer
+            </MudText>
+            <div style="height: 520px; overflow-y: auto;">
+                <FileExplorer @ref="FileExplorerRef" OnNodeSelected="OnNodeSelected" />
+            </div>
         </MudPaper>
     </MudItem>
-    <MudItem xs="12" md="4">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">Operations</MudText>
-            <FileOperations OnOperationCompleted="OnOperationCompleted" />
-        </MudPaper>
-        
-        <MudPaper Class="pa-4 mt-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">History</MudText>
-            <UndoRedoControls OnHistoryChanged="OnOperationCompleted" />
-        </MudPaper>
-        
-        <MudPaper Class="pa-4 mt-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">Event Log</MudText>
-            <EventLog @ref="EventLogRef" />
-        </MudPaper>
+    
+    <MudItem xs="12" lg="6">
+        <MudStack Spacing="3">
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-3">
+                    <MudIcon Icon="Icons.Material.Filled.Build" Class="mr-2" />
+                    File Operations
+                </MudText>
+                <FileOperations OnOperationCompleted="OnOperationCompleted" />
+            </MudPaper>
+            
+            <MudPaper Class="pa-4" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-3">
+                    <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
+                    Recent Activity
+                </MudText>
+                <div style="max-height: 200px; overflow-y: auto;">
+                    <EventLog @ref="EventLogRef" />
+                </div>
+            </MudPaper>
+        </MudStack>
     </MudItem>
 </MudGrid>
 
-@if (SelectedNode != null)
+@if (!VFS.IsEmpty)
 {
     <MudPaper Class="pa-4 mt-4" Elevation="2">
-        <MudText Typo="Typo.h6" Class="mb-3">Selected: @SelectedNode.Name</MudText>
-        <MudSimpleTable Dense="true">
-            <tbody>
-                <tr>
-                    <td><strong>Path:</strong></td>
-                    <td>@SelectedNode.Path.Value</td>
-                </tr>
-                <tr>
-                    <td><strong>Type:</strong></td>
-                    <td>@(SelectedNode.IsDirectory ? "Directory" : "File")</td>
-                </tr>
-                <tr>
-                    <td><strong>Created:</strong></td>
-                    <td>@SelectedNode.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                </tr>
-                <tr>
-                    <td><strong>Modified:</strong></td>
-                    <td>@SelectedNode.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                </tr>
-                @if (SelectedNode is IFileNode fileNode)
-                {
-                    <tr>
-                        <td><strong>Content:</strong></td>
-                        <td>
-                            <MudTextField Value="@fileNode.Content" 
-                                          Lines="5" 
-                                          ReadOnly="true" 
-                                          Variant="Variant.Outlined" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </MudSimpleTable>
+        <MudText Typo="Typo.h6" Class="mb-3">
+            <MudIcon Icon="Icons.Material.Filled.Analytics" Class="mr-2" />
+            File System Overview
+        </MudText>
+        <MudGrid>
+            <MudItem xs="6" sm="3">
+                <MudCard Elevation="1">
+                    <MudCardContent Class="text-center">
+                        <MudText Typo="Typo.h4" Color="Color.Primary">@VFS.Index.FilesCount</MudText>
+                        <MudText Typo="Typo.body2">Files</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudCard Elevation="1">
+                    <MudCardContent Class="text-center">
+                        <MudText Typo="Typo.h4" Color="Color.Secondary">@VFS.Index.DirectoriesCount</MudText>
+                        <MudText Typo="Typo.body2">Directories</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudCard Elevation="1">
+                    <MudCardContent Class="text-center">
+                        <MudText Typo="Typo.h4" Color="Color.Tertiary">@VFS.ChangeHistory.UndoStack.Count</MudText>
+                        <MudText Typo="Typo.body2">History</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+            <MudItem xs="6" sm="3">
+                <MudCard Elevation="1">
+                    <MudCardContent Class="text-center">
+                        <MudText Typo="Typo.h4" Color="Color.Info">@VFS.Index.Count</MudText>
+                        <MudText Typo="Typo.body2">Total Items</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
     </MudPaper>
 }
 
