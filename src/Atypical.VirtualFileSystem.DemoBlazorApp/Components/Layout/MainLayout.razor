@@ -7,23 +7,30 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <MudIconButton Icon="Icons.Material.Filled.Menu" 
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" 
                        Color="Color.Inherit" 
                        Edge="Edge.Start" 
-                       OnClick="@(() => DrawerToggle())" />
+                       OnClick="@(() => DrawerToggle())"
+                       aria-label="Toggle navigation menu" />
         <MudSpacer />
-        <MudText Typo="Typo.h6">Atypical Virtual File System Demo</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudIcon Icon="@Icons.Material.Filled.Folder" />
+            <MudText Typo="Typo.h6">VFS Demo</MudText>
+        </MudStack>
         <MudSpacer />
-        <MudIconButton Icon="Icons.Material.Filled.Info" 
+        <MudIconButton Icon="@Icons.Material.Filled.Info" 
                        Color="Color.Inherit" 
                        Edge="Edge.End"
-                       OnClick="@(() => RightDrawerToggle())" />
+                       OnClick="@(() => RightDrawerToggle())"
+                       aria-label="Toggle information panel" />
     </MudAppBar>
     
-    <MudDrawer @bind-Open="DrawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <MudDrawerHeader Class="mud-theme-primary">
-            <MudText Typo="Typo.h6" Class="mud-primary-text">Navigation</MudText>
-        </MudDrawerHeader>
+    <MudDrawer @bind-Open="DrawerOpen" 
+               ClipMode="DrawerClipMode.Always" 
+               Elevation="2"
+               Breakpoint="Breakpoint.Md"
+               OpenMiniOnHover="true"
+               Width="280px">
         <NavigationMenu />
     </MudDrawer>
     
@@ -31,9 +38,21 @@
                Anchor="Anchor.End" 
                ClipMode="DrawerClipMode.Always" 
                Elevation="2" 
-               Width="400px">
+               Width="380px"
+               Breakpoint="Breakpoint.Lg"
+               Variant="@(GetBreakpoint() == Breakpoint.Xs || GetBreakpoint() == Breakpoint.Sm ? DrawerVariant.Temporary : DrawerVariant.Persistent)">
         <MudDrawerHeader Class="mud-theme-secondary">
-            <MudText Typo="Typo.h6" Class="mud-secondary-text">Information</MudText>
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                <MudIcon Icon="@Icons.Material.Filled.Info" Class="mud-secondary-text" />
+                <MudText Typo="Typo.h6" Class="mud-secondary-text">Information</MudText>
+                <MudSpacer />
+                @if (GetBreakpoint() == Breakpoint.Xs || GetBreakpoint() == Breakpoint.Sm)
+                {
+                    <MudIconButton Icon="@Icons.Material.Filled.Close" 
+                                   Size="Size.Small"
+                                   OnClick="() => RightDrawerOpen = false" />
+                }
+            </MudStack>
         </MudDrawerHeader>
         <ContextualInfo />
     </MudDrawer>
@@ -47,16 +66,36 @@
 
 @code {
     private bool DrawerOpen = true;
-    private bool RightDrawerOpen;
+    private bool RightDrawerOpen = false;
+
+    protected override void OnInitialized()
+    {
+        // Auto-close drawers on mobile
+        var userAgent = "";
+        if (userAgent.Contains("Mobile"))
+        {
+            DrawerOpen = false;
+            RightDrawerOpen = false;
+        }
+    }
 
     private void DrawerToggle()
     {
         DrawerOpen = !DrawerOpen;
+        StateHasChanged();
     }
     
     private void RightDrawerToggle()
     {
         RightDrawerOpen = !RightDrawerOpen;
+        StateHasChanged();
+    }
+
+    private Breakpoint GetBreakpoint()
+    {
+        // This would normally be injected from a breakpoint service
+        // For now, return a default
+        return Breakpoint.Md;
     }
 }
 

@@ -11,13 +11,13 @@
 <MudPaper Class="pa-4" Elevation="2">
     <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
         <MudText Typo="Typo.h6">
-            <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
+            <MudIcon Icon="@Icons.Material.Filled.Event" Class="mr-2" />
             Live Event Stream (@EventHistory.Count events)
         </MudText>
         <MudStack Row="true" Spacing="2">
             <MudButton Variant="Variant.Outlined" 
                        Size="Size.Small"
-                       StartIcon="Icons.Material.Filled.Clear"
+                       StartIcon="@Icons.Material.Filled.Clear"
                        OnClick="ClearEvents"
                        Disabled="!EventHistory.Any()">
                 Clear Log
@@ -27,11 +27,11 @@
 
     @if (!EventHistory.Any())
     {
-        <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+        <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
             No events recorded yet. Perform some file operations to see events appear here in real-time.
             <div class="mt-2">
                 <MudButton Variant="Variant.Text" 
-                           StartIcon="Icons.Material.Filled.Build"
+                           StartIcon="@Icons.Material.Filled.Build"
                            Href="/operations">
                     Go to Operations
                 </MudButton>

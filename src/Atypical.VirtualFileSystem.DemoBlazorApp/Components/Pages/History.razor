@@ -14,12 +14,12 @@
         <MudPaper Class="pa-4" Elevation="2">
             <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
                 <MudText Typo="Typo.h6">
-                    <MudIcon Icon="Icons.Material.Filled.Undo" Class="mr-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.Undo" Class="mr-2" />
                     Undo Stack (@VFS.ChangeHistory.UndoStack.Count)
                 </MudText>
                 <MudButton Variant="Variant.Outlined" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Undo"
+                           StartIcon="@Icons.Material.Filled.Undo"
                            OnClick="UndoOperation"
                            Disabled="!VFS.ChangeHistory.UndoStack.Any()">
                     Undo
@@ -58,7 +58,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No operations to undo.
                 </MudAlert>
             }
@@ -69,12 +69,12 @@
         <MudPaper Class="pa-4" Elevation="2">
             <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-3">
                 <MudText Typo="Typo.h6">
-                    <MudIcon Icon="Icons.Material.Filled.Redo" Class="mr-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.Redo" Class="mr-2" />
                     Redo Stack (@VFS.ChangeHistory.RedoStack.Count)
                 </MudText>
                 <MudButton Variant="Variant.Outlined" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Redo"
+                           StartIcon="@Icons.Material.Filled.Redo"
                            OnClick="RedoOperation"
                            Disabled="!VFS.ChangeHistory.RedoStack.Any()">
                     Redo
@@ -113,7 +113,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No operations to redo.
                 </MudAlert>
             }
@@ -123,7 +123,7 @@
 
 <MudPaper Class="pa-4 mt-4" Elevation="2">
     <MudText Typo="Typo.h6" Class="mb-3">
-        <MudIcon Icon="Icons.Material.Filled.Analytics" Class="mr-2" />
+        <MudIcon Icon="@Icons.Material.Filled.Analytics" Class="mr-2" />
         History Statistics
     </MudText>
     

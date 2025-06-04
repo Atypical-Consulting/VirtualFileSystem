@@ -6,7 +6,7 @@
         <MudText Typo="Typo.body2">
             Events: @EventHistory.Count
         </MudText>
-        <MudButton StartIcon="Icons.Material.Filled.Clear" 
+        <MudButton StartIcon="@Icons.Material.Filled.Clear" 
                    Size="Size.Small" 
                    Variant="Variant.Text"
                    OnClick="ClearLog"
@@ -17,7 +17,7 @@
 
     @if (!EventHistory.Any())
     {
-        <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info" Dense="true">
+        <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info" Dense="true">
             No events yet. Perform some file operations to see events here.
         </MudAlert>
     }

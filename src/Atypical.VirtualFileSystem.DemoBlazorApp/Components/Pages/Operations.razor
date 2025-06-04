@@ -12,7 +12,7 @@
     <MudItem xs="12" lg="8">
         <MudPaper Class="pa-4" Elevation="2" Style="height: 600px;">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.AccountTree" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.AccountTree" Class="mr-2" />
                 File Explorer
             </MudText>
             <div style="height: 520px; overflow-y: auto;">
@@ -25,7 +25,7 @@
         <MudStack Spacing="3">
             <MudPaper Class="pa-4" Elevation="2">
                 <MudText Typo="Typo.h6" Class="mb-3">
-                    <MudIcon Icon="Icons.Material.Filled.Build" Class="mr-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.Build" Class="mr-2" />
                     Operations Panel
                 </MudText>
                 <FileOperations OnOperationCompleted="OnOperationCompleted" />
@@ -33,7 +33,7 @@
             
             <MudPaper Class="pa-4" Elevation="2">
                 <MudText Typo="Typo.h6" Class="mb-3">
-                    <MudIcon Icon="Icons.Material.Filled.History" Class="mr-2" />
+                    <MudIcon Icon="@Icons.Material.Filled.History" Class="mr-2" />
                     Undo/Redo
                 </MudText>
                 <UndoRedoControls OnHistoryChanged="OnOperationCompleted" />
@@ -86,7 +86,7 @@
                 <MudItem xs="12" md="6">
                     <MudButton Variant="Variant.Filled" 
                                Color="Color.Primary"
-                               StartIcon="Icons.Material.Filled.Edit"
+                               StartIcon="@Icons.Material.Filled.Edit"
                                Href="@($"/editor?file={Uri.EscapeDataString(selectedFile.Path.Value)}")"
                                FullWidth="true">
                         Edit File Content

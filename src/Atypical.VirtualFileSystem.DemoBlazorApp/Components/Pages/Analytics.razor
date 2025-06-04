@@ -13,7 +13,7 @@
     <MudItem xs="12" lg="6">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.Assessment" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Assessment" Class="mr-2" />
                 File System Overview
             </MudText>
             
@@ -56,7 +56,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No files or directories to analyze.
                 </MudAlert>
             }
@@ -67,7 +67,7 @@
     <MudItem xs="12" lg="6">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.PieChart" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.PieChart" Class="mr-2" />
                 File Types Distribution
             </MudText>
             
@@ -110,7 +110,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No files to analyze for type distribution.
                 </MudAlert>
             }
@@ -121,7 +121,7 @@
     <MudItem xs="12" lg="6">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.AccountTree" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.AccountTree" Class="mr-2" />
                 Directory Structure
             </MudText>
             
@@ -144,7 +144,7 @@
                                 <td>
                                     <MudButton Variant="Variant.Text" 
                                                Size="Size.Small"
-                                               StartIcon="Icons.Material.Filled.Folder"
+                                               StartIcon="@Icons.Material.Filled.Folder"
                                                OnClick="() => SelectDirectory(dir)">
                                         @(dir.Path.IsRoot ? "/" : dir.Name)
                                     </MudButton>
@@ -160,7 +160,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No directories to analyze.
                 </MudAlert>
             }
@@ -171,7 +171,7 @@
     <MudItem xs="12" lg="6">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.Storage" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Storage" Class="mr-2" />
                 Largest Files
             </MudText>
             
@@ -193,7 +193,7 @@
                                 <td>
                                     <MudButton Variant="Variant.Text" 
                                                Size="Size.Small"
-                                               StartIcon="Icons.Material.Filled.InsertDriveFile"
+                                               StartIcon="@Icons.Material.Filled.InsertDriveFile"
                                                OnClick="() => SelectFile(file)">
                                         @file.Name
                                     </MudButton>
@@ -203,7 +203,7 @@
                                 <td>
                                     <MudButton Variant="Variant.Text" 
                                                Size="Size.Small"
-                                               StartIcon="Icons.Material.Filled.Edit"
+                                               StartIcon="@Icons.Material.Filled.Edit"
                                                Href="@($"/editor?file={Uri.EscapeDataString(file.Path.Value)}")">
                                         Edit
                                     </MudButton>
@@ -215,7 +215,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No files to analyze for size comparison.
                 </MudAlert>
             }
@@ -226,7 +226,7 @@
 <!-- Search Suggestions -->
 <MudPaper Class="pa-4 mt-4" Elevation="2">
     <MudText Typo="Typo.h6" Class="mb-3">
-        <MudIcon Icon="Icons.Material.Filled.Lightbulb" Class="mr-2" />
+        <MudIcon Icon="@Icons.Material.Filled.Lightbulb" Class="mr-2" />
         Quick Analysis Actions
     </MudText>
     
@@ -234,7 +234,7 @@
         <MudItem xs="12" sm="6" md="3">
             <MudButton Variant="Variant.Outlined" 
                        FullWidth="true"
-                       StartIcon="Icons.Material.Filled.Search"
+                       StartIcon="@Icons.Material.Filled.Search"
                        Href="/search">
                 Search Files
             </MudButton>
@@ -242,7 +242,7 @@
         <MudItem xs="12" sm="6" md="3">
             <MudButton Variant="Variant.Outlined" 
                        FullWidth="true"
-                       StartIcon="Icons.Material.Filled.CreateNewFolder"
+                       StartIcon="@Icons.Material.Filled.CreateNewFolder"
                        Href="/operations">
                 Manage Files
             </MudButton>
@@ -250,7 +250,7 @@
         <MudItem xs="12" sm="6" md="3">
             <MudButton Variant="Variant.Outlined" 
                        FullWidth="true"
-                       StartIcon="Icons.Material.Filled.History"
+                       StartIcon="@Icons.Material.Filled.History"
                        Href="/history">
                 View History
             </MudButton>
@@ -258,7 +258,7 @@
         <MudItem xs="12" sm="6" md="3">
             <MudButton Variant="Variant.Outlined" 
                        FullWidth="true"
-                       StartIcon="Icons.Material.Filled.Refresh"
+                       StartIcon="@Icons.Material.Filled.Refresh"
                        OnClick="RefreshAnalytics">
                 Refresh Data
             </MudButton>

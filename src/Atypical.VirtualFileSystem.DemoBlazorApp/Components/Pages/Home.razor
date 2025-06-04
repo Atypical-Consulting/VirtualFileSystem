@@ -1,109 +1,171 @@
 @page "/"
 @inject IVirtualFileSystem VFS
+@inject Services.VFSStateService StateService
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
 
-<PageTitle>VFS Demo</PageTitle>
+<PageTitle>Dashboard - VFS Demo</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">Virtual File System Dashboard</MudText>
-<MudText Typo="Typo.subtitle1" Class="mb-4">Interactive demonstration of the Atypical VFS library with real-time operations</MudText>
-
-<MudGrid>
-    <MudItem xs="12" lg="6">
-        <MudPaper Class="pa-4" Elevation="2" Style="height: 600px;">
-            <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.AccountTree" Class="mr-2" />
-                File Explorer
-            </MudText>
-            <div style="height: 520px; overflow-y: auto;">
-                <FileExplorer @ref="FileExplorerRef" OnNodeSelected="OnNodeSelected" />
-            </div>
-        </MudPaper>
-    </MudItem>
-    
-    <MudItem xs="12" lg="6">
-        <MudStack Spacing="3">
-            <MudPaper Class="pa-4" Elevation="2">
-                <MudText Typo="Typo.h6" Class="mb-3">
-                    <MudIcon Icon="Icons.Material.Filled.Build" Class="mr-2" />
-                    File Operations
-                </MudText>
-                <FileOperations OnOperationCompleted="OnOperationCompleted" />
-            </MudPaper>
-            
-            <MudPaper Class="pa-4" Elevation="2">
-                <MudText Typo="Typo.h6" Class="mb-3">
-                    <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
-                    Recent Activity
-                </MudText>
-                <div style="max-height: 200px; overflow-y: auto;">
-                    <EventLog @ref="EventLogRef" />
-                </div>
-            </MudPaper>
-        </MudStack>
-    </MudItem>
-</MudGrid>
-
-@if (!VFS.IsEmpty)
-{
-    <MudPaper Class="pa-4 mt-4" Elevation="2">
-        <MudText Typo="Typo.h6" Class="mb-3">
-            <MudIcon Icon="Icons.Material.Filled.Analytics" Class="mr-2" />
-            File System Overview
-        </MudText>
+<MudStack Spacing="4">
+    <!-- Welcome Section -->
+    <MudPaper Class="pa-6" Elevation="2">
         <MudGrid>
-            <MudItem xs="6" sm="3">
-                <MudCard Elevation="1">
-                    <MudCardContent Class="text-center">
-                        <MudText Typo="Typo.h4" Color="Color.Primary">@VFS.Index.FilesCount</MudText>
-                        <MudText Typo="Typo.body2">Files</MudText>
-                    </MudCardContent>
+            <MudItem xs="12" md="8">
+                <MudStack Spacing="3">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3">
+                        <MudIcon Icon="@Icons.Material.Filled.Folder" Size="Size.Large" Color="Color.Primary" />
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.h3" Color="Color.Primary">VFS Demo Dashboard</MudText>
+                            <MudText Typo="Typo.subtitle1" Class="text-muted">
+                                Atypical Virtual File System - Interactive Demonstration
+                            </MudText>
+                        </MudStack>
+                    </MudStack>
+                    
+                    <MudText Typo="Typo.body1">
+                        Welcome to the Atypical Virtual File System demo! This application showcases 
+                        the capabilities of our in-memory file system with full CRUD operations, 
+                        event-driven architecture, and undo/redo functionality.
+                    </MudText>
+                    
+                    @if (VFS.IsEmpty)
+                    {
+                        <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
+                            <MudText>Your virtual file system is empty. Get started by creating some sample data!</MudText>
+                            <MudButton Variant="Variant.Text" 
+                                       StartIcon="@Icons.Material.Filled.AutoFixHigh"
+                                       OnClick="CreateSampleData"
+                                       Class="mt-2">
+                                Create Sample Data
+                            </MudButton>
+                        </MudAlert>
+                    }
+                </MudStack>
+            </MudItem>
+            <MudItem xs="12" md="4" Class="text-center">
+                <MudStack Spacing="2" AlignItems="AlignItems.Center">
+                    <MudCard Elevation="3" Class="pa-4">
+                        <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                            <MudText Typo="Typo.h2" Color="Color.Success">@VFS.Index.Count</MudText>
+                            <MudText Typo="Typo.body2">Total Items</MudText>
+                        </MudStack>
+                    </MudCard>
+                    <MudStack Row="true" Spacing="1">
+                        <MudChip T="string" Color="Color.Primary" Size="Size.Small">
+                            @VFS.Index.FilesCount Files
+                        </MudChip>
+                        <MudChip T="string" Color="Color.Secondary" Size="Size.Small">
+                            @VFS.Index.DirectoriesCount Dirs
+                        </MudChip>
+                    </MudStack>
+                </MudStack>
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+    <!-- Quick Actions -->
+    <MudPaper Class="pa-4" Elevation="2">
+        <MudText Typo="Typo.h5" Class="mb-3">
+            <MudIcon Icon="@Icons.Material.Filled.Speed" Class="mr-2" />
+            Quick Actions
+        </MudText>
+        
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Class="pa-4 hover-card" @onclick="NavigateToOperations" Style="cursor: pointer;">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="@Icons.Material.Filled.CreateNewFolder" Size="Size.Large" Color="Color.Primary" />
+                        <MudText Typo="Typo.h6" Align="Align.Center">File Operations</MudText>
+                        <MudText Typo="Typo.body2" Align="Align.Center" Class="text-muted">
+                            Create, modify, and manage files and directories
+                        </MudText>
+                    </MudStack>
                 </MudCard>
             </MudItem>
-            <MudItem xs="6" sm="3">
-                <MudCard Elevation="1">
-                    <MudCardContent Class="text-center">
-                        <MudText Typo="Typo.h4" Color="Color.Secondary">@VFS.Index.DirectoriesCount</MudText>
-                        <MudText Typo="Typo.body2">Directories</MudText>
-                    </MudCardContent>
+            
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Class="pa-4 hover-card" @onclick="NavigateToSearch" Style="cursor: pointer;">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Secondary" />
+                        <MudText Typo="Typo.h6" Align="Align.Center">Search Files</MudText>
+                        <MudText Typo="Typo.body2" Align="Align.Center" Class="text-muted">
+                            Find files by name, content, or pattern
+                        </MudText>
+                    </MudStack>
                 </MudCard>
             </MudItem>
-            <MudItem xs="6" sm="3">
-                <MudCard Elevation="1">
-                    <MudCardContent Class="text-center">
-                        <MudText Typo="Typo.h4" Color="Color.Tertiary">@VFS.ChangeHistory.UndoStack.Count</MudText>
-                        <MudText Typo="Typo.body2">History</MudText>
-                    </MudCardContent>
+            
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Class="pa-4 hover-card" @onclick="NavigateToEditor" Style="cursor: pointer;">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="@Icons.Material.Filled.Edit" Size="Size.Large" Color="Color.Tertiary" />
+                        <MudText Typo="Typo.h6" Align="Align.Center">File Editor</MudText>
+                        <MudText Typo="Typo.body2" Align="Align.Center" Class="text-muted">
+                            Edit file content with syntax highlighting
+                        </MudText>
+                    </MudStack>
                 </MudCard>
             </MudItem>
-            <MudItem xs="6" sm="3">
-                <MudCard Elevation="1">
-                    <MudCardContent Class="text-center">
-                        <MudText Typo="Typo.h4" Color="Color.Info">@VFS.Index.Count</MudText>
-                        <MudText Typo="Typo.body2">Total Items</MudText>
-                    </MudCardContent>
+            
+            <MudItem xs="12" sm="6" md="3">
+                <MudCard Class="pa-4 hover-card" @onclick="NavigateToAnalytics" Style="cursor: pointer;">
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        <MudIcon Icon="@Icons.Material.Filled.Analytics" Size="Size.Large" Color="Color.Success" />
+                        <MudText Typo="Typo.h6" Align="Align.Center">Analytics</MudText>
+                        <MudText Typo="Typo.body2" Align="Align.Center" Class="text-muted">
+                            View detailed file system insights
+                        </MudText>
+                    </MudStack>
                 </MudCard>
             </MudItem>
         </MudGrid>
     </MudPaper>
-}
+</MudStack>
+
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+</style>
 
 @code {
-    private FileExplorer? FileExplorerRef;
-    private EventLog? EventLogRef;
-    private IVirtualFileSystemNode? SelectedNode;
-
-    private async Task OnOperationCompleted()
+    protected override void OnInitialized()
     {
-        if (FileExplorerRef != null)
-        {
-            await FileExplorerRef.RefreshTree();
-        }
-        StateHasChanged();
+        StateService.OnDataChanged += StateHasChanged;
     }
 
-    private void OnNodeSelected(IVirtualFileSystemNode node)
+    private void NavigateToOperations() => Navigation.NavigateTo("/operations");
+    private void NavigateToSearch() => Navigation.NavigateTo("/search");
+    private void NavigateToEditor() => Navigation.NavigateTo("/editor");
+    private void NavigateToAnalytics() => Navigation.NavigateTo("/analytics");
+
+    private void CreateSampleData()
     {
-        SelectedNode = node;
-        StateHasChanged();
+        try
+        {
+            VFS.CreateDirectory("/docs")
+               .CreateDirectory("/src")
+               .CreateDirectory("/tests")
+               .CreateFile("/docs/readme.txt", "# Welcome to VFS Demo\n\nThis is a comprehensive virtual file system demonstration.")
+               .CreateFile("/docs/changelog.md", "# Changelog\n\n## v1.0.0\n- Initial release")
+               .CreateFile("/src/main.cs", "using System;\n\nnamespace Demo\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello VFS!\");\n        }\n    }\n}")
+               .CreateFile("/tests/test.cs", "using Xunit;\n\npublic class Tests\n{\n    [Fact]\n    public void Test1()\n    {\n        Assert.True(true);\n    }\n}");
+
+            StateService.NotifyDataChanged();
+        }
+        catch (Exception)
+        {
+            // Handle error silently for now
+        }
+    }
+
+    public void Dispose()
+    {
+        StateService.OnDataChanged -= StateHasChanged;
     }
 }

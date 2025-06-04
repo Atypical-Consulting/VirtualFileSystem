@@ -10,7 +10,7 @@
     <MudStack Row="true" Spacing="2">
         <MudButton Variant="Variant.Filled" 
                    Color="Color.Secondary" 
-                   StartIcon="Icons.Material.Filled.Undo"
+                   StartIcon="@Icons.Material.Filled.Undo"
                    OnClick="Undo"
                    Disabled="!VFS.ChangeHistory.UndoStack.Any()"
                    Size="Size.Small">
@@ -19,7 +19,7 @@
         
         <MudButton Variant="Variant.Filled" 
                    Color="Color.Secondary" 
-                   StartIcon="Icons.Material.Filled.Redo"
+                   StartIcon="@Icons.Material.Filled.Redo"
                    OnClick="Redo"
                    Disabled="!VFS.ChangeHistory.RedoStack.Any()"
                    Size="Size.Small">

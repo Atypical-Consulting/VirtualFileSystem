@@ -18,7 +18,7 @@
                 <MudStack Spacing="3">
                     <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
                         <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                            <MudIcon Icon="Icons.Material.Filled.InsertDriveFile" />
+                            <MudIcon Icon="@Icons.Material.Filled.InsertDriveFile" />
                             <MudText Typo="Typo.h6">@CurrentFile.Name</MudText>
                             @if (HasUnsavedChanges)
                             {
@@ -30,13 +30,13 @@
                         <MudStack Row="true" Spacing="2">
                             <MudButton Variant="Variant.Filled" 
                                        Color="Color.Success"
-                                       StartIcon="Icons.Material.Filled.Save"
+                                       StartIcon="@Icons.Material.Filled.Save"
                                        OnClick="SaveFile"
                                        Disabled="!HasUnsavedChanges">
                                 Save
                             </MudButton>
                             <MudButton Variant="Variant.Outlined" 
-                                       StartIcon="Icons.Material.Filled.Refresh"
+                                       StartIcon="@Icons.Material.Filled.Refresh"
                                        OnClick="ReloadFile"
                                        Disabled="!HasUnsavedChanges">
                                 Reload
@@ -58,13 +58,13 @@
                         <MudStack Row="true" Spacing="1">
                             <MudButton Variant="Variant.Text" 
                                        Size="Size.Small"
-                                       StartIcon="Icons.Material.Filled.FormatAlignLeft"
+                                       StartIcon="@Icons.Material.Filled.FormatAlignLeft"
                                        OnClick="FormatContent">
                                 Format
                             </MudButton>
                             <MudButton Variant="Variant.Text" 
                                        Size="Size.Small"
-                                       StartIcon="Icons.Material.Filled.ContentCopy"
+                                       StartIcon="@Icons.Material.Filled.ContentCopy"
                                        OnClick="CopyToClipboard">
                                 Copy
                             </MudButton>
@@ -78,7 +78,7 @@
             <MudStack Spacing="3">
                 <MudPaper Class="pa-4" Elevation="2">
                     <MudText Typo="Typo.h6" Class="mb-3">
-                        <MudIcon Icon="Icons.Material.Filled.Info" Class="mr-2" />
+                        <MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-2" />
                         File Information
                     </MudText>
                     <MudSimpleTable Dense="true">
@@ -113,7 +113,7 @@
                 
                 <MudPaper Class="pa-4" Elevation="2">
                     <MudText Typo="Typo.h6" Class="mb-3">
-                        <MudIcon Icon="Icons.Material.Filled.Build" Class="mr-2" />
+                        <MudIcon Icon="@Icons.Material.Filled.Build" Class="mr-2" />
                         Editor Tools
                     </MudText>
                     <MudStack Spacing="2">
@@ -122,7 +122,7 @@
                                       Placeholder="Search in content..."
                                       FullWidth="true"
                                       Adornment="Adornment.End"
-                                      AdornmentIcon="Icons.Material.Filled.Search" />
+                                      AdornmentIcon="@Icons.Material.Filled.Search" />
                         
                         <MudTextField @bind-Value="ReplaceText" 
                                       Label="Replace With" 
@@ -132,7 +132,7 @@
                         <MudStack Row="true" Spacing="1">
                             <MudButton Variant="Variant.Text" 
                                        Size="Size.Small"
-                                       StartIcon="Icons.Material.Filled.FindReplace"
+                                       StartIcon="@Icons.Material.Filled.FindReplace"
                                        OnClick="ReplaceAll"
                                        Disabled="string.IsNullOrEmpty(FindText)">
                                 Replace All
@@ -143,7 +143,7 @@
                         
                         <MudButton Variant="Variant.Text" 
                                    Size="Size.Small"
-                                   StartIcon="Icons.Material.Filled.Undo"
+                                   StartIcon="@Icons.Material.Filled.Undo"
                                    OnClick="UndoChanges"
                                    Disabled="!HasUnsavedChanges"
                                    FullWidth="true">
@@ -154,20 +154,20 @@
                 
                 <MudPaper Class="pa-4" Elevation="2">
                     <MudText Typo="Typo.h6" Class="mb-3">
-                        <MudIcon Icon="Icons.Material.Filled.Storage" Class="mr-2" />
+                        <MudIcon Icon="@Icons.Material.Filled.Storage" Class="mr-2" />
                         Quick Actions
                     </MudText>
                     <MudStack Spacing="1">
                         <MudButton Variant="Variant.Text" 
                                    Size="Size.Small"
-                                   StartIcon="Icons.Material.Filled.CreateNewFolder"
+                                   StartIcon="@Icons.Material.Filled.CreateNewFolder"
                                    Href="/operations"
                                    FullWidth="true">
                             Back to Operations
                         </MudButton>
                         <MudButton Variant="Variant.Text" 
                                    Size="Size.Small"
-                                   StartIcon="Icons.Material.Filled.Search"
+                                   StartIcon="@Icons.Material.Filled.Search"
                                    Href="/search"
                                    FullWidth="true">
                             Search Files
@@ -180,16 +180,16 @@
 }
 else if (!string.IsNullOrEmpty(ErrorMessage))
 {
-    <MudAlert Severity="Severity.Error" Icon="Icons.Material.Filled.Error">
+    <MudAlert Severity="Severity.Error" Icon="@Icons.Material.Filled.Error">
         @ErrorMessage
     </MudAlert>
 }
 else
 {
-    <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+    <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
         <MudText>No file selected for editing.</MudText>
         <MudButton Variant="Variant.Text" 
-                   StartIcon="Icons.Material.Filled.Search"
+                   StartIcon="@Icons.Material.Filled.Search"
                    Href="/search"
                    Class="mt-2">
             Search for Files

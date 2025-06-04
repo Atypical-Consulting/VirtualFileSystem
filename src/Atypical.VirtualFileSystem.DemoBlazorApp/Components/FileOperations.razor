@@ -7,7 +7,7 @@
         <MudExpansionPanel>
             <TitleContent>
                 <div style="display: flex; align-items: center">
-                    <MudIcon Icon="Icons.Material.Filled.CreateNewFolder" class="mr-3"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.CreateNewFolder" class="mr-3"></MudIcon>
                     <MudText>Create Directory</MudText>
                 </div>
             </TitleContent>
@@ -19,7 +19,7 @@
                               Margin="Margin.Dense" />
                 <MudButton Variant="Variant.Filled" 
                            Color="Color.Primary" 
-                           StartIcon="Icons.Material.Filled.CreateNewFolder"
+                           StartIcon="@Icons.Material.Filled.CreateNewFolder"
                            OnClick="CreateDirectory"
                            Class="mt-2"
                            Disabled="string.IsNullOrWhiteSpace(NewDirectoryPath)">
@@ -31,7 +31,7 @@
         <MudExpansionPanel>
             <TitleContent>
                 <div style="display: flex; align-items: center">
-                    <MudIcon Icon="Icons.Material.Filled.NoteAdd" class="mr-3"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.NoteAdd" class="mr-3"></MudIcon>
                     <MudText>Create File</MudText>
                 </div>
             </TitleContent>
@@ -50,7 +50,7 @@
                               Class="mt-2" />
                 <MudButton Variant="Variant.Filled" 
                            Color="Color.Success" 
-                           StartIcon="Icons.Material.Filled.NoteAdd"
+                           StartIcon="@Icons.Material.Filled.NoteAdd"
                            OnClick="CreateFile"
                            Class="mt-2"
                            Disabled="string.IsNullOrWhiteSpace(NewFilePath)">
@@ -62,7 +62,7 @@
         <MudExpansionPanel>
             <TitleContent>
                 <div style="display: flex; align-items: center">
-                    <MudIcon Icon="Icons.Material.Filled.Delete" class="mr-3"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.Delete" class="mr-3"></MudIcon>
                     <MudText>Delete</MudText>
                 </div>
             </TitleContent>
@@ -75,14 +75,14 @@
                 <MudStack Row="true" Class="mt-2">
                     <MudButton Variant="Variant.Filled" 
                                Color="Color.Error" 
-                               StartIcon="Icons.Material.Filled.DeleteSweep"
+                               StartIcon="@Icons.Material.Filled.DeleteSweep"
                                OnClick="DeleteFile"
                                Disabled="string.IsNullOrWhiteSpace(DeletePath)">
                         Delete File
                     </MudButton>
                     <MudButton Variant="Variant.Outlined" 
                                Color="Color.Error" 
-                               StartIcon="Icons.Material.Filled.FolderDelete"
+                               StartIcon="@Icons.Material.Filled.FolderDelete"
                                OnClick="DeleteDirectory"
                                Disabled="string.IsNullOrWhiteSpace(DeletePath)">
                         Delete Directory
@@ -94,7 +94,7 @@
         <MudExpansionPanel>
             <TitleContent>
                 <div style="display: flex; align-items: center">
-                    <MudIcon Icon="Icons.Material.Filled.DriveFileMove" class="mr-3"></MudIcon>
+                    <MudIcon Icon="@Icons.Material.Filled.DriveFileMove" class="mr-3"></MudIcon>
                     <MudText>Move/Rename</MudText>
                 </div>
             </TitleContent>
@@ -113,14 +113,14 @@
                 <MudStack Row="true" Class="mt-2">
                     <MudButton Variant="Variant.Filled" 
                                Color="Color.Info" 
-                               StartIcon="Icons.Material.Filled.DriveFileMove"
+                               StartIcon="@Icons.Material.Filled.DriveFileMove"
                                OnClick="MoveFile"
                                Disabled="string.IsNullOrWhiteSpace(SourcePath) || string.IsNullOrWhiteSpace(DestinationPath)">
                         Move File
                     </MudButton>
                     <MudButton Variant="Variant.Outlined" 
                                Color="Color.Info" 
-                               StartIcon="Icons.Material.Filled.DriveFileMoveOutline"
+                               StartIcon="@Icons.Material.Filled.FolderOpen"
                                OnClick="MoveDirectory"
                                Disabled="string.IsNullOrWhiteSpace(SourcePath) || string.IsNullOrWhiteSpace(DestinationPath)">
                         Move Directory
@@ -134,7 +134,7 @@
 
     <MudButton Variant="Variant.Outlined" 
                Color="Color.Warning" 
-               StartIcon="Icons.Material.Filled.AutoFixHigh"
+               StartIcon="@Icons.Material.Filled.AutoFixHigh"
                OnClick="CreateSampleData"
                FullWidth="true">
         Create Sample Data

@@ -12,7 +12,7 @@
     <MudItem xs="12" lg="4">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.Search" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Search" Class="mr-2" />
                 Search Criteria
             </MudText>
             
@@ -23,7 +23,7 @@
                               FullWidth="true"
                               @onkeyup="OnSearchKeyUp"
                               Adornment="Adornment.End"
-                              AdornmentIcon="Icons.Material.Filled.Search" />
+                              AdornmentIcon="@Icons.Material.Filled.Search" />
                 
                 <MudSelect @bind-Value="SearchType" Label="Search Type" FullWidth="true">
                     <MudSelectItem Value="SearchTypes.Name">Name Contains</MudSelectItem>
@@ -44,13 +44,13 @@
                 <MudStack Row="true" Spacing="2">
                     <MudButton Variant="Variant.Filled" 
                                Color="Color.Primary"
-                               StartIcon="Icons.Material.Filled.Search"
+                               StartIcon="@Icons.Material.Filled.Search"
                                OnClick="PerformSearch"
                                Disabled="string.IsNullOrWhiteSpace(SearchTerm)">
                         Search
                     </MudButton>
                     <MudButton Variant="Variant.Outlined" 
-                               StartIcon="Icons.Material.Filled.Clear"
+                               StartIcon="@Icons.Material.Filled.Clear"
                                OnClick="ClearSearch">
                         Clear
                     </MudButton>
@@ -62,7 +62,7 @@
     <MudItem xs="12" lg="8">
         <MudPaper Class="pa-4" Elevation="2">
             <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="Icons.Material.Filled.FindInPage" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.FindInPage" Class="mr-2" />
                 Search Results (@SearchResults.Count)
             </MudText>
             
@@ -75,7 +75,7 @@
             }
             else if (!SearchResults.Any() && HasSearched)
             {
-                <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
                     No results found for "@SearchTerm"
                 </MudAlert>
             }
@@ -109,7 +109,7 @@
                                     <MudStack Row="true" Spacing="1">
                                         <MudButton Variant="Variant.Text" 
                                                    Size="Size.Small"
-                                                   StartIcon="Icons.Material.Filled.Visibility"
+                                                   StartIcon="@Icons.Material.Filled.Visibility"
                                                    OnClick="() => SelectNode(result)">
                                             Select
                                         </MudButton>
@@ -117,7 +117,7 @@
                                         {
                                             <MudButton Variant="Variant.Text" 
                                                        Size="Size.Small"
-                                                       StartIcon="Icons.Material.Filled.Edit"
+                                                       StartIcon="@Icons.Material.Filled.Edit"
                                                        Href="@($"/editor?file={Uri.EscapeDataString(result.Path.Value)}")">
                                                 Edit
                                             </MudButton>
@@ -131,7 +131,7 @@
             }
             else
             {
-                <MudAlert Severity="Severity.Normal" Icon="Icons.Material.Filled.Search">
+                <MudAlert Severity="Severity.Normal" Icon="@Icons.Material.Filled.Search">
                     Enter search criteria and click "Search" to find files and directories.
                 </MudAlert>
             }

@@ -1,13 +1,18 @@
 @inject IVirtualFileSystem VFS
 @inject Services.VFSStateService StateService
+@inject ISnackbar Snackbar
 @rendermode InteractiveServer
 
 <div class="pa-4">
+    @if (isLoading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="mb-4" />
+    }
     <MudStack Spacing="3">
         <!-- VFS Statistics -->
         <MudPaper Class="pa-3" Elevation="1">
             <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="Icons.Material.Filled.Assessment" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Assessment" Class="mr-2" />
                 VFS Statistics
             </MudText>
             <MudSimpleTable Dense="true">
@@ -88,7 +93,7 @@
         <!-- History Info -->
         <MudPaper Class="pa-3" Elevation="1">
             <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="Icons.Material.Filled.History" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.History" Class="mr-2" />
                 Change History
             </MudText>
             <MudSimpleTable Dense="true">
@@ -107,14 +112,14 @@
             <MudStack Row="true" Class="mt-2" Spacing="1">
                 <MudButton Variant="Variant.Outlined" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Undo"
+                           StartIcon="@Icons.Material.Filled.Undo"
                            OnClick="Undo"
                            Disabled="!VFS.ChangeHistory.UndoStack.Any()">
                     Undo
                 </MudButton>
                 <MudButton Variant="Variant.Outlined" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Redo"
+                           StartIcon="@Icons.Material.Filled.Redo"
                            OnClick="Redo"
                            Disabled="!VFS.ChangeHistory.RedoStack.Any()">
                     Redo
@@ -125,7 +130,7 @@
         <!-- Recent Events -->
         <MudPaper Class="pa-3" Elevation="1">
             <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="Icons.Material.Filled.Event" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Event" Class="mr-2" />
                 Recent Events
             </MudText>
             @if (RecentEvents.Any())
@@ -150,20 +155,20 @@
         <!-- Quick Actions -->
         <MudPaper Class="pa-3" Elevation="1">
             <MudText Typo="Typo.h6" Class="mb-2">
-                <MudIcon Icon="Icons.Material.Filled.Speed" Class="mr-2" />
+                <MudIcon Icon="@Icons.Material.Filled.Speed" Class="mr-2" />
                 Quick Actions
             </MudText>
             <MudStack Spacing="1">
                 <MudButton Variant="Variant.Text" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.AutoFixHigh"
+                           StartIcon="@Icons.Material.Filled.AutoFixHigh"
                            OnClick="CreateSampleData"
                            FullWidth="true">
                     Create Sample Data
                 </MudButton>
                 <MudButton Variant="Variant.Text" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Clear"
+                           StartIcon="@Icons.Material.Filled.Clear"
                            OnClick="ClearFileSystem"
                            FullWidth="true"
                            Disabled="VFS.IsEmpty">
@@ -171,7 +176,7 @@
                 </MudButton>
                 <MudButton Variant="Variant.Text" 
                            Size="Size.Small"
-                           StartIcon="Icons.Material.Filled.Refresh"
+                           StartIcon="@Icons.Material.Filled.Refresh"
                            OnClick="RefreshInfo"
                            FullWidth="true">
                     Refresh Info
@@ -187,6 +192,8 @@
 
     private List<EventEntry> RecentEvents = new();
 
+    private bool isLoading;
+
     protected override void OnInitialized()
     {
         // Subscribe to VFS events
@@ -198,6 +205,9 @@
         VFS.DirectoryDeleted += OnDirectoryDeleted;
         VFS.DirectoryMoved += OnDirectoryMoved;
         VFS.DirectoryRenamed += OnDirectoryRenamed;
+        
+        // Subscribe to state changes
+        StateService.OnDataChanged += StateHasChanged;
     }
 
     private void OnFileCreated(VFSFileCreatedArgs e) => AddEvent(e);
@@ -281,29 +291,49 @@
 
     private async Task CreateSampleData()
     {
+        if (isLoading) return;
+        
+        isLoading = true;
+        StateHasChanged();
+        
         try
         {
+            await Task.Delay(500); // Simulate some work
+            
             VFS.CreateDirectory("/docs")
                .CreateDirectory("/src")
                .CreateDirectory("/tests")
-               .CreateFile("/docs/readme.txt", "# Welcome to VFS Demo\n\nThis is a sample readme file.")
-               .CreateFile("/docs/changelog.md", "# Changelog\n\n## v1.0.0\n- Initial release")
-               .CreateFile("/src/main.cs", "using System;\n\nnamespace Demo\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello VFS!\");\n        }\n    }\n}")
-               .CreateFile("/tests/test.cs", "using Xunit;\n\npublic class Tests\n{\n    [Fact]\n    public void Test1()\n    {\n        Assert.True(true);\n    }\n}");
+               .CreateFile("/docs/readme.txt", "# Welcome to VFS Demo\n\nThis is a sample readme file.\n\nFeatures:\n- In-memory file system\n- Full CRUD operations\n- Event-driven architecture\n- Undo/Redo support")
+               .CreateFile("/docs/changelog.md", "# Changelog\n\n## v1.0.0\n- Initial release\n- Basic file operations\n- Event system\n\n## v1.1.0\n- Added undo/redo\n- Enhanced search")
+               .CreateFile("/src/main.cs", "using System;\nusing Atypical.VirtualFileSystem.Core;\n\nnamespace Demo\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            var vfs = new VFS();\n            Console.WriteLine(\"Hello VFS!\");\n            Console.WriteLine($\"Files: {vfs.Files.Count()}\");\n        }\n    }\n}")
+               .CreateFile("/tests/test.cs", "using Xunit;\nusing Atypical.VirtualFileSystem.Core;\n\npublic class VFSTests\n{\n    [Fact]\n    public void CreateFile_ShouldWork()\n    {\n        var vfs = new VFS();\n        vfs.CreateFile(\"/test.txt\", \"content\");\n        Assert.Single(vfs.Files);\n    }\n}");
 
             await OnDataChanged.InvokeAsync();
-            StateHasChanged();
+            StateService.NotifyDataChanged();
+            Snackbar.Add("Sample data created successfully!", Severity.Success);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Handle error silently for now
+            Snackbar.Add($"Error creating sample data: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
         }
     }
 
     private async Task ClearFileSystem()
     {
+        if (isLoading) return;
+        
+        isLoading = true;
+        StateHasChanged();
+        
         try
         {
+            await Task.Delay(300); // Simulate some work
+            
             var allFiles = VFS.Files.ToList();
             var allDirectories = VFS.Directories.ToList();
 
@@ -318,11 +348,17 @@
             }
 
             await OnDataChanged.InvokeAsync();
-            StateHasChanged();
+            StateService.NotifyDataChanged();
+            Snackbar.Add("File system cleared successfully!", Severity.Info);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Handle error silently for now
+            Snackbar.Add($"Error clearing file system: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
         }
     }
 
@@ -347,5 +383,7 @@
         VFS.DirectoryDeleted -= OnDirectoryDeleted;
         VFS.DirectoryMoved -= OnDirectoryMoved;
         VFS.DirectoryRenamed -= OnDirectoryRenamed;
+        
+        StateService.OnDataChanged -= StateHasChanged;
     }
 }
