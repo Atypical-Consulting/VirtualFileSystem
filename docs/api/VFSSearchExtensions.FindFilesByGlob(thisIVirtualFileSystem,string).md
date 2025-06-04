@@ -1,0 +1,27 @@
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core\.Extensions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Extensions 'Atypical\.VirtualFileSystem\.Core\.Extensions').[VFSSearchExtensions](VFSSearchExtensions.md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSSearchExtensions')
+
+## VFSSearchExtensions\.FindFilesByGlob\(this IVirtualFileSystem, string\) Method
+
+Searches files using glob pattern matching\.
+
+```csharp
+public static System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> FindFilesByGlob(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string pattern);
+```
+#### Parameters
+
+<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSearchExtensions.FindFilesByGlob(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string).vfs'></a>
+
+`vfs` [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')
+
+The virtual file system\.
+
+<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSearchExtensions.FindFilesByGlob(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string).pattern'></a>
+
+`pattern` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+
+The glob pattern \(e\.g\., "\*\.txt", "test\*\.md", "\*\*/config\.\*"\)\.
+
+#### Returns
+[System\.Collections\.Generic\.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')  
+Files matching the glob pattern\.

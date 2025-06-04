@@ -1,0 +1,31 @@
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core\.Extensions](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Extensions 'Atypical\.VirtualFileSystem\.Core\.Extensions')
+
+## VFSConvenienceExtensions Class
+
+Provides convenience extension methods for IVirtualFileSystem to simplify common operations\.
+These methods accept string paths directly and handle common use cases with less boilerplate\.
+
+```csharp
+public static class VFSConvenienceExtensions
+```
+
+Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSConvenienceExtensions
+
+| Methods | |
+| :--- | :--- |
+| [CreateDirectory\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.CreateDirectory(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.CreateDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Creates a directory with the specified path using a string path\. |
+| [CreateFile\(this IVirtualFileSystem, string, string\)](VFSConvenienceExtensions.CreateFile(thisIVirtualFileSystem,string,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.CreateFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, string\)') | Creates a file with the specified path and content using a string path\. |
+| [DeleteDirectory\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.DeleteDirectory(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.DeleteDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Deletes a directory with the specified path using a string path\. |
+| [DeleteFile\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.DeleteFile(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.DeleteFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Deletes a file with the specified path using a string path\. |
+| [DirectoryExists\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.DirectoryExists(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.DirectoryExists\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Checks if a directory exists at the specified path\. |
+| [Exists\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.Exists(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.Exists\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Checks if a file or directory exists at the specified path\. |
+| [FileExists\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.FileExists(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.FileExists\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Checks if a file exists at the specified path\. |
+| [GetDirectory\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.GetDirectory(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.GetDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Gets a directory by its path using a string path\. |
+| [GetFile\(this IVirtualFileSystem, string\)](VFSConvenienceExtensions.GetFile(thisIVirtualFileSystem,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.GetFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string\)') | Gets a file by its path using a string path\. |
+| [MoveDirectory\(this IVirtualFileSystem, string, string\)](VFSConvenienceExtensions.MoveDirectory(thisIVirtualFileSystem,string,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.MoveDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, string\)') | Moves a directory from source to destination using string paths\. |
+| [MoveFile\(this IVirtualFileSystem, string, string\)](VFSConvenienceExtensions.MoveFile(thisIVirtualFileSystem,string,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.MoveFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, string\)') | Moves a file from source to destination using string paths\. |
+| [RenameDirectory\(this IVirtualFileSystem, string, string\)](VFSConvenienceExtensions.RenameDirectory(thisIVirtualFileSystem,string,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.RenameDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, string\)') | Renames a directory using string paths\. |
+| [RenameFile\(this IVirtualFileSystem, string, string\)](VFSConvenienceExtensions.RenameFile(thisIVirtualFileSystem,string,string).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.RenameFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, string\)') | Renames a file using string paths\. |
+| [TryGetDirectory\(this IVirtualFileSystem, string, IDirectoryNode\)](VFSConvenienceExtensions.TryGetDirectory(thisIVirtualFileSystem,string,IDirectoryNode).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.TryGetDirectory\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode\)') | Tries to get a directory by its path using a string path\. |
+| [TryGetFile\(this IVirtualFileSystem, string, IFileNode\)](VFSConvenienceExtensions.TryGetFile(thisIVirtualFileSystem,string,IFileNode).md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSConvenienceExtensions\.TryGetFile\(this Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem, string, Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode\)') | Tries to get a file by its path using a string path\. |
