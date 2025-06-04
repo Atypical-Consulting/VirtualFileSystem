@@ -1,0 +1,73 @@
+@inject IVirtualFileSystem VFS
+@rendermode InteractiveServer
+
+<div>
+    @if (VFS.IsEmpty)
+    {
+        <MudAlert Severity="Severity.Info" Icon="Icons.Material.Filled.Info">
+            The virtual file system is empty. Create some files and directories to get started!
+        </MudAlert>
+    }
+    else
+    {
+        @RenderNodeTree(VFS.Root)
+    }
+</div>
+
+@code {
+    [Parameter] public EventCallback<IVirtualFileSystemNode> OnNodeSelected { get; set; }
+    
+    private IVirtualFileSystemNode? SelectedNode;
+
+    private RenderFragment RenderNodeTree(IVirtualFileSystemNode node)
+    {
+        return @<div class="mud-treeview-item">
+            <MudButton Variant="Variant.Text" 
+                       StartIcon="@GetNodeIcon(node)" 
+                       OnClick="@(() => SelectNode(node))"
+                       Class="text-left justify-start"
+                       Style="@GetNodeStyle(node)">
+                @(node.IsDirectory && node.Path.IsRoot ? "File System Root" : node.Name)
+            </MudButton>
+            
+            @if (node is IDirectoryNode dirNode)
+            {
+                <div class="ml-4">
+                    @foreach (var childDir in dirNode.Directories.OrderBy(d => d.Name))
+                    {
+                        @RenderNodeTree(childDir)
+                    }
+                    @foreach (var childFile in dirNode.Files.OrderBy(f => f.Name))
+                    {
+                        @RenderNodeTree(childFile)
+                    }
+                </div>
+            }
+        </div>;
+    }
+
+    private string GetNodeIcon(IVirtualFileSystemNode node)
+    {
+        return node.IsDirectory ? Icons.Material.Filled.Folder : Icons.Material.Filled.InsertDriveFile;
+    }
+
+    private string GetNodeStyle(IVirtualFileSystemNode node)
+    {
+        var isSelected = SelectedNode == node;
+        return isSelected ? "background-color: var(--mud-palette-action-selected);" : "";
+    }
+
+    private async Task SelectNode(IVirtualFileSystemNode node)
+    {
+        SelectedNode = node;
+        await OnNodeSelected.InvokeAsync(node);
+        StateHasChanged();
+    }
+
+    public async Task RefreshTree()
+    {
+        SelectedNode = null;
+        await Task.CompletedTask;
+        StateHasChanged();
+    }
+}

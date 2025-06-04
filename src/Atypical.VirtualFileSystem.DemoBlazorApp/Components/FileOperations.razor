@@ -1,0 +1,267 @@
+@inject IVirtualFileSystem VFS
+@inject ISnackbar Snackbar
+@rendermode InteractiveServer
+
+<MudStack Spacing="3">
+    <MudExpansionPanels Elevation="0">
+        <MudExpansionPanel>
+            <TitleContent>
+                <div style="display: flex; align-items: center">
+                    <MudIcon Icon="Icons.Material.Filled.CreateNewFolder" class="mr-3"></MudIcon>
+                    <MudText>Create Directory</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudTextField @bind-Value="NewDirectoryPath" 
+                              Label="Directory Path" 
+                              Placeholder="e.g., /docs/tutorials"
+                              FullWidth="true"
+                              Margin="Margin.Dense" />
+                <MudButton Variant="Variant.Filled" 
+                           Color="Color.Primary" 
+                           StartIcon="Icons.Material.Filled.CreateNewFolder"
+                           OnClick="CreateDirectory"
+                           Class="mt-2"
+                           Disabled="string.IsNullOrWhiteSpace(NewDirectoryPath)">
+                    Create Directory
+                </MudButton>
+            </ChildContent>
+        </MudExpansionPanel>
+
+        <MudExpansionPanel>
+            <TitleContent>
+                <div style="display: flex; align-items: center">
+                    <MudIcon Icon="Icons.Material.Filled.NoteAdd" class="mr-3"></MudIcon>
+                    <MudText>Create File</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudTextField @bind-Value="NewFilePath" 
+                              Label="File Path" 
+                              Placeholder="e.g., /docs/readme.txt"
+                              FullWidth="true"
+                              Margin="Margin.Dense" />
+                <MudTextField @bind-Value="NewFileContent" 
+                              Label="File Content" 
+                              Placeholder="Enter file content..."
+                              Lines="3"
+                              FullWidth="true"
+                              Margin="Margin.Dense"
+                              Class="mt-2" />
+                <MudButton Variant="Variant.Filled" 
+                           Color="Color.Success" 
+                           StartIcon="Icons.Material.Filled.NoteAdd"
+                           OnClick="CreateFile"
+                           Class="mt-2"
+                           Disabled="string.IsNullOrWhiteSpace(NewFilePath)">
+                    Create File
+                </MudButton>
+            </ChildContent>
+        </MudExpansionPanel>
+
+        <MudExpansionPanel>
+            <TitleContent>
+                <div style="display: flex; align-items: center">
+                    <MudIcon Icon="Icons.Material.Filled.Delete" class="mr-3"></MudIcon>
+                    <MudText>Delete</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudTextField @bind-Value="DeletePath" 
+                              Label="Path to Delete" 
+                              Placeholder="e.g., /docs/readme.txt"
+                              FullWidth="true"
+                              Margin="Margin.Dense" />
+                <MudStack Row="true" Class="mt-2">
+                    <MudButton Variant="Variant.Filled" 
+                               Color="Color.Error" 
+                               StartIcon="Icons.Material.Filled.DeleteSweep"
+                               OnClick="DeleteFile"
+                               Disabled="string.IsNullOrWhiteSpace(DeletePath)">
+                        Delete File
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" 
+                               Color="Color.Error" 
+                               StartIcon="Icons.Material.Filled.FolderDelete"
+                               OnClick="DeleteDirectory"
+                               Disabled="string.IsNullOrWhiteSpace(DeletePath)">
+                        Delete Directory
+                    </MudButton>
+                </MudStack>
+            </ChildContent>
+        </MudExpansionPanel>
+
+        <MudExpansionPanel>
+            <TitleContent>
+                <div style="display: flex; align-items: center">
+                    <MudIcon Icon="Icons.Material.Filled.DriveFileMove" class="mr-3"></MudIcon>
+                    <MudText>Move/Rename</MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <MudTextField @bind-Value="SourcePath" 
+                              Label="Source Path" 
+                              Placeholder="e.g., /docs/readme.txt"
+                              FullWidth="true"
+                              Margin="Margin.Dense" />
+                <MudTextField @bind-Value="DestinationPath" 
+                              Label="Destination Path" 
+                              Placeholder="e.g., /documents/readme.txt"
+                              FullWidth="true"
+                              Margin="Margin.Dense"
+                              Class="mt-2" />
+                <MudStack Row="true" Class="mt-2">
+                    <MudButton Variant="Variant.Filled" 
+                               Color="Color.Info" 
+                               StartIcon="Icons.Material.Filled.DriveFileMove"
+                               OnClick="MoveFile"
+                               Disabled="string.IsNullOrWhiteSpace(SourcePath) || string.IsNullOrWhiteSpace(DestinationPath)">
+                        Move File
+                    </MudButton>
+                    <MudButton Variant="Variant.Outlined" 
+                               Color="Color.Info" 
+                               StartIcon="Icons.Material.Filled.DriveFileMoveOutline"
+                               OnClick="MoveDirectory"
+                               Disabled="string.IsNullOrWhiteSpace(SourcePath) || string.IsNullOrWhiteSpace(DestinationPath)">
+                        Move Directory
+                    </MudButton>
+                </MudStack>
+            </ChildContent>
+        </MudExpansionPanel>
+    </MudExpansionPanels>
+
+    <MudDivider />
+
+    <MudButton Variant="Variant.Outlined" 
+               Color="Color.Warning" 
+               StartIcon="Icons.Material.Filled.AutoFixHigh"
+               OnClick="CreateSampleData"
+               FullWidth="true">
+        Create Sample Data
+    </MudButton>
+</MudStack>
+
+@code {
+    [Parameter] public EventCallback OnOperationCompleted { get; set; }
+
+    private string NewDirectoryPath = "";
+    private string NewFilePath = "";
+    private string NewFileContent = "";
+    private string DeletePath = "";
+    private string SourcePath = "";
+    private string DestinationPath = "";
+
+    private async Task CreateDirectory()
+    {
+        try
+        {
+            VFS.CreateDirectory(NewDirectoryPath);
+            Snackbar.Add($"Directory '{NewDirectoryPath}' created successfully!", Severity.Success);
+            NewDirectoryPath = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error creating directory: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task CreateFile()
+    {
+        try
+        {
+            VFS.CreateFile(NewFilePath, NewFileContent ?? "");
+            Snackbar.Add($"File '{NewFilePath}' created successfully!", Severity.Success);
+            NewFilePath = "";
+            NewFileContent = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error creating file: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task DeleteFile()
+    {
+        try
+        {
+            VFS.DeleteFile(DeletePath);
+            Snackbar.Add($"File '{DeletePath}' deleted successfully!", Severity.Success);
+            DeletePath = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error deleting file: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task DeleteDirectory()
+    {
+        try
+        {
+            VFS.DeleteDirectory(DeletePath);
+            Snackbar.Add($"Directory '{DeletePath}' deleted successfully!", Severity.Success);
+            DeletePath = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error deleting directory: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task MoveFile()
+    {
+        try
+        {
+            VFS.MoveFile(SourcePath, DestinationPath);
+            Snackbar.Add($"File moved from '{SourcePath}' to '{DestinationPath}' successfully!", Severity.Success);
+            SourcePath = "";
+            DestinationPath = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error moving file: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task MoveDirectory()
+    {
+        try
+        {
+            VFS.MoveDirectory(SourcePath, DestinationPath);
+            Snackbar.Add($"Directory moved from '{SourcePath}' to '{DestinationPath}' successfully!", Severity.Success);
+            SourcePath = "";
+            DestinationPath = "";
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error moving directory: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task CreateSampleData()
+    {
+        try
+        {
+            VFS.CreateDirectory("/docs")
+               .CreateDirectory("/src")
+               .CreateDirectory("/tests")
+               .CreateFile("/docs/readme.txt", "# Welcome to VFS Demo\n\nThis is a sample readme file.")
+               .CreateFile("/docs/changelog.md", "# Changelog\n\n## v1.0.0\n- Initial release")
+               .CreateFile("/src/main.cs", "using System;\n\nnamespace Demo\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello VFS!\");\n        }\n    }\n}")
+               .CreateFile("/tests/test.cs", "using Xunit;\n\npublic class Tests\n{\n    [Fact]\n    public void Test1()\n    {\n        Assert.True(true);\n    }\n}");
+
+            Snackbar.Add("Sample data created successfully!", Severity.Success);
+            await OnOperationCompleted.InvokeAsync();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error creating sample data: {ex.Message}", Severity.Error);
+        }
+    }
+}

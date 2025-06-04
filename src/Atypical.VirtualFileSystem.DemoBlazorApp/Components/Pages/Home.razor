@@ -1,0 +1,93 @@
+@page "/"
+@inject IVirtualFileSystem VFS
+@rendermode InteractiveServer
+
+<PageTitle>VFS Demo</PageTitle>
+
+<MudText Typo="Typo.h4" GutterBottom="true">Virtual File System Demo</MudText>
+<MudText Typo="Typo.subtitle1" Class="mb-4">Interactive demo of the Atypical Virtual File System library</MudText>
+
+<MudGrid>
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">File Explorer</MudText>
+            <FileExplorer @ref="FileExplorerRef" OnNodeSelected="OnNodeSelected" />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Operations</MudText>
+            <FileOperations OnOperationCompleted="OnOperationCompleted" />
+        </MudPaper>
+        
+        <MudPaper Class="pa-4 mt-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">History</MudText>
+            <UndoRedoControls OnHistoryChanged="OnOperationCompleted" />
+        </MudPaper>
+        
+        <MudPaper Class="pa-4 mt-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Event Log</MudText>
+            <EventLog @ref="EventLogRef" />
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@if (SelectedNode != null)
+{
+    <MudPaper Class="pa-4 mt-4" Elevation="2">
+        <MudText Typo="Typo.h6" Class="mb-3">Selected: @SelectedNode.Name</MudText>
+        <MudSimpleTable Dense="true">
+            <tbody>
+                <tr>
+                    <td><strong>Path:</strong></td>
+                    <td>@SelectedNode.Path.Value</td>
+                </tr>
+                <tr>
+                    <td><strong>Type:</strong></td>
+                    <td>@(SelectedNode.IsDirectory ? "Directory" : "File")</td>
+                </tr>
+                <tr>
+                    <td><strong>Created:</strong></td>
+                    <td>@SelectedNode.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <td><strong>Modified:</strong></td>
+                    <td>@SelectedNode.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+                @if (SelectedNode is IFileNode fileNode)
+                {
+                    <tr>
+                        <td><strong>Content:</strong></td>
+                        <td>
+                            <MudTextField Value="@fileNode.Content" 
+                                          Lines="5" 
+                                          ReadOnly="true" 
+                                          Variant="Variant.Outlined" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </MudPaper>
+}
+
+@code {
+    private FileExplorer? FileExplorerRef;
+    private EventLog? EventLogRef;
+    private IVirtualFileSystemNode? SelectedNode;
+
+    private async Task OnOperationCompleted()
+    {
+        if (FileExplorerRef != null)
+        {
+            await FileExplorerRef.RefreshTree();
+        }
+        StateHasChanged();
+    }
+
+    private void OnNodeSelected(IVirtualFileSystemNode node)
+    {
+        SelectedNode = node;
+        StateHasChanged();
+    }
+}
