@@ -6,7 +6,7 @@
 Gets a file and returns a Result containing the file or an error\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> GetFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
+public static Atypical.VirtualFileSystem.Core.Result<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> GetFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
 ```
 #### Parameters
 
@@ -23,5 +23,5 @@ The virtual file system\.
 The file path as a string\.
 
 #### Returns
-[Atypical\.VirtualFileSystem\.Core\.Models\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')  
+[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
 A Result containing the file node or an error message\.

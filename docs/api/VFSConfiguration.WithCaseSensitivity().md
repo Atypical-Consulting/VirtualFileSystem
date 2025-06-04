@@ -1,14 +1,14 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')
 
 ## VFSConfiguration\.WithCaseSensitivity\(\) Method
 
 Creates a new configuration with case sensitivity enabled\.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Models.VFSConfiguration WithCaseSensitivity();
+public Atypical.VirtualFileSystem.Core.VFSConfiguration WithCaseSensitivity();
 ```
 
 #### Returns
-[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')  
+[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')  
 A new configuration with case sensitivity enabled\.

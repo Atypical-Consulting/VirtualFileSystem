@@ -1,5 +1,5 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.IBinaryFileNode')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode')
 
 ## IBinaryFileNode\.SizeInBytes Property
 

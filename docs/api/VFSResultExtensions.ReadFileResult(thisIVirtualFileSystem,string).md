@@ -6,7 +6,7 @@
 Reads file content and returns a Result containing the content or an error\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result<string> ReadFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
+public static Atypical.VirtualFileSystem.Core.Result<string> ReadFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
 ```
 #### Parameters
 
@@ -23,5 +23,5 @@ The virtual file system\.
 The file path as a string\.
 
 #### Returns
-[Atypical\.VirtualFileSystem\.Core\.Models\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')  
+[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
 A Result containing the file content or an error message\.

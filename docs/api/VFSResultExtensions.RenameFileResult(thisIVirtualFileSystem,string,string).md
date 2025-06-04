@@ -6,7 +6,7 @@
 Renames a file and returns a Result indicating success or failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result RenameFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, string newName);
+public static Atypical.VirtualFileSystem.Core.Result RenameFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, string newName);
 ```
 #### Parameters
 
@@ -29,5 +29,5 @@ The file path as a string\.
 The new file name\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

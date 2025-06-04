@@ -20,7 +20,7 @@ public static class VFSPathExtensions
     {
         var name = path.Name;
         var lastDotIndex = name.LastIndexOf('.');
-        return lastDotIndex >= 0 ? name.Substring(lastDotIndex) : string.Empty;
+        return lastDotIndex >= 0 ? name[lastDotIndex..] : string.Empty;
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public static class VFSPathExtensions
     {
         var name = path.Name;
         var lastDotIndex = name.LastIndexOf('.');
-        return lastDotIndex >= 0 ? name.Substring(0, lastDotIndex) : name;
+        return lastDotIndex >= 0 ? name[..lastDotIndex] : name;
     }
 
     /// <summary>
@@ -206,12 +206,12 @@ public static class VFSPathExtensions
     public static bool MatchesGlob(this VFSPath path, string pattern)
     {
         // Create a simple glob regex without dependency on VFSSearchExtensions
-        var regexPattern = System.Text.RegularExpressions.Regex.Escape(pattern)
+        var regexPattern = Regex.Escape(pattern)
             .Replace(@"\*\*", ".*")  // ** matches any path
             .Replace(@"\*", "[^/]*") // * matches anything except path separator
             .Replace(@"\?", ".");    // ? matches single character
         
-        var regex = new System.Text.RegularExpressions.Regex($"^{regexPattern}$", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        var regex = new Regex($"^{regexPattern}$", RegexOptions.IgnoreCase);
         return regex.IsMatch(path.Value);
     }
 

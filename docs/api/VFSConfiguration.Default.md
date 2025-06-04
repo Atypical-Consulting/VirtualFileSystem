@@ -1,13 +1,13 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')
 
 ## VFSConfiguration\.Default Property
 
 Gets the default VFS configuration\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.VFSConfiguration Default { get; }
+public static Atypical.VirtualFileSystem.Core.VFSConfiguration Default { get; }
 ```
 
 #### Property Value
-[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')
+[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')

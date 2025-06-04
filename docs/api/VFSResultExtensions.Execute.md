@@ -15,7 +15,7 @@
 Executes an operation and returns a Result, converting any exception to a failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result Execute(System.Action operation);
+public static Atypical.VirtualFileSystem.Core.Result Execute(System.Action operation);
 ```
 #### Parameters
 
@@ -26,7 +26,7 @@ public static Atypical.VirtualFileSystem.Core.Models.Result Execute(System.Actio
 The operation to execute\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSResultExtensions.Execute_T_(System.Func_T_)'></a>
@@ -36,7 +36,7 @@ A Result indicating success or containing an error message\.
 Executes an operation that returns a value and returns a Result\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result<T> Execute<T>(System.Func<T> operation);
+public static Atypical.VirtualFileSystem.Core.Result<T> Execute<T>(System.Func<T> operation);
 ```
 #### Type parameters
 
@@ -54,5 +54,5 @@ The return type\.
 The operation to execute\.
 
 #### Returns
-[Atypical\.VirtualFileSystem\.Core\.Models\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')[T](VFSResultExtensions.md#Atypical.VirtualFileSystem.Core.Extensions.VFSResultExtensions.Execute_T_(System.Func_T_).T 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSResultExtensions\.Execute\<T\>\(System\.Func\<T\>\)\.T')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')  
+[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[T](VFSResultExtensions.md#Atypical.VirtualFileSystem.Core.Extensions.VFSResultExtensions.Execute_T_(System.Func_T_).T 'Atypical\.VirtualFileSystem\.Core\.Extensions\.VFSResultExtensions\.Execute\<T\>\(System\.Func\<T\>\)\.T')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
 A Result containing the value or an error message\.

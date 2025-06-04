@@ -6,7 +6,7 @@
 Moves a file and returns a Result indicating success or failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result MoveFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string sourceFilePath, string destinationFilePath);
+public static Atypical.VirtualFileSystem.Core.Result MoveFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string sourceFilePath, string destinationFilePath);
 ```
 #### Parameters
 
@@ -29,5 +29,5 @@ The source file path as a string\.
 The destination file path as a string\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

@@ -4,8 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree.
 
-using Atypical.VirtualFileSystem.Core.Models;
-
 namespace Atypical.VirtualFileSystem.Core.Extensions;
 
 /// <summary>
@@ -218,7 +216,7 @@ public static class VFSBinaryExtensions
                 return binaryFile.SizeInBytes;
             
             // For text files, return content length in bytes (UTF-8)
-            return System.Text.Encoding.UTF8.GetByteCount(file.Content);
+            return Encoding.UTF8.GetByteCount(file.Content);
         }
         catch
         {
@@ -233,11 +231,11 @@ public static class VFSBinaryExtensions
     /// <param name="filePath">The file path as a string.</param>
     /// <param name="encoding">The encoding to use for conversion. Default is UTF-8.</param>
     /// <returns>True if conversion was successful, false otherwise.</returns>
-    public static bool ConvertToBinary(this IVirtualFileSystem vfs, string filePath, System.Text.Encoding? encoding = null)
+    public static bool ConvertToBinary(this IVirtualFileSystem vfs, string filePath, Encoding? encoding = null)
     {
         try
         {
-            encoding ??= System.Text.Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             
             if (!vfs.TryGetFile(filePath, out var file))
                 return false;
@@ -261,11 +259,11 @@ public static class VFSBinaryExtensions
     /// <param name="filePath">The file path as a string.</param>
     /// <param name="encoding">The encoding to use for conversion. Default is UTF-8.</param>
     /// <returns>True if conversion was successful, false otherwise.</returns>
-    public static bool ConvertToText(this IVirtualFileSystem vfs, string filePath, System.Text.Encoding? encoding = null)
+    public static bool ConvertToText(this IVirtualFileSystem vfs, string filePath, Encoding? encoding = null)
     {
         try
         {
-            encoding ??= System.Text.Encoding.UTF8;
+            encoding ??= Encoding.UTF8;
             
             if (!vfs.TryReadBinaryFile(filePath, out var binaryContent) || binaryContent == null)
                 return false;
@@ -352,4 +350,4 @@ public sealed record FileInfo(
     /// Gets the file type description.
     /// </summary>
     public string FileType => IsBinary ? "Binary" : "Text";
-};
+}

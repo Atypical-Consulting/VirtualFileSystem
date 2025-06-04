@@ -173,15 +173,9 @@ public static class VFSBulkExtensions
     /// <returns>Collection of successfully deleted directory paths.</returns>
     public static IEnumerable<string> TryDeleteDirectories(this IVirtualFileSystem vfs, IEnumerable<string> directoryPaths)
     {
-        var successfulPaths = new List<string>();
-        
-        foreach (var path in directoryPaths)
-        {
-            if (vfs.TryDeleteDirectory(path))
-                successfulPaths.Add(path);
-        }
-        
-        return successfulPaths;
+        return directoryPaths
+            .Where(vfs.TryDeleteDirectory)
+            .ToList();
     }
 
     /// <summary>

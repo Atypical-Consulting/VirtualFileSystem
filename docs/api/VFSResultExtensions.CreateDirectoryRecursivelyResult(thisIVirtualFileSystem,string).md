@@ -6,7 +6,7 @@
 Creates a directory recursively and returns a Result\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result CreateDirectoryRecursivelyResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath);
+public static Atypical.VirtualFileSystem.Core.Result CreateDirectoryRecursivelyResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath);
 ```
 #### Parameters
 
@@ -23,5 +23,5 @@ The virtual file system\.
 The directory path as a string\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

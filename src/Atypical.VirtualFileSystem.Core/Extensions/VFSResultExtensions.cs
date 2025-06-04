@@ -4,8 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree.
 
-using Atypical.VirtualFileSystem.Core.Models;
-
 namespace Atypical.VirtualFileSystem.Core.Extensions;
 
 /// <summary>
@@ -146,10 +144,9 @@ public static class VFSResultExtensions
     {
         try
         {
-            if (vfs.TryGetFile(filePath, out var file))
-                return Result<IFileNode>.Success(file);
-            else
-                return Result<IFileNode>.Failure($"File '{filePath}' not found.");
+            return vfs.TryGetFile(filePath, out var file)
+                ? Result<IFileNode>.Success(file)
+                : Result<IFileNode>.Failure($"File '{filePath}' not found.");
         }
         catch (Exception ex)
         {
@@ -167,10 +164,9 @@ public static class VFSResultExtensions
     {
         try
         {
-            if (vfs.TryGetDirectory(directoryPath, out var directory))
-                return Result<IDirectoryNode>.Success(directory);
-            else
-                return Result<IDirectoryNode>.Failure($"Directory '{directoryPath}' not found.");
+            return vfs.TryGetDirectory(directoryPath, out var directory)
+                ? Result<IDirectoryNode>.Success(directory)
+                : Result<IDirectoryNode>.Failure($"Directory '{directoryPath}' not found.");
         }
         catch (Exception ex)
         {

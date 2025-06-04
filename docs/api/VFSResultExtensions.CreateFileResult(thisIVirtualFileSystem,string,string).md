@@ -6,7 +6,7 @@
 Creates a file and returns a Result indicating success or failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result CreateFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, string? content=null);
+public static Atypical.VirtualFileSystem.Core.Result CreateFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, string? content=null);
 ```
 #### Parameters
 
@@ -29,5 +29,5 @@ The file path as a string\.
 The file content\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

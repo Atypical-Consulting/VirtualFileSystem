@@ -142,20 +142,40 @@ public static class VFSAdvancedExtensions
         // Create destination directory
         vfs.CreateDirectoryRecursively(destinationDirectoryPath);
         
+        // Normalize source path for comparison (remove vfs:// prefix from comparison)
+        var normalizedSourcePath = sourceDirectoryPath.TrimEnd('/');
+        var sourcePathWithPrefix = $"vfs://{normalizedSourcePath.TrimStart('/')}";
+        
         // Copy all files
         foreach (var file in sourceDir.Files)
         {
-            var relativePath = file.Path.Value.Substring(sourceDirectoryPath.Length).TrimStart('/');
+            // Get relative path by removing the source directory path from the full file path
+            var fullFilePath = file.Path.Value;
+            string relativePath;
+            
+            relativePath = fullFilePath.StartsWith(sourcePathWithPrefix)
+                ? fullFilePath[sourcePathWithPrefix.Length..].TrimStart('/')
+                // Fallback: extract just the filename
+                : file.Name;
+            
             var destinationFilePath = $"{destinationDirectoryPath.TrimEnd('/')}/{relativePath}";
-            vfs.CopyFile(file.Path.Value, destinationFilePath);
+            vfs.CopyFile(fullFilePath, destinationFilePath);
         }
         
         // Copy all subdirectories recursively
         foreach (var subDir in sourceDir.Directories)
         {
-            var relativePath = subDir.Path.Value.Substring(sourceDirectoryPath.Length).TrimStart('/');
+            // Get relative path by removing the source directory path from the full subdirectory path
+            var fullSubDirPath = subDir.Path.Value;
+            string relativePath;
+            
+            relativePath = fullSubDirPath.StartsWith(sourcePathWithPrefix)
+                ? fullSubDirPath[sourcePathWithPrefix.Length..].TrimStart('/')
+                // Fallback: extract just the directory name
+                : subDir.Name;
+            
             var destinationSubDirPath = $"{destinationDirectoryPath.TrimEnd('/')}/{relativePath}";
-            vfs.CopyDirectory(subDir.Path.Value, destinationSubDirPath);
+            vfs.CopyDirectory(fullSubDirPath, destinationSubDirPath);
         }
         
         return vfs;

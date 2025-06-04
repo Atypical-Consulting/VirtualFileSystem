@@ -6,7 +6,7 @@
 Renames a directory and returns a Result indicating success or failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result RenameDirectoryResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath, string newName);
+public static Atypical.VirtualFileSystem.Core.Result RenameDirectoryResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath, string newName);
 ```
 #### Parameters
 
@@ -29,5 +29,5 @@ The directory path as a string\.
 The new directory name\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

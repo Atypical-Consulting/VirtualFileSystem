@@ -4,8 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree.
 
-using System.Text.RegularExpressions;
-
 namespace Atypical.VirtualFileSystem.Core.Extensions;
 
 /// <summary>
@@ -134,7 +132,7 @@ public static class VFSSearchExtensions
                     return false;
                 
                 // Check if it's a direct child (no additional path separators)
-                var relativePath = filePath.Substring(normalizedPath.Length);
+                var relativePath = filePath[normalizedPath.Length..];
                 return !relativePath.Contains('/');
             });
         }

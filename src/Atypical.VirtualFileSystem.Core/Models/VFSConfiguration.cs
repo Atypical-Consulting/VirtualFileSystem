@@ -4,7 +4,7 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree.
 
-namespace Atypical.VirtualFileSystem.Core.Models;
+namespace Atypical.VirtualFileSystem.Core;
 
 /// <summary>
 /// Configuration options for the Virtual File System.
@@ -20,7 +20,7 @@ public sealed record VFSConfiguration
     /// Gets or sets whether file and directory operations are case sensitive.
     /// Default is false (case insensitive).
     /// </summary>
-    public bool CaseSensitive { get; init; } = false;
+    public bool CaseSensitive { get; init; }
 
     /// <summary>
     /// Gets or sets the maximum depth for recursive operations.
@@ -207,7 +207,7 @@ public sealed record EventConfiguration
     /// Gets or sets whether events should be fired asynchronously.
     /// Default is false for synchronous events.
     /// </summary>
-    public bool AsyncEvents { get; init; } = false;
+    public bool AsyncEvents { get; init; }
 
     /// <summary>
     /// Gets or sets the maximum number of event handlers per event type.

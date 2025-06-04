@@ -1,14 +1,14 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[EventConfiguration](EventConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.EventConfiguration')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[EventConfiguration](EventConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.EventConfiguration')
 
 ## EventConfiguration\.Disabled\(\) Method
 
 Creates a configuration with all events disabled\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.EventConfiguration Disabled();
+public static Atypical.VirtualFileSystem.Core.EventConfiguration Disabled();
 ```
 
 #### Returns
-[EventConfiguration](EventConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.EventConfiguration')  
+[EventConfiguration](EventConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.EventConfiguration')  
 A configuration with events disabled\.

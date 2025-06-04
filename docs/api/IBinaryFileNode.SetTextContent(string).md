@@ -1,5 +1,5 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.IBinaryFileNode')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode')
 
 ## IBinaryFileNode\.SetTextContent\(string\) Method
 
@@ -10,7 +10,7 @@ void SetTextContent(string textContent);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Models.IBinaryFileNode.SetTextContent(string).textContent'></a>
+<a name='Atypical.VirtualFileSystem.Core.IBinaryFileNode.SetTextContent(string).textContent'></a>
 
 `textContent` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
 

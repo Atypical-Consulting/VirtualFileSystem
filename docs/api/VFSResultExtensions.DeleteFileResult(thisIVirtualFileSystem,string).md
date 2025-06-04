@@ -6,7 +6,7 @@
 Deletes a file and returns a Result indicating success or failure\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result DeleteFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
+public static Atypical.VirtualFileSystem.Core.Result DeleteFileResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath);
 ```
 #### Parameters
 
@@ -23,5 +23,5 @@ The virtual file system\.
 The file path as a string\.
 
 #### Returns
-[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result')  
+[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')  
 A Result indicating success or containing an error message\.

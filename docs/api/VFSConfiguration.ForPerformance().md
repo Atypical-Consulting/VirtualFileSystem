@@ -1,14 +1,14 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')
 
 ## VFSConfiguration\.ForPerformance\(\) Method
 
 Creates a new configuration optimized for performance\.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Models.VFSConfiguration ForPerformance();
+public Atypical.VirtualFileSystem.Core.VFSConfiguration ForPerformance();
 ```
 
 #### Returns
-[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.VFSConfiguration')  
+[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')  
 A new performance\-optimized configuration\.

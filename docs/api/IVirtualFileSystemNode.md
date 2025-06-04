@@ -11,13 +11,13 @@ public interface IVirtualFileSystemNode
 ```
 
 Derived  
+&#8627; [BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.BinaryFileNode')  
 &#8627; [IDirectoryNode](IDirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode')  
 &#8627; [IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')  
 &#8627; [IRootNode](IRootNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IRootNode')  
 &#8627; [DirectoryNode](DirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.DirectoryNode')  
 &#8627; [FileNode](FileNode.md 'Atypical\.VirtualFileSystem\.Core\.FileNode')  
-&#8627; [BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.BinaryFileNode')  
-&#8627; [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.IBinaryFileNode')  
+&#8627; [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode')  
 &#8627; [RootNode](RootNode.md 'Atypical\.VirtualFileSystem\.Core\.RootNode')  
 &#8627; [VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode')
 

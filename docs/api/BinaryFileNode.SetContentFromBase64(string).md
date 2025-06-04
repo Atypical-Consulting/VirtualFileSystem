@@ -1,5 +1,5 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.BinaryFileNode')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.BinaryFileNode')
 
 ## BinaryFileNode\.SetContentFromBase64\(string\) Method
 
@@ -10,13 +10,13 @@ public void SetContentFromBase64(string base64Content);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Models.BinaryFileNode.SetContentFromBase64(string).base64Content'></a>
+<a name='Atypical.VirtualFileSystem.Core.BinaryFileNode.SetContentFromBase64(string).base64Content'></a>
 
 `base64Content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
 
 The base64 encoded content\.
 
-Implements [SetContentFromBase64\(string\)](IBinaryFileNode.SetContentFromBase64(string).md 'Atypical\.VirtualFileSystem\.Core\.Models\.IBinaryFileNode\.SetContentFromBase64\(string\)')
+Implements [SetContentFromBase64\(string\)](IBinaryFileNode.SetContentFromBase64(string).md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode\.SetContentFromBase64\(string\)')
 
 #### Exceptions
 

@@ -1,14 +1,14 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical\.VirtualFileSystem\.Core\.Models](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Models 'Atypical\.VirtualFileSystem\.Core\.Models').[PathSeparatorConfiguration](PathSeparatorConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.PathSeparatorConfiguration')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[PathSeparatorConfiguration](PathSeparatorConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.PathSeparatorConfiguration')
 
 ## PathSeparatorConfiguration\.WindowsOnly\(\) Method
 
 Creates a configuration that only accepts backslashes\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.PathSeparatorConfiguration WindowsOnly();
+public static Atypical.VirtualFileSystem.Core.PathSeparatorConfiguration WindowsOnly();
 ```
 
 #### Returns
-[PathSeparatorConfiguration](PathSeparatorConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.Models\.PathSeparatorConfiguration')  
+[PathSeparatorConfiguration](PathSeparatorConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.PathSeparatorConfiguration')  
 A configuration for Windows\-style paths only\.

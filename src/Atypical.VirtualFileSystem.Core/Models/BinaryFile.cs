@@ -4,7 +4,7 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree.
 
-namespace Atypical.VirtualFileSystem.Core.Models;
+namespace Atypical.VirtualFileSystem.Core;
 
 /// <summary>
 /// Represents a binary file node in the virtual file system.

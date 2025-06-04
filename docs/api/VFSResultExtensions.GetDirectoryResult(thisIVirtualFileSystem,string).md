@@ -6,7 +6,7 @@
 Gets a directory and returns a Result containing the directory or an error\.
 
 ```csharp
-public static Atypical.VirtualFileSystem.Core.Models.Result<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode> GetDirectoryResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath);
+public static Atypical.VirtualFileSystem.Core.Result<Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode> GetDirectoryResult(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string directoryPath);
 ```
 #### Parameters
 
@@ -23,5 +23,5 @@ The virtual file system\.
 The directory path as a string\.
 
 #### Returns
-[Atypical\.VirtualFileSystem\.Core\.Models\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')[IDirectoryNode](IDirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Models\.Result\<T\>')  
+[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[IDirectoryNode](IDirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
 A Result containing the directory node or an error message\.

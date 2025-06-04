@@ -11,9 +11,9 @@ public interface IFileNode : Atypical.VirtualFileSystem.Core.Contracts.IVirtualF
 ```
 
 Derived  
+&#8627; [BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.BinaryFileNode')  
 &#8627; [FileNode](FileNode.md 'Atypical\.VirtualFileSystem\.Core\.FileNode')  
-&#8627; [BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.BinaryFileNode')  
-&#8627; [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Models\.IBinaryFileNode')
+&#8627; [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')
 
