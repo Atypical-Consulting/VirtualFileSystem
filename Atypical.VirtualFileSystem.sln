@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.DemoBlazorApp", "src\Atypical.VirtualFileSystem.DemoBlazorApp\Atypical.VirtualFileSystem.DemoBlazorApp.csproj", "{0B033820-BA0C-4927-8546-96AFE74B2612}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.Benchmarks", "tests\Atypical.VirtualFileSystem.Benchmarks\Atypical.VirtualFileSystem.Benchmarks.csproj", "{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,7 @@ Global
 		{DD02DF87-F94E-4218-8D65-4DB03760926E} = {10E2E10B-AB65-4800-93ED-CDB737917154}
 		{40DD51CE-1F1B-466E-9177-05C9401FF81B} = {EB224BFD-23D3-41CE-AA5E-FE2D69D78B76}
 		{0B033820-BA0C-4927-8546-96AFE74B2612} = {EB224BFD-23D3-41CE-AA5E-FE2D69D78B76}
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF} = {10E2E10B-AB65-4800-93ED-CDB737917154}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{87387B16-144D-4163-B559-5847ED0D1E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -48,5 +51,9 @@ Global
 		{0B033820-BA0C-4927-8546-96AFE74B2612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B033820-BA0C-4927-8546-96AFE74B2612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B033820-BA0C-4927-8546-96AFE74B2612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-1234-567890ABCDEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
