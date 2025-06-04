@@ -1,7 +1,7 @@
 https://github.com/Atypical-Consulting/VirtualFileSystem/blob/master/docs/
-M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor|VirtualFileSystemException.VirtualFileSystemException().md|VirtualFileSystemException()
-M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String)|VirtualFileSystemException.VirtualFileSystemException(string).md|VirtualFileSystemException(string)
-M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String,System.Exception)|VirtualFileSystemException.VirtualFileSystemException(string,Exception).md|VirtualFileSystemException(string, Exception)
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor|VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException()|VirtualFileSystemException()
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String)|VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string)|VirtualFileSystemException(string)
+M:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor(System.String,System.Exception)|VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception)|VirtualFileSystemException(string, Exception)
 N:Atypical.VirtualFileSystem.Core|VirtualFileSystem.md#Atypical.VirtualFileSystem.Core|Atypical.VirtualFileSystem.Core
 T:Atypical.VirtualFileSystem.Core.VirtualFileSystemException|VirtualFileSystemException.md|VirtualFileSystemException
 P:Atypical.VirtualFileSystem.Core.DirectoryNode.Directories|DirectoryNode.Directories.md|Directories
@@ -96,10 +96,10 @@ M:Atypical.VirtualFileSystem.Core.VFS.MoveDirectory(Atypical.VirtualFileSystem.C
 M:Atypical.VirtualFileSystem.Core.VFS.MoveFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.VFSFilePath)|VFS.MoveFile(VFSFilePath,VFSFilePath).md|MoveFile(VFSFilePath, VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.VFS.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,System.String)|VFS.RenameDirectory(VFSDirectoryPath,string).md|RenameDirectory(VFSDirectoryPath, string)
 M:Atypical.VirtualFileSystem.Core.VFS.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFS.RenameFile(VFSFilePath,string).md|RenameFile(VFSFilePath, string)
-M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|VFS.FindDirectories(Func_IDirectoryNode,bool_).md|FindDirectories(Func<IDirectoryNode,bool>)
-M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)|VFS.FindDirectories(Regex).md|FindDirectories(Regex)
-M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|VFS.FindFiles(Func_IFileNode,bool_).md|FindFiles(Func<IFileNode,bool>)
-M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|VFS.FindFiles(Regex).md|FindFiles(Regex)
+M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|VFS.FindDirectories.md#Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Func_Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool_)|FindDirectories(Func<IDirectoryNode,bool>)
+M:Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)|VFS.FindDirectories.md#Atypical.VirtualFileSystem.Core.VFS.FindDirectories(System.Text.RegularExpressions.Regex)|FindDirectories(Regex)
+M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|VFS.FindFiles.md#Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Func_Atypical.VirtualFileSystem.Core.Contracts.IFileNode,bool_)|FindFiles(Func<IFileNode,bool>)
+M:Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|VFS.FindFiles.md#Atypical.VirtualFileSystem.Core.VFS.FindFiles(System.Text.RegularExpressions.Regex)|FindFiles(Regex)
 M:Atypical.VirtualFileSystem.Core.VFS.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFS.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.VFS.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|VFS.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.VFS.GetTree|VFS.GetTree().md|GetTree()
@@ -189,8 +189,8 @@ P:Atypical.VirtualFileSystem.Core.ChangeHistory.UndoStack|ChangeHistory.UndoStac
 P:Atypical.VirtualFileSystem.Core.ChangeHistory.RedoStack|ChangeHistory.RedoStack.md|RedoStack
 M:Atypical.VirtualFileSystem.Core.ChangeHistory.#ctor(Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem)|ChangeHistory.ChangeHistory(IVirtualFileSystem).md|ChangeHistory(IVirtualFileSystem)
 M:Atypical.VirtualFileSystem.Core.ChangeHistory.Finalize|ChangeHistory.~ChangeHistory().md|~ChangeHistory()
-M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose|ChangeHistory.Dispose().md|Dispose()
-M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(System.Boolean)|ChangeHistory.Dispose(bool).md|Dispose(bool)
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose|ChangeHistory.Dispose.md#Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose()|Dispose()
+M:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(System.Boolean)|ChangeHistory.Dispose.md#Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(bool)|Dispose(bool)
 M:Atypical.VirtualFileSystem.Core.ChangeHistory.OnChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|ChangeHistory.OnChange(VFSEventArgs).md|OnChange(VFSEventArgs)
 M:Atypical.VirtualFileSystem.Core.ChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs)|ChangeHistory.AddChange(VFSEventArgs).md|AddChange(VFSEventArgs)
 M:Atypical.VirtualFileSystem.Core.ChangeHistory.Undo|ChangeHistory.Undo().md|Undo()
@@ -227,12 +227,12 @@ P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Directories|IVirt
 P:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.Files|IVirtualFileSystem.Files.md|Files
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|IVirtualFileSystem.GetDirectory(VFSDirectoryPath).md|GetDirectory(VFSDirectoryPath)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode@)|IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md|TryGetDirectory(VFSDirectoryPath, IDirectoryNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|IVirtualFileSystem.FindDirectories(Func_IDirectoryNode,bool_).md|FindDirectories(Func<IDirectoryNode,bool>)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindDirectories(Regex).md|FindDirectories(Regex)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,System.Boolean})|IVirtualFileSystem.FindDirectories.md#Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Func_Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode,bool_)|FindDirectories(Func<IDirectoryNode,bool>)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindDirectories.md#Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories(System.Text.RegularExpressions.Regex)|FindDirectories(Regex)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetFile(Atypical.VirtualFileSystem.Core.VFSFilePath)|IVirtualFileSystem.GetFile(VFSFilePath).md|GetFile(VFSFilePath)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.TryGetFile(Atypical.VirtualFileSystem.Core.VFSFilePath,Atypical.VirtualFileSystem.Core.Contracts.IFileNode@)|IVirtualFileSystem.TryGetFile(VFSFilePath,IFileNode).md|TryGetFile(VFSFilePath, IFileNode)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|IVirtualFileSystem.FindFiles(Func_IFileNode,bool_).md|FindFiles(Func<IFileNode,bool>)
-M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindFiles(Regex).md|FindFiles(Regex)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Func{Atypical.VirtualFileSystem.Core.Contracts.IFileNode,System.Boolean})|IVirtualFileSystem.FindFiles.md#Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Func_Atypical.VirtualFileSystem.Core.Contracts.IFileNode,bool_)|FindFiles(Func<IFileNode,bool>)
+M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)|IVirtualFileSystem.FindFiles.md#Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles(System.Text.RegularExpressions.Regex)|FindFiles(Regex)
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.GetTree|IVirtualFileSystem.GetTree().md|GetTree()
 T:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem|IVirtualFileSystem.md|IVirtualFileSystem
 M:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory.CreateFileSystem|IVirtualFileSystemFactory.CreateFileSystem().md|CreateFileSystem()
@@ -265,3 +265,9 @@ M:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameFile(Atypical.Virtu
 E:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.DirectoryRenamed|IVFSRename.DirectoryRenamed.md|DirectoryRenamed
 E:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.FileRenamed|IVFSRename.FileRenamed.md|FileRenamed
 T:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename|IVFSRename.md|IVFSRename
+?:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor|VirtualFileSystemException.VirtualFileSystemException.md|VirtualFileSystemException
+?:Atypical.VirtualFileSystem.Core.VFS.FindDirectories|VFS.FindDirectories.md|FindDirectories
+?:Atypical.VirtualFileSystem.Core.VFS.FindFiles|VFS.FindFiles.md|FindFiles
+?:Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose|ChangeHistory.Dispose.md|Dispose
+?:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindDirectories|IVirtualFileSystem.FindDirectories.md|FindDirectories
+?:Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem.FindFiles|IVirtualFileSystem.FindFiles.md|FindFiles

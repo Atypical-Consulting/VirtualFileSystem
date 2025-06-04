@@ -1,9 +1,9 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[IChangeHistory](IChangeHistory.md 'Atypical.VirtualFileSystem.Core.IChangeHistory')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[IChangeHistory](IChangeHistory.md 'Atypical\.VirtualFileSystem\.Core\.IChangeHistory')
 
-## IChangeHistory.AddChange(VFSEventArgs) Method
+## IChangeHistory\.AddChange\(VFSEventArgs\) Method
 
-Adds a change to the history.
+Adds a change to the history\.
 
 ```csharp
 void AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs change);
@@ -12,6 +12,6 @@ void AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs change);
 
 <a name='Atypical.VirtualFileSystem.Core.IChangeHistory.AddChange(Atypical.VirtualFileSystem.Core.VFSEventArgs).change'></a>
 
-`change` [VFSEventArgs](VFSEventArgs.md 'Atypical.VirtualFileSystem.Core.VFSEventArgs')
+`change` [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs')
 
-The change to add.
+The change to add\.

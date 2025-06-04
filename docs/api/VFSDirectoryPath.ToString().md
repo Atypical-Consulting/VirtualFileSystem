@@ -1,15 +1,15 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical.VirtualFileSystem.Core.VFSDirectoryPath')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath')
 
-## VFSDirectoryPath.ToString() Method
+## VFSDirectoryPath\.ToString\(\) Method
 
-Returns a string that represents the current object.  
-The string representation of the directory path is the path itself.
+Returns a string that represents the current object\.
+The string representation of the directory path is the path itself\.
 
 ```csharp
 public override string ToString();
 ```
 
 #### Returns
-[System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')  
-A string that represents the current object.
+[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+A string that represents the current object\.

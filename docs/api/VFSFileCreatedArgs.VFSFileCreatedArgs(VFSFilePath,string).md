@@ -1,9 +1,9 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs')
 
-## VFSFileCreatedArgs(VFSFilePath, string) Constructor
+## VFSFileCreatedArgs\(VFSFilePath, string\) Constructor
 
-Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs') class.
+Initializes a new instance of the [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs') class\.
 
 ```csharp
 public VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath path, string content);
@@ -12,12 +12,12 @@ public VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath path, stri
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath,string).path'></a>
 
-`path` [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')
+`path` [VFSFilePath](VFSFilePath.md 'Atypical\.VirtualFileSystem\.Core\.VFSFilePath')
 
-The path of the created file.
+The path of the created file\.
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.VFSFileCreatedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath,string).content'></a>
 
-`content` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+`content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
 
-The content of the created file.
+The content of the created file\.

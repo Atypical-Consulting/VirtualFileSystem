@@ -1,15 +1,15 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSNode](VFSNode.md 'Atypical.VirtualFileSystem.Core.VFSNode')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode')
 
-## VFSNode.IsDirectory Property
+## VFSNode\.IsDirectory Property
 
-Indicates whether the node is a directory.
+Indicates whether the node is a directory\.
 
 ```csharp
 public abstract bool IsDirectory { get; }
 ```
 
-Implements [IsDirectory](IVirtualFileSystemNode.IsDirectory.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode.IsDirectory')
+Implements [IsDirectory](IVirtualFileSystemNode.IsDirectory.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.IsDirectory')
 
 #### Property Value
-[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
+[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')

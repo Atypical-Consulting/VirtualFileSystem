@@ -1,9 +1,9 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSIndex](VFSIndex.md 'Atypical\.VirtualFileSystem\.Core\.VFSIndex')
 
-## VFSIndex.TryAdd(VFSPath, IVirtualFileSystemNode) Method
+## VFSIndex\.TryAdd\(VFSPath, IVirtualFileSystemNode\) Method
 
-Tries to add the specified node to the index.
+Tries to add the specified node to the index\.
 
 ```csharp
 public bool TryAdd(Atypical.VirtualFileSystem.Core.VFSPath pathValue, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode node);
@@ -12,11 +12,11 @@ public bool TryAdd(Atypical.VirtualFileSystem.Core.VFSPath pathValue, Atypical.V
 
 <a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).pathValue'></a>
 
-`pathValue` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
+`pathValue` [VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')
 
 <a name='Atypical.VirtualFileSystem.Core.VFSIndex.TryAdd(Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode).node'></a>
 
-`node` [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode')
+`node` [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')
 
 #### Returns
-[System.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System.Boolean')
+[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')

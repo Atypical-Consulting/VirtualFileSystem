@@ -1,10 +1,10 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Contracts](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts 'Atypical.VirtualFileSystem.Core.Contracts').[IVFSDelete](IVFSDelete.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core\.Contracts](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts 'Atypical\.VirtualFileSystem\.Core\.Contracts').[IVFSDelete](IVFSDelete.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSDelete')
 
-## IVFSDelete.DeleteFile(VFSFilePath) Method
+## IVFSDelete\.DeleteFile\(VFSFilePath\) Method
 
-Deletes a file node at the specified path.  
-The path must be absolute.
+Deletes a file node at the specified path\.
+The path must be absolute\.
 
 ```csharp
 Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath filePath);
@@ -13,10 +13,10 @@ Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem DeleteFile(Atypical
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete.DeleteFile(Atypical.VirtualFileSystem.Core.VFSFilePath).filePath'></a>
 
-`filePath` [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')
+`filePath` [VFSFilePath](VFSFilePath.md 'Atypical\.VirtualFileSystem\.Core\.VFSFilePath')
 
-The path of the file node.
+The path of the file node\.
 
 #### Returns
-[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  
-The file system.
+[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')  
+The file system\.

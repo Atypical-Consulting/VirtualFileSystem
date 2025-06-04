@@ -1,10 +1,10 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core.Contracts](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts 'Atypical.VirtualFileSystem.Core.Contracts').[IVFSCreate](IVFSCreate.md 'Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core\.Contracts](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core.Contracts 'Atypical\.VirtualFileSystem\.Core\.Contracts').[IVFSCreate](IVFSCreate.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSCreate')
 
-## IVFSCreate.CreateFile(VFSFilePath, string) Method
+## IVFSCreate\.CreateFile\(VFSFilePath, string\) Method
 
-Creates a file node at the specified path.  
-The path must be absolute.
+Creates a file node at the specified path\.
+The path must be absolute\.
 
 ```csharp
 Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath filePath, string? content=null);
@@ -13,16 +13,16 @@ Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem CreateFile(Atypical
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath,string).filePath'></a>
 
-`filePath` [VFSFilePath](VFSFilePath.md 'Atypical.VirtualFileSystem.Core.VFSFilePath')
+`filePath` [VFSFilePath](VFSFilePath.md 'Atypical\.VirtualFileSystem\.Core\.VFSFilePath')
 
-The path of the file node.
+The path of the file node\.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate.CreateFile(Atypical.VirtualFileSystem.Core.VFSFilePath,string).content'></a>
 
-`content` [System.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System.String')
+`content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
 
-The content of the file node.
+The content of the file node\.
 
 #### Returns
-[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem')  
-The file system.
+[IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')  
+The file system\.

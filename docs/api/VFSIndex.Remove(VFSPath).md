@@ -1,9 +1,9 @@
-#### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md 'VirtualFileSystem')
-### [Atypical.VirtualFileSystem.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical.VirtualFileSystem.Core').[VFSIndex](VFSIndex.md 'Atypical.VirtualFileSystem.Core.VFSIndex')
+#### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
+### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSIndex](VFSIndex.md 'Atypical\.VirtualFileSystem\.Core\.VFSIndex')
 
-## VFSIndex.Remove(VFSPath) Method
+## VFSIndex\.Remove\(VFSPath\) Method
 
-Removes the node with the specified key.
+Removes the node with the specified key\.
 
 ```csharp
 public void Remove(Atypical.VirtualFileSystem.Core.VFSPath key);
@@ -12,4 +12,4 @@ public void Remove(Atypical.VirtualFileSystem.Core.VFSPath key);
 
 <a name='Atypical.VirtualFileSystem.Core.VFSIndex.Remove(Atypical.VirtualFileSystem.Core.VFSPath).key'></a>
 
-`key` [VFSPath](VFSPath.md 'Atypical.VirtualFileSystem.Core.VFSPath')
+`key` [VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')
