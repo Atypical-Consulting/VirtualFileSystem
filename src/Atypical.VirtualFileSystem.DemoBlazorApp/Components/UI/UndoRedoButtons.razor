@@ -1,0 +1,46 @@
+@* Undo/Redo Button Group *@
+@inject UndoRedoService UndoRedoService
+@implements IDisposable
+
+<div class="hidden md:flex items-center border border-gray-200 rounded-lg p-0.5">
+    <button class="p-1.5 rounded-md transition-colors @(UndoRedoService.CanUndo ? "hover:bg-gray-100 text-gray-600" : "opacity-40 text-gray-400 cursor-not-allowed")"
+            disabled="@(!UndoRedoService.CanUndo)"
+            @onclick="HandleUndo"
+            title="Undo (Ctrl+Z)">
+        @* Undo arrow icon *@
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+    </button>
+    <button class="p-1.5 rounded-md transition-colors @(UndoRedoService.CanRedo ? "hover:bg-gray-100 text-gray-600" : "opacity-40 text-gray-400 cursor-not-allowed")"
+            disabled="@(!UndoRedoService.CanRedo)"
+            @onclick="HandleRedo"
+            title="Redo (Ctrl+Y)">
+        @* Redo arrow icon *@
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />
+        </svg>
+    </button>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        UndoRedoService.OnHistoryChanged += StateHasChanged;
+    }
+
+    private void HandleUndo()
+    {
+        UndoRedoService.Undo();
+    }
+
+    private void HandleRedo()
+    {
+        UndoRedoService.Redo();
+    }
+
+    public void Dispose()
+    {
+        UndoRedoService.OnHistoryChanged -= StateHasChanged;
+    }
+}

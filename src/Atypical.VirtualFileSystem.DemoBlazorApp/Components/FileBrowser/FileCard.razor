@@ -1,5 +1,6 @@
 @* Grid View File/Folder Card *@
 @inject VFSStateService StateService
+@inject UndoRedoService UndoRedoService
 
 <div class="@CardClass"
      tabindex="0"
@@ -58,6 +59,8 @@
     private bool IsSelected => StateService.IsItemSelected(Path);
     private bool IsStarred => StateService.IsStarred(Path);
 
+    private bool IsHighlighted => UndoRedoService.IsRecentlyAffected(Path);
+
     private string CardClass
     {
         get
@@ -66,7 +69,8 @@
             var selectedClass = IsSelected
                 ? "bg-cloud-50 border-cloud-300"
                 : "bg-white border-transparent hover:border-gray-200";
-            return $"{baseClass} {selectedClass}";
+            var highlightClass = IsHighlighted ? "file-item-highlight" : "";
+            return $"{baseClass} {selectedClass} {highlightClass}";
         }
     }
 

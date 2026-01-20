@@ -378,7 +378,7 @@
 
         try
         {
-            var newPath = StateService.CurrentPath.TrimEnd('/') + "/" + _newFolderName;
+            var newPath = BuildChildPath(StateService.CurrentPath, _newFolderName);
             VFS.CreateDirectory(newPath);
             StateService.NotifyDataChanged();
             Toast.ShowSuccess($"Created folder '{_newFolderName}'");
@@ -396,7 +396,7 @@
 
         try
         {
-            var newPath = StateService.CurrentPath.TrimEnd('/') + "/" + _newFileName;
+            var newPath = BuildChildPath(StateService.CurrentPath, _newFileName);
             VFS.CreateFile(newPath, _newFileContent);
             StateService.NotifyDataChanged();
             Toast.ShowSuccess($"Created file '{_newFileName}'");
@@ -406,6 +406,15 @@
         {
             Toast.ShowError($"Failed to create file: {ex.Message}");
         }
+    }
+
+    private static string BuildChildPath(string parentPath, string childName)
+    {
+        // Handle root path specially to preserve "vfs://" prefix
+        if (parentPath is "vfs://" or "vfs:" or "vfs:/")
+            return $"vfs://{childName}";
+
+        return $"{parentPath.TrimEnd('/')}/{childName}";
     }
 
     private void PerformRename()

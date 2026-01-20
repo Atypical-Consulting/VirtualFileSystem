@@ -111,6 +111,12 @@ window.cloudDrive = {
 
     // Keyboard navigation helper
     keyboard: {
+        undoRedoRef: null,
+
+        registerUndoRedo: function (dotNetRef) {
+            this.undoRedoRef = dotNetRef;
+        },
+
         handleGridNavigation: function (containerId, dotNetRef) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -177,5 +183,25 @@ document.addEventListener('click', function (e) {
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
         window.cloudDrive.contextMenu.hideAll();
+    }
+});
+
+// Global keydown handler for Undo/Redo
+document.addEventListener('keydown', function (e) {
+    if (!window.cloudDrive.keyboard.undoRedoRef) return;
+
+    // Skip if in input/textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    // Ctrl+Z or Cmd+Z for Undo (without Shift)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        window.cloudDrive.keyboard.undoRedoRef.invokeMethodAsync('HandleUndo');
+    }
+
+    // Ctrl+Y or Cmd+Y for Redo, or Ctrl+Shift+Z or Cmd+Shift+Z
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey) || (e.key === 'Z' && e.shiftKey))) {
+        e.preventDefault();
+        window.cloudDrive.keyboard.undoRedoRef.invokeMethodAsync('HandleRedo');
     }
 });

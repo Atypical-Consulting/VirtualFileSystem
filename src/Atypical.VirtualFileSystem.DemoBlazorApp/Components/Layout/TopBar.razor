@@ -1,6 +1,8 @@
 @* CloudDrive Top Navigation Bar *@
 @inject VFSStateService StateService
 @inject NavigationManager Navigation
+@inject UndoRedoService UndoRedoService
+@implements IDisposable
 
 <header class="h-topbar bg-white border-b border-gray-200 flex items-center px-4 gap-4">
     @* Logo and Brand *@
@@ -55,6 +57,24 @@
             </button>
         </div>
 
+        @* Undo/Redo Buttons *@
+        <UndoRedoButtons />
+
+        @* History Toggle *@
+        <button class="btn-icon hidden md:flex relative"
+                @onclick="() => OnToggleHistory.InvokeAsync()"
+                title="History">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            @if (UndoRedoService.UndoCount > 0)
+            {
+                <span class="absolute -top-1 -right-1 bg-cloud-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                    @(UndoRedoService.UndoCount > 9 ? "9+" : UndoRedoService.UndoCount)
+                </span>
+            }
+        </button>
+
         @* Preview Panel Toggle *@
         <button class="btn-icon hidden md:flex @(StateService.ShowPreviewPanel ? "bg-gray-100" : "")"
                 @onclick="() => StateService.ShowPreviewPanel = !StateService.ShowPreviewPanel"
@@ -73,8 +93,14 @@
 
 @code {
     [Parameter] public EventCallback OnToggleSidebar { get; set; }
+    [Parameter] public EventCallback OnToggleHistory { get; set; }
 
     private string SearchQuery { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        UndoRedoService.OnHistoryChanged += StateHasChanged;
+    }
 
     private void HandleSearchKeyDown(KeyboardEventArgs e)
     {
@@ -82,5 +108,10 @@
         {
             Navigation.NavigateTo($"/search?q={Uri.EscapeDataString(SearchQuery)}");
         }
+    }
+
+    public void Dispose()
+    {
+        UndoRedoService.OnHistoryChanged -= StateHasChanged;
     }
 }

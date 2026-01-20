@@ -18,6 +18,7 @@ builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.Toa
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.FileIconService>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecentFilesService>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecycleBinService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.UndoRedoService>();
 
 var app = builder.Build();
 

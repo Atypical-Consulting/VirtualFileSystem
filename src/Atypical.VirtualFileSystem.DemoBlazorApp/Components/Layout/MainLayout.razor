@@ -1,10 +1,12 @@
 @inherits LayoutComponentBase
 @inject VFSStateService StateService
+@inject UndoRedoService UndoRedoService
+@inject IJSRuntime JS
 @implements IDisposable
 
 <div class="h-screen flex flex-col bg-gray-50">
     @* Top Bar *@
-    <TopBar OnToggleSidebar="ToggleSidebar" />
+    <TopBar OnToggleSidebar="ToggleSidebar" OnToggleHistory="ToggleHistory" />
 
     @* Main Content Area *@
     <div class="flex-1 flex overflow-hidden">
@@ -31,6 +33,12 @@
     <ToastContainer />
 </div>
 
+@* History Drawer *@
+@if (_showHistory)
+{
+    <HistoryDrawer OnClose="() => _showHistory = false" />
+}
+
 @* Mobile Sidebar Overlay *@
 @if (_sidebarOpen)
 {
@@ -50,10 +58,21 @@
 
 @code {
     private bool _sidebarOpen = false;
+    private bool _showHistory = false;
+    private DotNetObjectReference<MainLayout>? _jsRef;
 
     protected override void OnInitialized()
     {
         StateService.OnStateChanged += StateHasChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _jsRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("cloudDrive.keyboard.registerUndoRedo", _jsRef);
+        }
     }
 
     private void ToggleSidebar()
@@ -61,8 +80,28 @@
         _sidebarOpen = !_sidebarOpen;
     }
 
+    private void ToggleHistory()
+    {
+        _showHistory = !_showHistory;
+    }
+
+    [JSInvokable]
+    public void HandleUndo()
+    {
+        UndoRedoService.Undo();
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void HandleRedo()
+    {
+        UndoRedoService.Redo();
+        InvokeAsync(StateHasChanged);
+    }
+
     public void Dispose()
     {
         StateService.OnStateChanged -= StateHasChanged;
+        _jsRef?.Dispose();
     }
 }

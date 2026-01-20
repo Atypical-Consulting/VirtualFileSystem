@@ -1,0 +1,156 @@
+@* History Drawer - Slide-out panel showing operation timeline *@
+@inject UndoRedoService UndoRedoService
+@implements IDisposable
+
+<div class="fixed inset-0 z-40" @onclick="HandleBackdropClick">
+    @* Backdrop *@
+    <div class="fixed inset-0 bg-black/30 animate-fade-in"></div>
+
+    @* Drawer *@
+    <div class="fixed inset-y-0 right-0 w-80 bg-white shadow-xl animate-slide-in-right flex flex-col"
+         @onclick:stopPropagation="true">
+        @* Header *@
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900">History</h2>
+            <button class="btn-icon" @onclick="Close" title="Close">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        @* Content *@
+        <div class="flex-1 overflow-y-auto custom-scrollbar">
+            @if (!_historyEntries.Any())
+            {
+                @* Empty state *@
+                <div class="flex flex-col items-center justify-center h-full p-8 text-center">
+                    <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <p class="text-gray-500 font-medium">No history yet</p>
+                    <p class="text-sm text-gray-400 mt-1">Your actions will appear here</p>
+                </div>
+            }
+            else
+            {
+                <div class="p-2">
+                    @* Undo stack section *@
+                    @if (_historyEntries.Any())
+                    {
+                        <div class="mb-4">
+                            <div class="px-2 py-1 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Recent Actions
+                            </div>
+                            @foreach (var entry in _historyEntries)
+                            {
+                                <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                    @* Icon *@
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full @entry.ColorClass flex items-center justify-center">
+                                        @((MarkupString)entry.IconSvg)
+                                    </div>
+
+                                    @* Description *@
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-900 truncate" title="@entry.Description">
+                                            @entry.Description
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-0.5">
+                                            @entry.RelativeTime
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    @* Redo stack section *@
+                    @if (_redoEntries.Any())
+                    {
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <div class="px-2 py-1 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Undone Actions
+                            </div>
+                            @foreach (var entry in _redoEntries)
+                            {
+                                <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors opacity-60">
+                                    @* Icon *@
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full @entry.ColorClass flex items-center justify-center">
+                                        @((MarkupString)entry.IconSvg)
+                                    </div>
+
+                                    @* Description *@
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-gray-900 truncate" title="@entry.Description">
+                                            @entry.Description
+                                        </p>
+                                        <p class="text-xs text-gray-500 mt-0.5">
+                                            @entry.RelativeTime
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        @* Footer with actions *@
+        <div class="border-t border-gray-200 p-4 space-y-2">
+            <div class="flex gap-2">
+                <button class="btn-secondary flex-1"
+                        disabled="@(!UndoRedoService.CanUndo)"
+                        @onclick="() => UndoRedoService.Undo()">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                    Undo
+                </button>
+                <button class="btn-secondary flex-1"
+                        disabled="@(!UndoRedoService.CanRedo)"
+                        @onclick="() => UndoRedoService.Redo()">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />
+                    </svg>
+                    Redo
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private List<Models.HistoryEntry> _historyEntries = new();
+    private List<Models.HistoryEntry> _redoEntries = new();
+
+    protected override void OnInitialized()
+    {
+        UndoRedoService.OnHistoryChanged += RefreshHistory;
+        RefreshHistory();
+    }
+
+    private void RefreshHistory()
+    {
+        _historyEntries = UndoRedoService.GetHistory().ToList();
+        _redoEntries = UndoRedoService.GetRedoHistory().ToList();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleBackdropClick()
+    {
+        Close();
+    }
+
+    private void Close()
+    {
+        OnClose.InvokeAsync();
+    }
+
+    public void Dispose()
+    {
+        UndoRedoService.OnHistoryChanged -= RefreshHistory;
+    }
+}

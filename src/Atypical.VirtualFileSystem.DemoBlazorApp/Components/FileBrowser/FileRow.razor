@@ -1,5 +1,6 @@
 @* List View File/Folder Row *@
 @inject VFSStateService StateService
+@inject UndoRedoService UndoRedoService
 
 <div class="@RowClass"
      tabindex="0"
@@ -70,6 +71,7 @@
 
     private bool IsSelected => StateService.IsItemSelected(Path);
     private bool IsStarred => StateService.IsStarred(Path);
+    private bool IsHighlighted => UndoRedoService.IsRecentlyAffected(Path);
 
     private string RowClass
     {
@@ -79,7 +81,8 @@
             var selectedClass = IsSelected
                 ? "bg-cloud-50"
                 : "hover:bg-gray-50";
-            return $"{baseClass} {selectedClass}";
+            var highlightClass = IsHighlighted ? "file-item-highlight" : "";
+            return $"{baseClass} {selectedClass} {highlightClass}";
         }
     }
 
