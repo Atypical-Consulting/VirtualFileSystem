@@ -1,5 +1,6 @@
 using Atypical.VirtualFileSystem.DemoBlazorApp.Components;
 using Atypical.VirtualFileSystem.Core.Services;
+using Atypical.VirtualFileSystem.GitHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddRazorComponents()
 // Add Virtual File System
 builder.Services.AddVirtualFileSystem();
 
+// Add GitHub Repository Loader
+builder.Services.AddVirtualFileSystemGitHub();
+
 // Add State Service
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.VFSStateService>();
 
@@ -19,6 +23,7 @@ builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.Fil
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecentFilesService>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecycleBinService>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.UndoRedoService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubImportService>();
 
 var app = builder.Build();
 

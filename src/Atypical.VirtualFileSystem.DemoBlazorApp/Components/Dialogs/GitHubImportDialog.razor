@@ -1,0 +1,311 @@
+@* GitHub Repository Import Dialog *@
+@inject IVirtualFileSystem VFS
+@inject GitHubImportService ImportService
+@inject VFSStateService StateService
+@inject ToastService Toast
+@inject NavigationManager Navigation
+@implements IDisposable
+
+<Modal @bind-IsOpen="IsOpen" Title="Import from GitHub" Size="lg" CloseOnBackdropClick="@(!ImportService.State.IsImporting)">
+    <ChildContent>
+        @if (ImportService.State.IsImporting)
+        {
+            @* Loading State *@
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-cloud-600"></div>
+                    <span class="text-gray-700">Importing repository...</span>
+                </div>
+
+                @* Progress Bar *@
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm text-gray-600">
+                        <span>@ImportService.State.ProgressText</span>
+                        <span>@ImportService.State.ProgressPercent%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-cloud-600 h-2 rounded-full transition-all duration-300"
+                             style="width: @(ImportService.State.ProgressPercent)%"></div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(ImportService.State.CurrentPath))
+                    {
+                        <p class="text-xs text-gray-500 truncate" title="@ImportService.State.CurrentPath">
+                            @ImportService.State.CurrentPath
+                        </p>
+                    }
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(ImportService.State.ErrorMessage))
+        {
+            @* Error State *@
+            <div class="space-y-4">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex gap-3">
+                        <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                        <div>
+                            <h4 class="text-sm font-medium text-red-800">Import Failed</h4>
+                            <p class="text-sm text-red-700 mt-1">@ImportService.State.ErrorMessage</p>
+                        </div>
+                    </div>
+                </div>
+                <Button Variant="secondary" OnClick="ResetForm">Try Again</Button>
+            </div>
+        }
+        else
+        {
+            @* Input Form *@
+            <div class="space-y-4">
+                @* URL Input *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">GitHub URL</label>
+                    <input type="text"
+                           class="input"
+                           placeholder="https://github.com/owner/repository"
+                           @bind="_repositoryUrl"
+                           @bind:event="oninput"
+                           @onblur="ParseUrl" />
+                    <p class="text-xs text-gray-500 mt-1">Paste a GitHub repository URL to auto-fill owner and repository</p>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                    <span class="text-xs text-gray-500 uppercase">or enter manually</span>
+                    <div class="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                @* Owner & Repository *@
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Owner</label>
+                        <input type="text"
+                               class="input"
+                               placeholder="e.g., octocat"
+                               @bind="_owner" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Repository</label>
+                        <input type="text"
+                               class="input"
+                               placeholder="e.g., Hello-World"
+                               @bind="_repository" />
+                    </div>
+                </div>
+
+                @* Branch *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Branch</label>
+                    <input type="text"
+                           class="input"
+                           placeholder="main (default)"
+                           @bind="_branch" />
+                </div>
+
+                @* SubPath *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Subdirectory (optional)</label>
+                    <input type="text"
+                           class="input"
+                           placeholder="e.g., src/components"
+                           @bind="_subPath" />
+                    <p class="text-xs text-gray-500 mt-1">Load only files from a specific directory</p>
+                </div>
+
+                @* Advanced Options Toggle *@
+                <div>
+                    <button type="button"
+                            class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+                            @onclick="() => _showAdvanced = !_showAdvanced">
+                        <svg class="w-4 h-4 transition-transform @(_showAdvanced ? "rotate-90" : "")"
+                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                        </svg>
+                        Advanced Options
+                    </button>
+                </div>
+
+                @if (_showAdvanced)
+                {
+                    <div class="space-y-4 pl-4 border-l-2 border-gray-200">
+                        @* Target Path *@
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Target Path</label>
+                            <input type="text"
+                                   class="input"
+                                   placeholder="/github/{owner}/{repo}"
+                                   @bind="_targetPath" />
+                            <p class="text-xs text-gray-500 mt-1">Where to load the repository in the VFS</p>
+                        </div>
+
+                        @* Max File Size *@
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Max File Size (KB)</label>
+                            <input type="number"
+                                   class="input"
+                                   min="1"
+                                   max="10240"
+                                   @bind="_maxFileSizeKb" />
+                            <p class="text-xs text-gray-500 mt-1">Files larger than this will be skipped</p>
+                        </div>
+
+                        @* Include Extensions *@
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Include Extensions (optional)</label>
+                            <input type="text"
+                                   class="input"
+                                   placeholder=".cs, .js, .json"
+                                   @bind="_includeExtensions" />
+                            <p class="text-xs text-gray-500 mt-1">Comma-separated list of extensions to include</p>
+                        </div>
+
+                        @* Exclude Binary Files *@
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox"
+                                   id="excludeBinary"
+                                   class="w-4 h-4 text-cloud-600 rounded border-gray-300"
+                                   @bind="_excludeBinaryFiles" />
+                            <label for="excludeBinary" class="text-sm text-gray-700">
+                                Exclude binary files (images, executables, etc.)
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </ChildContent>
+    <Footer>
+        @if (ImportService.State.IsImporting)
+        {
+            <Button Variant="danger" OnClick="CancelImport">Cancel</Button>
+        }
+        else if (!string.IsNullOrEmpty(ImportService.State.ErrorMessage))
+        {
+            <Button Variant="ghost" OnClick="Close">Close</Button>
+        }
+        else
+        {
+            <Button Variant="ghost" OnClick="Close">Cancel</Button>
+            <Button Variant="primary"
+                    OnClick="StartImport"
+                    Disabled="@(!CanImport)"
+                    Icon="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5">
+                Import
+            </Button>
+        }
+    </Footer>
+</Modal>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public EventCallback<string> OnImportComplete { get; set; }
+
+    private string _repositoryUrl = "";
+    private string _owner = "";
+    private string _repository = "";
+    private string _branch = "";
+    private string _subPath = "";
+    private string _targetPath = "";
+    private int _maxFileSizeKb = 1024; // 1 MB
+    private string _includeExtensions = "";
+    private bool _excludeBinaryFiles = false;
+    private bool _showAdvanced = false;
+
+    private bool CanImport => !string.IsNullOrWhiteSpace(_owner) && !string.IsNullOrWhiteSpace(_repository);
+
+    protected override void OnInitialized()
+    {
+        ImportService.OnStateChanged += StateHasChanged;
+    }
+
+    private void ParseUrl()
+    {
+        if (string.IsNullOrWhiteSpace(_repositoryUrl))
+            return;
+
+        if (ImportService.TryParseUrl(_repositoryUrl, out var owner, out var repository))
+        {
+            _owner = owner;
+            _repository = repository;
+        }
+    }
+
+    private async Task StartImport()
+    {
+        if (!CanImport) return;
+
+        // Parse include extensions
+        HashSet<string>? includeExtensions = null;
+        if (!string.IsNullOrWhiteSpace(_includeExtensions))
+        {
+            includeExtensions = _includeExtensions
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Select(ext => ext.StartsWith('.') ? ext : $".{ext}")
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        }
+
+        // Start import
+        var result = await ImportService.ImportRepositoryAsync(
+            VFS,
+            _owner,
+            _repository,
+            string.IsNullOrWhiteSpace(_branch) ? null : _branch,
+            string.IsNullOrWhiteSpace(_subPath) ? null : _subPath,
+            string.IsNullOrWhiteSpace(_targetPath) ? null : _targetPath,
+            _maxFileSizeKb * 1024,
+            includeExtensions,
+            _excludeBinaryFiles
+        );
+
+        if (result != null)
+        {
+            // Success
+            var message = result.HasSkippedFiles
+                ? $"Imported {result.FilesLoaded} files ({result.FilesSkipped} skipped)"
+                : $"Imported {result.FilesLoaded} files successfully";
+
+            Toast.ShowSuccess(message);
+
+            // Navigate to the loaded path
+            StateService.NavigateTo(result.TargetPath);
+            StateService.NotifyDataChanged();
+
+            await OnImportComplete.InvokeAsync(result.TargetPath);
+            await Close();
+        }
+    }
+
+    private void CancelImport()
+    {
+        ImportService.CancelImport();
+    }
+
+    private void ResetForm()
+    {
+        ImportService.State.Reset();
+        StateHasChanged();
+    }
+
+    private async Task Close()
+    {
+        ResetForm();
+        _repositoryUrl = "";
+        _owner = "";
+        _repository = "";
+        _branch = "";
+        _subPath = "";
+        _targetPath = "";
+        _maxFileSizeKb = 1024;
+        _includeExtensions = "";
+        _excludeBinaryFiles = false;
+        _showAdvanced = false;
+        await IsOpenChanged.InvokeAsync(false);
+    }
+
+    public void Dispose()
+    {
+        ImportService.OnStateChanged -= StateHasChanged;
+    }
+}

@@ -45,10 +45,11 @@ public class ToastService
         _toasts.Add(toast);
         OnChange?.Invoke();
 
-        // Auto-remove after duration
-        _ = Task.Delay(durationMs).ContinueWith(_ =>
+        // Auto-remove after duration - use Timer to avoid thread issues
+        _ = Task.Run(async () =>
         {
-            Remove(toast.Id);
+            await Task.Delay(durationMs);
+            RemoveSilently(toast.Id);
         });
     }
 
@@ -59,6 +60,17 @@ public class ToastService
         {
             _toasts.Remove(toast);
             OnChange?.Invoke();
+        }
+    }
+
+    private void RemoveSilently(Guid id)
+    {
+        var toast = _toasts.FirstOrDefault(t => t.Id == id);
+        if (toast != null)
+        {
+            _toasts.Remove(toast);
+            // Don't invoke OnChange here - the next UI interaction will pick up the change
+            // or components can poll the Toasts collection
         }
     }
 

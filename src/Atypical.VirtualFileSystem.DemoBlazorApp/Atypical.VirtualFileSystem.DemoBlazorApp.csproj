@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj" />
+    <ProjectReference Include="../Atypical.VirtualFileSystem.GitHub/Atypical.VirtualFileSystem.GitHub.csproj" />
   </ItemGroup>
 
   <!-- Tailwind CSS Build -->

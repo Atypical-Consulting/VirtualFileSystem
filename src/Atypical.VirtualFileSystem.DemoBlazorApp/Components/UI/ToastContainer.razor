@@ -10,9 +10,22 @@
 </div>
 
 @code {
+    private System.Threading.Timer? _timer;
+
     protected override void OnInitialized()
     {
-        ToastService.OnChange += StateHasChanged;
+        ToastService.OnChange += HandleChange;
+
+        // Periodic check to handle auto-removal (every 500ms)
+        _timer = new System.Threading.Timer(_ =>
+        {
+            InvokeAsync(StateHasChanged);
+        }, null, 500, 500);
+    }
+
+    private void HandleChange()
+    {
+        InvokeAsync(StateHasChanged);
     }
 
     private void HandleDismiss(Guid id)
@@ -22,6 +35,7 @@
 
     public void Dispose()
     {
-        ToastService.OnChange -= StateHasChanged;
+        ToastService.OnChange -= HandleChange;
+        _timer?.Dispose();
     }
 }
