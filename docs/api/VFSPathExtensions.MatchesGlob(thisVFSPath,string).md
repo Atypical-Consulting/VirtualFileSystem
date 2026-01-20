@@ -18,10 +18,10 @@ The VFS path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.MatchesGlob(thisAtypical.VirtualFileSystem.Core.VFSPath,string).pattern'></a>
 
-`pattern` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`pattern` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The glob pattern \(e\.g\., "\*\.txt", "test\*", "\*\*/config\.\*"\)\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the path matches the pattern\.

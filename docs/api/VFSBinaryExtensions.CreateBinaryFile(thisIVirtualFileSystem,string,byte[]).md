@@ -18,13 +18,13 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.CreateBinaryFile(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,byte[]).filePath'></a>
 
-`filePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.CreateBinaryFile(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,byte[]).binaryContent'></a>
 
-`binaryContent` [System\.Byte](https://docs.microsoft.com/en-us/dotnet/api/System.Byte 'System\.Byte')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+`binaryContent` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
 
 The binary content of the file\.
 

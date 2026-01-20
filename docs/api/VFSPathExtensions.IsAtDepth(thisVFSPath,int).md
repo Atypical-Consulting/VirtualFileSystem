@@ -18,10 +18,10 @@ The VFS path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.IsAtDepth(thisAtypical.VirtualFileSystem.Core.VFSPath,int).depth'></a>
 
-`depth` [System\.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System\.Int32')
+`depth` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The depth to check\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the path is at the specified depth\.

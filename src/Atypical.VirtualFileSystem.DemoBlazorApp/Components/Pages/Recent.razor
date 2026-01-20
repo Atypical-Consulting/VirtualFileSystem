@@ -1,0 +1,122 @@
+@page "/recent"
+@inject RecentFilesService RecentFiles
+@inject IVirtualFileSystem VFS
+@inject VFSStateService StateService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@implements IDisposable
+
+<PageTitle>Recent - CloudDrive</PageTitle>
+
+<div class="h-full flex flex-col bg-white">
+    @* Header *@
+    <div class="p-4 border-b border-gray-200">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <svg class="w-6 h-6 text-cloud-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <h1 class="text-xl font-semibold text-gray-900">Recent</h1>
+            </div>
+            @if (RecentFiles.RecentFiles.Any())
+            {
+                <Button Variant="ghost" Size="sm" OnClick="ClearRecent">
+                    Clear All
+                </Button>
+            }
+        </div>
+        <p class="text-sm text-gray-500 mt-1">Recently accessed files and folders</p>
+    </div>
+
+    @* Content *@
+    <div class="flex-1 overflow-auto">
+        @if (!RecentFiles.RecentFiles.Any())
+        {
+            <EmptyState Title="No recent files"
+                        Description="Files and folders you access will appear here"
+                        Icon="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        }
+        else
+        {
+            <div class="divide-y divide-gray-100">
+                @foreach (var entry in RecentFiles.RecentFiles)
+                {
+                    var exists = entry.IsDirectory ? VFS.DirectoryExists(entry.Path) : VFS.FileExists(entry.Path);
+
+                    <div class="flex items-center gap-4 px-4 py-3 hover:bg-gray-50 transition-colors @(!exists ? "opacity-50" : "cursor-pointer")"
+                         @onclick="() => OpenItem(entry)">
+                        <FileIcon IsDirectory="@entry.IsDirectory" FileName="@entry.Name" />
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-medium text-gray-900 truncate">@entry.Name</p>
+                            <p class="text-xs text-gray-500 truncate">@entry.Path</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-500">@GetTimeAgo(entry.AccessedAt)</p>
+                            @if (!exists)
+                            {
+                                <Badge Variant="red" Size="sm">Deleted</Badge>
+                            }
+                        </div>
+                        <button class="p-1 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100"
+                                @onclick:stopPropagation="true"
+                                @onclick="() => RemoveEntry(entry.Path)">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        RecentFiles.OnChange += StateHasChanged;
+    }
+
+    private void OpenItem(RecentFileEntry entry)
+    {
+        var exists = entry.IsDirectory ? VFS.DirectoryExists(entry.Path) : VFS.FileExists(entry.Path);
+        if (!exists) return;
+
+        if (entry.IsDirectory)
+        {
+            StateService.NavigateTo(entry.Path);
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            Navigation.NavigateTo($"/file?path={Uri.EscapeDataString(entry.Path)}");
+        }
+    }
+
+    private void RemoveEntry(string path)
+    {
+        RecentFiles.RemoveEntry(path);
+    }
+
+    private void ClearRecent()
+    {
+        RecentFiles.Clear();
+    }
+
+    private string GetTimeAgo(DateTime time)
+    {
+        var diff = DateTime.Now - time;
+
+        if (diff.TotalMinutes < 1) return "Just now";
+        if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
+        if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
+        if (diff.TotalDays < 7) return $"{(int)diff.TotalDays}d ago";
+
+        return time.ToString("MMM d");
+    }
+
+    public void Dispose()
+    {
+        RecentFiles.OnChange -= StateHasChanged;
+    }
+}

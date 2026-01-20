@@ -1,0 +1,297 @@
+@page "/file"
+@inject IVirtualFileSystem VFS
+@inject VFSStateService StateService
+@inject ToastService Toast
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@rendermode InteractiveServer
+
+<PageTitle>@(CurrentFile?.Name ?? "File") - CloudDrive</PageTitle>
+
+<div class="h-full flex flex-col bg-white">
+    @if (CurrentFile != null)
+    {
+        @* Header *@
+        <div class="p-4 border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button class="btn-icon" @onclick="GoBack">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                        </svg>
+                    </button>
+                    <FileIcon IsDirectory="false" FileName="@CurrentFile.Name" Size="lg" />
+                    <div>
+                        <h1 class="text-lg font-semibold text-gray-900">@CurrentFile.Name</h1>
+                        <p class="text-xs text-gray-500">@CurrentFile.Path.Value</p>
+                    </div>
+                    @if (HasUnsavedChanges)
+                    {
+                        <Badge Variant="yellow">Unsaved changes</Badge>
+                    }
+                </div>
+                <div class="flex items-center gap-2">
+                    <Button Variant="ghost" OnClick="ReloadFile" Disabled="!HasUnsavedChanges"
+                            Icon="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99">
+                        Discard
+                    </Button>
+                    <Button Variant="primary" OnClick="SaveFile" Disabled="!HasUnsavedChanges"
+                            Icon="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z">
+                        Save
+                    </Button>
+                </div>
+            </div>
+        </div>
+
+        @* Editor *@
+        <div class="flex-1 flex overflow-hidden">
+            @* Main Editor *@
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <textarea @bind="FileContent"
+                          @bind:event="oninput"
+                          class="flex-1 w-full p-4 font-mono text-sm text-gray-800 bg-gray-50 border-0 resize-none focus:outline-none focus:ring-0"
+                          placeholder="File content..."
+                          spellcheck="false"></textarea>
+
+                @* Status Bar *@
+                <div class="flex items-center justify-between px-4 py-2 bg-gray-100 border-t border-gray-200 text-xs text-gray-500">
+                    <div class="flex items-center gap-4">
+                        <span>@FileContent.Length bytes</span>
+                        <span>@FileContent.Split('\n').Length lines</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span>@System.IO.Path.GetExtension(CurrentFile.Name).ToUpperInvariant().TrimStart('.')</span>
+                    </div>
+                </div>
+            </div>
+
+            @* Right Panel - Tools *@
+            <div class="w-72 border-l border-gray-200 bg-white flex flex-col overflow-hidden hidden md:flex">
+                @* File Info *@
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-900 mb-3">File Information</h3>
+                    <dl class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Extension</dt>
+                            <dd class="text-gray-900">@System.IO.Path.GetExtension(CurrentFile.Name)</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Created</dt>
+                            <dd class="text-gray-900">@CurrentFile.CreationTime.ToString("MMM d, yyyy")</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Modified</dt>
+                            <dd class="text-gray-900">@CurrentFile.LastWriteTime.ToString("MMM d, yyyy")</dd>
+                        </div>
+                        <div class="flex justify-between">
+                            <dt class="text-gray-500">Original size</dt>
+                            <dd class="text-gray-900">@OriginalContent.Length bytes</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                @* Find & Replace *@
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-900 mb-3">Find & Replace</h3>
+                    <div class="space-y-3">
+                        <Input @bind-Value="FindText"
+                               Placeholder="Find..."
+                               LeadingIcon="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        <Input @bind-Value="ReplaceText"
+                               Placeholder="Replace with..." />
+                        <Button Variant="secondary" Size="sm" OnClick="ReplaceAll"
+                                Disabled="@string.IsNullOrEmpty(FindText)">
+                            Replace All
+                        </Button>
+                    </div>
+                </div>
+
+                @* Quick Actions *@
+                <div class="p-4">
+                    <h3 class="text-sm font-medium text-gray-900 mb-3">Quick Actions</h3>
+                    <div class="space-y-2">
+                        <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 rounded-md"
+                                @onclick="CopyToClipboard">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                            </svg>
+                            Copy to clipboard
+                        </button>
+                        <button class="w-full flex items-center gap-2 px-3 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 rounded-md"
+                                @onclick="DownloadFile">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <div class="flex-1 flex items-center justify-center">
+            <div class="text-center max-w-md mx-auto p-8">
+                <svg class="w-16 h-16 mx-auto text-red-400 mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                </svg>
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Error loading file</h2>
+                <p class="text-gray-500 mb-4">@ErrorMessage</p>
+                <Button Variant="secondary" OnClick="GoBack">Go Back</Button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="flex-1 flex items-center justify-center">
+            <EmptyState Title="No file selected"
+                        Description="Select a file from your CloudDrive to view and edit it"
+                        Icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
+                <Action>
+                    <Button Variant="primary" OnClick="GoBack">
+                        Browse Files
+                    </Button>
+                </Action>
+            </EmptyState>
+        </div>
+    }
+</div>
+
+@code {
+    [SupplyParameterFromQuery] public string? path { get; set; }
+
+    private IFileNode? CurrentFile;
+    private string FileContent = "";
+    private string OriginalContent = "";
+    private string FindText = "";
+    private string ReplaceText = "";
+    private string ErrorMessage = "";
+
+    private bool HasUnsavedChanges => FileContent != OriginalContent;
+
+    protected override void OnInitialized()
+    {
+        LoadFileFromQuery();
+    }
+
+    protected override void OnParametersSet()
+    {
+        LoadFileFromQuery();
+    }
+
+    private void LoadFileFromQuery()
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            if (StateService.SelectedNode is IFileNode selectedFile)
+            {
+                LoadFile(selectedFile);
+            }
+            return;
+        }
+
+        try
+        {
+            var fileNode = VFS.GetFile(path);
+            LoadFile(fileNode);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Could not load file: {ex.Message}";
+            CurrentFile = null;
+        }
+    }
+
+    private void LoadFile(IFileNode file)
+    {
+        CurrentFile = file;
+        FileContent = file.Content;
+        OriginalContent = file.Content;
+        ErrorMessage = "";
+        StateService.SelectedNode = file;
+        StateHasChanged();
+    }
+
+    private void SaveFile()
+    {
+        if (CurrentFile == null || !HasUnsavedChanges)
+            return;
+
+        try
+        {
+            VFS.DeleteFile(CurrentFile.Path.Value);
+            VFS.CreateFile(CurrentFile.Path.Value, FileContent);
+
+            OriginalContent = FileContent;
+            CurrentFile = VFS.GetFile(CurrentFile.Path.Value);
+
+            StateService.NotifyDataChanged();
+            Toast.ShowSuccess($"File '{CurrentFile.Name}' saved");
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Toast.ShowError($"Error saving file: {ex.Message}");
+        }
+    }
+
+    private void ReloadFile()
+    {
+        if (CurrentFile != null)
+        {
+            FileContent = OriginalContent;
+            StateHasChanged();
+        }
+    }
+
+    private void ReplaceAll()
+    {
+        if (string.IsNullOrEmpty(FindText))
+            return;
+
+        var newContent = FileContent.Replace(FindText, ReplaceText ?? "");
+        if (newContent != FileContent)
+        {
+            FileContent = newContent;
+            Toast.ShowSuccess($"Replaced all occurrences of '{FindText}'");
+        }
+        else
+        {
+            Toast.ShowInfo($"No occurrences of '{FindText}' found");
+        }
+    }
+
+    private async Task CopyToClipboard()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("cloudDrive.clipboard.writeText", FileContent);
+            Toast.ShowSuccess("Copied to clipboard");
+        }
+        catch
+        {
+            Toast.ShowError("Could not copy to clipboard");
+        }
+    }
+
+    private async Task DownloadFile()
+    {
+        if (CurrentFile == null) return;
+
+        try
+        {
+            await JS.InvokeVoidAsync("cloudDrive.download.text", CurrentFile.Name, FileContent);
+            Toast.ShowSuccess($"Downloaded {CurrentFile.Name}");
+        }
+        catch
+        {
+            Toast.ShowError("Could not download file");
+        }
+    }
+
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

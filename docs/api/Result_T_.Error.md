@@ -10,9 +10,9 @@ public string Error { get; }
 ```
 
 #### Property Value
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 #### Exceptions
 
-[System\.InvalidOperationException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidOperationException 'System\.InvalidOperationException')  
+[System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
 Thrown when accessing Error on a successful result\.

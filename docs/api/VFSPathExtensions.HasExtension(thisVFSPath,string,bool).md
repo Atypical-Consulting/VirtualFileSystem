@@ -18,16 +18,16 @@ The VFS path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.HasExtension(thisAtypical.VirtualFileSystem.Core.VFSPath,string,bool).extension'></a>
 
-`extension` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`extension` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The extension to check \(with or without leading dot\)\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.HasExtension(thisAtypical.VirtualFileSystem.Core.VFSPath,string,bool).ignoreCase'></a>
 
-`ignoreCase` [System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+`ignoreCase` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 Whether to ignore case\. Default is true\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the path has the specified extension\.

@@ -9,7 +9,7 @@ Provides bulk operation extension methods for IVirtualFileSystem for efficient b
 public static class VFSBulkExtensions
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSBulkExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSBulkExtensions
 
 | Methods | |
 | :--- | :--- |

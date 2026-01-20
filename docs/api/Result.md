@@ -9,7 +9,7 @@ Represents the result of an operation that can either succeed or fail without a 
 public readonly record struct Result : System.IEquatable<Atypical.VirtualFileSystem.Core.Result>
 ```
 
-Implements [System\.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System\.IEquatable\`1')[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System\.IEquatable\`1')
+Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[Result](Result.md 'Atypical\.VirtualFileSystem\.Core\.Result')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 
 | Properties | |
 | :--- | :--- |

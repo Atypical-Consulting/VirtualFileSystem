@@ -18,10 +18,10 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.GetFileSize(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string).filePath'></a>
 
-`filePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
 #### Returns
-[System\.Int64](https://docs.microsoft.com/en-us/dotnet/api/System.Int64 'System\.Int64')  
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')  
 The size in bytes, or \-1 if the file doesn't exist\.

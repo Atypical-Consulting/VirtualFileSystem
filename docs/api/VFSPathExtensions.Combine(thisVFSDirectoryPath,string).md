@@ -18,10 +18,10 @@ The base directory path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.Combine(thisAtypical.VirtualFileSystem.Core.VFSDirectoryPath,string).relativePath'></a>
 
-`relativePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`relativePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The relative path to combine\.
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The combined path\.

@@ -10,7 +10,7 @@ These methods return boolean success indicators instead of throwing exceptions\.
 public static class VFSSafeExtensions
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSSafeExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSSafeExtensions
 
 | Methods | |
 | :--- | :--- |

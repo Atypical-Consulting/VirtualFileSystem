@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "mcp__plugin_playwright_playwright__browser_type",
+      "mcp__plugin_playwright_playwright__browser_press_key",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "Bash(killall dotnet:*)",
+      "Bash(true sleep 2 cd /Users/phmatray/Repositories/github-atyp/VirtualFileSystem/src/Atypical.VirtualFileSystem.DemoBlazorApp rm -rf bin obj ~/.nuget/packages/atypical.virtualfilesystem*)",
+      "mcp__plugin_playwright_playwright__browser_select_option"
     ],
     "deny": []
   }

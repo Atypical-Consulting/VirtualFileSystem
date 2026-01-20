@@ -18,13 +18,13 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSConvenienceExtensions.MoveDirectory(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,string).sourceDirectoryPath'></a>
 
-`sourceDirectoryPath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`sourceDirectoryPath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The source directory path as a string\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSConvenienceExtensions.MoveDirectory(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,string).destinationDirectoryPath'></a>
 
-`destinationDirectoryPath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`destinationDirectoryPath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The destination directory path as a string\.
 

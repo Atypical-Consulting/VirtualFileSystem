@@ -18,10 +18,10 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSafeExtensions.TryDeleteFile(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string).filePath'></a>
 
-`filePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the file was deleted successfully, false otherwise\.

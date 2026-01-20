@@ -18,10 +18,10 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSConvenienceExtensions.Exists(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string).path'></a>
 
-`path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path to check as a string\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the path exists, false otherwise\.

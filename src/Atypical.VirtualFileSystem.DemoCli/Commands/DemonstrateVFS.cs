@@ -4,7 +4,7 @@ namespace Atypical.VirtualFileSystem.DemoCli.Commands;
 
 public class DemonstrateVFS : Command
 {
-    public override int Execute(CommandContext context)
+    public override int Execute(CommandContext context, CancellationToken cancellationToken)
     {
         // Create a virtual file system
         var factory = new VirtualFileSystemFactory();

@@ -16,7 +16,7 @@ public virtual Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode 
 
 The new path of the node\.
 
-Implements [UpdatePath\(VFSPath\)](https://docs.microsoft.com/en-us/dotnet/api/Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode.UpdatePath#Atypical_VirtualFileSystem_Core_Contracts_IVirtualFileSystemNode_UpdatePath_Atypical_VirtualFileSystem_Core_VFSPath_ 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.UpdatePath\(Atypical\.VirtualFileSystem\.Core\.VFSPath\)')
+Implements [UpdatePath\(VFSPath\)](https://learn.microsoft.com/en-us/dotnet/api/atypical.virtualfilesystem.core.contracts.ivirtualfilesystemnode.updatepath#atypical-virtualfilesystem-core-contracts-ivirtualfilesystemnode-updatepath(atypical-virtualfilesystem-core-vfspath) 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.UpdatePath\(Atypical\.VirtualFileSystem\.Core\.VFSPath\)')
 
 #### Returns
 [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')

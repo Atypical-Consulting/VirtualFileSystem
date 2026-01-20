@@ -12,4 +12,4 @@ public abstract bool IsDirectory { get; }
 Implements [IsDirectory](IVirtualFileSystemNode.IsDirectory.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.IsDirectory')
 
 #### Property Value
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')

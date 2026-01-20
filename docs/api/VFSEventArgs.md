@@ -9,7 +9,7 @@ Represents the base class for all VFS event arguments\.
 public abstract class VFSEventArgs : System.EventArgs
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; [System\.EventArgs](https://docs.microsoft.com/en-us/dotnet/api/System.EventArgs 'System\.EventArgs') &#129106; VFSEventArgs
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; VFSEventArgs
 
 Derived  
 &#8627; [VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryCreatedArgs')  

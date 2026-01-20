@@ -9,7 +9,7 @@ Represents a factory for creating [IVirtualFileSystem](IVirtualFileSystem.md 'At
 public class VirtualFileSystemFactory : Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemFactory
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VirtualFileSystemFactory
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VirtualFileSystemFactory
 
 Implements [IVirtualFileSystemFactory](IVirtualFileSystemFactory.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemFactory')
 

@@ -9,7 +9,7 @@ Represents the index of the virtual file system\.
 public sealed class VFSIndex
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSIndex
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSIndex
 
 ### Remarks
 The vfs index is a dictionary of vfs paths and vfs nodes\.

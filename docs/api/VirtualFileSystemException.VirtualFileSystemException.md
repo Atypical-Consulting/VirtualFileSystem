@@ -6,8 +6,8 @@
 | Overloads | |
 | :--- | :--- |
 | [VirtualFileSystemException\(\)](VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException() 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException\.VirtualFileSystemException\(\)') | Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class\. |
-| [VirtualFileSystemException\(string, Exception\)](VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception) 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException\.VirtualFileSystemException\(string, System\.Exception\)') | Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class with a message and an inner exception that is the cause of this exception\. |
 | [VirtualFileSystemException\(string\)](VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string) 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException\.VirtualFileSystemException\(string\)') | Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class with a message that describes the error\. |
+| [VirtualFileSystemException\(string, Exception\)](VirtualFileSystemException.VirtualFileSystemException.md#Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception) 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException\.VirtualFileSystemException\(string, System\.Exception\)') | Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class with a message and an inner exception that is the cause of this exception\. |
 
 <a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException()'></a>
 
@@ -18,6 +18,23 @@ Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystem
 ```csharp
 public VirtualFileSystemException();
 ```
+
+<a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string)'></a>
+
+## VirtualFileSystemException\(string\) Constructor
+
+Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class with a message that describes the error\.
+
+```csharp
+public VirtualFileSystemException(string message);
+```
+#### Parameters
+
+<a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string).message'></a>
+
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+
+The error message that explains the reason for the exception\.
 
 <a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception)'></a>
 
@@ -33,30 +50,13 @@ public VirtualFileSystemException(string message, System.Exception innerExceptio
 
 <a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception).message'></a>
 
-`message` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`message` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The error message that explains the reason for the exception\.
 
 <a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string,System.Exception).innerException'></a>
 
-`innerException` [System\.Exception](https://docs.microsoft.com/en-us/dotnet/api/System.Exception 'System\.Exception')
+`innerException` [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception')
 
 The exception that is the cause of the current exception, or a null reference if no inner
 exception is specified\.
-
-<a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string)'></a>
-
-## VirtualFileSystemException\(string\) Constructor
-
-Initializes a new instance of the [VirtualFileSystemException](VirtualFileSystemException.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemException') class with a message that describes the error\.
-
-```csharp
-public VirtualFileSystemException(string message);
-```
-#### Parameters
-
-<a name='Atypical.VirtualFileSystem.Core.VirtualFileSystemException.VirtualFileSystemException(string).message'></a>
-
-`message` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
-
-The error message that explains the reason for the exception\.

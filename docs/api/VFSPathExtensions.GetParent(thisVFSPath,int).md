@@ -18,7 +18,7 @@ The VFS path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.GetParent(thisAtypical.VirtualFileSystem.Core.VFSPath,int).levels'></a>
 
-`levels` [System\.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System\.Int32')
+`levels` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 Number of levels to go up\. Default is 1\.
 
@@ -28,5 +28,5 @@ The parent directory at the specified level\.
 
 #### Exceptions
 
-[System\.InvalidOperationException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidOperationException 'System\.InvalidOperationException')  
+[System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
 Thrown when there's no parent at the specified level\.

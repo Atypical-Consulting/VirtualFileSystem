@@ -12,12 +12,12 @@ public void Deconstruct(out bool isSuccess, out object? valueOrError);
 
 <a name='Atypical.VirtualFileSystem.Core.Result_T_.Deconstruct(bool,object).isSuccess'></a>
 
-`isSuccess` [System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+`isSuccess` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 Whether the operation was successful\.
 
 <a name='Atypical.VirtualFileSystem.Core.Result_T_.Deconstruct(bool,object).valueOrError'></a>
 
-`valueOrError` [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object')
+`valueOrError` [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object')
 
 The value if successful, or the error message if failed\.

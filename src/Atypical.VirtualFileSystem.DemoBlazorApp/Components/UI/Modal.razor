@@ -1,0 +1,84 @@
+@* Reusable Modal/Dialog Component *@
+@inject IJSRuntime JS
+
+@if (IsOpen)
+{
+    <div class="modal-backdrop" @onclick="HandleBackdropClick" @onkeydown="HandleKeyDown" tabindex="-1">
+        <div class="modal-content @SizeClass" @onclick:stopPropagation="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            @if (ShowHeader)
+            {
+                <div class="modal-header">
+                    <h3 id="modal-title" class="text-lg font-semibold text-gray-900">@Title</h3>
+                    @if (ShowCloseButton)
+                    {
+                        <button type="button"
+                                class="btn-icon"
+                                @onclick="Close"
+                                aria-label="Close">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    }
+                </div>
+            }
+
+            <div class="modal-body">
+                @ChildContent
+            </div>
+
+            @if (Footer != null)
+            {
+                <div class="modal-footer">
+                    @Footer
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? Footer { get; set; }
+    [Parameter] public bool ShowHeader { get; set; } = true;
+    [Parameter] public bool ShowCloseButton { get; set; } = true;
+    [Parameter] public bool CloseOnBackdropClick { get; set; } = true;
+    [Parameter] public bool CloseOnEscape { get; set; } = true;
+    [Parameter] public string Size { get; set; } = "md";
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private string SizeClass => Size switch
+    {
+        "sm" => "max-w-sm",
+        "lg" => "max-w-lg",
+        "xl" => "max-w-xl",
+        "2xl" => "max-w-2xl",
+        "full" => "max-w-full mx-4",
+        _ => "max-w-md"
+    };
+
+    private async Task Close()
+    {
+        await IsOpenChanged.InvokeAsync(false);
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task HandleBackdropClick()
+    {
+        if (CloseOnBackdropClick)
+        {
+            await Close();
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape" && CloseOnEscape)
+        {
+            await Close();
+        }
+    }
+}

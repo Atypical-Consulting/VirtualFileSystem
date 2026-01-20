@@ -1,0 +1,27 @@
+@* Toast Container - displays all active toasts *@
+@implements IDisposable
+@inject ToastService ToastService
+
+<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm">
+    @foreach (var toast in ToastService.Toasts)
+    {
+        <Toast Message="toast" OnDismiss="HandleDismiss" />
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ToastService.OnChange += StateHasChanged;
+    }
+
+    private void HandleDismiss(Guid id)
+    {
+        ToastService.Remove(id);
+    }
+
+    public void Dispose()
+    {
+        ToastService.OnChange -= StateHasChanged;
+    }
+}

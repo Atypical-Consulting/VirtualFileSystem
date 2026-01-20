@@ -27,7 +27,7 @@ The file path\.
 
 <a name='Atypical.VirtualFileSystem.Core.BinaryFileNode.BinaryFileNode(Atypical.VirtualFileSystem.Core.VFSFilePath,byte[]).binaryContent'></a>
 
-`binaryContent` [System\.Byte](https://docs.microsoft.com/en-us/dotnet/api/System.Byte 'System\.Byte')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+`binaryContent` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
 
 The binary content of the file\.
 
@@ -50,6 +50,6 @@ The file path\.
 
 <a name='Atypical.VirtualFileSystem.Core.BinaryFileNode.BinaryFileNode(Atypical.VirtualFileSystem.Core.VFSFilePath,string).content'></a>
 
-`content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`content` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The text content of the file\.

@@ -1,0 +1,101 @@
+@* Reusable Input Component *@
+
+<div class="@ContainerClass">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label for="@Id" class="block text-sm font-medium text-gray-700 mb-1">
+            @Label
+            @if (Required)
+            {
+                <span class="text-red-500">*</span>
+            }
+        </label>
+    }
+
+    <div class="relative">
+        @if (!string.IsNullOrEmpty(LeadingIcon))
+        {
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="@LeadingIcon" />
+                </svg>
+            </div>
+        }
+
+        <input
+            id="@Id"
+            type="@Type"
+            value="@Value"
+            placeholder="@Placeholder"
+            disabled="@Disabled"
+            readonly="@Readonly"
+            required="@Required"
+            class="@InputClass"
+            @oninput="HandleInput"
+            @onkeydown="HandleKeyDown"
+            @attributes="AdditionalAttributes" />
+
+        @if (!string.IsNullOrEmpty(TrailingIcon))
+        {
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="@TrailingIcon" />
+                </svg>
+            </div>
+        }
+    </div>
+
+    @if (!string.IsNullOrEmpty(Error))
+    {
+        <p class="mt-1 text-sm text-red-600">@Error</p>
+    }
+    else if (!string.IsNullOrEmpty(HelperText))
+    {
+        <p class="mt-1 text-sm text-gray-500">@HelperText</p>
+    }
+</div>
+
+@code {
+    [Parameter] public string? Id { get; set; }
+    [Parameter] public string? Label { get; set; }
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string> ValueChanged { get; set; }
+    [Parameter] public string Type { get; set; } = "text";
+    [Parameter] public string? Placeholder { get; set; }
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public bool Readonly { get; set; }
+    [Parameter] public bool Required { get; set; }
+    [Parameter] public string? Error { get; set; }
+    [Parameter] public string? HelperText { get; set; }
+    [Parameter] public string? LeadingIcon { get; set; }
+    [Parameter] public string? TrailingIcon { get; set; }
+    [Parameter] public string? ContainerClass { get; set; }
+    [Parameter] public EventCallback<KeyboardEventArgs> OnKeyDown { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+    private string InputClass
+    {
+        get
+        {
+            var baseClass = "block w-full rounded-md shadow-sm text-sm transition-colors duration-150";
+            var stateClass = !string.IsNullOrEmpty(Error)
+                ? "border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500"
+                : "border-gray-300 focus:ring-cloud-500 focus:border-cloud-500";
+            var disabledClass = Disabled ? "bg-gray-100 cursor-not-allowed" : "";
+            var paddingClass = !string.IsNullOrEmpty(LeadingIcon) ? "pl-10" : "pl-3";
+            var paddingRightClass = !string.IsNullOrEmpty(TrailingIcon) ? "pr-10" : "pr-3";
+
+            return $"{baseClass} {stateClass} {disabledClass} {paddingClass} {paddingRightClass} py-2";
+        }
+    }
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync(e.Value?.ToString() ?? "");
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        await OnKeyDown.InvokeAsync(e);
+    }
+}

@@ -12,4 +12,4 @@ public System.DateTimeOffset LastWriteTime { get; }
 Implements [LastWriteTime](IVirtualFileSystemNode.LastWriteTime.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.LastWriteTime')
 
 #### Property Value
-[System\.DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/System.DateTimeOffset 'System\.DateTimeOffset')
+[System\.DateTimeOffset](https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset 'System\.DateTimeOffset')

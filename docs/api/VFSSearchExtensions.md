@@ -9,7 +9,7 @@ Provides fluent search extension methods for IVirtualFileSystem and file/directo
 public static class VFSSearchExtensions
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSSearchExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSSearchExtensions
 
 | Methods | |
 | :--- | :--- |

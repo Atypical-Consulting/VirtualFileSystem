@@ -10,4 +10,4 @@ public bool IsEmpty { get; }
 ```
 
 #### Property Value
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')

@@ -1,0 +1,53 @@
+@* Reusable Button Component *@
+
+<button type="@Type"
+        class="@CssClass"
+        disabled="@Disabled"
+        @onclick="OnClick"
+        @attributes="AdditionalAttributes">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <svg class="w-5 h-5 @(string.IsNullOrEmpty(ChildContent?.ToString()) ? "" : "-ml-0.5")" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="@Icon" />
+        </svg>
+    }
+    @ChildContent
+</button>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string Variant { get; set; } = "primary";
+    [Parameter] public string Size { get; set; } = "md";
+    [Parameter] public string? Icon { get; set; }
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public string Type { get; set; } = "button";
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter(CaptureUnmatchedValues = true)] public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
+    private string CssClass
+    {
+        get
+        {
+            var baseClass = "inline-flex items-center justify-center gap-2 font-medium rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+
+            var sizeClass = Size switch
+            {
+                "sm" => "px-2.5 py-1.5 text-xs",
+                "lg" => "px-4 py-2.5 text-base",
+                _ => "px-3 py-2 text-sm"
+            };
+
+            var variantClass = Variant switch
+            {
+                "secondary" => "bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300 focus:ring-gray-500",
+                "ghost" => "bg-transparent text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus:ring-gray-500",
+                "danger" => "bg-red-600 text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500",
+                "outline" => "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 active:bg-gray-100 focus:ring-cloud-500",
+                "link" => "text-cloud-600 hover:text-cloud-700 hover:underline focus:ring-cloud-500 p-0",
+                _ => "bg-cloud-600 text-white hover:bg-cloud-700 active:bg-cloud-800 focus:ring-cloud-500"
+            };
+
+            return $"{baseClass} {sizeClass} {variantClass}";
+        }
+    }
+}

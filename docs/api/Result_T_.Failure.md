@@ -21,7 +21,7 @@ public static Atypical.VirtualFileSystem.Core.Result<T> Failure(string error);
 
 <a name='Atypical.VirtualFileSystem.Core.Result_T_.Failure(string).error'></a>
 
-`error` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`error` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The error message\.
 
@@ -42,7 +42,7 @@ public static Atypical.VirtualFileSystem.Core.Result<T> Failure(System.Exception
 
 <a name='Atypical.VirtualFileSystem.Core.Result_T_.Failure(System.Exception).exception'></a>
 
-`exception` [System\.Exception](https://docs.microsoft.com/en-us/dotnet/api/System.Exception 'System\.Exception')
+`exception` [System\.Exception](https://learn.microsoft.com/en-us/dotnet/api/system.exception 'System\.Exception')
 
 The exception\.
 

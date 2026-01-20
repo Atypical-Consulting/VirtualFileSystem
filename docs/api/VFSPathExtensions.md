@@ -9,7 +9,7 @@ Provides path manipulation and utility extension methods for VFS paths\.
 public static class VFSPathExtensions
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSPathExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSPathExtensions
 
 | Methods | |
 | :--- | :--- |

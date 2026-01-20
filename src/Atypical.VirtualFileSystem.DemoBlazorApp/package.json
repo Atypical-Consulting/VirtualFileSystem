@@ -1,0 +1,14 @@
+{
+  "name": "clouddrive-blazor",
+  "version": "1.0.0",
+  "description": "CloudDrive - OneDrive-like cloud storage interface",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --minify",
+    "watch:css": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.33",
+    "autoprefixer": "^10.4.17"
+  }
+}

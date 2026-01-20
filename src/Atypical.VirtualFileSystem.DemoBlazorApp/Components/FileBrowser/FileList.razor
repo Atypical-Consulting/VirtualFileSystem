@@ -1,0 +1,20 @@
+@* List View Container *@
+
+<div class="divide-y divide-gray-100" id="@ContainerId">
+    @* Header *@
+    <div class="flex items-center gap-3 px-4 py-2 bg-gray-50 text-xs font-medium text-gray-500 uppercase tracking-wider">
+        <div class="w-8"></div>
+        <div class="w-8"></div>
+        <div class="flex-1">Name</div>
+        <div class="hidden sm:block w-32 text-right">Modified</div>
+        <div class="hidden md:block w-24 text-right">Size</div>
+        <div class="w-8"></div>
+    </div>
+
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string ContainerId { get; set; } = "file-list";
+}

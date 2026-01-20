@@ -12,7 +12,7 @@ public void SetBinaryContent(byte[] binaryContent);
 
 <a name='Atypical.VirtualFileSystem.Core.BinaryFileNode.SetBinaryContent(byte[]).binaryContent'></a>
 
-`binaryContent` [System\.Byte](https://docs.microsoft.com/en-us/dotnet/api/System.Byte 'System\.Byte')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+`binaryContent` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
 
 The binary content to set\.
 

@@ -1,0 +1,58 @@
+@* Smart File/Folder Icon Component *@
+@inject FileIconService IconService
+
+<svg class="@SizeClass @ColorClass flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="@StrokeWidth" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="@IconPath" />
+</svg>
+
+@code {
+    [Parameter] public bool IsDirectory { get; set; }
+    [Parameter] public string? Extension { get; set; }
+    [Parameter] public string? FileName { get; set; }
+    [Parameter] public string Size { get; set; } = "md";
+    [Parameter] public bool IsOpen { get; set; }
+
+    private string IconPath
+    {
+        get
+        {
+            if (IsDirectory)
+            {
+                return IsOpen ? IconService.FolderOpenIcon : IconService.FolderIcon;
+            }
+
+            var ext = Extension ?? System.IO.Path.GetExtension(FileName);
+            return IconService.GetIconForExtension(ext);
+        }
+    }
+
+    private string ColorClass
+    {
+        get
+        {
+            if (IsDirectory)
+            {
+                return "text-amber-500";
+            }
+
+            var ext = Extension ?? System.IO.Path.GetExtension(FileName);
+            return IconService.GetColorForExtension(ext);
+        }
+    }
+
+    private string SizeClass => Size switch
+    {
+        "sm" => "w-4 h-4",
+        "lg" => "w-8 h-8",
+        "xl" => "w-12 h-12",
+        _ => "w-5 h-5"
+    };
+
+    private string StrokeWidth => Size switch
+    {
+        "sm" => "2",
+        "lg" => "1.5",
+        "xl" => "1",
+        _ => "1.5"
+    };
+}

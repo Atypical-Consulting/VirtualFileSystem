@@ -12,7 +12,7 @@ public Atypical.VirtualFileSystem.Core.Result OnSuccess(System.Action action);
 
 <a name='Atypical.VirtualFileSystem.Core.Result.OnSuccess(System.Action).action'></a>
 
-`action` [System\.Action](https://docs.microsoft.com/en-us/dotnet/api/System.Action 'System\.Action')
+`action` [System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
 
 The action to execute\.
 

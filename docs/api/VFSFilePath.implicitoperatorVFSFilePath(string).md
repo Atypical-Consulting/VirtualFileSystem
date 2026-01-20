@@ -13,7 +13,7 @@ public static Atypical.VirtualFileSystem.Core.VFSFilePath implicit operator Atyp
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFilePath.op_ImplicitAtypical.VirtualFileSystem.Core.VFSFilePath(string).path'></a>
 
-`path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path to convert\.
 

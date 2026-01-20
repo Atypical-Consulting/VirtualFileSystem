@@ -12,4 +12,4 @@ public byte[] BinaryContent { get; set; }
 Implements [BinaryContent](IBinaryFileNode.BinaryContent.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode\.BinaryContent')
 
 #### Property Value
-[System\.Byte](https://docs.microsoft.com/en-us/dotnet/api/System.Byte 'System\.Byte')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+[System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')

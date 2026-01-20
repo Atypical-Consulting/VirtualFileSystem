@@ -12,16 +12,16 @@ protected string ToMarkup(string color, params object[] args);
 
 <a name='Atypical.VirtualFileSystem.Core.VFSEventArgs.ToMarkup(string,object[]).color'></a>
 
-`color` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`color` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The color to use in the markup\.
 
 <a name='Atypical.VirtualFileSystem.Core.VFSEventArgs.ToMarkup(string,object[]).args'></a>
 
-`args` [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+`args` [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
 
 The arguments to format the message\.
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The markup message\.

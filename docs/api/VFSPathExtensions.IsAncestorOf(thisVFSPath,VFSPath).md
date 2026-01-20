@@ -23,5 +23,5 @@ The potential ancestor path\.
 The potential descendant path\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if descendantPath is under ancestorPath\.

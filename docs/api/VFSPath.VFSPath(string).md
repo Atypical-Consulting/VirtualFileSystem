@@ -12,14 +12,14 @@ protected VFSPath(string path);
 
 <a name='Atypical.VirtualFileSystem.Core.VFSPath.VFSPath(string).path'></a>
 
-`path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path to the file system entry\.
 
 #### Exceptions
 
-[System\.ArgumentNullException](https://docs.microsoft.com/en-us/dotnet/api/System.ArgumentNullException 'System\.ArgumentNullException')  
+[System\.ArgumentNullException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentnullexception 'System\.ArgumentNullException')  
 Thrown when the path is null\.
 
-[System\.ArgumentException](https://docs.microsoft.com/en-us/dotnet/api/System.ArgumentException 'System\.ArgumentException')  
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
 Thrown when the path is invalid\.

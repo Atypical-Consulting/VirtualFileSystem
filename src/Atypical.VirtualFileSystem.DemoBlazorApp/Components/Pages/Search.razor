@@ -1,169 +1,168 @@
 @page "/search"
 @inject IVirtualFileSystem VFS
-@inject Services.VFSStateService StateService
+@inject VFSStateService StateService
+@inject NavigationManager Navigation
+@inject RecentFilesService RecentFiles
 @rendermode InteractiveServer
 
-<PageTitle>Search - VFS Demo</PageTitle>
+<PageTitle>Search - CloudDrive</PageTitle>
 
-<MudText Typo="Typo.h4" GutterBottom="true">Search Files & Directories</MudText>
-<MudText Typo="Typo.subtitle1" Class="mb-4">Find files and directories using various search criteria</MudText>
+<div class="h-full flex flex-col bg-white">
+    @* Header *@
+    <div class="p-4 border-b border-gray-200">
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-cloud-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <h1 class="text-xl font-semibold text-gray-900">Search</h1>
+        </div>
+    </div>
 
-<MudGrid>
-    <MudItem xs="12" lg="4">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="@Icons.Material.Filled.Search" Class="mr-2" />
-                Search Criteria
-            </MudText>
-            
-            <MudStack Spacing="3">
-                <MudTextField @bind-Value="SearchTerm" 
-                              Label="Search Term" 
-                              Placeholder="Enter filename or pattern"
-                              FullWidth="true"
-                              @onkeyup="OnSearchKeyUp"
-                              Adornment="Adornment.End"
-                              AdornmentIcon="@Icons.Material.Filled.Search" />
-                
-                <MudSelect @bind-Value="SearchType" Label="Search Type" FullWidth="true">
-                    <MudSelectItem Value="SearchTypes.Name">Name Contains</MudSelectItem>
-                    <MudSelectItem Value="SearchTypes.Exact">Exact Name</MudSelectItem>
-                    <MudSelectItem Value="SearchTypes.Extension">File Extension</MudSelectItem>
-                    <MudSelectItem Value="SearchTypes.Content">Content Contains</MudSelectItem>
-                    <MudSelectItem Value="SearchTypes.Regex">Regex Pattern</MudSelectItem>
-                </MudSelect>
-                
-                <MudSelect @bind-Value="SearchTarget" Label="Search Target" FullWidth="true">
-                    <MudSelectItem Value="SearchTargets.Both">Files & Directories</MudSelectItem>
-                    <MudSelectItem Value="SearchTargets.FilesOnly">Files Only</MudSelectItem>
-                    <MudSelectItem Value="SearchTargets.DirectoriesOnly">Directories Only</MudSelectItem>
-                </MudSelect>
-                
-                <MudCheckBox @bind-Value="CaseSensitive" Label="Case Sensitive" />
-                
-                <MudStack Row="true" Spacing="2">
-                    <MudButton Variant="Variant.Filled" 
-                               Color="Color.Primary"
-                               StartIcon="@Icons.Material.Filled.Search"
-                               OnClick="PerformSearch"
-                               Disabled="string.IsNullOrWhiteSpace(SearchTerm)">
-                        Search
-                    </MudButton>
-                    <MudButton Variant="Variant.Outlined" 
-                               StartIcon="@Icons.Material.Filled.Clear"
-                               OnClick="ClearSearch">
-                        Clear
-                    </MudButton>
-                </MudStack>
-            </MudStack>
-        </MudPaper>
-    </MudItem>
-    
-    <MudItem xs="12" lg="8">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6" Class="mb-3">
-                <MudIcon Icon="@Icons.Material.Filled.FindInPage" Class="mr-2" />
-                Search Results (@SearchResults.Count)
-            </MudText>
-            
-            @if (IsSearching)
-            {
-                <div class="text-center pa-4">
-                    <MudProgressCircular Indeterminate="true" />
-                    <MudText Typo="Typo.body2" Class="mt-2">Searching...</MudText>
+    @* Search Bar *@
+    <div class="p-4 bg-gray-50 border-b border-gray-200">
+        <div class="max-w-2xl">
+            <div class="flex gap-2">
+                <div class="flex-1 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </div>
+                    <input type="text"
+                           class="block w-full pl-10 pr-3 py-2.5 text-sm bg-white border border-gray-300 rounded-lg focus:border-cloud-500 focus:ring-1 focus:ring-cloud-500"
+                           placeholder="Search files and folders..."
+                           @bind="SearchTerm"
+                           @bind:event="oninput"
+                           @onkeydown="HandleKeyDown" />
                 </div>
-            }
-            else if (!SearchResults.Any() && HasSearched)
-            {
-                <MudAlert Severity="Severity.Info" Icon="@Icons.Material.Filled.Info">
-                    No results found for "@SearchTerm"
-                </MudAlert>
-            }
-            else if (SearchResults.Any())
-            {
-                <div style="max-height: 500px; overflow-y: auto;">
+                <Button Variant="primary" OnClick="PerformSearch" Disabled="@string.IsNullOrWhiteSpace(SearchTerm)">
+                    Search
+                </Button>
+            </div>
+
+            @* Filters *@
+            <div class="flex flex-wrap gap-4 mt-3">
+                <div class="flex items-center gap-2">
+                    <label class="text-sm text-gray-600">Type:</label>
+                    <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:ring-cloud-500 focus:border-cloud-500"
+                            @bind="SearchType">
+                        <option value="@SearchTypes.Name">Name contains</option>
+                        <option value="@SearchTypes.Exact">Exact name</option>
+                        <option value="@SearchTypes.Extension">Extension</option>
+                        <option value="@SearchTypes.Content">Content contains</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <label class="text-sm text-gray-600">In:</label>
+                    <select class="text-sm border border-gray-300 rounded-md px-2 py-1 focus:ring-cloud-500 focus:border-cloud-500"
+                            @bind="SearchTarget">
+                        <option value="@SearchTargets.Both">Files & Folders</option>
+                        <option value="@SearchTargets.FilesOnly">Files only</option>
+                        <option value="@SearchTargets.DirectoriesOnly">Folders only</option>
+                    </select>
+                </div>
+
+                <label class="flex items-center gap-2 text-sm text-gray-600">
+                    <input type="checkbox" class="checkbox" @bind="CaseSensitive" />
+                    Case sensitive
+                </label>
+            </div>
+        </div>
+    </div>
+
+    @* Results *@
+    <div class="flex-1 overflow-auto">
+        @if (IsSearching)
+        {
+            <div class="flex items-center justify-center py-16">
+                <div class="text-center">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-cloud-600 mx-auto mb-3"></div>
+                    <p class="text-sm text-gray-500">Searching...</p>
+                </div>
+            </div>
+        }
+        else if (HasSearched && !SearchResults.Any())
+        {
+            <EmptyState Title="No results found"
+                        Description="@($"No items matching \"{SearchTerm}\" were found")"
+                        Icon="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        }
+        else if (SearchResults.Any())
+        {
+            <div class="p-4">
+                <p class="text-sm text-gray-500 mb-3">@SearchResults.Count results found</p>
+
+                <div class="space-y-2">
                     @foreach (var result in SearchResults)
                     {
-                        <MudCard Class="mb-2" Elevation="1">
-                            <MudCardContent Class="pa-3">
-                                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
-                                    <MudStack Spacing="1">
-                                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                                            <MudIcon Icon="@GetNodeIcon(result)" />
-                                            <MudText Typo="Typo.h6">@result.Name</MudText>
-                                            <MudChip T="string" Size="Size.Small" 
-                                                     Color="@(result.IsDirectory ? Color.Primary : Color.Secondary)">
-                                                @(result.IsDirectory ? "Directory" : "File")
-                                            </MudChip>
-                                        </MudStack>
-                                        <MudText Typo="Typo.caption" Class="text-muted">
-                                            @result.Path.Value
-                                        </MudText>
-                                        @if (result is IFileNode file && SearchType == SearchTypes.Content && !string.IsNullOrEmpty(SearchTerm))
-                                        {
-                                            <MudText Typo="Typo.caption" Class="text-muted">
-                                                Size: @file.Content.Length bytes
-                                            </MudText>
-                                        }
-                                    </MudStack>
-                                    <MudStack Row="true" Spacing="1">
-                                        <MudButton Variant="Variant.Text" 
-                                                   Size="Size.Small"
-                                                   StartIcon="@Icons.Material.Filled.Visibility"
-                                                   OnClick="() => SelectNode(result)">
-                                            Select
-                                        </MudButton>
-                                        @if (result is IFileNode)
-                                        {
-                                            <MudButton Variant="Variant.Text" 
-                                                       Size="Size.Small"
-                                                       StartIcon="@Icons.Material.Filled.Edit"
-                                                       Href="@($"/editor?file={Uri.EscapeDataString(result.Path.Value)}")">
-                                                Edit
-                                            </MudButton>
-                                        }
-                                    </MudStack>
-                                </MudStack>
-                            </MudCardContent>
-                        </MudCard>
+                        <div class="flex items-center gap-4 p-3 bg-white rounded-lg border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all cursor-pointer"
+                             @onclick="() => OpenResult(result)">
+                            <FileIcon IsDirectory="@result.IsDirectory" FileName="@result.Name" />
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">@result.Name</p>
+                                <p class="text-xs text-gray-500 truncate">@result.Path.Value</p>
+                            </div>
+                            <Badge Variant="@(result.IsDirectory ? "blue" : "gray")">
+                                @(result.IsDirectory ? "Folder" : "File")
+                            </Badge>
+                        </div>
                     }
                 </div>
-            }
-            else
-            {
-                <MudAlert Severity="Severity.Normal" Icon="@Icons.Material.Filled.Search">
-                    Enter search criteria and click "Search" to find files and directories.
-                </MudAlert>
-            }
-        </MudPaper>
-    </MudItem>
-</MudGrid>
+            </div>
+        }
+        else
+        {
+            <div class="flex items-center justify-center py-16">
+                <div class="text-center">
+                    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    <p class="text-gray-500">Enter a search term to find files and folders</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 @code {
+    [SupplyParameterFromQuery] public string? q { get; set; }
+
     private string SearchTerm = "";
     private SearchTypes SearchType = SearchTypes.Name;
     private SearchTargets SearchTarget = SearchTargets.Both;
     private bool CaseSensitive = false;
     private bool IsSearching = false;
     private bool HasSearched = false;
-    
-    private List<IVirtualFileSystemNode> SearchResults = new();
 
-    private enum SearchTypes
+    private List<IVirtualFileSystemNode> SearchResults = [];
+
+    private enum SearchTypes { Name, Exact, Extension, Content }
+    private enum SearchTargets { Both, FilesOnly, DirectoriesOnly }
+
+    protected override void OnInitialized()
     {
-        Name, Exact, Extension, Content, Regex
-    }
-    
-    private enum SearchTargets
-    {
-        Both, FilesOnly, DirectoriesOnly
+        if (!string.IsNullOrWhiteSpace(q))
+        {
+            SearchTerm = q;
+            _ = PerformSearch();
+        }
     }
 
-    private async Task OnSearchKeyUp(KeyboardEventArgs e)
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrWhiteSpace(q) && q != SearchTerm)
+        {
+            SearchTerm = q;
+            _ = PerformSearch();
+        }
+    }
+
+    private void HandleKeyDown(KeyboardEventArgs e)
     {
         if (e.Key == "Enter" && !string.IsNullOrWhiteSpace(SearchTerm))
         {
-            await PerformSearch();
+            _ = PerformSearch();
         }
     }
 
@@ -179,40 +178,26 @@
 
         try
         {
-            // Simulate search delay for better UX
-            await Task.Delay(100);
+            await Task.Delay(100); // Brief delay for UX
 
             var allNodes = new List<IVirtualFileSystemNode>();
-            
-            // Add files and directories based on search target
-            if (SearchTarget is SearchTargets.Both or SearchTargets.FilesOnly)
-            {
-                allNodes.AddRange(VFS.Files);
-            }
-            
-            if (SearchTarget is SearchTargets.Both or SearchTargets.DirectoriesOnly)
-            {
-                allNodes.AddRange(VFS.Directories);
-            }
 
-            // Apply search criteria
+            if (SearchTarget is SearchTargets.Both or SearchTargets.FilesOnly)
+                allNodes.AddRange(VFS.Files);
+
+            if (SearchTarget is SearchTargets.Both or SearchTargets.DirectoriesOnly)
+                allNodes.AddRange(VFS.Directories);
+
             foreach (var node in allNodes)
             {
                 if (MatchesSearchCriteria(node))
-                {
                     SearchResults.Add(node);
-                }
             }
 
-            // Sort results: directories first, then files, both alphabetically
             SearchResults = SearchResults
                 .OrderBy(n => n.IsFile ? 1 : 0)
                 .ThenBy(n => n.Name, CaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase)
                 .ToList();
-        }
-        catch (Exception)
-        {
-            // Handle search errors silently for now
         }
         finally
         {
@@ -224,48 +209,32 @@
     private bool MatchesSearchCriteria(IVirtualFileSystemNode node)
     {
         var comparison = CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-        
+
         return SearchType switch
         {
             SearchTypes.Name => node.Name.Contains(SearchTerm, comparison),
             SearchTypes.Exact => node.Name.Equals(SearchTerm, comparison),
-            SearchTypes.Extension => node is IFileNode && 
-                                   Path.GetExtension(node.Name).Equals(SearchTerm.StartsWith('.') ? SearchTerm : '.' + SearchTerm, comparison),
-            SearchTypes.Content => node is IFileNode file && 
+            SearchTypes.Extension => node is IFileNode &&
+                                   System.IO.Path.GetExtension(node.Name).Equals(
+                                       SearchTerm.StartsWith('.') ? SearchTerm : '.' + SearchTerm, comparison),
+            SearchTypes.Content => node is IFileNode file &&
                                  file.Content.Contains(SearchTerm, comparison),
-            SearchTypes.Regex => IsRegexMatch(node.Name, SearchTerm),
             _ => false
         };
     }
 
-    private bool IsRegexMatch(string input, string pattern)
+    private void OpenResult(IVirtualFileSystemNode result)
     {
-        try
+        if (result.IsDirectory)
         {
-            var options = CaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
-            return Regex.IsMatch(input, pattern, options);
+            StateService.NavigateTo(result.Path.Value);
+            RecentFiles.RecordAccess(result.Path.Value, true);
+            Navigation.NavigateTo("/");
         }
-        catch
+        else
         {
-            return false;
+            RecentFiles.RecordAccess(result.Path.Value, false);
+            Navigation.NavigateTo($"/file?path={Uri.EscapeDataString(result.Path.Value)}");
         }
-    }
-
-    private void ClearSearch()
-    {
-        SearchTerm = "";
-        SearchResults.Clear();
-        HasSearched = false;
-        StateHasChanged();
-    }
-
-    private void SelectNode(IVirtualFileSystemNode node)
-    {
-        StateService.SelectedNode = node;
-    }
-
-    private string GetNodeIcon(IVirtualFileSystemNode node)
-    {
-        return node.IsDirectory ? Icons.Material.Filled.Folder : Icons.Material.Filled.InsertDriveFile;
     }
 }

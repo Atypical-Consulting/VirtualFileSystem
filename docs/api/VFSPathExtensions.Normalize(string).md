@@ -12,10 +12,10 @@ public static string Normalize(string path);
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.Normalize(string).path'></a>
 
-`path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path to normalize\.
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The normalized path\.

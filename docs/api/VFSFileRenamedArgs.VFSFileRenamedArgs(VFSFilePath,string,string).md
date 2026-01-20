@@ -18,12 +18,12 @@ The path of the renamed file\.
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath,string,string).oldName'></a>
 
-`oldName` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`oldName` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The old name of the renamed file\.
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.VFSFileRenamedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath,string,string).newName'></a>
 
-`newName` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`newName` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The new name of the renamed file\.

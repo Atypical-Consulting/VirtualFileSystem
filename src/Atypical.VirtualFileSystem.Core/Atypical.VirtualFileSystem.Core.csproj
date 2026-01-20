@@ -17,11 +17,11 @@
     
     <!-- Development dependencies -->
     <ItemGroup>
-      <PackageReference Include="DefaultDocumentation" Version="1.1.0">
+      <PackageReference Include="DefaultDocumentation" Version="1.2.2">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.5" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
     </ItemGroup>
 
     <!-- NuGet metadata -->
@@ -38,8 +38,8 @@
         When writing applications in .NET, you often need to write or read the contents of a file. .NET provides `System.IO` namespace dedicated to this purpose. But how do we deal with the filesystem when testing our code?
         "Virtual File System" is an attempt to solve this problem. Currently, this library is at an early stage of development. If you need additional functionality, I invite you to open an issue to discuss it.
       </Description>
-      <PackageTags>virtual filesystem;testing;core;net8</PackageTags>
-      <Copyright>Copyright (c) 2022-2024 Atypical Consulting SRL</Copyright>
+      <PackageTags>virtual filesystem;testing;core;net10</PackageTags>
+      <Copyright>Copyright (c) 2022-2025 Atypical Consulting SRL</Copyright>
       <PackageProjectUrl>https://github.com/Atypical-Consulting/VirtualFileSystem</PackageProjectUrl>
       <RepositoryUrl>https://github.com/Atypical-Consulting/VirtualFileSystem.git</RepositoryUrl>
       <RepositoryType>git</RepositoryType>
@@ -47,8 +47,8 @@
       <PackageReleaseNotes>
         ## Changes
 
-        - Add support for .NET 9.0
-        - Drop support for .NET 6.0
+        - Add support for .NET 10.0
+        - Drop support for .NET 8.0
       </PackageReleaseNotes>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <PackageLanguage>en-US</PackageLanguage>

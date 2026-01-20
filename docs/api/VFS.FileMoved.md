@@ -12,4 +12,4 @@ public event Action<VFSFileMovedArgs>? FileMoved;
 Implements [FileMoved](IVFSMove.FileMoved.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSMove\.FileMoved')
 
 #### Event Type
-[System\.Action&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')[VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileMovedArgs')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileMovedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

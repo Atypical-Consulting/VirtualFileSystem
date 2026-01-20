@@ -10,5 +10,5 @@ public override string ToString();
 ```
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A string that represents the path of the file\.

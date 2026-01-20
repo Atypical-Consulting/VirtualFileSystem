@@ -12,7 +12,7 @@ public Atypical.VirtualFileSystem.Core.VFSConfiguration WithMaxFileSize(long max
 
 <a name='Atypical.VirtualFileSystem.Core.VFSConfiguration.WithMaxFileSize(long).maxSize'></a>
 
-`maxSize` [System\.Int64](https://docs.microsoft.com/en-us/dotnet/api/System.Int64 'System\.Int64')
+`maxSize` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
 
 Maximum file size in bytes\.
 

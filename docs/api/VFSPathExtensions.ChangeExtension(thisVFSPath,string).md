@@ -18,10 +18,10 @@ The VFS path\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSPathExtensions.ChangeExtension(thisAtypical.VirtualFileSystem.Core.VFSPath,string).newExtension'></a>
 
-`newExtension` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`newExtension` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The new extension \(with or without leading dot\)\.
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A new path with the changed extension\.

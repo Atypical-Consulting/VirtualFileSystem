@@ -1,0 +1,77 @@
+@* Breadcrumb Navigation Component *@
+@inject VFSStateService StateService
+@implements IDisposable
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+    @foreach (var (segment, index) in GetBreadcrumbs().Select((s, i) => (s, i)))
+    {
+        @if (index > 0)
+        {
+            <svg class="breadcrumb-separator w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        }
+
+        @if (index == GetBreadcrumbs().Count - 1)
+        {
+            <span class="breadcrumb-item-active px-1">@segment.Name</span>
+        }
+        else
+        {
+            <button class="breadcrumb-item px-1" @onclick="() => NavigateTo(segment.Path)">
+                @segment.Name
+            </button>
+        }
+    }
+</nav>
+
+@code {
+    private List<BreadcrumbSegment> GetBreadcrumbs()
+    {
+        var segments = new List<BreadcrumbSegment>
+        {
+            new("My Files", "vfs://")
+        };
+
+        var currentPath = StateService.CurrentPath;
+        if (string.IsNullOrEmpty(currentPath) || currentPath == "vfs://" || currentPath == "vfs:/")
+        {
+            return segments;
+        }
+
+        // Parse the path after vfs://
+        var pathPart = currentPath.Replace("vfs://", "").Replace("vfs:/", "").TrimStart('/');
+        if (string.IsNullOrEmpty(pathPart))
+        {
+            return segments;
+        }
+
+        var parts = pathPart.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        var accumulatedPath = "vfs://";
+
+        foreach (var part in parts)
+        {
+            accumulatedPath = accumulatedPath.TrimEnd('/') + "/" + part;
+            segments.Add(new BreadcrumbSegment(part, accumulatedPath));
+        }
+
+        return segments;
+    }
+
+    private void NavigateTo(string path)
+    {
+        StateService.NavigateTo(path);
+    }
+
+    private record BreadcrumbSegment(string Name, string Path);
+
+    protected override void OnInitialized()
+    {
+        StateService.OnCurrentPathChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        StateService.OnCurrentPathChanged -= StateHasChanged;
+    }
+}

@@ -24,5 +24,5 @@ The path of the file node\.
 The file node\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 `true` if the file node exists; otherwise, `false`\.

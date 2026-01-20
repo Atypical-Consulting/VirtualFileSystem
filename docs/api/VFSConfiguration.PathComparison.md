@@ -10,4 +10,4 @@ public System.StringComparison PathComparison { get; }
 ```
 
 #### Property Value
-[System\.StringComparison](https://docs.microsoft.com/en-us/dotnet/api/System.StringComparison 'System\.StringComparison')
+[System\.StringComparison](https://learn.microsoft.com/en-us/dotnet/api/system.stringcomparison 'System\.StringComparison')

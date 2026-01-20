@@ -12,7 +12,7 @@ public Atypical.VirtualFileSystem.Core.Result<T> OnFailure(System.Action<string>
 
 <a name='Atypical.VirtualFileSystem.Core.Result_T_.OnFailure(System.Action_string_).action'></a>
 
-`action` [System\.Action&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')
+`action` [System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
 
 The action to execute with the error message\.
 

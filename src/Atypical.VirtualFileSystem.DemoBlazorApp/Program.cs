@@ -1,5 +1,4 @@
 using Atypical.VirtualFileSystem.DemoBlazorApp.Components;
-using MudBlazor.Services;
 using Atypical.VirtualFileSystem.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,14 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Add MudBlazor services
-builder.Services.AddMudServices();
-
 // Add Virtual File System
 builder.Services.AddVirtualFileSystem();
 
 // Add State Service
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.VFSStateService>();
+
+// Add CloudDrive services
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.ToastService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.FileIconService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecentFilesService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.RecycleBinService>();
 
 var app = builder.Build();
 

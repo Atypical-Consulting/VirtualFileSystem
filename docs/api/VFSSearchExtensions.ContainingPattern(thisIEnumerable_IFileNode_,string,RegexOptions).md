@@ -12,22 +12,22 @@ public static System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSearchExtensions.ContainingPattern(thisSystem.Collections.Generic.IEnumerable_Atypical.VirtualFileSystem.Core.Contracts.IFileNode_,string,System.Text.RegularExpressions.RegexOptions).files'></a>
 
-`files` [System\.Collections\.Generic\.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+`files` [System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
 
 The files to filter\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSearchExtensions.ContainingPattern(thisSystem.Collections.Generic.IEnumerable_Atypical.VirtualFileSystem.Core.Contracts.IFileNode_,string,System.Text.RegularExpressions.RegexOptions).pattern'></a>
 
-`pattern` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`pattern` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The regular expression pattern\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSSearchExtensions.ContainingPattern(thisSystem.Collections.Generic.IEnumerable_Atypical.VirtualFileSystem.Core.Contracts.IFileNode_,string,System.Text.RegularExpressions.RegexOptions).options'></a>
 
-`options` [System\.Text\.RegularExpressions\.RegexOptions](https://docs.microsoft.com/en-us/dotnet/api/System.Text.RegularExpressions.RegexOptions 'System\.Text\.RegularExpressions\.RegexOptions')
+`options` [System\.Text\.RegularExpressions\.RegexOptions](https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regexoptions 'System\.Text\.RegularExpressions\.RegexOptions')
 
 Regular expression options\. Default is IgnoreCase\.
 
 #### Returns
-[System\.Collections\.Generic\.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')  
+[System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')  
 Files with content matching the pattern\.

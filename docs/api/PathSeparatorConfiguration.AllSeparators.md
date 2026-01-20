@@ -10,4 +10,4 @@ public char[] AllSeparators { get; }
 ```
 
 #### Property Value
-[System\.Char](https://docs.microsoft.com/en-us/dotnet/api/System.Char 'System\.Char')[\[\]](https://docs.microsoft.com/en-us/dotnet/api/System.Array 'System\.Array')
+[System\.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char 'System\.Char')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')

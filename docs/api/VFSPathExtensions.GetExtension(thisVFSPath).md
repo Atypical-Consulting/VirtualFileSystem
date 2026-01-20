@@ -17,5 +17,5 @@ public static string GetExtension(this Atypical.VirtualFileSystem.Core.VFSPath p
 The VFS path\.
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The file extension including the leading dot, or empty string if no extension\.

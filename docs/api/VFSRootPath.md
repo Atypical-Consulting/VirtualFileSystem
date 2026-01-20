@@ -9,9 +9,9 @@ Represents the root directory of the virtual file system\.
 public record VFSRootPath : Atypical.VirtualFileSystem.Core.VFSDirectoryPath, System.IEquatable<Atypical.VirtualFileSystem.Core.VFSRootPath>
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; [VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath') &#129106; [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath') &#129106; VFSRootPath
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath') &#129106; [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath') &#129106; VFSRootPath
 
-Implements [System\.IEquatable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System\.IEquatable\`1')[VFSRootPath](VFSRootPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSRootPath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.IEquatable-1 'System\.IEquatable\`1')
+Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[VFSRootPath](VFSRootPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSRootPath')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 
 | Constructors | |
 | :--- | :--- |

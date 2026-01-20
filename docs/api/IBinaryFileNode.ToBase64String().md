@@ -10,5 +10,5 @@ string ToBase64String();
 ```
 
 #### Returns
-[System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')  
+[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 The base64 encoded representation of the binary content\.

@@ -12,20 +12,20 @@ public FileInfo(string Path, bool IsBinary, long SizeInBytes, System.DateTime Cr
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.FileInfo.FileInfo(string,bool,long,System.DateTime,System.DateTime).Path'></a>
 
-`Path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`Path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.FileInfo.FileInfo(string,bool,long,System.DateTime,System.DateTime).IsBinary'></a>
 
-`IsBinary` [System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+`IsBinary` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.FileInfo.FileInfo(string,bool,long,System.DateTime,System.DateTime).SizeInBytes'></a>
 
-`SizeInBytes` [System\.Int64](https://docs.microsoft.com/en-us/dotnet/api/System.Int64 'System\.Int64')
+`SizeInBytes` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.FileInfo.FileInfo(string,bool,long,System.DateTime,System.DateTime).CreationTime'></a>
 
-`CreationTime` [System\.DateTime](https://docs.microsoft.com/en-us/dotnet/api/System.DateTime 'System\.DateTime')
+`CreationTime` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.FileInfo.FileInfo(string,bool,long,System.DateTime,System.DateTime).LastWriteTime'></a>
 
-`LastWriteTime` [System\.DateTime](https://docs.microsoft.com/en-us/dotnet/api/System.DateTime 'System\.DateTime')
+`LastWriteTime` [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime')

@@ -10,4 +10,4 @@ public char PrimarySeparator { get; init; }
 ```
 
 #### Property Value
-[System\.Char](https://docs.microsoft.com/en-us/dotnet/api/System.Char 'System\.Char')
+[System\.Char](https://learn.microsoft.com/en-us/dotnet/api/system.char 'System\.Char')

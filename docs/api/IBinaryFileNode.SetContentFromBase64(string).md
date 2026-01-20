@@ -12,6 +12,6 @@ void SetContentFromBase64(string base64Content);
 
 <a name='Atypical.VirtualFileSystem.Core.IBinaryFileNode.SetContentFromBase64(string).base64Content'></a>
 
-`base64Content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`base64Content` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The base64 encoded content\.

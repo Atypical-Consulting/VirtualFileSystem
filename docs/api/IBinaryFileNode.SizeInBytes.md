@@ -10,4 +10,4 @@ long SizeInBytes { get; }
 ```
 
 #### Property Value
-[System\.Int64](https://docs.microsoft.com/en-us/dotnet/api/System.Int64 'System\.Int64')
+[System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')

@@ -19,7 +19,7 @@ The path of the file node\.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameFile(Atypical.VirtualFileSystem.Core.VFSFilePath,string).newName'></a>
 
-`newName` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`newName` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The new name of the file node\.
 

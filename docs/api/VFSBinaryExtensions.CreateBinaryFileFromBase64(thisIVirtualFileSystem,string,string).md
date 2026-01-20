@@ -18,13 +18,13 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.CreateBinaryFileFromBase64(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,string).filePath'></a>
 
-`filePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.CreateBinaryFileFromBase64(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,string).base64Content'></a>
 
-`base64Content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`base64Content` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The base64 encoded content\.
 
@@ -34,5 +34,5 @@ The virtual file system for method chaining\.
 
 #### Exceptions
 
-[System\.FormatException](https://docs.microsoft.com/en-us/dotnet/api/System.FormatException 'System\.FormatException')  
+[System\.FormatException](https://learn.microsoft.com/en-us/dotnet/api/system.formatexception 'System\.FormatException')  
 Thrown when the base64 string is invalid\.

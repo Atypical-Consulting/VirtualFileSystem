@@ -19,7 +19,7 @@ The value type\.
 
 <a name='Atypical.VirtualFileSystem.Core.Result.Map_T_(System.Func_T_).valueFactory'></a>
 
-`valueFactory` [System\.Func&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Func-1 'System\.Func\`1')[T](Result.Map_T_(Func_T_).md#Atypical.VirtualFileSystem.Core.Result.Map_T_(System.Func_T_).T 'Atypical\.VirtualFileSystem\.Core\.Result\.Map\<T\>\(System\.Func\<T\>\)\.T')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Func-1 'System\.Func\`1')
+`valueFactory` [System\.Func&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-1 'System\.Func\`1')[T](Result.Map_T_(Func_T_).md#Atypical.VirtualFileSystem.Core.Result.Map_T_(System.Func_T_).T 'Atypical\.VirtualFileSystem\.Core\.Result\.Map\<T\>\(System\.Func\<T\>\)\.T')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-1 'System\.Func\`1')
 
 Function to create the value on success\.
 

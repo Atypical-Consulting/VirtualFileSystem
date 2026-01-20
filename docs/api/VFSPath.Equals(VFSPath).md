@@ -17,5 +17,5 @@ public virtual bool Equals(Atypical.VirtualFileSystem.Core.VFSPath? other);
 An object to compare with this object\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 A value that indicates whether the current object is equal to the [other](VFSPath.Equals(VFSPath).md#Atypical.VirtualFileSystem.Core.VFSPath.Equals(Atypical.VirtualFileSystem.Core.VFSPath).other 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.Equals\(Atypical\.VirtualFileSystem\.Core\.VFSPath\)\.other') parameter\.

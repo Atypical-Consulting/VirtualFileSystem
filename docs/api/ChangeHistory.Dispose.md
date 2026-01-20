@@ -18,7 +18,7 @@ Performs application\-defined tasks associated with freeing, releasing, or reset
 public void Dispose();
 ```
 
-Implements [Dispose\(\)](https://docs.microsoft.com/en-us/dotnet/api/System.IDisposable.Dispose 'System\.IDisposable\.Dispose')
+Implements [Dispose\(\)](https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose 'System\.IDisposable\.Dispose')
 
 <a name='Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(bool)'></a>
 
@@ -33,6 +33,6 @@ public void Dispose(bool disposing);
 
 <a name='Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(bool).disposing'></a>
 
-`disposing` [System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+`disposing` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 `true` to release both managed and unmanaged resources; `false` to release only unmanaged resources\.

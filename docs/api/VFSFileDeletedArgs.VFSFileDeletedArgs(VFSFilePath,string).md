@@ -18,6 +18,6 @@ The path of the deleted file\.
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.VFSFileDeletedArgs(Atypical.VirtualFileSystem.Core.VFSFilePath,string).content'></a>
 
-`content` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`content` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The content of the deleted file\.

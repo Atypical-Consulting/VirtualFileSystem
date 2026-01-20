@@ -13,6 +13,6 @@ public VFSFilePath(string path);
 
 <a name='Atypical.VirtualFileSystem.Core.VFSFilePath.VFSFilePath(string).path'></a>
 
-`path` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`path` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the file\.

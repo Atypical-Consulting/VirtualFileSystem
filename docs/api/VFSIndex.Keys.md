@@ -10,4 +10,4 @@ public System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.VF
 ```
 
 #### Property Value
-[System\.Collections\.Generic\.IEnumerable&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')
+[System\.Collections\.Generic\.IEnumerable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1 'System\.Collections\.Generic\.IEnumerable\`1')

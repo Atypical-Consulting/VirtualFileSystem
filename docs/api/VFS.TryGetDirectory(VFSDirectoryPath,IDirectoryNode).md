@@ -28,5 +28,5 @@ The directory node\.
 Implements [TryGetDirectory\(VFSDirectoryPath, IDirectoryNode\)](IVirtualFileSystem.TryGetDirectory(VFSDirectoryPath,IDirectoryNode).md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem\.TryGetDirectory\(Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath, Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode\)')
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 `true` if the directory node exists; otherwise, `false`\.

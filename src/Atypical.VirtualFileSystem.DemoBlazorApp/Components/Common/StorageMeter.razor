@@ -1,0 +1,30 @@
+@* Storage Usage Meter *@
+
+<div class="@ContainerClass">
+    <div class="flex items-center justify-between text-sm mb-2">
+        <span class="text-gray-600">@Label</span>
+        <span class="text-gray-900 font-medium">@UsageText</span>
+    </div>
+    <div class="storage-meter">
+        <div class="storage-meter-fill @FillColorClass" style="width: @Percentage%"></div>
+    </div>
+    @if (!string.IsNullOrEmpty(HelperText))
+    {
+        <p class="text-xs text-gray-500 mt-1">@HelperText</p>
+    }
+</div>
+
+@code {
+    [Parameter] public string Label { get; set; } = "Storage";
+    [Parameter] public string UsageText { get; set; } = "";
+    [Parameter] public string? HelperText { get; set; }
+    [Parameter] public int Percentage { get; set; }
+    [Parameter] public string? ContainerClass { get; set; }
+
+    private string FillColorClass => Percentage switch
+    {
+        > 90 => "bg-red-500",
+        > 75 => "bg-yellow-500",
+        _ => "bg-cloud-500"
+    };
+}

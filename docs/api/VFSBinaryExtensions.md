@@ -9,7 +9,7 @@ Provides extension methods for handling binary files in the Virtual File System\
 public static class VFSBinaryExtensions
 ```
 
-Inheritance [System\.Object](https://docs.microsoft.com/en-us/dotnet/api/System.Object 'System\.Object') &#129106; VFSBinaryExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSBinaryExtensions
 
 | Methods | |
 | :--- | :--- |

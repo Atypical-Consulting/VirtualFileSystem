@@ -12,4 +12,4 @@ public abstract bool IsFile { get; }
 Implements [IsFile](IVirtualFileSystemNode.IsFile.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.IsFile')
 
 #### Property Value
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')

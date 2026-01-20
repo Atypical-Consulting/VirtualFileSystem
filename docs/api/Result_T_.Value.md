@@ -14,5 +14,5 @@ public T Value { get; }
 
 #### Exceptions
 
-[System\.InvalidOperationException](https://docs.microsoft.com/en-us/dotnet/api/System.InvalidOperationException 'System\.InvalidOperationException')  
+[System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
 Thrown when accessing Value on a failed result\.

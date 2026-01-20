@@ -10,4 +10,4 @@ event Action<VFSFileCreatedArgs>? FileCreated;
 ```
 
 #### Event Type
-[System\.Action&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Action-1 'System\.Action\`1')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

@@ -12,4 +12,4 @@ public System.DateTimeOffset CreationTime { get; }
 Implements [CreationTime](IVirtualFileSystemNode.CreationTime.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.CreationTime')
 
 #### Property Value
-[System\.DateTimeOffset](https://docs.microsoft.com/en-us/dotnet/api/System.DateTimeOffset 'System\.DateTimeOffset')
+[System\.DateTimeOffset](https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset 'System\.DateTimeOffset')

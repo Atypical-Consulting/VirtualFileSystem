@@ -15,4 +15,4 @@ public System.Collections.Immutable.ImmutableArray<Atypical.VirtualFileSystem.Co
 `directoryPath` [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath')
 
 #### Returns
-[System\.Collections\.Immutable\.ImmutableArray&lt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableArray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Immutable.ImmutableArray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')
+[System\.Collections\.Immutable\.ImmutableArray&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')

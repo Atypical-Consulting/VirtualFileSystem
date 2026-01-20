@@ -18,7 +18,7 @@ The virtual file system\.
 
 <a name='Atypical.VirtualFileSystem.Core.Extensions.VFSConvenienceExtensions.TryGetFile(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,Atypical.VirtualFileSystem.Core.Contracts.IFileNode).filePath'></a>
 
-`filePath` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
@@ -29,5 +29,5 @@ The file path as a string\.
 The file node if found\.
 
 #### Returns
-[System\.Boolean](https://docs.microsoft.com/en-us/dotnet/api/System.Boolean 'System\.Boolean')  
+[System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')  
 True if the file exists, false otherwise\.

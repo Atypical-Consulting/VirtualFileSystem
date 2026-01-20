@@ -15,7 +15,7 @@ public Atypical.VirtualFileSystem.Core.VFSDirectoryPath GetAbsoluteParentPath(in
 
 <a name='Atypical.VirtualFileSystem.Core.VFSPath.GetAbsoluteParentPath(int).depthFromRoot'></a>
 
-`depthFromRoot` [System\.Int32](https://docs.microsoft.com/en-us/dotnet/api/System.Int32 'System\.Int32')
+`depthFromRoot` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The depth of the parent directory from the root directory\.
 
@@ -25,5 +25,5 @@ The absolute path of the parent directory with depth [depthFromRoot](VFSPath.Get
 
 #### Exceptions
 
-[System\.ArgumentOutOfRangeException](https://docs.microsoft.com/en-us/dotnet/api/System.ArgumentOutOfRangeException 'System\.ArgumentOutOfRangeException')  
+[System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
 Thrown when the depth is negative\.

@@ -1,106 +1,68 @@
 @inherits LayoutComponentBase
+@inject VFSStateService StateService
+@implements IDisposable
 
-<MudThemeProvider />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<div class="h-screen flex flex-col bg-gray-50">
+    @* Top Bar *@
+    <TopBar OnToggleSidebar="ToggleSidebar" />
 
-<MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" 
-                       Color="Color.Inherit" 
-                       Edge="Edge.Start" 
-                       OnClick="@(() => DrawerToggle())"
-                       aria-label="Toggle navigation menu" />
-        <MudSpacer />
-        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-            <MudIcon Icon="@Icons.Material.Filled.Folder" />
-            <MudText Typo="Typo.h6">VFS Demo</MudText>
-        </MudStack>
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.Info" 
-                       Color="Color.Inherit" 
-                       Edge="Edge.End"
-                       OnClick="@(() => RightDrawerToggle())"
-                       aria-label="Toggle information panel" />
-    </MudAppBar>
-    
-    <MudDrawer @bind-Open="DrawerOpen" 
-               ClipMode="DrawerClipMode.Always" 
-               Elevation="2"
-               Breakpoint="Breakpoint.Md"
-               OpenMiniOnHover="true"
-               Width="280px">
-        <NavigationMenu />
-    </MudDrawer>
-    
-    <MudDrawer @bind-Open="RightDrawerOpen" 
-               Anchor="Anchor.End" 
-               ClipMode="DrawerClipMode.Always" 
-               Elevation="2" 
-               Width="380px"
-               Breakpoint="Breakpoint.Lg"
-               Variant="@(GetBreakpoint() == Breakpoint.Xs || GetBreakpoint() == Breakpoint.Sm ? DrawerVariant.Temporary : DrawerVariant.Persistent)">
-        <MudDrawerHeader Class="mud-theme-secondary">
-            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                <MudIcon Icon="@Icons.Material.Filled.Info" Class="mud-secondary-text" />
-                <MudText Typo="Typo.h6" Class="mud-secondary-text">Information</MudText>
-                <MudSpacer />
-                @if (GetBreakpoint() == Breakpoint.Xs || GetBreakpoint() == Breakpoint.Sm)
-                {
-                    <MudIconButton Icon="@Icons.Material.Filled.Close" 
-                                   Size="Size.Small"
-                                   OnClick="() => RightDrawerOpen = false" />
-                }
-            </MudStack>
-        </MudDrawerHeader>
-        <ContextualInfo />
-    </MudDrawer>
-    
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.False" Class="pa-4">
+    @* Main Content Area *@
+    <div class="flex-1 flex overflow-hidden">
+        @* Left Sidebar (hidden on mobile by default) *@
+        <div class="hidden lg:block">
+            <LeftSidebar IsOpen="true" />
+        </div>
+
+        @* Main Content *@
+        <main class="flex-1 overflow-auto">
             @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+        </main>
 
-@code {
-    private bool DrawerOpen = true;
-    private bool RightDrawerOpen = false;
-
-    protected override void OnInitialized()
-    {
-        // Auto-close drawers on mobile
-        var userAgent = "";
-        if (userAgent.Contains("Mobile"))
+        @* Right Preview Panel *@
+        @if (StateService.ShowPreviewPanel)
         {
-            DrawerOpen = false;
-            RightDrawerOpen = false;
+            <aside class="w-preview bg-white border-l border-gray-200 hidden lg:block overflow-y-auto">
+                <FilePreviewPanel />
+            </aside>
         }
-    }
+    </div>
 
-    private void DrawerToggle()
-    {
-        DrawerOpen = !DrawerOpen;
-        StateHasChanged();
-    }
-    
-    private void RightDrawerToggle()
-    {
-        RightDrawerOpen = !RightDrawerOpen;
-        StateHasChanged();
-    }
+    @* Toast Notifications *@
+    <ToastContainer />
+</div>
 
-    private Breakpoint GetBreakpoint()
-    {
-        // This would normally be injected from a breakpoint service
-        // For now, return a default
-        return Breakpoint.Md;
-    }
+@* Mobile Sidebar Overlay *@
+@if (_sidebarOpen)
+{
+    <div class="fixed inset-0 z-40 lg:hidden">
+        <div class="fixed inset-0 bg-black/50" @onclick="() => _sidebarOpen = false"></div>
+        <div class="fixed inset-y-0 left-0 w-sidebar z-50 animate-slide-in">
+            <LeftSidebar IsOpen="true" OnClose="() => _sidebarOpen = false" />
+        </div>
+    </div>
 }
 
 <div id="blazor-error-ui" data-nosnippet>
   An unhandled error has occurred.
   <a href="." class="reload">Reload</a>
-  <span class="dismiss">🗙</span>
+  <span class="dismiss">X</span>
 </div>
+
+@code {
+    private bool _sidebarOpen = false;
+
+    protected override void OnInitialized()
+    {
+        StateService.OnStateChanged += StateHasChanged;
+    }
+
+    private void ToggleSidebar()
+    {
+        _sidebarOpen = !_sidebarOpen;
+    }
+
+    public void Dispose()
+    {
+        StateService.OnStateChanged -= StateHasChanged;
+    }
+}

@@ -1,0 +1,106 @@
+@* File Browser Action Bar *@
+@inject VFSStateService StateService
+
+<div class="flex items-center justify-between gap-4 p-4 border-b border-gray-200 bg-white">
+    @* Left: Breadcrumb + Actions *@
+    <div class="flex items-center gap-4 flex-1 min-w-0">
+        <BreadcrumbNav />
+    </div>
+
+    @* Right: Create Actions + Sort *@
+    <div class="flex items-center gap-2">
+        @* New Folder *@
+        <Button Variant="secondary" Size="sm" OnClick="() => OnNewFolder.InvokeAsync()"
+                Icon="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z">
+            <span class="hidden sm:inline">New Folder</span>
+        </Button>
+
+        @* Upload (simulated) *@
+        <Button Variant="primary" Size="sm" OnClick="() => OnUpload.InvokeAsync()"
+                Icon="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5">
+            <span class="hidden sm:inline">Upload</span>
+        </Button>
+
+        @* Sort Dropdown *@
+        <div class="relative hidden md:block">
+            <button class="btn btn-ghost text-sm" @onclick="ToggleSortMenu">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                </svg>
+                Sort: @GetSortLabel()
+                <svg class="w-4 h-4 @(_sortMenuOpen ? "rotate-180" : "")" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+            </button>
+
+            @if (_sortMenuOpen)
+            {
+                <div class="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-10">
+                    @foreach (var option in Enum.GetValues<SortOption>())
+                    {
+                        <button class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center justify-between @(StateService.SortBy == option ? "text-cloud-600 font-medium" : "text-gray-700")"
+                                @onclick="() => SetSort(option)">
+                            @GetSortOptionLabel(option)
+                            @if (StateService.SortBy == option)
+                            {
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                            }
+                        </button>
+                    }
+                    <div class="border-t border-gray-200 my-1"></div>
+                    <button class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 flex items-center gap-2 text-gray-700"
+                            @onclick="ToggleSortDirection">
+                        <svg class="w-4 h-4 @(!StateService.SortAscending ? "rotate-180" : "")" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                        </svg>
+                        @(StateService.SortAscending ? "Ascending" : "Descending")
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback OnNewFolder { get; set; }
+    [Parameter] public EventCallback OnUpload { get; set; }
+
+    private bool _sortMenuOpen = false;
+
+    private void ToggleSortMenu()
+    {
+        _sortMenuOpen = !_sortMenuOpen;
+    }
+
+    private void SetSort(SortOption option)
+    {
+        StateService.SortBy = option;
+        _sortMenuOpen = false;
+    }
+
+    private void ToggleSortDirection()
+    {
+        StateService.SortAscending = !StateService.SortAscending;
+        _sortMenuOpen = false;
+    }
+
+    private string GetSortLabel()
+    {
+        return GetSortOptionLabel(StateService.SortBy);
+    }
+
+    private string GetSortOptionLabel(SortOption option)
+    {
+        return option switch
+        {
+            SortOption.Name => "Name",
+            SortOption.DateModified => "Modified",
+            SortOption.DateCreated => "Created",
+            SortOption.Size => "Size",
+            SortOption.Type => "Type",
+            _ => "Name"
+        };
+    }
+}

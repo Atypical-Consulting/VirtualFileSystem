@@ -19,7 +19,7 @@ The path of the directory node\.
 
 <a name='Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.RenameDirectory(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,string).newDir'></a>
 
-`newDir` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`newDir` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The new name of the directory node\.
 

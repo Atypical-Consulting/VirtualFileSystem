@@ -12,6 +12,6 @@ void SetTextContent(string textContent);
 
 <a name='Atypical.VirtualFileSystem.Core.IBinaryFileNode.SetTextContent(string).textContent'></a>
 
-`textContent` [System\.String](https://docs.microsoft.com/en-us/dotnet/api/System.String 'System\.String')
+`textContent` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The text content to set\.
