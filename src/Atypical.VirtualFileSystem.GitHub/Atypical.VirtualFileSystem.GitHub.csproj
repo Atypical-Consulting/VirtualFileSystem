@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <!-- File inclusion -->
+    <ItemGroup>
+        <None Include="../../Logo.png" Pack="true" PackagePath="" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <!-- Dependencies -->
+    <ItemGroup>
+        <PackageReference Include="Octokit" Version="13.0.1" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
+    </ItemGroup>
+
+    <!-- Project references -->
+    <ItemGroup>
+        <ProjectReference Include="..\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
+    </ItemGroup>
+
+    <!-- NuGet metadata -->
+    <PropertyGroup>
+        <PackageId>Atypical.VirtualFileSystem.GitHub</PackageId>
+        <PackageIcon>Logo.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <Authors>Philippe Matray</Authors>
+        <Company>Atypical Consulting SRL</Company>
+        <Product>Virtual File System - GitHub Extension</Product>
+        <Description>
+            GitHub repository loading extension for Atypical.VirtualFileSystem.
+            Load GitHub repositories directly into the Virtual File System for browsing and manipulation.
+        </Description>
+        <PackageTags>virtual filesystem;github;repository;octokit;net10</PackageTags>
+        <Copyright>Copyright (c) 2022-2025 Atypical Consulting SRL</Copyright>
+        <PackageProjectUrl>https://github.com/Atypical-Consulting/VirtualFileSystem</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Atypical-Consulting/VirtualFileSystem.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryBranch>main</RepositoryBranch>
+        <PackageReleaseNotes>
+            ## Initial Release
+
+            - Load GitHub repositories into VFS
+            - Support for authentication and rate limiting
+            - Configurable file filtering
+            - Eager, Lazy, and MetadataOnly loading strategies
+        </PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLanguage>en-US</PackageLanguage>
+    </PropertyGroup>
+
+</Project>
