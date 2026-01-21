@@ -1,0 +1,466 @@
+@* Create Pull Request Dialog *@
+@inject GitHubPendingChangesService PendingChangesService
+@inject GitHubAuthService AuthService
+@inject ToastService Toast
+@implements IDisposable
+
+<Modal @bind-IsOpen="IsOpen" Title="Create Pull Request" Size="xl" CloseOnBackdropClick="@(!_isCreating)">
+    <ChildContent>
+        @if (_result is not null && _result.Success)
+        {
+            @* Success State *@
+            <div class="space-y-4">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div class="flex gap-3">
+                        <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <div>
+                            <h4 class="text-sm font-medium text-green-800">Pull Request Created</h4>
+                            <p class="text-sm text-green-700 mt-1">
+                                PR #@(_result.PullRequestNumber) has been created successfully.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="@_result.PullRequestUrl"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="flex items-center justify-center gap-2 w-full px-4 py-3 bg-cloud-600 text-white rounded-lg hover:bg-cloud-700 transition-colors">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.167 22 16.42 22 12c0-5.523-4.477-10-10-10z" />
+                    </svg>
+                    View Pull Request on GitHub
+                </a>
+            </div>
+        }
+        else if (_result is not null && !_result.Success)
+        {
+            @* Error State *@
+            <div class="space-y-4">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex gap-3">
+                        <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                        <div>
+                            <h4 class="text-sm font-medium text-red-800">Failed to Create Pull Request</h4>
+                            <p class="text-sm text-red-700 mt-1">@_result.ErrorMessage</p>
+                            @if (_result.FailedAtStep.HasValue)
+                            {
+                                <p class="text-xs text-red-600 mt-1">
+                                    Failed at: @GetStepName(_result.FailedAtStep.Value)
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <Button Variant="secondary" OnClick="ResetDialog">Try Again</Button>
+            </div>
+        }
+        else if (_isCreating)
+        {
+            @* Creating State *@
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-cloud-600"></div>
+                    <span class="text-gray-700">@GetStepName(_currentStep)...</span>
+                </div>
+
+                @* Progress Steps *@
+                <div class="space-y-2">
+                    @foreach (var step in GetProgressSteps())
+                    {
+                        <div class="flex items-center gap-2 text-sm @(step.IsComplete ? "text-green-600" : step.IsCurrent ? "text-cloud-600" : "text-gray-400")">
+                            @if (step.IsComplete)
+                            {
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                            }
+                            else if (step.IsCurrent)
+                            {
+                                <div class="w-4 h-4 border-2 border-cloud-500 rounded-full border-t-transparent animate-spin"></div>
+                            }
+                            else
+                            {
+                                <div class="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
+                            }
+                            <span>@step.Name</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            @* Input Form *@
+            <div class="space-y-4">
+                @if (!AuthService.IsAuthenticated)
+                {
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                        <div class="flex gap-2">
+                            <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                            </svg>
+                            <span class="text-sm text-amber-700">
+                                You must be signed in to GitHub to create a pull request.
+                            </span>
+                        </div>
+                    </div>
+                }
+
+                @if (_requiresFork)
+                {
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <div class="flex gap-2">
+                            <svg class="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                            </svg>
+                            <span class="text-sm text-blue-700">
+                                You don't have write access to this repository. A fork will be created automatically.
+                            </span>
+                        </div>
+                    </div>
+                }
+
+                @* Repository Info *@
+                <div class="bg-gray-50 rounded-lg p-3">
+                    <div class="text-sm text-gray-600">
+                        <span class="font-medium">Repository:</span>
+                        <a href="@($"https://github.com/{_repositoryInfo?.Owner}/{_repositoryInfo?.Repository}")"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="text-cloud-600 hover:underline ml-1">
+                            @_repositoryInfo?.Owner/@_repositoryInfo?.Repository
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-600 mt-1">
+                        <span class="font-medium">Base Branch:</span>
+                        <span class="ml-1">@_baseBranch</span>
+                    </div>
+                </div>
+
+                @* PR Title *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                    <input type="text"
+                           class="input"
+                           placeholder="Update files"
+                           @bind="_title" />
+                </div>
+
+                @* PR Description *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
+                    <textarea class="input min-h-[100px]"
+                              placeholder="Describe your changes..."
+                              @bind="_description"></textarea>
+                </div>
+
+                @* Branch Name *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Branch Name</label>
+                    <input type="text"
+                           class="input"
+                           @bind="_branchName" />
+                    <p class="text-xs text-gray-500 mt-1">A new branch will be created for these changes</p>
+                </div>
+
+                @* File Changes List *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Files to include (@_changes.Count)
+                    </label>
+                    <div class="border border-gray-200 rounded-lg max-h-48 overflow-y-auto">
+                        @foreach (var change in _changes)
+                        {
+                            <div class="flex items-center gap-2 px-3 py-2 border-b border-gray-100 last:border-b-0 text-sm">
+                                <span class="@GetChangeTypeClass(change.ChangeType) px-1.5 py-0.5 rounded text-xs font-medium">
+                                    @GetChangeTypeLabel(change.ChangeType)
+                                </span>
+                                <span class="text-gray-700 truncate flex-1" title="@change.Metadata.OriginalPath">
+                                    @change.Metadata.OriginalPath
+                                </span>
+                                @if (change.LinesAdded > 0 || change.LinesRemoved > 0)
+                                {
+                                    <span class="text-xs text-gray-400">
+                                        @if (change.LinesAdded > 0)
+                                        {
+                                            <span class="text-green-600">+@change.LinesAdded</span>
+                                        }
+                                        @if (change.LinesRemoved > 0)
+                                        {
+                                            <span class="text-red-600 ml-1">-@change.LinesRemoved</span>
+                                        }
+                                    </span>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @* Draft PR Option *@
+                <div class="flex items-center gap-2">
+                    <input type="checkbox"
+                           id="draftPr"
+                           class="w-4 h-4 text-cloud-600 rounded border-gray-300"
+                           @bind="_isDraft" />
+                    <label for="draftPr" class="text-sm text-gray-700">
+                        Create as draft pull request
+                    </label>
+                </div>
+            </div>
+        }
+    </ChildContent>
+    <Footer>
+        @if (_result is not null)
+        {
+            <Button Variant="ghost" OnClick="Close">Close</Button>
+        }
+        else if (_isCreating)
+        {
+            <span class="text-sm text-gray-500">Creating pull request...</span>
+        }
+        else
+        {
+            <Button Variant="ghost" OnClick="Close">Cancel</Button>
+            <Button Variant="primary"
+                    OnClick="CreatePullRequest"
+                    Disabled="@(!CanCreate)"
+                    Icon="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z">
+                Create Pull Request
+            </Button>
+        }
+    </Footer>
+</Modal>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public string? Owner { get; set; }
+    [Parameter] public string? Repository { get; set; }
+
+    private string _title = "";
+    private string _description = "";
+    private string _branchName = "";
+    private string _baseBranch = "main";
+    private bool _isDraft = false;
+    private bool _isCreating = false;
+    private bool _requiresFork = false;
+    private PullRequestResult? _result;
+    private PullRequestCreationStep _currentStep = PullRequestCreationStep.CheckingPermissions;
+    private List<PendingFileChange> _changes = new();
+    private (string Owner, string Repository)? _repositoryInfo;
+
+    private bool CanCreate => AuthService.IsAuthenticated
+                              && !string.IsNullOrWhiteSpace(_title)
+                              && !string.IsNullOrWhiteSpace(_branchName)
+                              && _changes.Count > 0;
+
+    protected override void OnInitialized()
+    {
+        PendingChangesService.OnPendingChangesChanged += LoadChanges;
+        AuthService.OnCredentialsChanged += StateHasChanged;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (IsOpen && (Owner is not null || Repository is not null))
+        {
+            await InitializeDialog();
+        }
+    }
+
+    private async Task InitializeDialog()
+    {
+        _result = null;
+        _isCreating = false;
+
+        // Load changes
+        if (Owner is not null && Repository is not null)
+        {
+            _changes = PendingChangesService.GetChangesForRepository(Owner, Repository).ToList();
+            _repositoryInfo = (Owner, Repository);
+
+            // Determine base branch from first change
+            if (_changes.Count > 0)
+            {
+                _baseBranch = _changes[0].Metadata.Branch;
+            }
+        }
+        else
+        {
+            _changes = PendingChangesService.GetAllChanges().ToList();
+            if (_changes.Count > 0)
+            {
+                var first = _changes[0];
+                _repositoryInfo = (first.Metadata.Owner, first.Metadata.Repository);
+                _baseBranch = first.Metadata.Branch;
+            }
+        }
+
+        // Generate defaults
+        _title = PullRequestCreateInfo.GenerateTitle(_changes);
+        _branchName = PullRequestCreateInfo.GenerateBranchName();
+        _description = "";
+        _isDraft = false;
+
+        // Check if fork is required
+        if (_repositoryInfo is not null && AuthService.IsAuthenticated)
+        {
+            var (_, requiresFork) = await AuthService.CheckRepositoryAccessAsync(
+                _repositoryInfo.Value.Owner, _repositoryInfo.Value.Repository);
+            _requiresFork = requiresFork;
+        }
+    }
+
+    private void LoadChanges()
+    {
+        if (Owner is not null && Repository is not null)
+        {
+            _changes = PendingChangesService.GetChangesForRepository(Owner, Repository).ToList();
+        }
+        else
+        {
+            _changes = PendingChangesService.GetAllChanges().ToList();
+        }
+        StateHasChanged();
+    }
+
+    private async Task CreatePullRequest()
+    {
+        if (!CanCreate || _repositoryInfo is null) return;
+
+        _isCreating = true;
+        _currentStep = PullRequestCreationStep.CheckingPermissions;
+        StateHasChanged();
+
+        var createInfo = new PullRequestCreateInfo
+        {
+            Owner = _repositoryInfo.Value.Owner,
+            Repository = _repositoryInfo.Value.Repository,
+            Title = _title,
+            Body = string.IsNullOrWhiteSpace(_description) ? null : _description,
+            BaseBranch = _baseBranch,
+            HeadBranch = _branchName,
+            Changes = _changes,
+            RequiresFork = _requiresFork,
+            ForkOwner = _requiresFork ? AuthService.CurrentCredentials.Username : null,
+            IsDraft = _isDraft
+        };
+
+        // Simulate step progression for UI feedback
+        await SimulateProgress();
+
+        _result = await PendingChangesService.CreatePullRequestAsync(createInfo);
+
+        _isCreating = false;
+
+        if (_result.Success)
+        {
+            Toast.ShowSuccess($"Pull request #{_result.PullRequestNumber} created successfully!");
+        }
+
+        StateHasChanged();
+    }
+
+    private async Task SimulateProgress()
+    {
+        var steps = new[]
+        {
+            PullRequestCreationStep.CheckingPermissions,
+            PullRequestCreationStep.CreatingFork,
+            PullRequestCreationStep.CreatingBranch,
+            PullRequestCreationStep.CommittingChanges,
+            PullRequestCreationStep.CreatingPullRequest
+        };
+
+        foreach (var step in steps)
+        {
+            if (!_requiresFork && step == PullRequestCreationStep.CreatingFork)
+                continue;
+
+            _currentStep = step;
+            StateHasChanged();
+            await Task.Delay(500); // Brief delay for visual feedback
+        }
+    }
+
+    private void ResetDialog()
+    {
+        _result = null;
+        _isCreating = false;
+        StateHasChanged();
+    }
+
+    private async Task Close()
+    {
+        _result = null;
+        _isCreating = false;
+        await IsOpenChanged.InvokeAsync(false);
+    }
+
+    private string GetStepName(PullRequestCreationStep step) => step switch
+    {
+        PullRequestCreationStep.CheckingPermissions => "Checking permissions",
+        PullRequestCreationStep.CreatingFork => "Creating fork",
+        PullRequestCreationStep.WaitingForFork => "Waiting for fork",
+        PullRequestCreationStep.CreatingBranch => "Creating branch",
+        PullRequestCreationStep.CommittingChanges => "Committing changes",
+        PullRequestCreationStep.CreatingPullRequest => "Creating pull request",
+        PullRequestCreationStep.Completed => "Completed",
+        _ => step.ToString()
+    };
+
+    private IEnumerable<(string Name, bool IsComplete, bool IsCurrent)> GetProgressSteps()
+    {
+        var steps = new List<PullRequestCreationStep>
+        {
+            PullRequestCreationStep.CheckingPermissions
+        };
+
+        if (_requiresFork)
+        {
+            steps.Add(PullRequestCreationStep.CreatingFork);
+        }
+
+        steps.AddRange(new[]
+        {
+            PullRequestCreationStep.CreatingBranch,
+            PullRequestCreationStep.CommittingChanges,
+            PullRequestCreationStep.CreatingPullRequest
+        });
+
+        var currentIndex = steps.IndexOf(_currentStep);
+
+        return steps.Select((step, index) => (
+            Name: GetStepName(step),
+            IsComplete: index < currentIndex,
+            IsCurrent: index == currentIndex
+        ));
+    }
+
+    private static string GetChangeTypeClass(FileChangeType type) => type switch
+    {
+        FileChangeType.Modified => "bg-amber-100 text-amber-800",
+        FileChangeType.Created => "bg-green-100 text-green-800",
+        FileChangeType.Deleted => "bg-red-100 text-red-800",
+        _ => "bg-gray-100 text-gray-800"
+    };
+
+    private static string GetChangeTypeLabel(FileChangeType type) => type switch
+    {
+        FileChangeType.Modified => "M",
+        FileChangeType.Created => "A",
+        FileChangeType.Deleted => "D",
+        _ => "?"
+    };
+
+    public void Dispose()
+    {
+        PendingChangesService.OnPendingChangesChanged -= LoadChanges;
+        AuthService.OnCredentialsChanged -= StateHasChanged;
+    }
+}

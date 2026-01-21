@@ -11,7 +11,15 @@ namespace Atypical.VirtualFileSystem.DemoBlazorApp.Services;
 public class GitHubImportService
 {
     private readonly IGitHubRepositoryLoader _loader;
+    private readonly GitHubAuthService _authService;
+    private readonly GitHubMetadataTracker _metadataTracker;
     private CancellationTokenSource? _cancellationTokenSource;
+
+    // Store current import context for metadata callback
+    private string? _currentOwner;
+    private string? _currentRepository;
+    private string? _currentBranch;
+    private string? _currentCommitSha;
 
     /// <summary>
     /// Gets the current import state.
@@ -23,9 +31,14 @@ public class GitHubImportService
     /// </summary>
     public event Action? OnStateChanged;
 
-    public GitHubImportService(IGitHubRepositoryLoader loader)
+    public GitHubImportService(
+        IGitHubRepositoryLoader loader,
+        GitHubAuthService authService,
+        GitHubMetadataTracker metadataTracker)
     {
         _loader = loader;
+        _authService = authService;
+        _metadataTracker = metadataTracker;
     }
 
     /// <summary>
@@ -71,11 +84,20 @@ public class GitHubImportService
 
         try
         {
+            // Store context for metadata callback
+            _currentOwner = owner;
+            _currentRepository = repository;
+            _currentBranch = branch ?? "main"; // Will be updated by result
+
             // Build target path if not specified
             var effectiveTargetPath = targetPath ?? $"/github/{owner}/{repository}";
 
-            // Build options with progress callback
+            // Get auth token if available
+            var accessToken = _authService.GetAccessToken();
+
+            // Build options with progress and metadata callbacks
             var options = new GitHubLoaderOptions(
+                AccessToken: accessToken,
                 Branch: branch,
                 SubPath: subPath,
                 TargetPath: effectiveTargetPath,
@@ -88,12 +110,17 @@ public class GitHubImportService
                     State.TotalFiles = total;
                     State.CurrentPath = path;
                     NotifyStateChanged();
-                }
+                },
+                MetadataCallback: OnFileMetadataReceived
             );
 
             // Load the repository
             var result = await _loader.LoadRepositoryAsync(
                 vfs, owner, repository, options, token);
+
+            // Update context with actual branch and commit SHA from result
+            _currentBranch = result.Branch;
+            _currentCommitSha = result.CommitSha;
 
             return result;
         }
@@ -127,6 +154,7 @@ public class GitHubImportService
             NotifyStateChanged();
             _cancellationTokenSource?.Dispose();
             _cancellationTokenSource = null;
+            ClearImportContext();
         }
     }
 
@@ -141,5 +169,38 @@ public class GitHubImportService
     private void NotifyStateChanged()
     {
         OnStateChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// Callback invoked when file metadata is received during import.
+    /// </summary>
+    private void OnFileMetadataReceived(string vfsPath, string originalPath, string blobSha)
+    {
+        if (_currentOwner is null || _currentRepository is null || _currentBranch is null)
+            return;
+
+        var metadata = new GitHubFileMetadata
+        {
+            Owner = _currentOwner,
+            Repository = _currentRepository,
+            Branch = _currentBranch,
+            OriginalPath = originalPath,
+            BlobSha = blobSha,
+            CommitSha = _currentCommitSha,
+            ImportedAt = DateTimeOffset.UtcNow
+        };
+
+        _metadataTracker.TrackFile(vfsPath, metadata);
+    }
+
+    /// <summary>
+    /// Clears the current import context.
+    /// </summary>
+    private void ClearImportContext()
+    {
+        _currentOwner = null;
+        _currentRepository = null;
+        _currentBranch = null;
+        _currentCommitSha = null;
     }
 }

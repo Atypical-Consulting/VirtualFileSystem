@@ -153,6 +153,9 @@ public sealed partial class GitHubRepositoryLoader : IGitHubRepositoryLoader
                         totalBytesLoaded += content.Length;
                     }
 
+                    // Report metadata for tracking
+                    options.MetadataCallback?.Invoke(targetPath, item.Path, item.Sha);
+
                     filesLoaded++;
                 }
                 catch (Exception ex) when (ex is not OperationCanceledException)

@@ -205,3 +205,30 @@ document.addEventListener('keydown', function (e) {
         window.cloudDrive.keyboard.undoRedoRef.invokeMethodAsync('HandleRedo');
     }
 });
+
+// Local Storage helper for secure credential storage
+window.cloudDrive.storage = {
+    set: function (key, value) {
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch {
+            return false;
+        }
+    },
+    get: function (key) {
+        try {
+            return localStorage.getItem(key);
+        } catch {
+            return null;
+        }
+    },
+    remove: function (key) {
+        try {
+            localStorage.removeItem(key);
+            return true;
+        } catch {
+            return false;
+        }
+    }
+};

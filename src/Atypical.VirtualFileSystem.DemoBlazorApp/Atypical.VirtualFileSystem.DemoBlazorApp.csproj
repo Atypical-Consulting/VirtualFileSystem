@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Octokit" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj" />
     <ProjectReference Include="../Atypical.VirtualFileSystem.GitHub/Atypical.VirtualFileSystem.GitHub.csproj" />
   </ItemGroup>

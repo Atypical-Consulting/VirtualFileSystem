@@ -1,0 +1,45 @@
+@* Pending GitHub Changes Indicator *@
+@inject GitHubPendingChangesService PendingChangesService
+@inject GitHubAuthService AuthService
+@implements IDisposable
+
+@if (PendingChangesService.HasPendingChanges)
+{
+    <button class="relative flex items-center gap-2 px-3 py-1.5 text-sm bg-cloud-50 text-cloud-700 rounded-lg hover:bg-cloud-100 transition-colors border border-cloud-200"
+            @onclick="OpenDialog"
+            title="@PendingChangesService.PendingChangeCount pending change(s) ready for PR">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+        </svg>
+        <span class="font-medium">@PendingChangesService.PendingChangeCount PR</span>
+        @if (!AuthService.IsAuthenticated)
+        {
+            <svg class="w-3.5 h-3.5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" title="Sign in to create PR">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+        }
+    </button>
+}
+
+<CreatePullRequestDialog @bind-IsOpen="_showDialog" />
+
+@code {
+    private bool _showDialog;
+
+    protected override void OnInitialized()
+    {
+        PendingChangesService.OnPendingChangesChanged += StateHasChanged;
+        AuthService.OnCredentialsChanged += StateHasChanged;
+    }
+
+    private void OpenDialog()
+    {
+        _showDialog = true;
+    }
+
+    public void Dispose()
+    {
+        PendingChangesService.OnPendingChangesChanged -= StateHasChanged;
+        AuthService.OnCredentialsChanged -= StateHasChanged;
+    }
+}

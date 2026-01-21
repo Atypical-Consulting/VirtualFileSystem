@@ -2,6 +2,7 @@
 @inject VFSStateService StateService
 @inject NavigationManager Navigation
 @inject UndoRedoService UndoRedoService
+@inject GitHubAuthService GitHubAuthService
 @implements IDisposable
 
 <header class="h-topbar bg-white border-b border-gray-200 flex items-center px-4 gap-4">
@@ -46,6 +47,19 @@
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-4.247m0 0A8.966 8.966 0 0 1 3 12c0-1.97.633-3.791 1.708-5.273" />
             </svg>
+        </button>
+
+        @* GitHub Settings Button *@
+        <button class="btn-icon hidden md:flex relative"
+                @onclick="() => OnToggleGitHubSettings.InvokeAsync()"
+                title="@(GitHubAuthService.IsAuthenticated ? $"GitHub: {GitHubAuthService.CurrentCredentials.Username}" : "GitHub Settings")">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.167 22 16.42 22 12c0-5.523-4.477-10-10-10z" />
+            </svg>
+            @if (GitHubAuthService.IsAuthenticated)
+            {
+                <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white"></span>
+            }
         </button>
 
         @* View Toggle *@
@@ -104,12 +118,15 @@
     [Parameter] public EventCallback OnToggleSidebar { get; set; }
     [Parameter] public EventCallback OnToggleHistory { get; set; }
     [Parameter] public EventCallback OnToggleGitHubImport { get; set; }
+    [Parameter] public EventCallback OnToggleGitHubSettings { get; set; }
 
     private string SearchQuery { get; set; } = "";
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         UndoRedoService.OnHistoryChanged += StateHasChanged;
+        GitHubAuthService.OnCredentialsChanged += StateHasChanged;
+        await GitHubAuthService.InitializeAsync();
     }
 
     private void HandleSearchKeyDown(KeyboardEventArgs e)
@@ -123,5 +140,6 @@
     public void Dispose()
     {
         UndoRedoService.OnHistoryChanged -= StateHasChanged;
+        GitHubAuthService.OnCredentialsChanged -= StateHasChanged;
     }
 }

@@ -25,6 +25,12 @@ builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.Rec
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.UndoRedoService>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubImportService>();
 
+// Add GitHub authentication and PR services
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubAuthService>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubMetadataTracker>();
+builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubPendingChangesService>();
+builder.Services.AddScoped<IGitHubWriteService, GitHubWriteService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -6,7 +6,7 @@
 
 <div class="h-screen flex flex-col bg-gray-50">
     @* Top Bar *@
-    <TopBar OnToggleSidebar="ToggleSidebar" OnToggleHistory="ToggleHistory" OnToggleGitHubImport="ToggleGitHubImport" />
+    <TopBar OnToggleSidebar="ToggleSidebar" OnToggleHistory="ToggleHistory" OnToggleGitHubImport="ToggleGitHubImport" OnToggleGitHubSettings="ToggleGitHubSettings" />
 
     @* Main Content Area *@
     <div class="flex-1 flex overflow-hidden">
@@ -40,7 +40,10 @@
 }
 
 @* GitHub Import Dialog *@
-<GitHubImportDialog @bind-IsOpen="_showGitHubImport" />
+<GitHubImportDialog @bind-IsOpen="_showGitHubImport" OnOpenGitHubSettings="() => _showGitHubSettings = true" />
+
+@* GitHub Settings Dialog *@
+<GitHubSettingsDialog @bind-IsOpen="_showGitHubSettings" />
 
 @* Mobile Sidebar Overlay *@
 @if (_sidebarOpen)
@@ -63,6 +66,7 @@
     private bool _sidebarOpen = false;
     private bool _showHistory = false;
     private bool _showGitHubImport = false;
+    private bool _showGitHubSettings = false;
     private DotNetObjectReference<MainLayout>? _jsRef;
 
     protected override void OnInitialized()
@@ -92,6 +96,11 @@
     private void ToggleGitHubImport()
     {
         _showGitHubImport = !_showGitHubImport;
+    }
+
+    private void ToggleGitHubSettings()
+    {
+        _showGitHubSettings = !_showGitHubSettings;
     }
 
     [JSInvokable]

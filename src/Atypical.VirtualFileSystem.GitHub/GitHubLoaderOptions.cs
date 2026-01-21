@@ -78,6 +78,11 @@ public enum GitHubLoadingStrategy
 /// Optional callback for progress reporting during loading.
 /// Called with (currentFile, totalFiles, currentPath).
 /// </param>
+/// <param name="MetadataCallback">
+/// Optional callback for receiving file metadata during loading.
+/// Called with (vfsPath, originalPath, blobSha) for each file loaded.
+/// Use this to track GitHub source information for later PR creation.
+/// </param>
 public sealed record GitHubLoaderOptions(
     string? AccessToken = null,
     string? Branch = null,
@@ -89,7 +94,8 @@ public sealed record GitHubLoaderOptions(
     List<string>? ExcludePatterns = null,
     bool IncludeBinaryFiles = true,
     GitHubLoadingStrategy Strategy = GitHubLoadingStrategy.Eager,
-    Action<int, int, string>? ProgressCallback = null)
+    Action<int, int, string>? ProgressCallback = null,
+    Action<string, string, string>? MetadataCallback = null)
 {
     /// <summary>
     /// Gets the default options for loading a GitHub repository.

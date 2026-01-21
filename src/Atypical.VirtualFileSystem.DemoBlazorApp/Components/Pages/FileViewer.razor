@@ -4,7 +4,11 @@
 @inject ToastService Toast
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
+@inject GitHubMetadataTracker MetadataTracker
+@inject GitHubPendingChangesService PendingChangesService
+@inject GitHubAuthService GitHubAuthService
 @rendermode InteractiveServer
+@implements IDisposable
 
 <PageTitle>@(CurrentFile?.Name ?? "File") - CloudDrive</PageTitle>
 
@@ -25,12 +29,36 @@
                         <h1 class="text-lg font-semibold text-gray-900">@CurrentFile.Name</h1>
                         <p class="text-xs text-gray-500">@CurrentFile.Path.Value</p>
                     </div>
+                    @if (_gitHubMetadata is not null)
+                    {
+                        <a href="@_gitHubMetadata.GitHubUrl"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="flex items-center gap-1.5 px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                           title="View on GitHub">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.167 22 16.42 22 12c0-5.523-4.477-10-10-10z" />
+                            </svg>
+                            <span>@_gitHubMetadata.RepositoryKey</span>
+                        </a>
+                    }
                     @if (HasUnsavedChanges)
                     {
                         <Badge Variant="yellow">Unsaved changes</Badge>
                     }
+                    @if (_hasPendingPRChange)
+                    {
+                        <Badge Variant="blue">Pending PR</Badge>
+                    }
                 </div>
                 <div class="flex items-center gap-2">
+                    @if (_gitHubMetadata is not null && _repositoryPendingCount > 0)
+                    {
+                        <Button Variant="secondary" OnClick="OpenPRDialog"
+                                Icon="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z">
+                            Create PR (@_repositoryPendingCount)
+                        </Button>
+                    }
                     <Button Variant="ghost" OnClick="ReloadFile" Disabled="!HasUnsavedChanges"
                             Icon="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99">
                         Discard
@@ -89,6 +117,50 @@
                         </div>
                     </dl>
                 </div>
+
+                @* GitHub Source Info *@
+                @if (_gitHubMetadata is not null)
+                {
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-sm font-medium text-gray-900 mb-3">GitHub Source</h3>
+                        <dl class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Repository</dt>
+                                <dd class="text-gray-900">
+                                    <a href="@_gitHubMetadata.RepositoryUrl"
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       class="text-cloud-600 hover:underline">
+                                        @_gitHubMetadata.RepositoryKey
+                                    </a>
+                                </dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Branch</dt>
+                                <dd class="text-gray-900">@_gitHubMetadata.Branch</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Path</dt>
+                                <dd class="text-gray-900 text-xs truncate max-w-[150px]" title="@_gitHubMetadata.OriginalPath">
+                                    @_gitHubMetadata.OriginalPath
+                                </dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-500">Imported</dt>
+                                <dd class="text-gray-900">@_gitHubMetadata.ImportedAt.ToString("MMM d, yyyy")</dd>
+                            </div>
+                        </dl>
+                        <a href="@_gitHubMetadata.GitHubUrl"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="flex items-center justify-center gap-2 mt-3 px-3 py-2 text-xs text-cloud-600 border border-cloud-200 rounded-md hover:bg-cloud-50 transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                }
 
                 @* Find & Replace *@
                 <div class="p-4 border-b border-gray-200">
@@ -158,6 +230,11 @@
     }
 </div>
 
+@* PR Dialog *@
+<CreatePullRequestDialog @bind-IsOpen="_showPRDialog"
+                         Owner="@_gitHubMetadata?.Owner"
+                         Repository="@_gitHubMetadata?.Repository" />
+
 @code {
     [SupplyParameterFromQuery] public string? path { get; set; }
 
@@ -168,10 +245,17 @@
     private string ReplaceText = "";
     private string ErrorMessage = "";
 
+    // GitHub tracking
+    private GitHubFileMetadata? _gitHubMetadata;
+    private bool _hasPendingPRChange;
+    private int _repositoryPendingCount;
+    private bool _showPRDialog;
+
     private bool HasUnsavedChanges => FileContent != OriginalContent;
 
     protected override void OnInitialized()
     {
+        PendingChangesService.OnPendingChangesChanged += UpdatePendingState;
         LoadFileFromQuery();
     }
 
@@ -210,13 +294,45 @@
         OriginalContent = file.Content;
         ErrorMessage = "";
         StateService.SelectedNode = file;
+
+        // Load GitHub metadata
+        _gitHubMetadata = MetadataTracker.GetMetadata(file.Path.Value);
+        UpdatePendingState();
+
         StateHasChanged();
+    }
+
+    private void UpdatePendingState()
+    {
+        if (CurrentFile is null)
+        {
+            _hasPendingPRChange = false;
+            _repositoryPendingCount = 0;
+            return;
+        }
+
+        _hasPendingPRChange = PendingChangesService.HasPendingChange(CurrentFile.Path.Value);
+
+        if (_gitHubMetadata is not null)
+        {
+            _repositoryPendingCount = PendingChangesService
+                .GetChangesForRepository(_gitHubMetadata.Owner, _gitHubMetadata.Repository)
+                .Count;
+        }
+        else
+        {
+            _repositoryPendingCount = 0;
+        }
+
+        InvokeAsync(StateHasChanged);
     }
 
     private void SaveFile()
     {
         if (CurrentFile == null || !HasUnsavedChanges)
             return;
+
+        var previousContent = OriginalContent;
 
         try
         {
@@ -226,8 +342,18 @@
             OriginalContent = FileContent;
             CurrentFile = VFS.GetFile(CurrentFile.Path.Value);
 
+            // Queue change for PR if this is a GitHub file
+            if (_gitHubMetadata is not null)
+            {
+                PendingChangesService.AddChange(CurrentFile.Path.Value, previousContent, FileContent);
+                Toast.ShowSuccess($"File saved and queued for PR");
+            }
+            else
+            {
+                Toast.ShowSuccess($"File '{CurrentFile.Name}' saved");
+            }
+
             StateService.NotifyDataChanged();
-            Toast.ShowSuccess($"File '{CurrentFile.Name}' saved");
             StateHasChanged();
         }
         catch (Exception ex)
@@ -243,6 +369,11 @@
             FileContent = OriginalContent;
             StateHasChanged();
         }
+    }
+
+    private void OpenPRDialog()
+    {
+        _showPRDialog = true;
     }
 
     private void ReplaceAll()
@@ -293,5 +424,10 @@
     private void GoBack()
     {
         Navigation.NavigateTo("/");
+    }
+
+    public void Dispose()
+    {
+        PendingChangesService.OnPendingChangesChanged -= UpdatePendingState;
     }
 }
