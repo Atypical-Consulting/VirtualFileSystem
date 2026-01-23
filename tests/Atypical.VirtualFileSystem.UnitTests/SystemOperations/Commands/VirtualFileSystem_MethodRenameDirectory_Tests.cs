@@ -113,6 +113,36 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
     }
 
     [Fact]
+    public void RenameDirectory_can_be_undone_and_redone()
+    {
+        // Arrange
+        _vfs.CreateDirectory(_directoryPath);
+        var originalPath = _directoryPath;
+        var newPath = new VFSDirectoryPath("dir1/dir2/new_dir");
+
+        // Act - Rename directory
+        Act();
+
+        // Assert - Directory should be renamed
+        _vfs.Index.RawIndex.Should().NotContainKey(originalPath);
+        _vfs.Index.RawIndex.Should().ContainKey(newPath);
+
+        // Act - Undo rename
+        _vfs.ChangeHistory.Undo();
+
+        // Assert - Directory should be back to original name
+        _vfs.Index.RawIndex.Should().ContainKey(originalPath);
+        _vfs.Index.RawIndex.Should().NotContainKey(newPath);
+
+        // Act - Redo rename
+        _vfs.ChangeHistory.Redo();
+
+        // Assert - Directory should be renamed again
+        _vfs.Index.RawIndex.Should().NotContainKey(originalPath);
+        _vfs.Index.RawIndex.Should().ContainKey(newPath);
+    }
+
+    [Fact]
     public void RenameDirectory_updates_nested_file_paths()
     {
         // Arrange
