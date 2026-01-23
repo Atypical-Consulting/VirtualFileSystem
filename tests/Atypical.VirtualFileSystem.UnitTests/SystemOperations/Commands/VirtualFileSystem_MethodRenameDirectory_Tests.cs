@@ -80,7 +80,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.CreateDirectory(_directoryPath);
         var eventRaised = false;
 
-        _vfs.DirectoryRenamed += args => 
+        _vfs.DirectoryRenamed += args =>
         {
             eventRaised = true;
             args.Path.Should().Be(_directoryPath);
@@ -93,7 +93,31 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         // Assert
         eventRaised.Should().BeTrue();
     }
-    
+
+    [Fact]
+    public void RenameDirectory_event_args_contain_correct_paths()
+    {
+        // Arrange
+        _vfs.CreateDirectory(_directoryPath);
+        VFSDirectoryRenamedArgs? capturedArgs = null;
+
+        _vfs.DirectoryRenamed += args =>
+        {
+            capturedArgs = args;
+        };
+
+        // Act
+        Act();
+
+        // Assert
+        capturedArgs.Should().NotBeNull();
+        capturedArgs!.Path.Should().Be(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        capturedArgs.OldName.Should().Be("dir3");
+        capturedArgs.NewName.Should().Be("new_dir");
+        capturedArgs.NewPath.Should().Be(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
+        capturedArgs.Timestamp.Should().BeCloseTo(DateTimeOffset.Now, TimeSpan.FromSeconds(1));
+    }
+
     [Fact]
     public void RenameDirectory_adds_a_change_to_the_ChangeHistory()
     {
