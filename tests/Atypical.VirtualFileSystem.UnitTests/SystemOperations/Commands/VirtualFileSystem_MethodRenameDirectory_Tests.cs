@@ -105,10 +105,47 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
 
         // Retrieve the change from the UndoStack
         var change = _vfs.ChangeHistory.UndoStack.First();
-        
+
         // Assert
         _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
         _vfs.ChangeHistory.UndoStack.Should().HaveCount(4);
         _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+    }
+
+    [Fact]
+    public void RenameDirectory_updates_nested_file_paths()
+    {
+        // Arrange
+        _vfs.CreateDirectory(_directoryPath);
+        var nestedFilePath = new VFSFilePath("dir1/dir2/dir3/file.txt");
+        var deepNestedFilePath = new VFSFilePath("dir1/dir2/dir3/subdir/nested.txt");
+        _vfs.CreateFile(nestedFilePath, "content1");
+        _vfs.CreateDirectory(new VFSDirectoryPath("dir1/dir2/dir3/subdir"));
+        _vfs.CreateFile(deepNestedFilePath, "content2");
+        var indexLength = _vfs.Index.Count;
+
+        // Act
+        Act();
+
+        // Assert
+        _vfs.Index.Count.Should().Be(indexLength);
+
+        // Verify old paths no longer exist
+        _vfs.Index.RawIndex.Should().NotContainKey(nestedFilePath);
+        _vfs.Index.RawIndex.Should().NotContainKey(deepNestedFilePath);
+
+        // Verify new paths exist
+        var newNestedFilePath = new VFSFilePath("dir1/dir2/new_dir/file.txt");
+        var newDeepNestedFilePath = new VFSFilePath("dir1/dir2/new_dir/subdir/nested.txt");
+        _vfs.Index.RawIndex.Should().ContainKey(newNestedFilePath);
+        _vfs.Index.RawIndex.Should().ContainKey(newDeepNestedFilePath);
+
+        // Verify file contents are preserved
+        _vfs.Index[newNestedFilePath].As<IFileNode>().Content.Should().Be("content1");
+        _vfs.Index[newDeepNestedFilePath].As<IFileNode>().Content.Should().Be("content2");
+
+        // Verify file paths are updated
+        _vfs.Index[newNestedFilePath].Path.Value.Should().Be("vfs://dir1/dir2/new_dir/file.txt");
+        _vfs.Index[newDeepNestedFilePath].Path.Value.Should().Be("vfs://dir1/dir2/new_dir/subdir/nested.txt");
     }
 }
