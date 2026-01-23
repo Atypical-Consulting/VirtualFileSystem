@@ -6,13 +6,13 @@
 Executes an action if the result is successful\.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Result<T> OnSuccess(System.Action<T> action);
+public Atypical.VirtualFileSystem.Core.Result<T> OnSuccess(Action<T> action);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Result_T_.OnSuccess(System.Action_T_).action'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result_T_.OnSuccess(Action_T_).action'></a>
 
-`action` [System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[T](Result_T_.md#Atypical.VirtualFileSystem.Core.Result_T_.T 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.T')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+`action` [System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
 
 The action to execute with the value\.
 

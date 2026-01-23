@@ -7,12 +7,12 @@ Represents a binary file node in the virtual file system\.
 Extends the standard file node to support binary content in addition to text\.
 
 ```csharp
-public sealed record BinaryFileNode : Atypical.VirtualFileSystem.Core.FileNode, Atypical.VirtualFileSystem.Core.IBinaryFileNode, Atypical.VirtualFileSystem.Core.Contracts.IFileNode, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode, System.IEquatable<Atypical.VirtualFileSystem.Core.BinaryFileNode>
+public sealed record BinaryFileNode : Atypical.VirtualFileSystem.Core.FileNode, Atypical.VirtualFileSystem.Core.IBinaryFileNode, Atypical.VirtualFileSystem.Core.Contracts.IFileNode, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode') &#129106; [FileNode](FileNode.md 'Atypical\.VirtualFileSystem\.Core\.FileNode') &#129106; BinaryFileNode
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; [VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; [FileNode](FileNode.md 'Atypical\.VirtualFileSystem\.Core\.FileNode') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; BinaryFileNode
 
-Implements [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode'), [IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode'), [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode'), [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[BinaryFileNode](BinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.BinaryFileNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
+Implements [IBinaryFileNode](IBinaryFileNode.md 'Atypical\.VirtualFileSystem\.Core\.IBinaryFileNode'), [IFileNode](IFileNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IFileNode'), [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')
 
 | Constructors | |
 | :--- | :--- |

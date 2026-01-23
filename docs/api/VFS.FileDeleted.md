@@ -12,4 +12,4 @@ public event Action<VFSFileDeletedArgs>? FileDeleted;
 Implements [FileDeleted](IVFSDelete.FileDeleted.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSDelete\.FileDeleted')
 
 #### Event Type
-[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileDeletedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')

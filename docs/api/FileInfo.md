@@ -6,12 +6,10 @@
 Represents information about a file in the virtual file system\.
 
 ```csharp
-public sealed record FileInfo : System.IEquatable<Atypical.VirtualFileSystem.Core.Extensions.FileInfo>
+public sealed record FileInfo
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; FileInfo
-
-Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[FileInfo](FileInfo.md 'Atypical\.VirtualFileSystem\.Core\.Extensions\.FileInfo')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; FileInfo
 
 | Constructors | |
 | :--- | :--- |

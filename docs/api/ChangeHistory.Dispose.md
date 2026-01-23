@@ -18,8 +18,6 @@ Performs application\-defined tasks associated with freeing, releasing, or reset
 public void Dispose();
 ```
 
-Implements [Dispose\(\)](https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose 'System\.IDisposable\.Dispose')
-
 <a name='Atypical.VirtualFileSystem.Core.ChangeHistory.Dispose(bool)'></a>
 
 ## ChangeHistory\.Dispose\(bool\) Method

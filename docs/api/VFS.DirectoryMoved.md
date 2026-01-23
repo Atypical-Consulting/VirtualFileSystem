@@ -12,4 +12,4 @@ public event Action<VFSDirectoryMovedArgs>? DirectoryMoved;
 Implements [DirectoryMoved](IVFSMove.DirectoryMoved.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSMove\.DirectoryMoved')
 
 #### Event Type
-[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSDirectoryMovedArgs](VFSDirectoryMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryMovedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')

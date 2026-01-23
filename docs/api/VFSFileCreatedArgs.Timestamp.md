@@ -6,7 +6,7 @@
 Gets the timestamp when the file was created\.
 
 ```csharp
-public System.DateTimeOffset Timestamp { get; }
+public DateTimeOffset Timestamp { get; }
 ```
 
 #### Property Value

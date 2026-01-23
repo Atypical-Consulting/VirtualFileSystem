@@ -6,7 +6,7 @@
 Gets the last write time of the node\.
 
 ```csharp
-public System.DateTimeOffset LastWriteTime { get; }
+public DateTimeOffset LastWriteTime { get; }
 ```
 
 Implements [LastWriteTime](IVirtualFileSystemNode.LastWriteTime.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.LastWriteTime')

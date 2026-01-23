@@ -93,7 +93,7 @@ public partial record VFS
             }
         }
 
-        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, oldName, newName));
+        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, oldName, newName, newPath));
         return this;
     }
     

@@ -6,16 +6,14 @@
 Represents a file system entry \(file or directory\) in the virtual file system\.
 
 ```csharp
-public abstract record VFSPath : System.IComparable, System.IEquatable<Atypical.VirtualFileSystem.Core.VFSPath>
+public abstract record VFSPath
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSPath
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable 'System\.IComparable') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; VFSPath
 
 Derived  
 &#8627; [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath')  
 &#8627; [VFSFilePath](VFSFilePath.md 'Atypical\.VirtualFileSystem\.Core\.VFSFilePath')
-
-Implements [System\.IComparable](https://learn.microsoft.com/en-us/dotnet/api/system.icomparable 'System\.IComparable'), [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 
 | Constructors | |
 | :--- | :--- |
@@ -35,5 +33,5 @@ Implements [System\.IComparable](https://learn.microsoft.com/en-us/dotnet/api/sy
 | [Equals\(VFSPath\)](VFSPath.Equals(VFSPath).md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.Equals\(Atypical\.VirtualFileSystem\.Core\.VFSPath\)') | Indicates whether the current object is equal to another object of the same type\. |
 | [GetAbsoluteParentPath\(int\)](VFSPath.GetAbsoluteParentPath(int).md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.GetAbsoluteParentPath\(int\)') | Gets the absolute path of the parent directory with depth [depthFromRoot](VFSPath.GetAbsoluteParentPath(int).md#Atypical.VirtualFileSystem.Core.VFSPath.GetAbsoluteParentPath(int).depthFromRoot 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.GetAbsoluteParentPath\(int\)\.depthFromRoot')\. The root directory has a depth of 0\. The depth of a file is the depth of its parent directory plus one\. The depth of a directory is the depth of its parent directory plus one\. |
 | [GetHashCode\(\)](VFSPath.GetHashCode().md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.GetHashCode\(\)') | Serves as the default hash function\. |
-| [IsMatch\(Regex\)](VFSPath.IsMatch(Regex).md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.IsMatch\(System\.Text\.RegularExpressions\.Regex\)') | Indicates whether the specified regular expression finds a match in the path\. |
+| [IsMatch\(Regex\)](VFSPath.IsMatch(Regex).md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.IsMatch\(Regex\)') | Indicates whether the specified regular expression finds a match in the path\. |
 | [StartsWith\(string\)](VFSPath.StartsWith(string).md 'Atypical\.VirtualFileSystem\.Core\.VFSPath\.StartsWith\(string\)') | Determines whether the path starts with the specified path\. |

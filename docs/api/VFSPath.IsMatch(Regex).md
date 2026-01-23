@@ -6,11 +6,11 @@
 Indicates whether the specified regular expression finds a match in the path\.
 
 ```csharp
-public bool IsMatch(System.Text.RegularExpressions.Regex regex);
+public bool IsMatch(Regex regex);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.VFSPath.IsMatch(System.Text.RegularExpressions.Regex).regex'></a>
+<a name='Atypical.VirtualFileSystem.Core.VFSPath.IsMatch(Regex).regex'></a>
 
 `regex` [System\.Text\.RegularExpressions\.Regex](https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex 'System\.Text\.RegularExpressions\.Regex')
 

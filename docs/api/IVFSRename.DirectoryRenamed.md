@@ -10,4 +10,4 @@ event Action<VFSDirectoryRenamedArgs> DirectoryRenamed;
 ```
 
 #### Event Type
-[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')

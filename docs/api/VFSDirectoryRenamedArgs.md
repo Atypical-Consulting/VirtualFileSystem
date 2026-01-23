@@ -9,18 +9,19 @@ Provides data for the DirectoryRenamed event\.
 public sealed class VFSDirectoryRenamedArgs : Atypical.VirtualFileSystem.Core.VFSEventArgs
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryRenamedArgs
+Inheritance [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryRenamedArgs
 
 | Constructors | |
 | :--- | :--- |
-| [VFSDirectoryRenamedArgs\(VFSDirectoryPath, string, string\)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string).md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.VFSDirectoryRenamedArgs\(Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath, string, string\)') | Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs') class\. |
+| [VFSDirectoryRenamedArgs\(VFSDirectoryPath, string, string, VFSDirectoryPath\)](VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string,VFSDirectoryPath).md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.VFSDirectoryRenamedArgs\(Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath, string, string, Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath\)') | Initializes a new instance of the [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs') class\. |
 
 | Properties | |
 | :--- | :--- |
 | [Message](VFSDirectoryRenamedArgs.Message.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.Message') | Gets the message\. |
 | [MessageTemplate](VFSDirectoryRenamedArgs.MessageTemplate.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.MessageTemplate') | Gets the message template\. |
 | [MessageWithMarkup](VFSDirectoryRenamedArgs.MessageWithMarkup.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.MessageWithMarkup') | Gets the message with markup\. |
-| [NewName](VFSDirectoryRenamedArgs.NewName.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.NewName') | Gets the new name of the renamed file\. |
+| [NewName](VFSDirectoryRenamedArgs.NewName.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.NewName') | Gets the new name of the renamed directory\. |
+| [NewPath](VFSDirectoryRenamedArgs.NewPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.NewPath') | Gets the new path of the renamed directory\. |
 | [OldName](VFSDirectoryRenamedArgs.OldName.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.OldName') | Gets the old name of the renamed directory\. |
 | [Path](VFSDirectoryRenamedArgs.Path.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.Path') | Gets the old path of the renamed directory\. |
 | [Timestamp](VFSDirectoryRenamedArgs.Timestamp.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs\.Timestamp') | Gets the timestamp when the directory was renamed\. |

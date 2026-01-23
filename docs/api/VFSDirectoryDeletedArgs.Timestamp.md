@@ -6,7 +6,7 @@
 Gets the timestamp when the directory was deleted\.
 
 ```csharp
-public System.DateTimeOffset Timestamp { get; }
+public DateTimeOffset Timestamp { get; }
 ```
 
 #### Property Value

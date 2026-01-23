@@ -12,4 +12,4 @@ public event Action<VFSDirectoryCreatedArgs>? DirectoryCreated;
 Implements [DirectoryCreated](IVFSCreate.DirectoryCreated.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSCreate\.DirectoryCreated')
 
 #### Event Type
-[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryCreatedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')
+[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')

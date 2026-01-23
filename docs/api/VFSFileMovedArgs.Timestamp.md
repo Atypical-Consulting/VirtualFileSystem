@@ -6,7 +6,7 @@
 Gets the timestamp when the file was moved\.
 
 ```csharp
-public System.DateTimeOffset Timestamp { get; }
+public DateTimeOffset Timestamp { get; }
 ```
 
 #### Property Value

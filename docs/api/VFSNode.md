@@ -7,16 +7,16 @@ Represents a node in a virtual file system\.
 A node can be a file or a directory\.
 
 ```csharp
-public abstract record VFSNode : Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode, System.IEquatable<Atypical.VirtualFileSystem.Core.VFSNode>
+public abstract record VFSNode : Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSNode
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; VFSNode
 
 Derived  
 &#8627; [DirectoryNode](DirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.DirectoryNode')  
 &#8627; [FileNode](FileNode.md 'Atypical\.VirtualFileSystem\.Core\.FileNode')
 
-Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode'), [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
+Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')
 
 | Constructors | |
 | :--- | :--- |

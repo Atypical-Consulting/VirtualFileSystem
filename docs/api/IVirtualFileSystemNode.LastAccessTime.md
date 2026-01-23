@@ -6,7 +6,7 @@
 Gets the last access time of the node\.
 
 ```csharp
-System.DateTimeOffset LastAccessTime { get; }
+DateTimeOffset LastAccessTime { get; }
 ```
 
 #### Property Value

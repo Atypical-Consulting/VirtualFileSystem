@@ -9,7 +9,7 @@ Provides data for the FileCreated event\.
 public sealed class VFSFileCreatedArgs : Atypical.VirtualFileSystem.Core.VFSEventArgs
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSFileCreatedArgs
+Inheritance [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSFileCreatedArgs
 
 | Constructors | |
 | :--- | :--- |

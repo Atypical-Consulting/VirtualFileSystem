@@ -6,7 +6,7 @@
 Gets or sets the string comparison type for path operations\.
 
 ```csharp
-public System.StringComparison PathComparison { get; }
+public StringComparison PathComparison { get; }
 ```
 
 #### Property Value

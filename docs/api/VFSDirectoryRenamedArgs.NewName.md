@@ -3,7 +3,7 @@
 
 ## VFSDirectoryRenamedArgs\.NewName Property
 
-Gets the new name of the renamed file\.
+Gets the new name of the renamed directory\.
 
 ```csharp
 public string NewName { get; }

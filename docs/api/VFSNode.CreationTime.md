@@ -6,7 +6,7 @@
 Gets the creation time of the node\.
 
 ```csharp
-public System.DateTimeOffset CreationTime { get; }
+public DateTimeOffset CreationTime { get; }
 ```
 
 Implements [CreationTime](IVirtualFileSystemNode.CreationTime.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.CreationTime')

@@ -6,8 +6,8 @@
 Gets the values of the raw index\.
 
 ```csharp
-public System.Collections.Generic.SortedDictionary<Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode>.ValueCollection Values { get; }
+public ValueCollection<Atypical.VirtualFileSystem.Core.VFSPath,Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode> Values { get; }
 ```
 
 #### Property Value
-[System\.Collections\.Generic\.SortedDictionary\.ValueCollection&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary-2.valuecollection 'System\.Collections\.Generic\.SortedDictionary\`2\.ValueCollection')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[,](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary-2.valuecollection 'System\.Collections\.Generic\.SortedDictionary\`2\.ValueCollection')[IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary-2.valuecollection 'System\.Collections\.Generic\.SortedDictionary\`2\.ValueCollection')
+[System\.Collections\.Generic\.SortedDictionary\.ValueCollection](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary.valuecollection 'System\.Collections\.Generic\.SortedDictionary\.ValueCollection')
