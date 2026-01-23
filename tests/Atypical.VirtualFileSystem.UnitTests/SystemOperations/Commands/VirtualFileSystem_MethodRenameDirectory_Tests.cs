@@ -290,4 +290,23 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.Index[newSubdirAtC].Path.Value.Should().Be("vfs://a/b/renamed_c/subdir_c");
         _vfs.Index[newSubdirAtE].Path.Value.Should().Be("vfs://a/b/renamed_c/d/e/subdir_e");
     }
+
+    [Fact]
+    public void RenameDirectory_throws_exception_when_target_name_already_exists()
+    {
+        // Arrange
+        _vfs.CreateDirectory(new VFSDirectoryPath("dir1/dir2/dir3"));
+        _vfs.CreateDirectory(new VFSDirectoryPath("dir1/dir2/existing"));
+
+        // Act
+        Action action = () => _vfs.RenameDirectory(
+            new VFSDirectoryPath("dir1/dir2/dir3"),
+            "existing"
+        );
+
+        // Assert
+        action.Should()
+            .Throw<VirtualFileSystemException>()
+            .WithMessage("The node 'vfs://dir1/dir2/existing' already exists in the index.");
+    }
 }
