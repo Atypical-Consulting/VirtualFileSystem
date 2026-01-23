@@ -5,23 +5,23 @@
 
 | Overloads | |
 | :--- | :--- |
-| [GetValueOrDefault\(Func&lt;string,T&gt;\)](Result_T_.GetValueOrDefault.md#Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(Func_string,T_) 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.GetValueOrDefault\(Func\<string,T\>\)') | Gets the value if successful, or gets a value from the specified function\. |
+| [GetValueOrDefault\(Func&lt;string,T&gt;\)](Result_T_.GetValueOrDefault.md#Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(System.Func_string,T_) 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.GetValueOrDefault\(System\.Func\<string,T\>\)') | Gets the value if successful, or gets a value from the specified function\. |
 | [GetValueOrDefault\(T\)](Result_T_.GetValueOrDefault.md#Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(T) 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.GetValueOrDefault\(T\)') | Gets the value if successful, or returns the specified default value\. |
 
-<a name='Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(Func_string,T_)'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(System.Func_string,T_)'></a>
 
 ## Result\<T\>\.GetValueOrDefault\(Func\<string,T\>\) Method
 
 Gets the value if successful, or gets a value from the specified function\.
 
 ```csharp
-public T GetValueOrDefault(Func<string,T> defaultValueFactory);
+public T GetValueOrDefault(System.Func<string,T> defaultValueFactory);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(Func_string,T_).defaultValueFactory'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result_T_.GetValueOrDefault(System.Func_string,T_).defaultValueFactory'></a>
 
-`defaultValueFactory` [System\.Func](https://learn.microsoft.com/en-us/dotnet/api/system.func 'System\.Func')
+`defaultValueFactory` [System\.Func&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')[T](Result_T_.md#Atypical.VirtualFileSystem.Core.Result_T_.T 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.T')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')
 
 Function to create default value from error message\.
 

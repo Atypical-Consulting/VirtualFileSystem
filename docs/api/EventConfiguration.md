@@ -6,10 +6,12 @@
 Configuration for event handling\.
 
 ```csharp
-public sealed record EventConfiguration
+public sealed record EventConfiguration : System.IEquatable<Atypical.VirtualFileSystem.Core.EventConfiguration>
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; EventConfiguration
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; EventConfiguration
+
+Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[EventConfiguration](EventConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.EventConfiguration')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 
 | Properties | |
 | :--- | :--- |

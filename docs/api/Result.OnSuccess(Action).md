@@ -6,11 +6,11 @@
 Executes an action if the result is successful\.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Result OnSuccess(Action action);
+public Atypical.VirtualFileSystem.Core.Result OnSuccess(System.Action action);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Result.OnSuccess(Action).action'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result.OnSuccess(System.Action).action'></a>
 
 `action` [System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
 

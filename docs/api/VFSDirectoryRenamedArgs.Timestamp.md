@@ -6,7 +6,7 @@
 Gets the timestamp when the directory was renamed\.
 
 ```csharp
-public DateTimeOffset Timestamp { get; }
+public System.DateTimeOffset Timestamp { get; }
 ```
 
 #### Property Value

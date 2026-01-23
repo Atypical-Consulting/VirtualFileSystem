@@ -6,23 +6,23 @@
 Transforms the success value to another type\.
 
 ```csharp
-public Atypical.VirtualFileSystem.Core.Result<TNew> Map<TNew>(Func<T,TNew> mapper);
+public Atypical.VirtualFileSystem.Core.Result<TNew> Map<TNew>(System.Func<T,TNew> mapper);
 ```
 #### Type parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(Func_T,TNew_).TNew'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(System.Func_T,TNew_).TNew'></a>
 
 `TNew`
 
 The new value type\.
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(Func_T,TNew_).mapper'></a>
+<a name='Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(System.Func_T,TNew_).mapper'></a>
 
-`mapper` [System\.Func](https://learn.microsoft.com/en-us/dotnet/api/system.func 'System\.Func')
+`mapper` [System\.Func&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')[T](Result_T_.md#Atypical.VirtualFileSystem.Core.Result_T_.T 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.T')[,](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')[TNew](Result_T_.Map_TNew_(Func_T,TNew_).md#Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(System.Func_T,TNew_).TNew 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.Map\<TNew\>\(System\.Func\<T,TNew\>\)\.TNew')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.func-2 'System\.Func\`2')
 
 The transformation function\.
 
 #### Returns
-[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[TNew](Result_T_.Map_TNew_(Func_T,TNew_).md#Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(Func_T,TNew_).TNew 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.Map\<TNew\>\(Func\<T,TNew\>\)\.TNew')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
+[Atypical\.VirtualFileSystem\.Core\.Result&lt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')[TNew](Result_T_.Map_TNew_(Func_T,TNew_).md#Atypical.VirtualFileSystem.Core.Result_T_.Map_TNew_(System.Func_T,TNew_).TNew 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>\.Map\<TNew\>\(System\.Func\<T,TNew\>\)\.TNew')[&gt;](Result_T_.md 'Atypical\.VirtualFileSystem\.Core\.Result\<T\>')  
 A new result with the transformed value or the original error\.

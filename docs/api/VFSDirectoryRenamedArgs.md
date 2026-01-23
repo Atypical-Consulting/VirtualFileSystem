@@ -9,7 +9,7 @@ Provides data for the DirectoryRenamed event\.
 public sealed class VFSDirectoryRenamedArgs : Atypical.VirtualFileSystem.Core.VFSEventArgs
 ```
 
-Inheritance [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryRenamedArgs
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryRenamedArgs
 
 | Constructors | |
 | :--- | :--- |

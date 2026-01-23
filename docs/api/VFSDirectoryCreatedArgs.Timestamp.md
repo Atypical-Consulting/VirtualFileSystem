@@ -6,7 +6,7 @@
 Gets the timestamp when the directory was created\.
 
 ```csharp
-public DateTimeOffset Timestamp { get; }
+public System.DateTimeOffset Timestamp { get; }
 ```
 
 #### Property Value

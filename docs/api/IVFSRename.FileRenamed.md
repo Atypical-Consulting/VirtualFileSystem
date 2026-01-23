@@ -10,4 +10,4 @@ event Action<VFSFileRenamedArgs> FileRenamed;
 ```
 
 #### Event Type
-[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileRenamedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

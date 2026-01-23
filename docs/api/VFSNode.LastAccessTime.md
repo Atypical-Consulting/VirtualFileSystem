@@ -6,7 +6,7 @@
 Gets the last access time of the node\.
 
 ```csharp
-public DateTimeOffset LastAccessTime { get; }
+public System.DateTimeOffset LastAccessTime { get; }
 ```
 
 Implements [LastAccessTime](IVirtualFileSystemNode.LastAccessTime.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode\.LastAccessTime')

@@ -10,4 +10,4 @@ event Action<VFSDirectoryCreatedArgs>? DirectoryCreated;
 ```
 
 #### Event Type
-[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryCreatedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

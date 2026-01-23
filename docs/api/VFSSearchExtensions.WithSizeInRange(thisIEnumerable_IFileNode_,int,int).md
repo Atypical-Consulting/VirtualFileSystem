@@ -6,7 +6,7 @@
 Filters files by size range\.
 
 ```csharp
-public static System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> WithSizeInRange(this System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> files, int minSize=0, int maxSize=2147483647);
+public static System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> WithSizeInRange(this System.Collections.Generic.IEnumerable<Atypical.VirtualFileSystem.Core.Contracts.IFileNode> files, int minSize=0, int maxSize=int.MaxValue);
 ```
 #### Parameters
 

@@ -10,4 +10,4 @@ event Action<VFSFileMovedArgs> FileMoved;
 ```
 
 #### Event Type
-[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileMovedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

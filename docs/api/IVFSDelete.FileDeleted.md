@@ -10,4 +10,4 @@ event Action<VFSFileDeletedArgs> FileDeleted;
 ```
 
 #### Event Type
-[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileDeletedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

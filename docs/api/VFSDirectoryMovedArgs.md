@@ -9,7 +9,7 @@ Provides data for the DirectoryMoved event\.
 public sealed class VFSDirectoryMovedArgs : Atypical.VirtualFileSystem.Core.VFSEventArgs
 ```
 
-Inheritance [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryMovedArgs
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; [VFSEventArgs](VFSEventArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSEventArgs') &#129106; VFSDirectoryMovedArgs
 
 | Constructors | |
 | :--- | :--- |

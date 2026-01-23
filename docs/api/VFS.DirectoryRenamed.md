@@ -12,4 +12,4 @@ public event Action<VFSDirectoryRenamedArgs>? DirectoryRenamed;
 Implements [DirectoryRenamed](IVFSRename.DirectoryRenamed.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSRename\.DirectoryRenamed')
 
 #### Event Type
-[System\.Action](https://learn.microsoft.com/en-us/dotnet/api/system.action 'System\.Action')
+[System\.Action&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.action-1 'System\.Action\`1')

@@ -6,7 +6,7 @@
 Gets the paths starting with the specified directory path\.
 
 ```csharp
-public ImmutableArray<Atypical.VirtualFileSystem.Core.VFSPath> GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath directoryPath);
+public System.Collections.Immutable.ImmutableArray<Atypical.VirtualFileSystem.Core.VFSPath> GetPathsStartingWith(Atypical.VirtualFileSystem.Core.VFSDirectoryPath directoryPath);
 ```
 #### Parameters
 
@@ -15,4 +15,4 @@ public ImmutableArray<Atypical.VirtualFileSystem.Core.VFSPath> GetPathsStartingW
 `directoryPath` [VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath')
 
 #### Returns
-[System\.Collections\.Immutable\.ImmutableArray](https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray 'System\.Collections\.Immutable\.ImmutableArray')
+[System\.Collections\.Immutable\.ImmutableArray&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')[VFSPath](VFSPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSPath')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1 'System\.Collections\.Immutable\.ImmutableArray\`1')

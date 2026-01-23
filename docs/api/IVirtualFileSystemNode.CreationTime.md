@@ -6,7 +6,7 @@
 Gets the creation time of the node\.
 
 ```csharp
-DateTimeOffset CreationTime { get; }
+System.DateTimeOffset CreationTime { get; }
 ```
 
 #### Property Value

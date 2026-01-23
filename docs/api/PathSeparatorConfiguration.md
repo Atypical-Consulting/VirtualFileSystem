@@ -6,10 +6,12 @@
 Configuration for path separators\.
 
 ```csharp
-public sealed record PathSeparatorConfiguration
+public sealed record PathSeparatorConfiguration : System.IEquatable<Atypical.VirtualFileSystem.Core.PathSeparatorConfiguration>
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.IEquatable](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable 'System\.IEquatable') &#129106; PathSeparatorConfiguration
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; PathSeparatorConfiguration
+
+Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[PathSeparatorConfiguration](PathSeparatorConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.PathSeparatorConfiguration')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 
 | Properties | |
 | :--- | :--- |

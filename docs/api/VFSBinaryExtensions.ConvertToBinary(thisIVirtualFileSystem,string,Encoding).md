@@ -6,23 +6,23 @@
 Converts a text file to binary format\.
 
 ```csharp
-public static bool ConvertToBinary(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, Encoding? encoding=null);
+public static bool ConvertToBinary(this Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem vfs, string filePath, System.Text.Encoding? encoding=null);
 ```
 #### Parameters
 
-<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,Encoding).vfs'></a>
+<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,System.Text.Encoding).vfs'></a>
 
 `vfs` [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')
 
 The virtual file system\.
 
-<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,Encoding).filePath'></a>
+<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,System.Text.Encoding).filePath'></a>
 
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The file path as a string\.
 
-<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,Encoding).encoding'></a>
+<a name='Atypical.VirtualFileSystem.Core.Extensions.VFSBinaryExtensions.ConvertToBinary(thisAtypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem,string,System.Text.Encoding).encoding'></a>
 
 `encoding` [System\.Text\.Encoding](https://learn.microsoft.com/en-us/dotnet/api/system.text.encoding 'System\.Text\.Encoding')
 

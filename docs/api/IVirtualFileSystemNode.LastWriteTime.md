@@ -6,7 +6,7 @@
 Gets the last write time of the node\.
 
 ```csharp
-DateTimeOffset LastWriteTime { get; }
+System.DateTimeOffset LastWriteTime { get; }
 ```
 
 #### Property Value
