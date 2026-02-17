@@ -122,7 +122,7 @@ public sealed class ChangeHistory
                 _vfs.MoveDirectory(directoryMoved.DestinationPath, directoryMoved.SourcePath);
                 break;
             case VFSDirectoryRenamedArgs directoryRenamed:
-                _vfs.RenameDirectory(directoryRenamed.Path, directoryRenamed.OldName);
+                _vfs.RenameDirectory(directoryRenamed.NewPath, directoryRenamed.OldName);
                 break;
             case VFSFileCreatedArgs fileCreated:
                 _vfs.DeleteFile(fileCreated.Path);

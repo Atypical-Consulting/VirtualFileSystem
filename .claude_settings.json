@@ -1,0 +1,39 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  },
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read(./**)",
+      "Write(./**)",
+      "Edit(./**)",
+      "Glob(./**)",
+      "Grep(./**)",
+      "Read(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/**)",
+      "Write(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/**)",
+      "Edit(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/**)",
+      "Glob(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/**)",
+      "Grep(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/**)",
+      "Read(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/.auto-claude/specs/003-fix-rename-directory-operation/**)",
+      "Write(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/.auto-claude/specs/003-fix-rename-directory-operation/**)",
+      "Edit(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/worktrees/tasks/003-fix-rename-directory-operation/.auto-claude/specs/003-fix-rename-directory-operation/**)",
+      "Read(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/**)",
+      "Write(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/**)",
+      "Edit(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/**)",
+      "Glob(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/**)",
+      "Grep(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/**)",
+      "Bash(*)",
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "mcp__context7__resolve-library-id(*)",
+      "mcp__context7__get-library-docs(*)",
+      "mcp__graphiti-memory__search_nodes(*)",
+      "mcp__graphiti-memory__search_facts(*)",
+      "mcp__graphiti-memory__add_episode(*)",
+      "mcp__graphiti-memory__get_episodes(*)",
+      "mcp__graphiti-memory__get_entity_edge(*)"
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 #### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md 'VirtualFileSystem')
 ### [Atypical\.VirtualFileSystem\.Core](VirtualFileSystem.md#Atypical.VirtualFileSystem.Core 'Atypical\.VirtualFileSystem\.Core').[VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs')
 
-## VFSDirectoryRenamedArgs\.NewName Property
+## VFSDirectoryRenamedArgs\.NewPath Property
 
-Gets the new name of the renamed directory\.
+Gets the new path of the renamed directory\.
 
 ```csharp
-public string NewName { get; }
+public Atypical.VirtualFileSystem.Core.VFSDirectoryPath NewPath { get; }
 ```
 
 #### Property Value
-[System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
+[VFSDirectoryPath](VFSDirectoryPath.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryPath')
