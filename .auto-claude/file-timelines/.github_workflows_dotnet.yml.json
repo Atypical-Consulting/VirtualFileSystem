@@ -1,0 +1,28 @@
+{
+  "file_path": ".github/workflows/dotnet.yml",
+  "main_branch_history": [],
+  "task_views": {
+    "003-fix-rename-directory-operation": {
+      "task_id": "003-fix-rename-directory-operation",
+      "branch_point": {
+        "commit_hash": "d3bab18413d5e9da141030900e9e58760d16dd97",
+        "content": "# This workflow will build a .NET project\n# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net\n\nname: Build and Test .NET Project\n\non:\n  push:\n    branches: [ \"main\" ]\n  pull_request:\n    branches: [ \"main\" ]\n\njobs:\n  build-and-test:\n\n    runs-on: ubuntu-latest\n\n    steps:\n    - name: Checkout Source Code\n      uses: actions/checkout@v4\n      \n    - name: Setup .NET\n      uses: actions/setup-dotnet@v4\n      with:\n        dotnet-version: 9.x\n        \n    - name: Restore dependencies\n      run: dotnet restore\n      \n    - name: Build Project\n      run: dotnet build --no-restore\n      \n    - name: Run Unit Tests\n      run: dotnet test --no-build --verbosity normal --collect:\"XPlat Code Coverage\"\n      \n    - name: Upload Code Coverage\n      uses: codecov/codecov-action@v5\n",
+        "timestamp": "2026-01-23T16:17:25.409426"
+      },
+      "worktree_state": {
+        "content": "# This workflow will build a .NET project\n# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net\n\nname: Build and Test .NET Project\n\non:\n  push:\n    branches: [ \"main\" ]\n  pull_request:\n    branches: [ \"main\" ]\n\njobs:\n  build-and-test:\n\n    runs-on: ubuntu-latest\n\n    steps:\n    - name: Checkout Source Code\n      uses: actions/checkout@v6\n      \n    - name: Setup .NET\n      uses: actions/setup-dotnet@v5\n      with:\n        dotnet-version: 9.x\n        \n    - name: Restore dependencies\n      run: dotnet restore\n      \n    - name: Build Project\n      run: dotnet build --no-restore\n      \n    - name: Run Unit Tests\n      run: dotnet test --no-build --verbosity normal --collect:\"XPlat Code Coverage\"\n      \n    - name: Upload Code Coverage\n      uses: codecov/codecov-action@v5\n",
+        "last_modified": "2026-01-23T16:17:25.449231"
+      },
+      "task_intent": {
+        "title": "003-fix-rename-directory-operation",
+        "description": "# Fix Rename Directory Operation\n\nFix the known issue with directory rename operations to ensure they work correctly across all scenarios including nested directories and files.\n\n## Rationale\nThis is documented technical debt that affects the reliability of the library. The TODO in DemoCli indicates this is a known issue that needs resolution.\n\n## User Stories\n- As a .NET developer, I want to rename directories reliably so that I can test directory management code\n- As a library user, I expect rename operations to maintain consistency with nested contents\n\n## Acceptance Criteria\n- [ ] Renaming a directory updates all child paths correctly\n- [ ] DirectoryRenamed event contains correct old and new paths\n- [ ] Rename operation is correctly recorded for undo/redo\n- [ ] Renaming works for deeply nested directories\n- [ ] Renaming to an existing directory name throws appropriate exception\n",
+        "from_plan": true
+      },
+      "commits_behind_main": 1,
+      "status": "active",
+      "merged_at": null
+    }
+  },
+  "created_at": "2026-01-23T16:17:25.409458",
+  "last_updated": "2026-01-23T16:17:25.419204"
+}

@@ -1,0 +1,34 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  },
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read(./**)",
+      "Write(./**)",
+      "Edit(./**)",
+      "Glob(./**)",
+      "Grep(./**)",
+      "Read(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/**)",
+      "Write(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/**)",
+      "Edit(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/**)",
+      "Glob(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/**)",
+      "Grep(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/**)",
+      "Read(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/ideation/**)",
+      "Write(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/ideation/**)",
+      "Edit(/Users/phmatray/Repositories/github-atyp/VirtualFileSystem/.auto-claude/ideation/**)",
+      "Bash(*)",
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "mcp__context7__resolve-library-id(*)",
+      "mcp__context7__get-library-docs(*)",
+      "mcp__graphiti-memory__search_nodes(*)",
+      "mcp__graphiti-memory__search_facts(*)",
+      "mcp__graphiti-memory__add_episode(*)",
+      "mcp__graphiti-memory__get_episodes(*)",
+      "mcp__graphiti-memory__get_entity_edge(*)"
+    ]
+  }
+}

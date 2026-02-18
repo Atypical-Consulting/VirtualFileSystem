@@ -1,0 +1,119 @@
+{
+  "project_name": "VirtualFileSystem",
+  "project_type": "library",
+  "tech_stack": {
+    "primary_language": "C#",
+    "frameworks": [".NET 9.0", ".NET 10.0", "Blazor Server", "MudBlazor"],
+    "key_dependencies": [
+      "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "DefaultDocumentation",
+      "xUnit",
+      "FluentAssertions",
+      "Coverlet"
+    ]
+  },
+  "target_audience": {
+    "primary_persona": ".NET developers who need to test code that interacts with the file system",
+    "secondary_personas": [
+      "Software architects designing file system abstractions",
+      "Library authors building file management utilities",
+      "Enterprise developers building document management systems"
+    ],
+    "pain_points": [
+      "Testing file system operations requires creating actual files on disk",
+      "File system tests are slow and can leave orphaned test files",
+      "Mocking System.IO is complex and error-prone",
+      "Testing edge cases like full disk, permission errors is difficult",
+      "Integration tests with file systems are non-deterministic"
+    ],
+    "goals": [
+      "Write fast, isolated unit tests for file system code",
+      "Avoid side effects from file system tests",
+      "Simulate complex file system scenarios easily",
+      "Maintain clean test environments without cleanup code"
+    ],
+    "usage_context": "Development and testing environments for .NET applications that perform file operations"
+  },
+  "product_vision": {
+    "one_liner": "A comprehensive virtual file system implementation in modern C# for testing and simulation",
+    "problem_statement": "When writing applications in .NET, you often need to write or read files. Testing this code against the real file system is slow, error-prone, and creates side effects. VirtualFileSystem provides an in-memory alternative.",
+    "value_proposition": "Modern C# implementation with fluent API, event-driven architecture, undo/redo support, and comprehensive testing capabilities - all without touching the real file system",
+    "success_metrics": [
+      "NuGet downloads and adoption rate",
+      "GitHub stars and community engagement",
+      "Test execution speed improvements for users",
+      "Code coverage of file system operations in user projects"
+    ]
+  },
+  "current_state": {
+    "maturity": "mvp",
+    "existing_features": [
+      "Create virtual files and directories",
+      "Delete virtual files and directories",
+      "Move and rename files and directories",
+      "Read and write file content",
+      "ASCII tree visualization",
+      "Event-driven architecture (file created, deleted, etc.)",
+      "Undo/redo operations with change history",
+      "Advanced search by name, content, and regex",
+      "File system analytics and insights",
+      "TryGetFile/TryGetDirectory existence checks",
+      "Fluent API for chaining operations",
+      "Dependency injection support",
+      "Interactive Blazor demo application",
+      "Console demo application",
+      "Binary file support",
+      "GitHub repository import feature"
+    ],
+    "known_gaps": [
+      "Copy file/directory operations (planned)",
+      "Custom metadata support on files and directories (planned)",
+      "File and directory permissions (planned)",
+      "Symbolic links support (planned)",
+      "Rename directory has known issue (TODO in code)"
+    ],
+    "technical_debt": [
+      "TODO: fix rename directory issue in DemoCli",
+      "Documentation needs translation support",
+      "Some extension methods may need additional test coverage"
+    ]
+  },
+  "competitive_context": {
+    "alternatives": [
+      "System.IO.Abstractions",
+      "TestableIO",
+      "System.IO mocking with Moq/NSubstitute",
+      "Custom wrapper abstractions"
+    ],
+    "differentiators": [
+      "Modern C# 12/13 features (records, init properties, switch expressions)",
+      "Built-in undo/redo system with change history",
+      "Event-driven architecture for reactive programming",
+      "Fluent API for intuitive file system operations",
+      "Built-in tree visualization",
+      "Comprehensive demo applications (Blazor, CLI)",
+      "Advanced search capabilities built-in"
+    ],
+    "market_position": "A modern, feature-rich alternative to System.IO.Abstractions with additional capabilities like undo/redo, events, and search - targeting developers who want more than just a mockable interface",
+    "competitor_pain_points": [],
+    "competitor_analysis_available": false
+  },
+  "constraints": {
+    "technical": [
+      "Requires .NET 9.0 or higher",
+      "In-memory only - no persistence layer",
+      "String-based file content (no native stream support)",
+      "Case-insensitive path comparison"
+    ],
+    "resources": [
+      "Single primary maintainer (Philippe Matray / Atypical Consulting)",
+      "Open source with BSD-3-Clause license",
+      "Dependent on community contributions"
+    ],
+    "dependencies": [
+      "Microsoft.Extensions.DependencyInjection.Abstractions for DI support",
+      "DefaultDocumentation for API documentation generation"
+    ]
+  },
+  "created_at": "2026-01-23T12:00:00Z"
+}

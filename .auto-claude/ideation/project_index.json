@@ -1,0 +1,14 @@
+{
+  "project_root": "/Users/phmatray/Repositories/github-atyp/VirtualFileSystem",
+  "project_type": "single",
+  "services": {},
+  "infrastructure": {
+    "ci": "GitHub Actions",
+    "ci_workflows": [
+      "publish-to-nuget.yml",
+      "dotnet.yml",
+      "release-drafter.yml"
+    ]
+  },
+  "conventions": {}
+}

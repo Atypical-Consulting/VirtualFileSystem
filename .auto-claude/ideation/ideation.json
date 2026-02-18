@@ -1,0 +1,735 @@
+{
+  "id": "ideation-20260123-162900",
+  "project_id": "/Users/phmatray/Repositories/github-atyp/VirtualFileSystem",
+  "config": {
+    "enabled_types": [
+      "code_improvements",
+      "ui_ux_improvements",
+      "security_hardening",
+      "documentation_gaps",
+      "performance_optimizations",
+      "code_quality"
+    ],
+    "include_roadmap_context": true,
+    "include_kanban_context": true,
+    "max_ideas_per_type": 5
+  },
+  "ideas": [
+    {
+      "id": "ci-001",
+      "type": "code_improvements",
+      "title": "Fix Undo for Delete Operations",
+      "description": "Complete the undo functionality for file and directory delete operations. Currently, ChangeHistory.Undo() throws NotImplementedException for VFSDirectoryDeletedArgs and VFSFileDeletedArgs. The infrastructure exists - VFSFileDeletedArgs already stores Content, and VFSDirectoryDeletedArgs needs to store deleted children to enable restoration.",
+      "rationale": "The undo/redo pattern is fully implemented for Create, Move, and Rename operations. The delete undo has explicit throw statements marking it as incomplete. VFSFileDeletedArgs.Content already captures file content, showing the pattern was anticipated. VFSDirectoryDeletedArgs just needs enhancement to store child nodes.",
+      "builds_upon": [
+        "ChangeHistory undo/redo pattern",
+        "VFSEventArgs hierarchy",
+        "VFSFileDeletedArgs.Content property"
+      ],
+      "estimated_effort": "medium",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Delete/VFSDirectoryDeletedArgs.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/UndoRedo/ChangeHistoryTests.cs"
+      ],
+      "existing_patterns": [
+        "VFSFileDeletedArgs already stores Content for restoration",
+        "Redo() successfully restores deleted files/directories using stored event data",
+        "Other undo operations (Create, Move, Rename) follow symmetric patterns"
+      ],
+      "implementation_approach": "1. Enhance VFSDirectoryDeletedArgs to store a list of child nodes (files and subdirectories with their contents) at deletion time. 2. In ChangeHistory.Undo(), for VFSFileDeletedArgs: call CreateFile with stored path and content. 3. For VFSDirectoryDeletedArgs: recursively recreate directory structure and files using stored children. Follow the same pattern used in Redo() which already handles restoration logic.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-002",
+      "type": "code_improvements",
+      "title": "Add IVFSUpdate Interface for File Content Modification",
+      "description": "Add an UpdateFile operation following the existing interface segregation pattern (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename). This enables changing file content while maintaining the event-driven architecture with proper undo/redo support.",
+      "rationale": "The FileNode.Content property has a public setter but there's no VFS-level operation to modify content. This gap breaks the pattern where all state changes should go through IVirtualFileSystem operations and emit events. The interface segregation pattern (IVFSCreate, IVFSDelete, etc.) clearly shows where IVFSUpdate should fit.",
+      "builds_upon": [
+        "Interface segregation pattern (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename)",
+        "Event-driven architecture with VFSEventArgs",
+        "Fluent API returning IVirtualFileSystem"
+      ],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/VFSOperations/IVFSUpdate.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Update/VFS.Update.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Update/VFSFileUpdatedArgs.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Commands/VirtualFileSystem_MethodUpdateFile_Tests.cs (new)"
+      ],
+      "existing_patterns": [
+        "IVFSCreate with CreateFile(path, content) and FileCreated event",
+        "VFSFileCreatedArgs stores path, content, and timestamp",
+        "ChangeHistory subscribes to events and handles undo/redo",
+        "All operations return IVirtualFileSystem for fluent chaining"
+      ],
+      "implementation_approach": "1. Create IVFSUpdate interface with UpdateFile(VFSFilePath, string newContent) method and FileUpdated event. 2. Create VFSFileUpdatedArgs storing path, old content, new content, and timestamp. 3. Add VFS.Update.cs partial class implementing the operation. 4. Update IVirtualFileSystem to inherit from IVFSUpdate. 5. Add undo/redo handlers in ChangeHistory. 6. Add unit tests following the existing pattern.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-003",
+      "type": "code_improvements",
+      "title": "Add FileExists and DirectoryExists Convenience Methods",
+      "description": "Add simple boolean FileExists(VFSFilePath) and DirectoryExists(VFSDirectoryPath) methods to IVirtualFileSystem. These wrap the existing TryGet* pattern for common existence checks.",
+      "rationale": "The TryGetFile and TryGetDirectory methods exist but require out parameters for simple existence checks. The VFSIndex.ContainsKey method exists internally. Common use cases just need boolean checks without retrieving the node.",
+      "builds_upon": [
+        "TryGetFile/TryGetDirectory pattern",
+        "VFSIndex.ContainsKey method"
+      ],
+      "estimated_effort": "trivial",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.Exists.cs (new)",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodExists_Tests.cs (new)"
+      ],
+      "existing_patterns": [
+        "TryGetFile returns bool and out parameter",
+        "TryGetDirectory returns bool and out parameter",
+        "Index.ContainsKey(VFSPath) for raw existence check"
+      ],
+      "implementation_approach": "1. Add FileExists and DirectoryExists to IVirtualFileSystem interface. 2. Create VFS.Exists.cs partial class with simple implementations: FileExists calls TryGetFile and returns the bool result, DirectoryExists calls TryGetDirectory. 3. Add unit tests following the query test naming pattern.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-004",
+      "type": "code_improvements",
+      "title": "Add Glob Pattern Support to FindFiles/FindDirectories",
+      "description": "Extend the FindFiles and FindDirectories methods to accept glob patterns (e.g., '*.txt', 'docs/**/*.md') in addition to existing Regex patterns. This provides a more intuitive API for common file system search patterns.",
+      "rationale": "FindFiles/FindDirectories already support Regex patterns via the IsMatch method on VFSPath. Glob patterns are more familiar to developers and map naturally to file system operations. The query infrastructure is in place - this adds a user-friendly overload.",
+      "builds_upon": [
+        "FindFiles(Regex) and FindDirectories(Regex) pattern",
+        "VFSPath.IsMatch(Regex) method",
+        "Query method pattern in VFS.FindFiles.cs"
+      ],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.FindFiles.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.FindDirectories.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/GlobPattern.cs (new)",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodFindFiles_Tests.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodFindDirectories_Tests.cs"
+      ],
+      "existing_patterns": [
+        "FindFiles(Regex regexPattern) converts to predicate",
+        "FindFiles(Func<IFileNode, bool> predicate) as base implementation",
+        "VFSPath.IsMatch(Regex) for pattern matching"
+      ],
+      "implementation_approach": "1. Create a GlobPattern class that converts glob patterns to Regex (handle *, **, ?, character classes). 2. Add FindFiles(string globPattern) and FindDirectories(string globPattern) overloads to IVirtualFileSystem. 3. Implement by converting glob to Regex and delegating to existing Regex overloads. 4. Add unit tests for common glob patterns.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-005",
+      "type": "code_improvements",
+      "title": "Add GetSize Methods for Files and Directories",
+      "description": "Add methods to calculate file size (based on Content.Length) and directory size (sum of all contained files). The FileNode stores Content as a string, so size calculation is straightforward. Extend the node interfaces with size properties.",
+      "rationale": "FileNode.Content exists as a string property. File size is commonly needed for display and validation. The node hierarchy (IFileNode, IDirectoryNode) can be extended to expose Size properties. The Index enumeration pattern in VFSIndex supports aggregating directory contents.",
+      "builds_upon": [
+        "IFileNode.Content property",
+        "IDirectoryNode.Files and Directories collections",
+        "VFSIndex.GetPathsStartingWith for directory contents"
+      ],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IFileNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IDirectoryNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Nodes/FileNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Nodes/DirectoryNode.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/Models/FileNodeTests.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/Models/DirectoryNodeTests.cs"
+      ],
+      "existing_patterns": [
+        "IFileNode.Content returns string content",
+        "IDirectoryNode.Files returns IEnumerable<IFileNode>",
+        "DirectoryNode tracks child files and directories",
+        "VFSIndex.GetPathsStartingWith for finding all paths under a directory"
+      ],
+      "implementation_approach": "1. Add Size property to IFileNode interface: long Size => Content?.Length ?? 0 (using UTF-8 byte count for accuracy). 2. Add Size property to IDirectoryNode interface: calculates total size by summing Files sizes recursively. 3. Implement in FileNode and DirectoryNode. 4. Add unit tests verifying size calculations for empty files, files with content, and nested directories.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-001",
+      "type": "ui_ux_improvements",
+      "title": "Add Comprehensive ARIA Labels to Interactive Elements",
+      "description": "Add missing ARIA attributes to all interactive elements including toolbar buttons, dropdown menus, checkboxes, and action buttons to improve screen reader compatibility",
+      "rationale": "Currently only 5 components have ARIA attributes. Most toolbar buttons (GitHub import, settings, view toggle, history, preview panel) lack aria-label attributes. The sort dropdown in ActionBar lacks aria-expanded and aria-haspopup. This significantly impacts users relying on assistive technologies.",
+      "category": "accessibility",
+      "affected_components": [
+        "Components/Layout/TopBar.razor",
+        "Components/FileBrowser/ActionBar.razor",
+        "Components/UI/UndoRedoButtons.razor",
+        "Components/FileBrowser/FileCard.razor",
+        "Components/FileBrowser/FileRow.razor"
+      ],
+      "screenshots": [],
+      "current_state": "TopBar buttons use title attributes for tooltips but no aria-label. ActionBar sort dropdown lacks aria-expanded/aria-haspopup. View toggle buttons lack aria-pressed state. Search input relies on placeholder instead of proper label.",
+      "proposed_change": "1) Add aria-label to all icon-only buttons in TopBar.razor (GitHub import, settings, history, preview toggle, user avatar). 2) Add aria-expanded and aria-haspopup to sort dropdown button in ActionBar.razor. 3) Add aria-pressed to view toggle buttons. 4) Add visually-hidden label for search input. 5) Add aria-label to checkbox in FileCard.razor.",
+      "user_benefit": "Screen reader users will be able to understand and navigate all interactive elements, making the application accessible to users with visual impairments",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-002",
+      "type": "ui_ux_improvements",
+      "title": "Fix Error Page Design Inconsistency",
+      "description": "Update Error.razor page to use the established design system with Tailwind classes instead of undefined Bootstrap-style classes",
+      "rationale": "The Error page uses 'text-danger' class which is not defined in the Tailwind config or app.css, causing the error text to potentially render without proper styling. The page design is inconsistent with the polished CloudDrive design system.",
+      "category": "visual",
+      "affected_components": [
+        "Components/Pages/Error.razor"
+      ],
+      "screenshots": [],
+      "current_state": "Error.razor uses <h1 class=\"text-danger\"> and <h2 class=\"text-danger\"> which are Bootstrap classes not part of the project's Tailwind-based design system. The page lacks proper visual hierarchy and doesn't match the CloudDrive aesthetic.",
+      "proposed_change": "Redesign Error.razor to use the established design system: 1) Replace 'text-danger' with 'text-red-600'. 2) Wrap content in a centered card using the existing 'card' CSS class. 3) Add an error icon using the SVG pattern from Toast.razor. 4) Style the 'Development Mode' section using the existing badge and info patterns. 5) Add a 'Return Home' button using the Button component.",
+      "user_benefit": "Users encountering errors will have a consistent, professional experience that maintains trust in the application and provides clear guidance on next steps",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-003",
+      "type": "ui_ux_improvements",
+      "title": "Add Mobile-Friendly Action Alternatives",
+      "description": "Provide mobile-accessible alternatives for features currently hidden on small screens (undo/redo, sort, view toggle)",
+      "rationale": "Several important features are completely hidden on mobile with 'hidden md:flex' or 'hidden md:block': UndoRedoButtons, sort dropdown, view toggle, GitHub buttons. Mobile users lose access to core functionality like undo/redo which is essential for file operations.",
+      "category": "usability",
+      "affected_components": [
+        "Components/Layout/TopBar.razor",
+        "Components/FileBrowser/ActionBar.razor",
+        "Components/UI/UndoRedoButtons.razor"
+      ],
+      "screenshots": [],
+      "current_state": "UndoRedoButtons.razor line 5 has 'hidden md:flex' making undo/redo inaccessible on mobile. ActionBar.razor line 25 has sort dropdown 'hidden md:block'. TopBar.razor lines 44, 53, 66, 87, 102 hide GitHub buttons, view toggle, history, and preview toggle on mobile.",
+      "proposed_change": "1) Add a mobile action sheet/bottom drawer that appears via a '...' more button on mobile containing: undo, redo, sort options, view toggle, GitHub import/settings. 2) Create a new MobileActionsDrawer.razor component using the existing drawer pattern from HistoryDrawer. 3) Add a 'more actions' button visible only on mobile (lg:hidden) in TopBar that opens this drawer. 4) Include swipe gestures for undo (swipe left) and redo (swipe right) on the main content area.",
+      "user_benefit": "Mobile users will have full access to all application features, providing feature parity across devices and improving the mobile experience",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-004",
+      "type": "ui_ux_improvements",
+      "title": "Add Keyboard Navigation to Sort Dropdown",
+      "description": "Implement full keyboard navigation support for the sort dropdown menu with arrow keys, escape to close, and enter to select",
+      "rationale": "The sort dropdown in ActionBar.razor can be opened but cannot be navigated with arrow keys. Users must use Tab to move between options which is not the expected pattern for dropdown menus. This affects both keyboard-only users and power users who prefer keyboard navigation.",
+      "category": "accessibility",
+      "affected_components": [
+        "Components/FileBrowser/ActionBar.razor"
+      ],
+      "screenshots": [],
+      "current_state": "ActionBar sort dropdown (lines 24-61) uses @onclick handlers for each option but has no @onkeydown handler for keyboard navigation. The dropdown button doesn't trap focus when open and lacks arrow key support.",
+      "proposed_change": "1) Add @onkeydown handler to the sort dropdown container. 2) Track focused option index with a private field. 3) Implement: ArrowDown to move focus to next option, ArrowUp to previous, Enter/Space to select, Escape to close. 4) Add tabindex='0' to each dropdown option. 5) Visually highlight the focused option with the same hover style. 6) Auto-focus first option when dropdown opens. 7) Return focus to trigger button when dropdown closes.",
+      "user_benefit": "Keyboard users can efficiently navigate and select sort options without needing a mouse, improving accessibility and power-user workflows",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-005",
+      "type": "ui_ux_improvements",
+      "title": "Add Skeleton Loading States for File Grid/List",
+      "description": "Implement skeleton loading placeholders for the file grid and list views during initial load and navigation to improve perceived performance",
+      "rationale": "When navigating between directories or loading content, there's no visual feedback during the data fetch. Users see either nothing or a sudden content pop-in. Skeleton screens reduce perceived wait time and prevent layout shifts.",
+      "category": "performance",
+      "affected_components": [
+        "Components/FileBrowser/FileGrid.razor",
+        "Components/FileBrowser/FileList.razor",
+        "Components/FileBrowser/FileCard.razor",
+        "Components/FileBrowser/FileRow.razor"
+      ],
+      "screenshots": [],
+      "current_state": "FileGrid and FileList components render content immediately when available or show EmptyState when empty. There's no intermediate loading state showing placeholder content during navigation or initial load.",
+      "proposed_change": "1) Create SkeletonFileCard.razor with animated pulse background mimicking FileCard structure (icon area, text lines). 2) Create SkeletonFileRow.razor for list view with similar animation. 3) Add isLoading parameter to FileGrid and FileList components. 4) When isLoading is true, render 6-8 skeleton items instead of real content. 5) Use Tailwind's animate-pulse class on gray placeholder elements. 6) Add the loading state to VFSStateService with a debounce to avoid flicker on fast loads.",
+      "user_benefit": "Users experience smoother navigation with visual feedback during loading, reducing perceived wait times and preventing jarring content shifts",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "sec-001",
+      "type": "security_hardening",
+      "title": "Add Regex Timeout Protection to Prevent ReDoS Attacks",
+      "description": "Multiple methods in VFSSearchExtensions.cs and GitHubRepositoryLoader.cs create Regex objects from user-supplied glob patterns without timeout limits. Methods like ContainingPattern(), FindFilesByGlob(), FindDirectoriesByGlob(), and MatchGlobPattern() convert user input to regex patterns, which could be exploited for Regular Expression Denial of Service (ReDoS) attacks.",
+      "rationale": "Without timeout protection, specially crafted patterns can cause exponential backtracking in the regex engine, potentially hanging the application or consuming excessive CPU resources. This is a well-known denial of service vector.",
+      "category": "input_validation",
+      "severity": "medium",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSearchExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSPathExtensions.cs",
+        "src/Atypical.VirtualFileSystem.GitHub/GitHubRepositoryLoader.cs"
+      ],
+      "vulnerability": "CWE-1333: Inefficient Regular Expression Complexity",
+      "currentRisk": "Malicious glob patterns could cause CPU exhaustion when processing file searches",
+      "remediation": "Use Regex overloads that accept TimeSpan timeout parameter. In .NET, use new Regex(pattern, options, TimeSpan.FromSeconds(2)) to limit execution time. Also consider using source generators with [GeneratedRegex] where patterns are known at compile time.",
+      "references": [
+        "https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS",
+        "https://cwe.mitre.org/data/definitions/1333.html"
+      ],
+      "compliance": [
+        "OWASP",
+        "CWE"
+      ]
+    },
+    {
+      "id": "sec-002",
+      "type": "security_hardening",
+      "title": "Enable Deterministic Builds with Package Lock Files",
+      "description": "The project does not generate or use NuGet package lock files (packages.lock.json). Without lock files, the exact package versions resolved during build can vary, making builds non-deterministic and potentially vulnerable to supply chain attacks if package versions are compromised.",
+      "rationale": "Supply chain security is critical for open-source libraries. Lock files ensure that all builds use identical dependency versions, making it easier to detect if a dependency has been tampered with or maliciously updated.",
+      "category": "dependencies",
+      "severity": "medium",
+      "affectedFiles": [
+        "Directory.Build.props",
+        "src/Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj",
+        "src/Atypical.VirtualFileSystem.GitHub/Atypical.VirtualFileSystem.GitHub.csproj"
+      ],
+      "vulnerability": "CWE-1357: Reliance on Insufficiently Trustworthy Component",
+      "currentRisk": "Dependency resolution could pull in compromised package versions during CI/CD builds",
+      "remediation": "Add <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile> to Directory.Build.props. Generate lock files with 'dotnet restore --use-lock-file'. Commit packages.lock.json files to version control. In CI, use 'dotnet restore --locked-mode' to fail builds if lock file is out of date.",
+      "references": [
+        "https://devblogs.microsoft.com/nuget/enable-repeatable-package-restores-using-a-lock-file/",
+        "https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-lock-file"
+      ],
+      "compliance": [
+        "SOC2",
+        "SLSA"
+      ]
+    },
+    {
+      "id": "sec-003",
+      "type": "security_hardening",
+      "title": "Secure GitHub PAT Token Storage in Blazor Demo App",
+      "description": "The GitHubAuthService stores GitHub Personal Access Tokens (PATs) in browser localStorage using 'cloudDrive.storage.set'. localStorage is accessible to any JavaScript running on the same origin, making tokens vulnerable to XSS attacks. The token is also held in memory in plain text.",
+      "rationale": "GitHub PATs provide full access to user repositories and should be protected with defense-in-depth strategies. If an XSS vulnerability exists anywhere in the application, attackers could steal these tokens and gain unauthorized access to user GitHub accounts.",
+      "category": "secrets_management",
+      "severity": "high",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Services/GitHubAuthService.cs",
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Models/GitHubCredentials.cs"
+      ],
+      "vulnerability": "CWE-312: Cleartext Storage of Sensitive Information",
+      "currentRisk": "XSS attacks could extract GitHub PAT tokens from localStorage, enabling account takeover",
+      "remediation": "Consider using HttpOnly, Secure cookies with SameSite=Strict for token storage (requires server-side handling). Add token expiration handling. Display token scope warnings to users. Consider implementing GitHub OAuth device flow instead of PAT-based auth. At minimum, document the security implications to demo app users.",
+      "references": [
+        "https://owasp.org/www-community/HttpOnly",
+        "https://cwe.mitre.org/data/definitions/312.html",
+        "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps"
+      ],
+      "compliance": [
+        "OWASP",
+        "PCI-DSS"
+      ]
+    },
+    {
+      "id": "sec-004",
+      "type": "security_hardening",
+      "title": "Add Security Headers and Tighten AllowedHosts Configuration",
+      "description": "The Blazor demo application's appsettings.json has \"AllowedHosts\": \"*\" which accepts requests from any host. The application also lacks Content Security Policy (CSP) headers and other security headers that protect against common web attacks.",
+      "rationale": "Restrictive host filtering helps prevent DNS rebinding attacks. CSP headers provide defense-in-depth against XSS attacks, even if input validation fails. Security headers are a low-cost, high-value security measure.",
+      "category": "configuration",
+      "severity": "low",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/appsettings.json",
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Program.cs"
+      ],
+      "vulnerability": "CWE-16: Configuration",
+      "currentRisk": "Application may be susceptible to DNS rebinding attacks and lacks defense-in-depth against XSS",
+      "remediation": "Change AllowedHosts to specific domains in production. Add security headers middleware: Content-Security-Policy, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Referrer-Policy: strict-origin-when-cross-origin. Example: app.Use(async (context, next) => { context.Response.Headers.Add(\"X-Content-Type-Options\", \"nosniff\"); await next(); });",
+      "references": [
+        "https://owasp.org/www-project-secure-headers/",
+        "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/host-filtering"
+      ],
+      "compliance": [
+        "OWASP"
+      ]
+    },
+    {
+      "id": "sec-005",
+      "type": "security_hardening",
+      "title": "Strengthen Path Traversal Protection in VFS Path Handling",
+      "description": "While VFSPath constructor checks for './' relative path segments, the validation could be bypassed with certain edge cases. The path cleaning logic normalizes backslashes but doesn't explicitly validate against encoded path traversal sequences or double-encoded inputs.",
+      "rationale": "Path traversal vulnerabilities are a critical risk in any file system abstraction. Even though this is a virtual file system, consumers may use it to model real-world paths, and weak validation patterns could be copied to production code.",
+      "category": "input_validation",
+      "severity": "low",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSPath.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSFilePath.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSDirectoryPath.cs"
+      ],
+      "vulnerability": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory",
+      "currentRisk": "Edge cases in path validation might allow unexpected path resolution behavior",
+      "remediation": "Add explicit check for '..' segments (not just './'). Validate against URL-encoded traversal (e.g., %2e%2e). Add unit tests for edge cases like '/path/../secret', '//server/share', and 'path/./to/../file'. Consider using Path.GetFullPath() equivalent for path canonicalization before validation.",
+      "references": [
+        "https://owasp.org/www-community/attacks/Path_Traversal",
+        "https://cwe.mitre.org/data/definitions/22.html"
+      ],
+      "compliance": [
+        "OWASP",
+        "CWE"
+      ]
+    },
+    {
+      "id": "doc-001",
+      "type": "documentation_gaps",
+      "title": "Add Event System Usage Guide with Examples",
+      "description": "The VFS event-driven architecture (DirectoryCreated, FileDeleted, etc.) is a core feature but lacks dedicated documentation explaining how to subscribe to events, handle them, and common use cases like logging, syncing, or real-time notifications.",
+      "rationale": "Events are prominently mentioned as a feature in the README but there's no usage example showing how to subscribe and handle them. Users must read source code (IVFSCreate.cs, VFS.cs) to understand event patterns. The demo apps use events internally but there's no tutorial explaining this for library consumers.",
+      "category": "examples",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "docs/README.md",
+        "README.md",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/VFSOperations/IVFSCreate.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Events/VFSEventArgs.cs"
+      ],
+      "currentDocumentation": "README mentions 'Support for events (file created, file deleted, etc.)' but provides no code examples or explanation",
+      "proposedContent": "Create a dedicated Events Guide section with: (1) Subscribing to events example, (2) Event types reference table (VFSDirectoryCreatedArgs, VFSFileDeletedArgs, etc.), (3) Real-world use cases (logging, sync triggers), (4) Best practices for event handling",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-002",
+      "type": "documentation_gaps",
+      "title": "Document Undo/Redo System Capabilities and Limitations",
+      "description": "The ChangeHistory undo/redo system has critical limitations (cannot undo file/directory deletions - throws NotImplementedException) that are not documented. Users may expect full undo/redo support based on feature claims.",
+      "rationale": "README claims 'Support for undo/redo operations with change history' without mentioning that deleting files/directories cannot be undone. The ChangeHistory.cs implementation throws NotImplementedException for VFSDirectoryDeletedArgs and VFSFileDeletedArgs in Undo(). This is a significant limitation users need to know before designing their applications.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/IChangeHistory.cs"
+      ],
+      "currentDocumentation": "No documentation of limitations. XML comments on ChangeHistory only describe the happy path",
+      "proposedContent": "Add clear documentation: (1) What operations can be undone/redone (create, move, rename), (2) What operations CANNOT be undone (delete - with technical reason), (3) How the undo/redo stacks work, (4) Code example showing proper usage",
+      "priority": "high",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "doc-003",
+      "type": "documentation_gaps",
+      "title": "Create Extension Methods Usage Guide",
+      "description": "The library provides 8 extension classes (VFSSearchExtensions, VFSAdvancedExtensions, VFSBulkExtensions, VFSConvenienceExtensions, VFSPathExtensions, VFSResultExtensions, VFSSafeExtensions, VFSBinaryExtensions) with powerful functionality but no documentation showing how to use them together.",
+      "rationale": "Extension methods like FindFilesByGlob(), WithExtension(), ContainingText(), CopyFile(), CopyDirectory(), and CreateFileWithDirectories() significantly enhance the library but are only discoverable through XML comments. The README doesn't mention these capabilities at all. Users are likely missing out on the fluent search API and advanced operations.",
+      "category": "examples",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSearchExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSAdvancedExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSConvenienceExtensions.cs"
+      ],
+      "currentDocumentation": "Only XML doc comments exist; no narrative documentation or examples in README",
+      "proposedContent": "Add 'Advanced Features' section to README with: (1) Search capabilities (glob patterns, content search, filters), (2) Bulk operations (CreateMany, DeleteMany), (3) Safe operations with Result type, (4) Recursive directory operations (CopyDirectory, GetFilesRecursive)",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-004",
+      "type": "documentation_gaps",
+      "title": "Add Architecture Overview with Diagrams",
+      "description": "The codebase uses a sophisticated index-based architecture with interface segregation (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename) and event-driven design, but there's no visual representation or explanation of how components interact.",
+      "rationale": "New contributors and users building complex applications need to understand how VFSIndex works, how paths are resolved, and how events flow through the system. CLAUDE.md has a brief overview but lacks diagrams. The interface segregation pattern is powerful but not explained.",
+      "category": "architecture",
+      "targetAudience": "contributors",
+      "affectedAreas": [
+        "CLAUDE.md",
+        "docs/README.md",
+        "CONTRIBUTING.md",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/"
+      ],
+      "currentDocumentation": "CLAUDE.md has brief text description of 'Core Design Pattern' and 'Interface Segregation' but no diagrams or detailed data flow",
+      "proposedContent": "Create architecture documentation with: (1) Component relationship diagram showing VFS, VFSIndex, nodes hierarchy, (2) Event flow diagram, (3) Path resolution explanation with VFSPathComparer, (4) Interface segregation explanation with UML-style diagram",
+      "priority": "medium",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-005",
+      "type": "documentation_gaps",
+      "title": "Add Dependency Injection and Configuration Guide",
+      "description": "The library supports DI registration via AddVirtualFileSystem() and configuration via VFSConfiguration/EventConfiguration, but there's no documentation explaining setup patterns or configuration options.",
+      "rationale": "ServiceCollectionExtensions.AddVirtualFileSystem() registers VFS as scoped, but users don't know why scoped was chosen or how to configure events. The VFSConfiguration and EventConfiguration classes allow customization but aren't documented in README. Users building ASP.NET or Blazor apps need this guidance.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/Services/ServiceCollectionExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSConfiguration.cs"
+      ],
+      "currentDocumentation": "No documentation. AddVirtualFileSystem() is not mentioned in README at all",
+      "proposedContent": "Add 'Integration Guide' section: (1) DI registration example for ASP.NET/Blazor, (2) Configuration options (EventConfiguration.Disabled(), FileEventsOnly(), etc.), (3) Singleton vs Scoped lifetime considerations, (4) Integration with ILogger for event tracking",
+      "priority": "medium",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-001",
+      "type": "performance_optimizations",
+      "title": "Cache Depth property in VFSPath to avoid repeated parent chain traversal",
+      "description": "The `VFSPath.Depth` property computes depth by walking the parent chain from the current node to root on every access. For deeply nested paths, this is O(d) where d is depth, and the computation happens every time the property is accessed.",
+      "rationale": "The Depth property is used in GetTree() which iterates over all nodes. For a VFS with n nodes and average depth d, GetTree() becomes O(n*d) just for depth calculations. Since paths are immutable (records), the depth never changes after construction.",
+      "category": "runtime",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSPath.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.GetTree.cs"
+      ],
+      "currentMetric": "O(d) per Depth access, O(n*d) in GetTree()",
+      "expectedImprovement": "O(1) per Depth access after caching, reducing GetTree() to O(n) for depth calculations",
+      "implementation": "1. Add a private readonly int _depth field to VFSPath\n2. Compute depth once during construction by counting '/' separators (O(1) string scan)\n3. Return cached value from Depth property getter\n4. Alternative: Use lazy initialization with Lazy<int> if depth is rarely accessed",
+      "tradeoffs": "Adds 4 bytes per VFSPath instance for cached depth value. For typical use cases with thousands of paths, this is negligible.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-002",
+      "type": "performance_optimizations",
+      "title": "Optimize GetTree() from O(n\u00b2) to O(n) by pre-grouping siblings",
+      "description": "The `GetTree()` method calls `GetBrothers()` inside a loop over all nodes. `GetBrothers()` iterates through all Index.Values to find siblings, making GetTree() O(n\u00b2) complexity.",
+      "rationale": "GetTree() is called to visualize the entire file system structure. For a VFS with 1000 nodes, this results in ~1,000,000 operations. With 10,000 nodes, it's 100,000,000 operations. This becomes noticeably slow for larger file systems.",
+      "category": "runtime",
+      "impact": "high",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.GetTree.cs"
+      ],
+      "currentMetric": "O(n\u00b2) complexity in GetTree()",
+      "expectedImprovement": "O(n) complexity - linear time regardless of VFS size, ~1000x faster for 1000 nodes",
+      "implementation": "1. Pre-compute sibling groups before the loop using: `var siblingGroups = Index.Values.GroupBy(n => n.Path.Parent).ToDictionary(g => g.Key, g => g.ToList())`\n2. Pre-compute last sibling for each parent: `var lastSiblings = siblingGroups.ToDictionary(g => g.Key, g => g.Value.Last())`\n3. Replace GetBrothers() calls with dictionary lookups\n4. Use a single pass with proper indentation tracking",
+      "tradeoffs": "Uses additional memory for sibling groups dictionary during tree generation. Memory is released after method returns.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-003",
+      "type": "performance_optimizations",
+      "title": "Maintain separate file and directory collections in VFSIndex for O(1) access",
+      "description": "The `VFSIndex.Files` and `VFSIndex.Directories` properties use LINQ `OfType<>()` filtering on every access, which iterates through all values (O(n)). Additionally, `FilesCount` and `DirectoriesCount` call `Count()` on these enumerables, causing another full iteration.",
+      "rationale": "These properties are accessed frequently: in VFS.Files, VFS.Directories, FindFiles(), FindDirectories(), and ToString(). Each access triggers a full O(n) enumeration. For a VFS used in tight loops or with many queries, this adds up significantly.",
+      "category": "runtime",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSIndex.cs"
+      ],
+      "currentMetric": "O(n) per Files/Directories access, O(n) per Count access",
+      "expectedImprovement": "O(1) for count operations, O(f) or O(d) for enumeration where f=files count, d=directories count",
+      "implementation": "1. Add private HashSet<IFileNode> _files and HashSet<IDirectoryNode> _directories fields\n2. Update TryAdd() to add to appropriate collection based on node type\n3. Update Remove() to remove from appropriate collection\n4. Replace Files/Directories properties to return read-only views of these collections\n5. Replace FilesCount/DirectoriesCount to return _files.Count / _directories.Count",
+      "tradeoffs": "Increases memory footprint by storing additional references to nodes. Updates become slightly slower due to maintaining two additional collections.",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "perf-004",
+      "type": "performance_optimizations",
+      "title": "Avoid creating ImmutableList on every UndoStack/RedoStack property access",
+      "description": "The `ChangeHistory.UndoStack` and `RedoStack` properties create a new `ImmutableList<VFSEventArgs>` by calling `AddRange()` on every property access. This copies all elements O(n) each time the property is read.",
+      "rationale": "Users may frequently check the undo/redo stack state (e.g., to enable/disable UI buttons). Each access allocates a new immutable collection and copies all elements. For a history with 1000 operations, each access allocates and copies 1000 items.",
+      "category": "memory",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs"
+      ],
+      "currentMetric": "O(n) allocation and copy per property access",
+      "expectedImprovement": "O(1) property access with no allocations when using read-only wrapper",
+      "implementation": "1. Change return type from IReadOnlyCollection<VFSEventArgs> to maintain a cached read-only view\n2. Option A: Return _undoStack.ToArray() and cache it (invalidate cache on push/pop)\n3. Option B: Use IReadOnlyCollection<VFSEventArgs> implemented by Stack<T> itself: `=> _undoStack;`\n4. Option C: Create a custom StackReadOnlyWrapper<T> that wraps the stack without copying\n5. If immutability is required for thread safety, consider using System.Collections.Immutable.ImmutableStack<T>",
+      "tradeoffs": "Option B exposes the internal Stack as IReadOnlyCollection (safe but could be cast back). Option C requires a new wrapper class. Choosing ImmutableStack changes internal implementation.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-005",
+      "type": "performance_optimizations",
+      "title": "Replace RawIndex property's ToImmutableSortedDictionary() with lazy caching",
+      "description": "The `VFSIndex.RawIndex` property calls `ToImmutableSortedDictionary()` on every access, which creates a complete copy of the underlying dictionary. This is O(n log n) for n entries.",
+      "rationale": "While RawIndex may not be accessed frequently, any access triggers expensive copying. If used in scenarios like serialization, debugging, or when comparing VFS states, this can cause significant performance degradation.",
+      "category": "memory",
+      "impact": "low",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSIndex.cs"
+      ],
+      "currentMetric": "O(n log n) allocation and copy per RawIndex access",
+      "expectedImprovement": "O(1) for repeated accesses when cached, with invalidation on mutations",
+      "implementation": "1. Add private ImmutableSortedDictionary<VFSPath, IVirtualFileSystemNode>? _cachedRawIndex field\n2. In RawIndex getter, return cached value if not null, otherwise compute and cache\n3. Invalidate cache (set to null) in TryAdd(), Remove(), and indexer setters\n4. Alternative: Return a read-only wrapper around the SortedDictionary instead of immutable copy",
+      "tradeoffs": "Cache invalidation adds slight overhead to mutation operations. Cached immutable dictionary holds additional memory until next mutation. Read-only wrapper alternative doesn't provide true immutability guarantees.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "cq-001",
+      "type": "code_quality",
+      "title": "Rename FileInfo record to avoid conflict with System.IO.FileInfo",
+      "description": "The VFSBinaryExtensions.cs file defines a `FileInfo` record class (lines 324-353) that conflicts with `System.IO.FileInfo`. This naming collision can cause confusion, especially when both namespaces are imported, and doesn't follow the project's VFS-prefixed naming convention.",
+      "rationale": "Naming conflicts with BCL types create confusion for developers, can cause compile-time ambiguity errors, and require explicit namespace qualification. Using consistent VFS-prefixed names improves discoverability and reduces cognitive load.",
+      "category": "naming",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBinaryExtensions.cs"
+      ],
+      "currentState": "A `FileInfo` record is defined at the bottom of VFSBinaryExtensions.cs, conflicting with System.IO.FileInfo",
+      "proposedChange": "Rename the record from `FileInfo` to `VFSFileInfo` to follow the project's naming convention and avoid System.IO conflicts",
+      "codeExample": "// Current:\npublic sealed record FileInfo(\n    string Path,\n    bool IsBinary,\n    long SizeInBytes,\n    DateTime CreationTime,\n    DateTime LastWriteTime\n);\n\n// Proposed:\npublic sealed record VFSFileInfo(\n    string Path,\n    bool IsBinary,\n    long SizeInBytes,\n    DateTime CreationTime,\n    DateTime LastWriteTime\n);",
+      "bestPractice": "Avoid naming classes with the same names as BCL types to prevent ambiguity and improve code clarity",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": true,
+      "prerequisites": [
+        "Update all usages of FileInfo to VFSFileInfo"
+      ]
+    },
+    {
+      "id": "cq-002",
+      "type": "code_quality",
+      "title": "Consolidate duplicate exception-handling patterns across extension classes",
+      "description": "Three extension classes implement nearly identical exception-handling patterns with different return types: VFSSafeExtensions.cs (Try* methods returning bool), VFSResultExtensions.cs (*Result methods returning Result<T>), and VFSBulkExtensions.cs (Try* bulk operations). Each implements the same try-catch-return pattern around core VFS operations.",
+      "rationale": "Code duplication leads to maintenance burden when business logic changes. If validation logic needs updating, it must be changed in multiple places. A unified approach would reduce bugs from inconsistent implementations and simplify testing.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSafeExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSResultExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs"
+      ],
+      "currentState": "Three classes each implement their own try-catch wrappers around VFS operations with ~40 similar method implementations totaling ~980 lines",
+      "proposedChange": "Create a common internal executor class that handles exception wrapping, then have each extension class delegate to it. For example: VFSOperationExecutor.Execute(() => vfs.CreateFile(path, content)) which returns a Result, and adapters convert to bool or other types as needed.",
+      "codeExample": "// Current (repeated in 3 files with variations):\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch { return false; }\n}\n\n// Proposed common executor:\ninternal static class VFSOperationExecutor\n{\n    public static Result Execute(Action operation)\n    {\n        try { operation(); return Result.Success(); }\n        catch (Exception ex) { return Result.Failure(ex); }\n    }\n}\n\n// Extension methods delegate:\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n    => VFSOperationExecutor.Execute(() => vfs.CreateFile(filePath, content)).IsSuccess;",
+      "bestPractice": "DRY principle - Extract common patterns into reusable components",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 150,
+        "testCoverage": null
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": [
+        "Ensure all existing tests pass before refactoring"
+      ]
+    },
+    {
+      "id": "cq-003",
+      "type": "code_quality",
+      "title": "Add static code analyzers to enforce code quality standards",
+      "description": "The project has a comprehensive .editorconfig but doesn't include any Roslyn analyzers in its build process. Adding analyzers like StyleCop.Analyzers, Roslynator, or Microsoft.CodeAnalysis.NetAnalyzers would automatically enforce coding standards and catch potential issues during build.",
+      "rationale": "Static analysis tools catch issues early in development, enforce consistency across contributors, and can identify security vulnerabilities, performance issues, and common bugs that manual code review might miss. The project already has formatting rules in .editorconfig that could be enforced.",
+      "category": "linting",
+      "severity": "suggestion",
+      "affectedFiles": [
+        "Directory.Build.props",
+        "src/Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj"
+      ],
+      "currentState": "No Roslyn analyzers are configured. Only DefaultDocumentation is included as a build-time package.",
+      "proposedChange": "Add Microsoft.CodeAnalysis.NetAnalyzers and optionally Roslynator.Analyzers to Directory.Build.props to enable static analysis across all projects in the solution.",
+      "codeExample": "<!-- Directory.Build.props -->\n<ItemGroup>\n  <PackageReference Include=\"Microsoft.CodeAnalysis.NetAnalyzers\" Version=\"9.0.0\">\n    <PrivateAssets>all</PrivateAssets>\n    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>\n  </PackageReference>\n  <PackageReference Include=\"Roslynator.Analyzers\" Version=\"4.12.0\">\n    <PrivateAssets>all</PrivateAssets>\n    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>\n  </PackageReference>\n</ItemGroup>\n\n<PropertyGroup>\n  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>\n  <EnableNETAnalyzers>true</EnableNETAnalyzers>\n  <AnalysisLevel>latest-recommended</AnalysisLevel>\n</PropertyGroup>",
+      "bestPractice": "Use static analysis tools to automate code quality enforcement and catch issues early",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": [
+        "May need to fix warnings flagged by new analyzers"
+      ]
+    },
+    {
+      "id": "cq-004",
+      "type": "code_quality",
+      "title": "Replace silent exception swallowing with logging or error tracking",
+      "description": "Multiple extension methods in VFSSafeExtensions.cs, VFSBinaryExtensions.cs, and VFSBulkExtensions.cs use empty catch blocks that silently swallow exceptions (e.g., `catch { return false; }`). This makes debugging difficult as important error information is lost.",
+      "rationale": "Silent exception swallowing hides the root cause of failures, making debugging nearly impossible. Even in 'safe' methods that intentionally don't throw, capturing error information is valuable for diagnostics and logging.",
+      "category": "code_smells",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSafeExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBinaryExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs"
+      ],
+      "currentState": "Over 20 methods use empty catch blocks like `catch { return false; }` or `catch { return null; }`",
+      "proposedChange": "Add optional exception callback parameter to Try* methods, or use Result pattern consistently to preserve error information. Consider adding ILogger support for diagnostic scenarios.",
+      "codeExample": "// Current:\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch { return false; } // Error information lost\n}\n\n// Proposed Option 1 - Exception callback:\npublic static bool TryCreateFile(\n    this IVirtualFileSystem vfs, \n    string filePath, \n    string? content = null,\n    Action<Exception>? onError = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch (Exception ex) { onError?.Invoke(ex); return false; }\n}\n\n// Proposed Option 2 - Return tuple:\npublic static (bool Success, Exception? Error) TryCreateFile(\n    this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return (true, null); }\n    catch (Exception ex) { return (false, ex); }\n}",
+      "bestPractice": "Never silently swallow exceptions - always log, report, or preserve error information for diagnostics",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-005",
+      "type": "code_quality",
+      "title": "Separate BinaryFileNode interface into dedicated file following project conventions",
+      "description": "The IBinaryFileNode interface is defined at the bottom of BinaryFile.cs (lines 141-184) rather than in its own file under the Contracts folder, breaking the project's established pattern where all interfaces are separate files in the Contracts directory.",
+      "rationale": "Consistent file organization makes the codebase easier to navigate and maintain. The project has established a convention of placing interfaces in the Contracts folder (IDirectoryNode.cs, IFileNode.cs, IRootNode.cs, etc.), and IBinaryFileNode should follow this pattern.",
+      "category": "structure",
+      "severity": "suggestion",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Models/BinaryFile.cs",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/"
+      ],
+      "currentState": "IBinaryFileNode interface is defined in BinaryFile.cs alongside the BinaryFileNode record (183 lines total in one file)",
+      "proposedChange": "Extract IBinaryFileNode interface to src/Atypical.VirtualFileSystem.Core/Contracts/IBinaryFileNode.cs to match the pattern of IFileNode.cs, IDirectoryNode.cs, and other interfaces",
+      "codeExample": "// New file: src/Atypical.VirtualFileSystem.Core/Contracts/IBinaryFileNode.cs\nnamespace Atypical.VirtualFileSystem.Core;\n\n/// <summary>\n/// Interface for binary file nodes that support both text and binary content.\n/// </summary>\npublic interface IBinaryFileNode : IFileNode\n{\n    byte[] BinaryContent { get; set; }\n    long SizeInBytes { get; }\n    bool IsBinary { get; }\n    void SetTextContent(string textContent);\n    void SetBinaryContent(byte[] binaryContent);\n    void SetContentFromBase64(string base64Content);\n    string ToBase64String();\n}",
+      "bestPractice": "Follow established project conventions for file organization - one interface per file in designated Contracts folder",
+      "metrics": {
+        "lineCount": 183,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    }
+  ],
+  "project_context": {
+    "existing_features": [],
+    "tech_stack": [],
+    "target_audience": ".NET developers who need to test code that interacts with the file system",
+    "planned_features": [
+      "File and Directory Permissions",
+      "File System Snapshots",
+      "Persistence and Serialization",
+      "File System Watch/Observer Pattern",
+      "Comprehensive Documentation Portal",
+      "Stream-Based Content API",
+      "Symbolic Links Support",
+      "Performance Benchmarks and Optimization",
+      "Exception Simulation System",
+      "System.IO.Abstractions Compatibility Layer",
+      "Cross-Platform Path Simulation",
+      "Copy File and Directory Operations",
+      "Fix Rename Directory Operation",
+      "File Version History",
+      "Custom Metadata Support",
+      "Recursive Directory Operations"
+    ]
+  },
+  "summary": {
+    "total_ideas": 30,
+    "by_type": {
+      "code_improvements": 5,
+      "ui_ux_improvements": 5,
+      "security_hardening": 5,
+      "documentation_gaps": 5,
+      "performance_optimizations": 5,
+      "code_quality": 5
+    },
+    "by_status": {
+      "draft": 30
+    }
+  },
+  "generated_at": "2026-01-23T16:29:00.343081",
+  "updated_at": "2026-01-23T16:29:00.343091"
+}

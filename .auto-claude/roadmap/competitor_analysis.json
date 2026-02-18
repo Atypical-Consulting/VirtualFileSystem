@@ -1,0 +1,383 @@
+{
+  "project_context": {
+    "project_name": "VirtualFileSystem",
+    "project_type": "library",
+    "target_audience": ".NET developers who need to test code that interacts with the file system"
+  },
+  "competitors": [
+    {
+      "id": "competitor-1",
+      "name": "System.IO.Abstractions (TestableIO)",
+      "url": "https://github.com/TestableIO/System.IO.Abstractions",
+      "description": "The most popular .NET file system abstraction library with 83.8M NuGet downloads. Provides IFileSystem interfaces wrapping System.IO for testable code with MockFileSystem for unit testing.",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "pain-1-1",
+          "description": "Maintainer capacity issues - single maintainer who no longer uses it in day job, minimal time for issues/PRs/features",
+          "source": "GitHub Issue #781 - Maintainers wanted",
+          "severity": "high",
+          "frequency": "Ongoing concern discussed in project documentation",
+          "opportunity": "VirtualFileSystem is actively maintained with clear development focus"
+        },
+        {
+          "id": "pain-1-2",
+          "description": "Active development has shifted to Testably.Abstractions - significant new functionality unlikely to be added to TestableIO",
+          "source": "GitHub repository documentation and release notes",
+          "severity": "medium",
+          "frequency": "Stated policy in documentation",
+          "opportunity": "VirtualFileSystem offers continued feature development including advanced search, events, undo/redo"
+        },
+        {
+          "id": "pain-1-3",
+          "description": "MockFileSystem cross-platform path handling issues - Path.Combine produces invalid paths when testing Linux paths on Windows",
+          "source": "GitHub Issue #778 - Add option to specify operating system in MockFileSystem",
+          "severity": "medium",
+          "frequency": "Common issue for cross-platform development teams",
+          "opportunity": "VirtualFileSystem uses case-insensitive path comparison and consistent path handling"
+        },
+        {
+          "id": "pain-1-4",
+          "description": "MockFileSystem temp path leaks to actual file system - no way to configure virtual temp path",
+          "source": "GitHub Issue #588 - MockFileSystem sets Temp path to actual file system",
+          "severity": "medium",
+          "frequency": "Mentioned in multiple issues",
+          "opportunity": "VirtualFileSystem is fully isolated in-memory with no file system leakage"
+        },
+        {
+          "id": "pain-1-5",
+          "description": "IFileSystem package conflicts when using multiple TestableIO packages together",
+          "source": "GitHub Issue #81 - Conflict with IFileSystem after upgrading",
+          "severity": "high",
+          "frequency": "Recent issue (Nov 2024) affecting upgrades",
+          "opportunity": "VirtualFileSystem has self-contained interfaces with no package conflicts"
+        },
+        {
+          "id": "pain-1-6",
+          "description": "Cannot easily simulate read-only filesystems or out-of-space conditions without manual mocking",
+          "source": "GitHub Issue #71 - TestingHelpers.MockFileSystem level flags to simulate ReadOnly/Out-Of-Space",
+          "severity": "medium",
+          "frequency": "Requested feature for testing edge cases",
+          "opportunity": "VirtualFileSystem event-driven architecture allows intercepting operations for custom simulation"
+        },
+        {
+          "id": "pain-1-7",
+          "description": "MockFileSystem behavioral differences from real FileSystem in edge cases (hidden files, file move to self)",
+          "source": "GitHub Issues #92, #181",
+          "severity": "low",
+          "frequency": "Edge cases discovered periodically",
+          "opportunity": "VirtualFileSystem comprehensive test suite ensures consistent behavior"
+        }
+      ],
+      "strengths": [
+        "Massive adoption (83.8M downloads) with large community",
+        "API-compatible with System.IO making migration straightforward",
+        "Established ecosystem with analyzers, extensions, and helpers",
+        "Used by Microsoft PowerToys and other major projects",
+        "Targets multiple .NET versions (Framework 4.7.2, Standard 2.0, .NET 6+)"
+      ],
+      "market_position": "The de-facto standard for file system abstraction in .NET, but in maintenance mode with development focus shifting to Testably.Abstractions"
+    },
+    {
+      "id": "competitor-2",
+      "name": "Testably.Abstractions",
+      "url": "https://github.com/Testably/Testably.Abstractions",
+      "description": "Feature-complete testing helper using IFileSystem interfaces with additional abstractions for time and randomness. Runs tests against both mocked and real file systems to ensure behavioral parity.",
+      "relevance": "high",
+      "pain_points": [
+        {
+          "id": "pain-2-1",
+          "description": "Learning curve when migrating from TestableIO due to different API patterns",
+          "source": "GitHub documentation and migration notes",
+          "severity": "low",
+          "frequency": "One-time migration cost for existing users",
+          "opportunity": "VirtualFileSystem fluent API is intuitive and well-documented"
+        },
+        {
+          "id": "pain-2-2",
+          "description": "IFileSystem conflict when using with TestableIO packages - cannot mix the two",
+          "source": "GitHub Issue #81 - TestableIO/System.IO.Abstractions.Extensions",
+          "severity": "high",
+          "frequency": "Common during migration periods",
+          "opportunity": "VirtualFileSystem has standalone interfaces, no conflicts with other libraries"
+        },
+        {
+          "id": "pain-2-3",
+          "description": "Requires separate companion packages for Zip files (Compression) and Access Control Lists",
+          "source": "GitHub repository documentation",
+          "severity": "low",
+          "frequency": "Additional package management overhead",
+          "opportunity": "VirtualFileSystem is a single comprehensive package"
+        },
+        {
+          "id": "pain-2-4",
+          "description": "No built-in undo/redo functionality for file system operations",
+          "source": "Feature comparison with VirtualFileSystem",
+          "severity": "medium",
+          "frequency": "Not mentioned as available feature",
+          "opportunity": "VirtualFileSystem provides built-in undo/redo with change history"
+        }
+      ],
+      "strengths": [
+        "Active development with new features being added",
+        "Cross-platform simulation (Linux, MacOS, Windows)",
+        "Additional abstractions for ITimeSystem and IRandomSystem",
+        "Test suite validates against both mock and real file systems",
+        "Advanced features like FileSystemWatcher and SafeFileHandles support"
+      ],
+      "market_position": "The actively developed successor to TestableIO, focusing on advanced testing scenarios and cross-platform support"
+    },
+    {
+      "id": "competitor-3",
+      "name": "Zio",
+      "url": "https://github.com/xoofx/zio",
+      "description": "Cross-platform abstract/virtual filesystem framework with many built-in filesystems including MemoryFileSystem, PhysicalFileSystem, ZipArchiveFileSystem, and more. Supports atomic operations and per-node locking.",
+      "relevance": "medium",
+      "pain_points": [
+        {
+          "id": "pain-3-1",
+          "description": "ZipArchiveFileSystem has limited feature support - no creation/access times, limited FileShare support",
+          "source": "GitHub documentation changelog.md",
+          "severity": "medium",
+          "frequency": "Documented limitation for specific use cases",
+          "opportunity": "VirtualFileSystem focuses on comprehensive in-memory testing without zip complexity"
+        },
+        {
+          "id": "pain-3-2",
+          "description": "Breaking changes in recent versions affecting thread safety of MountFileSystem/AggregateFileSystem",
+          "source": "GitHub changelog.md breaking changes",
+          "severity": "medium",
+          "frequency": "Version upgrade concern",
+          "opportunity": "VirtualFileSystem maintains stable API with careful versioning"
+        },
+        {
+          "id": "pain-3-3",
+          "description": "Sporadic unauthorized access errors when copying files cross-filesystem",
+          "source": "GitHub changelog bug fixes",
+          "severity": "medium",
+          "frequency": "Historical bug that was fixed",
+          "opportunity": "VirtualFileSystem operations are fully in-memory with no access conflicts"
+        },
+        {
+          "id": "pain-3-4",
+          "description": "No built-in event system for file system changes",
+          "source": "Feature comparison with VirtualFileSystem",
+          "severity": "medium",
+          "frequency": "Missing feature for reactive programming patterns",
+          "opportunity": "VirtualFileSystem provides comprehensive event-driven architecture"
+        }
+      ],
+      "strengths": [
+        "Multiple filesystem types (Memory, Physical, Zip, Mount, Aggregate)",
+        "Atomic filesystem operations support",
+        "Per-node locking for efficient concurrency",
+        "100% API compatibility goal with System.IO",
+        "Active maintenance (905 GitHub stars)"
+      ],
+      "market_position": "Versatile filesystem abstraction framework suited for applications needing multiple filesystem types and mounting capabilities"
+    },
+    {
+      "id": "competitor-4",
+      "name": "TestableFileSystem",
+      "url": "https://github.com/bkoelman/TestableFileSystem",
+      "description": "In-memory NTFS-based file system for .NET unit tests with API practically identical to System.IO. Archived project with minimal adoption.",
+      "relevance": "low",
+      "pain_points": [
+        {
+          "id": "pain-4-1",
+          "description": "Project is archived and no longer maintained - last update May 2019",
+          "source": "GitHub repository status and NuGet package dates",
+          "severity": "high",
+          "frequency": "Permanent state",
+          "opportunity": "VirtualFileSystem is actively maintained with ongoing development"
+        },
+        {
+          "id": "pain-4-2",
+          "description": "Very low adoption with under 1,400 total downloads across all packages",
+          "source": "NuGet Gallery download statistics",
+          "severity": "high",
+          "frequency": "Reflects lack of community support",
+          "opportunity": "VirtualFileSystem aims for strong community engagement and documentation"
+        },
+        {
+          "id": "pain-4-3",
+          "description": "NTFS-specific implementation limits cross-platform testing scenarios",
+          "source": "Project documentation describing NTFS-based system",
+          "severity": "medium",
+          "frequency": "Architectural limitation",
+          "opportunity": "VirtualFileSystem uses platform-agnostic path handling"
+        }
+      ],
+      "strengths": [
+        "Blazingly fast in-memory implementation",
+        "API practically identical to System.IO",
+        "Detailed NTFS behavior simulation"
+      ],
+      "market_position": "Abandoned niche project that was superseded by more actively maintained alternatives"
+    },
+    {
+      "id": "competitor-5",
+      "name": "Custom Moq/NSubstitute Wrappers",
+      "url": "https://docs.microsoft.com/en-us/dotnet/core/testing/",
+      "description": "Using mocking frameworks like Moq or NSubstitute to manually mock System.IO interfaces. Common approach for simple scenarios without dedicated libraries.",
+      "relevance": "medium",
+      "pain_points": [
+        {
+          "id": "pain-5-1",
+          "description": "Requires extensive boilerplate to mock every file system call needed for tests",
+          "source": "Code Maze - How to Mock the File System for Unit Testing in .NET",
+          "severity": "high",
+          "frequency": "Every test setup requires manual mocking",
+          "opportunity": "VirtualFileSystem provides complete implementation out of the box"
+        },
+        {
+          "id": "pain-5-2",
+          "description": "Cannot mock static methods in System.IO directly - requires abstraction layer",
+          "source": "Code Maze tutorial on mocking limitations",
+          "severity": "high",
+          "frequency": "Fundamental C# limitation",
+          "opportunity": "VirtualFileSystem is designed as injectable interface from the start"
+        },
+        {
+          "id": "pain-5-3",
+          "description": "Retrofitting into existing codebases requires rewriting substantial amounts of code",
+          "source": "Don't Code Tired blog and Stack Overflow discussions",
+          "severity": "high",
+          "frequency": "Major barrier for legacy codebases",
+          "opportunity": "VirtualFileSystem fluent API makes adoption straightforward for new code"
+        },
+        {
+          "id": "pain-5-4",
+          "description": "Tests become fragile and tightly coupled to implementation details",
+          "source": "DEV Community - Testing File System Code article",
+          "severity": "medium",
+          "frequency": "Common testing anti-pattern",
+          "opportunity": "VirtualFileSystem allows testing against realistic file system behavior"
+        }
+      ],
+      "strengths": [
+        "No additional dependencies if already using mocking framework",
+        "Full control over mock behavior",
+        "Works with existing DI patterns"
+      ],
+      "market_position": "Low-ceremony approach for simple mocking needs, but quickly becomes unmaintainable for complex file system interactions"
+    }
+  ],
+  "market_gaps": [
+    {
+      "id": "gap-1",
+      "description": "No competitor provides built-in undo/redo functionality for file system operations",
+      "affected_competitors": ["competitor-1", "competitor-2", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "high",
+      "suggested_feature": "Maintain and expand undo/redo with change history - unique differentiator for VirtualFileSystem"
+    },
+    {
+      "id": "gap-2",
+      "description": "Event-driven architecture for reactive file system programming is not a standard feature",
+      "affected_competitors": ["competitor-1", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "high",
+      "suggested_feature": "Promote event-driven architecture as key differentiator for real-time UI updates and logging"
+    },
+    {
+      "id": "gap-3",
+      "description": "Built-in advanced search capabilities (regex, content search) are missing from competitors",
+      "affected_competitors": ["competitor-1", "competitor-2", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Expand search functionality with more filters and performance optimizations"
+    },
+    {
+      "id": "gap-4",
+      "description": "Modern C# features (C# 12/13) not consistently used across competitor libraries",
+      "affected_competitors": ["competitor-1", "competitor-4"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Continue leveraging latest C# features for cleaner APIs and better performance"
+    },
+    {
+      "id": "gap-5",
+      "description": "Fluent API for chaining file system operations is rare in the ecosystem",
+      "affected_competitors": ["competitor-1", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Expand fluent API patterns and document as primary usage pattern"
+    },
+    {
+      "id": "gap-6",
+      "description": "Interactive demo applications to showcase library capabilities are uncommon",
+      "affected_competitors": ["competitor-1", "competitor-2", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "low",
+      "suggested_feature": "Use Blazor and CLI demos as marketing tools and learning resources"
+    },
+    {
+      "id": "gap-7",
+      "description": "TreeView visualization of file system structure is not a standard feature",
+      "affected_competitors": ["competitor-1", "competitor-2", "competitor-3", "competitor-4", "competitor-5"],
+      "opportunity_size": "medium",
+      "suggested_feature": "Enhance ASCII tree visualization and add programmatic tree traversal APIs"
+    }
+  ],
+  "insights_summary": {
+    "top_pain_points": [
+      "System.IO.Abstractions is in maintenance mode with minimal new feature development",
+      "Package conflicts between TestableIO and Testably cause upgrade headaches",
+      "Cross-platform path handling inconsistencies cause testing failures",
+      "MockFileSystem leaks to real file system in some scenarios (temp paths)",
+      "Manual mocking with Moq/NSubstitute requires extensive boilerplate",
+      "No built-in support for undo/redo or event-driven patterns in competitors",
+      "Retrofitting file system abstractions into existing code is difficult"
+    ],
+    "differentiator_opportunities": [
+      "Undo/redo with change history is unique to VirtualFileSystem - emphasize this in marketing",
+      "Event-driven architecture enables reactive UI patterns and logging",
+      "Fluent API provides excellent developer experience for chaining operations",
+      "Modern C# implementation (records, init properties, switch expressions) appeals to developers wanting clean code",
+      "Built-in search, analytics, and visualization features go beyond basic mocking",
+      "Interactive demo applications demonstrate capabilities better than documentation alone",
+      "Single maintainer is also a risk for competitors - community building matters"
+    ],
+    "market_trends": [
+      "Active development is shifting from TestableIO to Testably.Abstractions",
+      "Cross-platform testing (Linux/Mac/Windows) is increasingly important",
+      "Developers want more than just mockable interfaces - they want realistic simulation",
+      "Event-driven and reactive programming patterns are growing in .NET",
+      "Modern C# features (records, nullability) are expected in new libraries",
+      "Developer experience (fluent APIs, good documentation) matters for adoption",
+      "Single-maintainer projects carry sustainability risks"
+    ]
+  },
+  "research_metadata": {
+    "search_queries_used": [
+      "System.IO.Abstractions .NET alternatives 2024 2025",
+      "System.IO.Abstractions problems issues complaints reddit",
+      ".NET mock file system testing best practices 2024",
+      "System.IO.Abstractions github issues site:github.com",
+      "Testably.Abstractions .NET file system mock alternative",
+      "\"mock file system\" .NET limitations \"doesn't work\" OR \"problem\" OR \"difficult\"",
+      "System.IO.Abstractions MockFileSystem limitations site:stackoverflow.com",
+      "\"file system testing\" .NET \"undo\" OR \"redo\" OR \"event\" virtualization",
+      ".NET file system abstraction NuGet download statistics comparison",
+      "Testably.Abstractions github issues limitations",
+      "\"in-memory file system\" .NET csharp library alternative",
+      "Zio .NET virtual file system github issues problems",
+      "TestableFileSystem .NET bkoelman issues complaints"
+    ],
+    "sources_consulted": [
+      "GitHub - TestableIO/System.IO.Abstractions repository and issues",
+      "GitHub - Testably/Testably.Abstractions repository",
+      "GitHub - xoofx/zio repository and changelog",
+      "GitHub - bkoelman/TestableFileSystem repository",
+      "NuGet Gallery - download statistics for file system packages",
+      "Code Maze - How to Mock the File System for Unit Testing in .NET",
+      "Don't Code Tired blog - Unit Testing C# File Access Code",
+      "Medium - Abstract the File System in .NET with TestableIO",
+      "DEV Community - Testing File System Code: Mocking, Stubbing, and Test Patterns",
+      "ServiceStack Virtual File System documentation"
+    ],
+    "limitations": [
+      "Reddit-specific search results were limited due to Systeme.io name collision",
+      "Stack Overflow direct searches did not return System.IO.Abstractions specific results",
+      "User sentiment analysis based on GitHub issues may not represent silent majority",
+      "Download statistics reflect historical accumulation, not current preference trends",
+      "Some pain points are inferred from feature requests rather than explicit complaints"
+    ]
+  },
+  "created_at": "2026-01-23T12:30:00Z"
+}

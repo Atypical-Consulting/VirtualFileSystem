@@ -1,0 +1,8 @@
+{
+  "feature": "Recursive Directory Operations",
+  "description": "# Recursive Directory Operations\n\nEnhance directory operations to support recursive delete, recursive size calculation, and recursive file enumeration with configurable depth limits.\n\n## Rationale\nReal file systems support recursive operations. This addresses common testing scenarios where developers need to work with entire directory trees.\n\n## User Stories\n- As a .NET developer, I want to recursively enumerate files in the virtual file system so that I can test file search functionality\n- As a test author, I want to recursively delete directories so that I can clean up test data efficiently\n\n## Acceptance Criteria\n- [ ] DeleteDirectory supports recursive deletion option\n- [ ] GetDirectorySize returns total size of all files recursively\n- [ ] EnumerateFiles supports SearchOption.AllDirectories equivalent\n- [ ] Depth limit parameter prevents excessive recursion\n- [ ] All recursive operations emit appropriate events\n",
+  "created_at": "2026-01-23T15:17:07.150Z",
+  "updated_at": "2026-01-23T15:17:07.150Z",
+  "status": "pending",
+  "phases": []
+}

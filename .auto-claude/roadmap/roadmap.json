@@ -1,0 +1,620 @@
+{
+  "id": "roadmap-2026-01-23",
+  "project_name": "VirtualFileSystem",
+  "version": "1.0",
+  "vision": "A comprehensive virtual file system implementation in modern C# for testing and simulation",
+  "target_audience": {
+    "primary": ".NET developers who need to test code that interacts with the file system",
+    "secondary": [
+      "Software architects designing file system abstractions",
+      "Library authors building file management utilities",
+      "Enterprise developers building document management systems"
+    ]
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "Foundation & Bug Fixes",
+      "description": "Address critical issues and complete core CRUD operations to establish a solid foundation",
+      "order": 1,
+      "status": "planned",
+      "features": [
+        "feature-1",
+        "feature-2",
+        "feature-3"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-1-1",
+          "title": "Complete CRUD Operations",
+          "description": "All basic file system operations (create, read, update, delete, move, copy, rename) are fully functional",
+          "features": [
+            "feature-1",
+            "feature-2"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-1-2",
+          "title": "Bug-Free Core",
+          "description": "All known bugs in core operations are fixed with comprehensive test coverage",
+          "features": [
+            "feature-3"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "Testing Simulation",
+      "description": "Enable advanced testing scenarios by simulating edge cases and error conditions",
+      "order": 2,
+      "status": "planned",
+      "features": [
+        "feature-4",
+        "feature-5",
+        "feature-6"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-2-1",
+          "title": "Edge Case Simulation",
+          "description": "Users can simulate disk full, permission errors, and other edge cases without manual mocking",
+          "features": [
+            "feature-4",
+            "feature-5"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-2-2",
+          "title": "Cross-Platform Testing",
+          "description": "Users can test cross-platform file system behavior from any development machine",
+          "features": [
+            "feature-6"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "Advanced Features",
+      "description": "Extend file system capabilities with metadata, streaming, and snapshots",
+      "order": 3,
+      "status": "planned",
+      "features": [
+        "feature-7",
+        "feature-8",
+        "feature-9",
+        "feature-10"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-3-1",
+          "title": "Rich File System",
+          "description": "Files support custom metadata, streaming content, and symbolic links",
+          "features": [
+            "feature-7",
+            "feature-8",
+            "feature-9"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-3-2",
+          "title": "State Management",
+          "description": "File system snapshots enable point-in-time restore and state comparison",
+          "features": [
+            "feature-10"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "name": "Migration & Ecosystem",
+      "description": "Enable easy migration from competitors and enhance ecosystem integration",
+      "order": 4,
+      "status": "planned",
+      "features": [
+        "feature-11",
+        "feature-12",
+        "feature-13"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-4-1",
+          "title": "Migration Path",
+          "description": "Developers can migrate from System.IO.Abstractions with minimal code changes",
+          "features": [
+            "feature-11"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-4-2",
+          "title": "Ecosystem Ready",
+          "description": "Comprehensive documentation and benchmarks demonstrate value proposition",
+          "features": [
+            "feature-12",
+            "feature-13"
+          ],
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "name": "Innovation & Growth",
+      "description": "Introduce innovative features that differentiate from competitors",
+      "order": 5,
+      "status": "planned",
+      "features": [
+        "feature-14",
+        "feature-15",
+        "feature-16"
+      ],
+      "milestones": [
+        {
+          "id": "milestone-5-1",
+          "title": "Advanced Event System",
+          "description": "Enhanced reactive patterns with file watching and event filtering",
+          "features": [
+            "feature-14"
+          ],
+          "status": "planned"
+        },
+        {
+          "id": "milestone-5-2",
+          "title": "Persistence & Versioning",
+          "description": "Optional persistence layer and file versioning for advanced use cases",
+          "features": [
+            "feature-15",
+            "feature-16"
+          ],
+          "status": "planned"
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "feature-1",
+      "title": "Copy File and Directory Operations",
+      "description": "Implement copy operations for files and directories, including recursive directory copy with proper event emission and undo/redo support.",
+      "rationale": "Copy is a fundamental file system operation that's currently missing. Users need this to simulate realistic file management workflows. This is a known gap in the current implementation.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [],
+      "status": "planned",
+      "acceptance_criteria": [
+        "CopyFile creates a new file with identical content at the target path",
+        "CopyDirectory recursively copies all files and subdirectories",
+        "FileCopied and DirectoryCopied events are emitted",
+        "Copy operations are added to change history for undo/redo",
+        "Attempting to copy to an existing path throws appropriate exception",
+        "Fluent API supports chaining copy operations"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to copy files and directories in the virtual file system so that I can test code that performs backup or duplication operations",
+        "As a test author, I want copy operations to emit events so that I can verify my application reacts correctly to file copies"
+      ],
+      "linked_spec_id": "001-copy-file-and-directory-operations",
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-2",
+      "title": "Recursive Directory Operations",
+      "description": "Enhance directory operations to support recursive delete, recursive size calculation, and recursive file enumeration with configurable depth limits.",
+      "rationale": "Real file systems support recursive operations. This addresses common testing scenarios where developers need to work with entire directory trees.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [],
+      "status": "planned",
+      "acceptance_criteria": [
+        "DeleteDirectory supports recursive deletion option",
+        "GetDirectorySize returns total size of all files recursively",
+        "EnumerateFiles supports SearchOption.AllDirectories equivalent",
+        "Depth limit parameter prevents excessive recursion",
+        "All recursive operations emit appropriate events"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to recursively enumerate files in the virtual file system so that I can test file search functionality",
+        "As a test author, I want to recursively delete directories so that I can clean up test data efficiently"
+      ],
+      "linked_spec_id": "002-recursive-directory-operations",
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-3",
+      "title": "Fix Rename Directory Operation",
+      "description": "Fix the known issue with directory rename operations to ensure they work correctly across all scenarios including nested directories and files.",
+      "rationale": "This is documented technical debt that affects the reliability of the library. The TODO in DemoCli indicates this is a known issue that needs resolution.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-1",
+      "dependencies": [],
+      "status": "planned",
+      "acceptance_criteria": [
+        "Renaming a directory updates all child paths correctly",
+        "DirectoryRenamed event contains correct old and new paths",
+        "Rename operation is correctly recorded for undo/redo",
+        "Renaming works for deeply nested directories",
+        "Renaming to an existing directory name throws appropriate exception"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to rename directories reliably so that I can test directory management code",
+        "As a library user, I expect rename operations to maintain consistency with nested contents"
+      ],
+      "linked_spec_id": "003-fix-rename-directory-operation",
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-4",
+      "title": "Exception Simulation System",
+      "description": "Provide a way to configure the virtual file system to throw specific exceptions (disk full, permission denied, path too long, etc.) for specific operations or paths.",
+      "rationale": "Testing error handling is critical but difficult with real file systems. System.IO.Abstractions users have requested this (pain-1-6). This addresses the user pain point of 'testing edge cases like full disk, permission errors is difficult'.",
+      "priority": "must",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-1"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "ConfigureException method allows specifying path patterns and exception types",
+        "Supports common exceptions: IOException (disk full), UnauthorizedAccessException, PathTooLongException",
+        "Exception triggers can be set per-operation (read, write, delete, etc.)",
+        "Exception simulation can be enabled/disabled dynamically",
+        "Triggered exceptions include realistic error messages"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to simulate disk full errors so that I can test my application's error handling",
+        "As a test author, I want to trigger permission denied on specific paths so that I can test access control logic"
+      ],
+      "competitor_insight_ids": [
+        "pain-1-6"
+      ]
+    },
+    {
+      "id": "feature-5",
+      "title": "File and Directory Permissions",
+      "description": "Add a permissions system to files and directories that can simulate read-only, write-only, or no-access scenarios for testing security and access control code.",
+      "rationale": "This is a known gap in the current implementation. Simulating permissions is essential for testing security-conscious applications. Addresses competitor pain point about simulating read-only filesystems (pain-1-6).",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [
+        "feature-4"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Files and directories have configurable permission flags (read, write, execute)",
+        "Operations respect permission settings and throw appropriate exceptions",
+        "Permissions can be changed dynamically via SetPermissions method",
+        "PermissionChanged event is emitted when permissions are modified",
+        "Default permissions are all-access for backward compatibility"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to set files as read-only so that I can test my application's handling of protected files",
+        "As a security tester, I want to simulate permission denied scenarios so that I can verify access control works correctly"
+      ],
+      "competitor_insight_ids": [
+        "pain-1-6"
+      ]
+    },
+    {
+      "id": "feature-6",
+      "title": "Cross-Platform Path Simulation",
+      "description": "Allow the virtual file system to simulate different operating system path conventions (Windows, Linux, macOS) regardless of the host platform.",
+      "rationale": "Cross-platform path handling is a major pain point for System.IO.Abstractions users (pain-1-3). This addresses the user pain point of 'integration tests with file systems are non-deterministic' across platforms.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-2",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "VFS constructor accepts PathConvention enum (Windows, Linux, macOS, Auto)",
+        "Path separators are correctly applied based on convention",
+        "Windows convention supports drive letters (C:, D:)",
+        "Linux/macOS conventions use forward slashes and no drive letters",
+        "Path comparison respects platform case sensitivity rules"
+      ],
+      "user_stories": [
+        "As a .NET developer on Windows, I want to test Linux path handling so that I can ensure my cross-platform app works correctly",
+        "As a CI/CD engineer, I want consistent path behavior across build agents so that tests don't fail due to platform differences"
+      ],
+      "competitor_insight_ids": [
+        "pain-1-3"
+      ]
+    },
+    {
+      "id": "feature-7",
+      "title": "Custom Metadata Support",
+      "description": "Allow arbitrary key-value metadata to be attached to files and directories, with metadata included in events and change history.",
+      "rationale": "This is a known gap in the current implementation. Custom metadata enables testing document management systems and applications that track file properties beyond basic attributes.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "SetMetadata(key, value) method on files and directories",
+        "GetMetadata(key) retrieves metadata values",
+        "MetadataChanged event is emitted on metadata changes",
+        "Metadata is preserved during copy/move operations",
+        "Metadata changes are included in undo/redo history"
+      ],
+      "user_stories": [
+        "As a document management developer, I want to attach custom properties to files so that I can test my tagging system",
+        "As a test author, I want to track file creation timestamps as metadata so that I can verify time-based operations"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-8",
+      "title": "Stream-Based Content API",
+      "description": "Provide Stream-based read/write APIs alongside the existing string-based content, enabling testing of applications that work with binary files or large files.",
+      "rationale": "The current string-based content is a technical constraint. Stream support enables testing applications that handle images, documents, or other binary content without conversion overhead.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "OpenRead() returns a readable Stream for file content",
+        "OpenWrite() returns a writable Stream for file content",
+        "Streams support seeking and position tracking",
+        "Binary content is stored efficiently in memory",
+        "Existing string-based API continues to work"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to use Stream APIs so that I can test code that processes binary files",
+        "As a file handling developer, I want to test large file operations without loading everything into strings"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-9",
+      "title": "Symbolic Links Support",
+      "description": "Implement symbolic link creation and resolution, including detection of circular links and proper handling during directory traversal.",
+      "rationale": "This is a known gap in the current implementation. Symbolic links are common in Linux/macOS environments and are increasingly used on Windows.",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-3",
+      "dependencies": [
+        "feature-6"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "CreateSymbolicLink creates a link pointing to a target path",
+        "IsSymbolicLink property identifies symbolic links",
+        "ResolveLink returns the actual target path",
+        "Circular link detection prevents infinite loops",
+        "SymbolicLinkCreated event is emitted"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to create symbolic links so that I can test applications that use symlinks for configuration",
+        "As a Linux developer, I want to test symlink resolution so that I can ensure my app handles links correctly"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-10",
+      "title": "File System Snapshots",
+      "description": "Enable creating named snapshots of the entire file system state and restoring to any snapshot, extending the undo/redo capability for complex test scenarios.",
+      "rationale": "This extends the unique undo/redo differentiator (gap-1). Snapshots enable test isolation and state management that no competitor offers.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "high",
+      "phase_id": "phase-3",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "CreateSnapshot(name) saves complete file system state",
+        "RestoreSnapshot(name) returns file system to saved state",
+        "ListSnapshots() returns all available snapshots",
+        "DeleteSnapshot(name) removes a saved snapshot",
+        "Snapshots include all files, directories, and metadata"
+      ],
+      "user_stories": [
+        "As a test author, I want to create a baseline snapshot so that I can reset the file system between test cases",
+        "As a .NET developer, I want to compare snapshots so that I can verify what files changed during an operation"
+      ],
+      "competitor_insight_ids": [
+        "pain-2-4"
+      ]
+    },
+    {
+      "id": "feature-11",
+      "title": "System.IO.Abstractions Compatibility Layer",
+      "description": "Provide adapter classes that implement System.IO.Abstractions IFileSystem interface, enabling drop-in replacement for existing codebases.",
+      "rationale": "System.IO.Abstractions has 83.8M downloads. Making migration easy addresses pain point about retrofitting abstractions (pain-5-3) and enables adoption by existing projects.",
+      "priority": "should",
+      "complexity": "high",
+      "impact": "high",
+      "phase_id": "phase-4",
+      "dependencies": [
+        "feature-1",
+        "feature-8"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "IFileSystem adapter wraps VirtualFileSystem",
+        "IFile, IDirectory, IPath, IFileInfo, IDirectoryInfo interfaces implemented",
+        "All adapter methods delegate to VirtualFileSystem equivalents",
+        "Adapter is optional separate package to avoid dependency",
+        "Migration guide documents differences and limitations"
+      ],
+      "user_stories": [
+        "As a developer with existing System.IO.Abstractions code, I want to swap in VirtualFileSystem so that I can benefit from events and undo/redo",
+        "As a library maintainer, I want to provide both APIs so that users can choose their preferred interface"
+      ],
+      "competitor_insight_ids": [
+        "pain-5-3",
+        "pain-1-2"
+      ]
+    },
+    {
+      "id": "feature-12",
+      "title": "Comprehensive Documentation Portal",
+      "description": "Create a documentation website with tutorials, API reference, examples, and migration guides to improve adoption and reduce learning curve.",
+      "rationale": "Developer experience and documentation matter for adoption (market trends). Good documentation addresses the learning curve pain point (pain-2-1) and helps differentiate from competitors.",
+      "priority": "should",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-4",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "Getting started guide with 5-minute quickstart",
+        "Complete API reference with examples for each method",
+        "Migration guide from System.IO.Abstractions",
+        "Tutorial series covering common testing patterns",
+        "Searchable documentation hosted on GitHub Pages"
+      ],
+      "user_stories": [
+        "As a new user, I want clear documentation so that I can start using VirtualFileSystem quickly",
+        "As a developer migrating from competitors, I want a migration guide so that I can convert my existing tests"
+      ],
+      "competitor_insight_ids": [
+        "pain-2-1"
+      ]
+    },
+    {
+      "id": "feature-13",
+      "title": "Performance Benchmarks and Optimization",
+      "description": "Create comprehensive benchmarks comparing VirtualFileSystem performance against competitors and optimize hot paths for best-in-class performance.",
+      "rationale": "Performance is a key value proposition for in-memory file systems. Benchmarks provide evidence for marketing claims and identify optimization opportunities.",
+      "priority": "could",
+      "complexity": "medium",
+      "impact": "medium",
+      "phase_id": "phase-4",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "BenchmarkDotNet suite covers all major operations",
+        "Comparison benchmarks against System.IO.Abstractions MockFileSystem",
+        "Memory usage benchmarks for large file system scenarios",
+        "Performance regression tests in CI/CD pipeline",
+        "Published benchmark results in documentation"
+      ],
+      "user_stories": [
+        "As a performance-conscious developer, I want benchmark data so that I can justify choosing VirtualFileSystem",
+        "As a maintainer, I want performance tests so that I can prevent regressions"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-14",
+      "title": "File System Watch/Observer Pattern",
+      "description": "Implement a FileSystemWatcher-compatible observer that can monitor specific paths for changes and notify subscribers, enhancing the event-driven architecture.",
+      "rationale": "This extends the unique event-driven architecture differentiator (gap-2). Real FileSystemWatcher testing is problematic; a virtual equivalent enables testing reactive file-watching code.",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "medium",
+      "phase_id": "phase-5",
+      "dependencies": [],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "CreateWatcher(path, filter) returns an IVirtualFileSystemWatcher",
+        "Watcher emits Changed, Created, Deleted, Renamed events",
+        "Filter supports glob patterns like *.txt",
+        "IncludeSubdirectories option monitors recursively",
+        "Watcher can be paused and resumed"
+      ],
+      "user_stories": [
+        "As a .NET developer, I want to test FileSystemWatcher-based code so that I can verify my app responds to file changes",
+        "As a reactive developer, I want to observe file changes so that I can test reactive pipelines"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-15",
+      "title": "Persistence and Serialization",
+      "description": "Enable saving the virtual file system to disk and loading it back, supporting test data setup from fixtures and sharing test file systems.",
+      "rationale": "While VirtualFileSystem is in-memory only, serialization enables sharing test fixtures between projects and persisting complex test setups for reuse.",
+      "priority": "could",
+      "complexity": "medium",
+      "impact": "low",
+      "phase_id": "phase-5",
+      "dependencies": [
+        "feature-7"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "SerializeToJson() exports complete file system state",
+        "DeserializeFromJson() recreates file system from JSON",
+        "SerializeToZip() creates a portable archive",
+        "Serialization includes content, metadata, and structure",
+        "Format is documented for manual editing if needed"
+      ],
+      "user_stories": [
+        "As a test author, I want to serialize test fixtures so that I can share them across projects",
+        "As a CI engineer, I want to load test data from files so that I can set up complex test scenarios"
+      ],
+      "competitor_insight_ids": []
+    },
+    {
+      "id": "feature-16",
+      "title": "File Version History",
+      "description": "Automatically track all versions of file content with timestamps, enabling retrieval of historical versions and diff comparison.",
+      "rationale": "This extends the unique undo/redo differentiator to file-level granularity. Version history enables testing backup/restore features and document management systems.",
+      "priority": "could",
+      "complexity": "high",
+      "impact": "low",
+      "phase_id": "phase-5",
+      "dependencies": [
+        "feature-10"
+      ],
+      "status": "under_review",
+      "acceptance_criteria": [
+        "GetVersionHistory(filePath) returns list of versions",
+        "GetVersion(filePath, versionId) retrieves specific version content",
+        "CompareVersions returns diff between two versions",
+        "Version history has configurable retention limit",
+        "History can be cleared to free memory"
+      ],
+      "user_stories": [
+        "As a document management developer, I want to retrieve file versions so that I can test version history features",
+        "As a test author, I want to compare file states so that I can verify incremental changes"
+      ],
+      "competitor_insight_ids": [
+        "pain-2-4"
+      ]
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-01-23T12:45:00Z",
+    "updated_at": "2026-01-23T15:21:15.947Z",
+    "generated_by": "roadmap_features agent",
+    "prioritization_framework": "MoSCoW",
+    "competitor_analysis_used": true,
+    "competitor_insights_referenced": [
+      "pain-1-2",
+      "pain-1-3",
+      "pain-1-6",
+      "pain-2-1",
+      "pain-2-4",
+      "pain-5-3"
+    ],
+    "market_gaps_addressed": [
+      "gap-1",
+      "gap-2"
+    ]
+  }
+}
