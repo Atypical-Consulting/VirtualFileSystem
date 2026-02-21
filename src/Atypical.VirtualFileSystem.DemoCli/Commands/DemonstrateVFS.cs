@@ -62,9 +62,8 @@ public class DemonstrateVFS : Command
             () => vfs.MoveDirectory(new VFSDirectoryPath("/heroes"), new VFSDirectoryPath("/avengers")));
 
         // Rename a directory
-        // TODO: fix rename directory
-        // ProcessStep(vfs, "RENAME DIRECTORY",
-        //     () => vfs.RenameDirectory(new VFSDirectoryPath("/avengers"), new VFSDirectoryPath("/heroes")));
+        ProcessStep(vfs, "RENAME DIRECTORY",
+            () => vfs.RenameDirectory(new VFSDirectoryPath("/avengers"), "heroes"));
 
         return 0;
     }
