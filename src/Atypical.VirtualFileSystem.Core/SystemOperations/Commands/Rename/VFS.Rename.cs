@@ -40,7 +40,7 @@ public partial record VFS
 
         // Validate that the destination path doesn't already exist
         if (Index.ContainsKey(newPath))
-            ThrowVirtualNodeAlreadyExists(newPath);
+            ThrowVirtualNodeAlreadyExists(Index[newPath]);
 
         var updatedDirectoryNode = directoryNode.UpdatePath(newPath);
 
