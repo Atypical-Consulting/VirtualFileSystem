@@ -20,11 +20,11 @@ public class VirtualFileSystem_MethodFindFiles_Tests : VirtualFileSystemTestsBas
         var files = vfs.Files.ToList();
 
         // Assert
-        files.Should().NotBeEmpty();
-        files.Should().HaveCount(3);
-        files.Should().Contain(f => f.Path.Value == "vfs://dir1/file1.txt");
-        files.Should().Contain(f => f.Path.Value == "vfs://dir2/file2.txt");
-        files.Should().Contain(f => f.Path.Value == "vfs://dir3/file3.txt");
+        files.ShouldNotBeEmpty();
+        files.Count.ShouldBe(3);
+        files.ShouldContain(f => f.Path.Value == "vfs://dir1/file1.txt");
+        files.ShouldContain(f => f.Path.Value == "vfs://dir2/file2.txt");
+        files.ShouldContain(f => f.Path.Value == "vfs://dir3/file3.txt");
     }
 
     [Fact]
@@ -42,15 +42,15 @@ public class VirtualFileSystem_MethodFindFiles_Tests : VirtualFileSystemTestsBas
         var files = vfs.FindFiles(regex).ToList();
 
         // Assert
-        files.Should().NotBeNull();
-        files.Count.Should().Be(3);
-        files[0].Name.Should().Be("file1.txt");
-        files[0].Content.Should().Be("content1");
-        files[1].Name.Should().Be("file2.txt");
-        files[1].Content.Should().Be("content2");
-        files[2].Name.Should().Be("file3.txt");
-        files[2].Content.Should().Be("content3");
+        files.ShouldNotBeNull();
+        files.Count.ShouldBe(3);
+        files[0].Name.ShouldBe("file1.txt");
+        files[0].Content.ShouldBe("content1");
+        files[1].Name.ShouldBe("file2.txt");
+        files[1].Content.ShouldBe("content2");
+        files[2].Name.ShouldBe("file3.txt");
+        files[2].Content.ShouldBe("content3");
         // Assert Index
-        vfs.Index.Count.Should().Be(3); // file1, file2, file3
+        vfs.Index.Count.ShouldBe(3); // file1, file2, file3
     }
 }

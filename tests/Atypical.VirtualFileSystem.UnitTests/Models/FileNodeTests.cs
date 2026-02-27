@@ -20,10 +20,10 @@ public static class FileNodeTests
             var fileNode = new FileNode(path);
 
             // Assert
-            fileNode.Path.Should().Be(path);
-            fileNode.Content.Should().BeEmpty();
-            fileNode.IsDirectory.Should().BeFalse();
-            fileNode.IsFile.Should().BeTrue();
+            fileNode.Path.ShouldBe(path);
+            fileNode.Content.ShouldBeEmpty();
+            fileNode.IsDirectory.ShouldBeFalse();
+            fileNode.IsFile.ShouldBeTrue();
         }
     }
 
@@ -40,7 +40,7 @@ public static class FileNodeTests
             var result = fileNode.ToString();
 
             // Assert
-            result.Should().Be(path.ToString());
+            result.ShouldBe(path.ToString());
         }
     }
 }

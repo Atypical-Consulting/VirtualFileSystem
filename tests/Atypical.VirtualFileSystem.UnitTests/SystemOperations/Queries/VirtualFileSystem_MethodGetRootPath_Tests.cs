@@ -12,7 +12,7 @@ public class VirtualFileSystem_MethodGetRootPath_Tests : VirtualFileSystemTestsB
         var rootPath = vfs.RootPath;
 
         // Assert
-        rootPath.Should().NotBeNull();
-        rootPath.Value.Should().Be("vfs://");
+        rootPath.ShouldNotBeNull();
+        rootPath.Value.ShouldBe("vfs://");
     }
 }

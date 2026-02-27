@@ -20,8 +20,8 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://new_dir"));
+        _vfs.Index.Count.ShouldBe(indexLength);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://new_dir"));
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
 
         // Assert
         _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].Path.Value
-            .Should().Be("vfs://new_dir");
+            .ShouldBe("vfs://new_dir");
     }
 
     [Fact]
@@ -51,9 +51,9 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         Act();
 
         // Assert
-        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].CreationTime.Should().Be(creationTime);
-        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastAccessTime.Should().Be(lastAccessTime);
-        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].CreationTime.ShouldBe(creationTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastAccessTime.ShouldBe(lastAccessTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://new_dir")].LastWriteTime.ShouldNotBe(lastWriteTime);
     }
 
     [Fact]
@@ -63,9 +63,8 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         var action = Act;
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
     }
 
     [Fact]
@@ -78,15 +77,15 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         _vfs.DirectoryMoved += args => 
         {
             eventRaised = true;
-            args.SourcePath.Should().Be(_directoryPath);
-            args.DestinationPath.Should().Be(_newDirectoryPath);
+            args.SourcePath.ShouldBe(_directoryPath);
+            args.DestinationPath.ShouldBe(_newDirectoryPath);
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -102,8 +101,8 @@ public class VirtualFileSystem_MethodMoveDirectory_Tests : VirtualFileSystemTest
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(4);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(4);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

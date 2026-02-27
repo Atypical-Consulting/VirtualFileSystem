@@ -15,14 +15,14 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.IsEmpty.Should().BeFalse();
-        _vfs.Index.RawIndex.Should().NotBeEmpty();
-        _vfs.Index.RawIndex.Should().HaveCount(1);
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        _vfs.Root.IsDirectory.Should().BeTrue();
-        _vfs.Root.IsFile.Should().BeFalse();
-        _vfs.Root.Path.Value.Should().Be("vfs://");
-        _vfs.Root.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(1));
+        _vfs.IsEmpty.ShouldBeFalse();
+        _vfs.Index.RawIndex.ShouldNotBeEmpty();
+        _vfs.Index.RawIndex.Count.ShouldBe(1);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Root.IsDirectory.ShouldBeTrue();
+        _vfs.Root.IsFile.ShouldBeFalse();
+        _vfs.Root.Path.Value.ShouldBe("vfs://");
+        (DateTime.Now - _vfs.Root.CreationTime).ShouldBeLessThan(TimeSpan.FromHours(1));
     }
 
     [Fact]
@@ -35,19 +35,19 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.Index.RawIndex.Should().NotBeEmpty();
-        _vfs.Index.RawIndex.Should().HaveCount(3); // dir1 + dir2 + dir3
-        _vfs.Index.RawIndex.Should().ContainKey(_directoryPath);
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.ShouldNotBeEmpty();
+        _vfs.Index.RawIndex.Count.ShouldBe(3); // dir1 + dir2 + dir3
+        _vfs.Index.RawIndex.ShouldContainKey(_directoryPath);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
             
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].Should().BeAssignableTo<IDirectoryNode>();
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2")].Should().BeAssignableTo<IDirectoryNode>();
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].Should().BeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].ShouldBeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2")].ShouldBeAssignableTo<IDirectoryNode>();
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/dir3")].ShouldBeAssignableTo<IDirectoryNode>();
             
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().NotBeEmpty();
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1")].As<IDirectoryNode>().Directories.Should().HaveCount(1);
+        ((IDirectoryNode)_vfs.Index[new VFSDirectoryPath("vfs://dir1")]).Directories.ShouldNotBeEmpty();
+        ((IDirectoryNode)_vfs.Index[new VFSDirectoryPath("vfs://dir1")]).Directories.Count().ShouldBe(1);
     }
 
     [Fact]
@@ -60,9 +60,8 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         var action = Act;
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage($"The node 'vfs://dir1' already exists in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The node 'vfs://dir1' already exists in the index.");
     }
         
     [Fact]
@@ -72,9 +71,8 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         Action action = () => _vfs.CreateDirectory(new VFSRootPath());
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("Cannot create the root directory.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("Cannot create the root directory.");
     }
 
     [Fact]
@@ -86,14 +84,14 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         _vfs.DirectoryCreated += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(_directoryPath);
+            args.Path.ShouldBe(_directoryPath);
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -106,8 +104,8 @@ public class VirtualFileSystem_MethodCreateDirectory_Tests : VirtualFileSystemTe
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(1);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

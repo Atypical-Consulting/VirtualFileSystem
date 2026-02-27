@@ -14,9 +14,9 @@ public class VirtualFileSystem_MethodTryGetFile_Tests : VirtualFileSystemTestsBa
         var result = vfs.TryGetFile(filePath, out var file);
 
         // Assert
-        result.Should().BeTrue();
-        file.Should().NotBeNull();
-        file!.Path.Value.Should().Be("vfs://dir1/dir2/dir3/file.txt");
+        result.ShouldBeTrue();
+        file.ShouldNotBeNull();
+        file!.Path.Value.ShouldBe("vfs://dir1/dir2/dir3/file.txt");
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public class VirtualFileSystem_MethodTryGetFile_Tests : VirtualFileSystemTestsBa
         var result = vfs.TryGetFile(filePath, out var file);
 
         // Assert
-        result.Should().BeFalse();
-        file.Should().BeNull();
+        result.ShouldBeFalse();
+        file.ShouldBeNull();
     }
 }

@@ -15,7 +15,7 @@ public static class VFSPathTests
             bool result = path1.Equals(path2);
             
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
         
         [Fact]
@@ -29,7 +29,7 @@ public static class VFSPathTests
             bool result = path1.Equals(path2);
             
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
         
         [Fact]
@@ -43,7 +43,7 @@ public static class VFSPathTests
             bool result = path1.Equals(path2);
             
             // Assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
     }
 }

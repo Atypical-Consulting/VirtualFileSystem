@@ -30,8 +30,8 @@ public static class VFSFilePathTests
             var vfsPath = new VFSFilePath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
         
         [Fact]
@@ -45,8 +45,8 @@ public static class VFSFilePathTests
             var vfsPath = new VFSFilePath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
         
         [Fact]
@@ -62,9 +62,8 @@ public static class VFSFilePathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("An empty path is invalid.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("An empty path is invalid.");
         }
 
         [Fact]
@@ -80,9 +79,8 @@ public static class VFSFilePathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("An empty path is invalid.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("An empty path is invalid.");
         }
     }
 
@@ -99,7 +97,7 @@ public static class VFSFilePathTests
             var vfsPath = new VFSFilePath(path);
 
             // Assert
-            vfsPath.Name.Should().Be(expectedName);
+            vfsPath.Name.ShouldBe(expectedName);
         }
 
         [Fact]
@@ -113,7 +111,7 @@ public static class VFSFilePathTests
             var vfsPath = new VFSFilePath(path);
 
             // Assert
-            vfsPath.Name.Should().Be(expectedName);
+            vfsPath.Name.ShouldBe(expectedName);
         }
     }
 
@@ -130,7 +128,7 @@ public static class VFSFilePathTests
             var result = filePath.ToString();
 
             // Assert
-            result.Should().Be(expectedPath);
+            result.ShouldBe(expectedPath);
         }
     }
 
@@ -148,7 +146,7 @@ public static class VFSFilePathTests
             var hashCode2 = filePath2.GetHashCode();
 
             // Assert
-            hashCode1.Should().Be(hashCode2);
+            hashCode1.ShouldBe(hashCode2);
         }
     }
 
@@ -165,7 +163,7 @@ public static class VFSFilePathTests
             string result = filePath;
 
             // Assert
-            result.Should().Be(expectedPath);
+            result.ShouldBe(expectedPath);
         }
     }
 
@@ -182,7 +180,7 @@ public static class VFSFilePathTests
             var result = filePath1.Equals(filePath2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
     }
 }

@@ -18,7 +18,7 @@ public class VirtualFileSystem_MethodDeleteFile_Tests : VirtualFileSystemTestsBa
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(3); // dir1, dir2, dir3
+        _vfs.Index.Count.ShouldBe(3); // dir1, dir2, dir3
     }
 
     [Fact]
@@ -28,9 +28,8 @@ public class VirtualFileSystem_MethodDeleteFile_Tests : VirtualFileSystemTestsBa
         var action = Act;
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
     }
     
     [Fact]
@@ -43,7 +42,7 @@ public class VirtualFileSystem_MethodDeleteFile_Tests : VirtualFileSystemTestsBa
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(3); // dir1, dir2, dir3
+        _vfs.Index.Count.ShouldBe(3); // dir1, dir2, dir3
     }
     
     [Fact]
@@ -59,8 +58,8 @@ public class VirtualFileSystem_MethodDeleteFile_Tests : VirtualFileSystemTestsBa
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(5);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(5);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

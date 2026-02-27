@@ -15,7 +15,7 @@ public class GitHubLoadResultTests
         var result = CreateTestResult();
 
         // Act & Assert
-        result.FullRepositoryName.Should().Be("testowner/testrepo");
+        result.FullRepositoryName.ShouldBe("testowner/testrepo");
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public class GitHubLoadResultTests
         var result = CreateTestResult(skippedFiles: skippedFiles);
 
         // Act & Assert
-        result.FilesSkipped.Should().Be(2);
+        result.FilesSkipped.ShouldBe(2);
     }
 
     [Fact]
@@ -44,7 +44,7 @@ public class GitHubLoadResultTests
         var result = CreateTestResult(skippedFiles: skippedFiles);
 
         // Act & Assert
-        result.HasSkippedFiles.Should().BeTrue();
+        result.HasSkippedFiles.ShouldBeTrue();
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class GitHubLoadResultTests
         var result = CreateTestResult();
 
         // Act & Assert
-        result.HasSkippedFiles.Should().BeFalse();
+        result.HasSkippedFiles.ShouldBeFalse();
     }
 
     [Theory]
@@ -73,7 +73,7 @@ public class GitHubLoadResultTests
         var summary = result.Summary;
 
         // Assert
-        summary.Should().Contain(expectedSize);
+        summary.ShouldContain(expectedSize);
     }
 
     [Fact]
@@ -92,7 +92,7 @@ public class GitHubLoadResultTests
         var summary = result.Summary;
 
         // Assert
-        summary.Should().Contain("3 files skipped");
+        summary.ShouldContain("3 files skipped");
     }
 
     [Fact]
@@ -112,10 +112,10 @@ public class GitHubLoadResultTests
         var byReason = result.SkippedFilesByReason;
 
         // Assert
-        byReason.Should().ContainKey(SkipReason.TooLarge);
-        byReason[SkipReason.TooLarge].Should().HaveCount(2);
-        byReason[SkipReason.BinaryExcluded].Should().HaveCount(1);
-        byReason[SkipReason.ExtensionExcluded].Should().HaveCount(1);
+        byReason.ShouldContainKey(SkipReason.TooLarge);
+        byReason[SkipReason.TooLarge].Count.ShouldBe(2);
+        byReason[SkipReason.BinaryExcluded].Count.ShouldBe(1);
+        byReason[SkipReason.ExtensionExcluded].Count.ShouldBe(1);
     }
 
     private static GitHubLoadResult CreateTestResult(

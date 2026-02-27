@@ -28,7 +28,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var extension = path.GetExtension();
 
         // Assert
-        extension.Should().Be(expectedExtension);
+        extension.ShouldBe(expectedExtension);
     }
 
     #endregion
@@ -50,7 +50,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var nameWithoutExtension = path.GetFileNameWithoutExtension();
 
         // Assert
-        nameWithoutExtension.Should().Be(expectedName);
+        nameWithoutExtension.ShouldBe(expectedName);
     }
 
     #endregion
@@ -67,8 +67,8 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var parent = path.GetParent();
 
         // Assert
-        parent.Should().NotBeNull();
-        parent.Value.Should().Contain("docs/folder");
+        parent.ShouldNotBeNull();
+        parent.Value.ShouldContain("docs/folder");
     }
 
     [Fact]
@@ -79,8 +79,8 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
 
         // Act & Assert
         var action = () => path.GetParent(-1);
-        action.Should().Throw<ArgumentException>()
-            .WithMessage("Levels must be non-negative. (Parameter 'levels')");
+        var ex = Should.Throw<ArgumentException>(action);
+        ex.Message.ShouldBe("Levels must be non-negative. (Parameter 'levels')");
     }
 
     #endregion
@@ -103,7 +103,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.HasExtension(extension);
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -117,8 +117,8 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var resultCaseSensitive = path.HasExtension("txt", ignoreCase: false);
 
         // Assert
-        resultIgnoreCase.Should().BeTrue();
-        resultCaseSensitive.Should().BeFalse();
+        resultIgnoreCase.ShouldBeTrue();
+        resultCaseSensitive.ShouldBeFalse();
     }
 
     #endregion
@@ -135,7 +135,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.HasAnyExtension("txt", "pdf", "doc");
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -148,7 +148,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.HasAnyExtension("txt", "doc", "docx");
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     #endregion
@@ -165,7 +165,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.ChangeExtension("pdf");
 
         // Assert
-        result.Should().Contain("file.pdf");
+        result.ShouldContain("file.pdf");
     }
 
     [Fact]
@@ -178,7 +178,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.ChangeExtension(".pdf");
 
         // Assert
-        result.Should().Contain("file.pdf");
+        result.ShouldContain("file.pdf");
     }
 
     #endregion
@@ -195,7 +195,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = dirPath.Combine("file.txt");
 
         // Assert
-        result.Should().Contain("docs/file.txt");
+        result.ShouldContain("docs/file.txt");
     }
 
     [Fact]
@@ -208,7 +208,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = dirPath.Combine("/file.txt");
 
         // Assert
-        result.Should().Contain("docs/file.txt");
+        result.ShouldContain("docs/file.txt");
     }
 
     #endregion
@@ -226,7 +226,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = from.GetRelativePath(to);
 
         // Assert
-        result.Should().Be(".");
+        result.ShouldBe(".");
     }
 
     [Fact]
@@ -240,7 +240,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = from.GetRelativePath(to);
 
         // Assert
-        result.Should().Be("file.txt");
+        result.ShouldBe("file.txt");
     }
 
     #endregion
@@ -258,7 +258,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = ancestor.IsAncestorOf(descendant);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -272,7 +272,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = ancestor.IsAncestorOf(nonDescendant);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     #endregion
@@ -292,7 +292,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         // Assert
         // Note: The method behavior may vary based on internal path representation
         // We just verify it doesn't throw an exception and returns a bool
-        result.Should().Be(result); // Just verify no exception is thrown
+        result.ShouldBe(result); // Just verify no exception is thrown
     }
 
     [Fact]
@@ -306,7 +306,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = child.IsDirectChildOf(parent);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     #endregion
@@ -323,10 +323,10 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var ancestors = path.GetAncestors().ToList();
 
         // Assert
-        ancestors.Should().HaveCount(3);
-        ancestors.Should().Contain(a => a.Value.Contains("deep"));
-        ancestors.Should().Contain(a => a.Value.Contains("subfolder"));
-        ancestors.Should().Contain(a => a.Value.Contains("docs"));
+        ancestors.Count.ShouldBe(3);
+        ancestors.ShouldContain(a => a.Value.Contains("deep"));
+        ancestors.ShouldContain(a => a.Value.Contains("subfolder"));
+        ancestors.ShouldContain(a => a.Value.Contains("docs"));
     }
 
     #endregion
@@ -347,7 +347,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.MatchesGlob(pattern);
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     #endregion
@@ -365,7 +365,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = VFSPathExtensions.Normalize(input);
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     #endregion
@@ -385,7 +385,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var depth = path.GetDepth();
 
         // Assert
-        depth.Should().Be(expectedDepth);
+        depth.ShouldBe(expectedDepth);
     }
 
     #endregion
@@ -402,7 +402,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.IsAtDepth(2);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -415,7 +415,7 @@ public class VFSPathExtensionsTests : VirtualFileSystemTestsBase
         var result = path.IsAtDepth(1);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     #endregion

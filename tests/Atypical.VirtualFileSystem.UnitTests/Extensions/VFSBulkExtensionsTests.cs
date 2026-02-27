@@ -29,15 +29,15 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateFiles(files);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/docs/file1.txt").Should().BeTrue();
-        vfs.FileExists("/docs/file2.txt").Should().BeTrue();
-        vfs.FileExists("/src/main.cs").Should().BeTrue();
-        vfs.DirectoryExists("/docs").Should().BeTrue();
-        vfs.DirectoryExists("/src").Should().BeTrue();
-        vfs.GetFile("/docs/file1.txt").Content.Should().Be("Content 1");
-        vfs.GetFile("/docs/file2.txt").Content.Should().Be("Content 2");
-        vfs.GetFile("/src/main.cs").Content.Should().Be("Content 3");
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/docs/file1.txt").ShouldBeTrue();
+        vfs.FileExists("/docs/file2.txt").ShouldBeTrue();
+        vfs.FileExists("/src/main.cs").ShouldBeTrue();
+        vfs.DirectoryExists("/docs").ShouldBeTrue();
+        vfs.DirectoryExists("/src").ShouldBeTrue();
+        vfs.GetFile("/docs/file1.txt").Content.ShouldBe("Content 1");
+        vfs.GetFile("/docs/file2.txt").Content.ShouldBe("Content 2");
+        vfs.GetFile("/src/main.cs").Content.ShouldBe("Content 3");
     }
 
     [Fact]
@@ -56,13 +56,13 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateFiles(files);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/file1.txt").Should().BeTrue();
-        vfs.FileExists("/file2.txt").Should().BeTrue();
-        vfs.FileExists("/file3.txt").Should().BeTrue();
-        vfs.GetFile("/file1.txt").Content.Should().Be("Content 1");
-        vfs.GetFile("/file2.txt").Content.Should().Be("Content 2");
-        vfs.GetFile("/file3.txt").Content.Should().Be("Content 3");
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/file1.txt").ShouldBeTrue();
+        vfs.FileExists("/file2.txt").ShouldBeTrue();
+        vfs.FileExists("/file3.txt").ShouldBeTrue();
+        vfs.GetFile("/file1.txt").Content.ShouldBe("Content 1");
+        vfs.GetFile("/file2.txt").Content.ShouldBe("Content 2");
+        vfs.GetFile("/file3.txt").Content.ShouldBe("Content 3");
     }
 
     [Fact]
@@ -77,9 +77,9 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
 
         // Assert
         // Note: Base VFS CreateFile automatically creates parent directories
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/nonexistent/file.txt").Should().BeTrue();
-        vfs.DirectoryExists("/nonexistent").Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/nonexistent/file.txt").ShouldBeTrue();
+        vfs.DirectoryExists("/nonexistent").ShouldBeTrue();
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateFiles(files);
 
         // Assert
-        result.Should().BeSameAs(vfs);
+        result.ShouldBeSameAs(vfs);
     }
 
     [Fact]
@@ -111,11 +111,11 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryCreateFiles(files).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/docs/file1.txt");
-        successfulPaths.Should().Contain("/docs/file2.txt");
-        vfs.FileExists("/docs/file1.txt").Should().BeTrue();
-        vfs.FileExists("/docs/file2.txt").Should().BeTrue();
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/docs/file1.txt");
+        successfulPaths.ShouldContain("/docs/file2.txt");
+        vfs.FileExists("/docs/file1.txt").ShouldBeTrue();
+        vfs.FileExists("/docs/file2.txt").ShouldBeTrue();
     }
 
     [Fact]
@@ -135,10 +135,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryCreateFiles(files).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/valid.txt");
-        successfulPaths.Should().Contain("/another.txt");
-        successfulPaths.Should().NotContain("/existing.txt");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/valid.txt");
+        successfulPaths.ShouldContain("/another.txt");
+        successfulPaths.ShouldNotContain("/existing.txt");
     }
 
     #endregion
@@ -156,12 +156,12 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateDirectories(directories);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.DirectoryExists("/docs").Should().BeTrue();
-        vfs.DirectoryExists("/src/main").Should().BeTrue();
-        vfs.DirectoryExists("/tests/unit").Should().BeTrue();
-        vfs.DirectoryExists("/src").Should().BeTrue();
-        vfs.DirectoryExists("/tests").Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.DirectoryExists("/docs").ShouldBeTrue();
+        vfs.DirectoryExists("/src/main").ShouldBeTrue();
+        vfs.DirectoryExists("/tests/unit").ShouldBeTrue();
+        vfs.DirectoryExists("/src").ShouldBeTrue();
+        vfs.DirectoryExists("/tests").ShouldBeTrue();
     }
 
     [Fact]
@@ -176,9 +176,9 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
 
         // Assert
         // Note: Base VFS CreateDirectory automatically creates parent directories
-        result.Should().BeSameAs(vfs);
-        vfs.DirectoryExists("/parent").Should().BeTrue();
-        vfs.DirectoryExists("/parent/child").Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.DirectoryExists("/parent").ShouldBeTrue();
+        vfs.DirectoryExists("/parent/child").ShouldBeTrue();
     }
 
     [Fact]
@@ -192,10 +192,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryCreateDirectories(directories).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(3);
-        successfulPaths.Should().Contain("/docs");
-        successfulPaths.Should().Contain("/src");
-        successfulPaths.Should().Contain("/tests");
+        successfulPaths.Count.ShouldBe(3);
+        successfulPaths.ShouldContain("/docs");
+        successfulPaths.ShouldContain("/src");
+        successfulPaths.ShouldContain("/tests");
     }
 
     [Fact]
@@ -211,10 +211,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
 
         // Assert
         // VFS TryCreateDirectory succeeds for existing directories (idempotent operation)
-        successfulPaths.Should().HaveCount(3);
-        successfulPaths.Should().Contain("/valid");
-        successfulPaths.Should().Contain("/existing");
-        successfulPaths.Should().Contain("/another");
+        successfulPaths.Count.ShouldBe(3);
+        successfulPaths.ShouldContain("/valid");
+        successfulPaths.ShouldContain("/existing");
+        successfulPaths.ShouldContain("/another");
     }
 
     #endregion
@@ -235,10 +235,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.DeleteFiles(filesToDelete);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/file1.txt").Should().BeFalse();
-        vfs.FileExists("/file2.txt").Should().BeFalse();
-        vfs.FileExists("/file3.txt").Should().BeTrue(); // Should remain
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/file1.txt").ShouldBeFalse();
+        vfs.FileExists("/file2.txt").ShouldBeFalse();
+        vfs.FileExists("/file3.txt").ShouldBeTrue(); // Should remain
     }
 
     [Fact]
@@ -252,7 +252,7 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.DeleteFiles(filesToDelete);
 
         // Assert
-        result.Should().BeSameAs(vfs);
+        result.ShouldBeSameAs(vfs);
     }
 
     [Fact]
@@ -268,10 +268,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryDeleteFiles(filesToDelete).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/file1.txt");
-        successfulPaths.Should().Contain("/file2.txt");
-        successfulPaths.Should().NotContain("/nonexistent.txt");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/file1.txt");
+        successfulPaths.ShouldContain("/file2.txt");
+        successfulPaths.ShouldNotContain("/nonexistent.txt");
     }
 
     #endregion
@@ -292,10 +292,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.DeleteDirectories(directoriesToDelete);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.DirectoryExists("/dir1").Should().BeFalse();
-        vfs.DirectoryExists("/dir2").Should().BeFalse();
-        vfs.DirectoryExists("/dir3").Should().BeTrue(); // Should remain
+        result.ShouldBeSameAs(vfs);
+        vfs.DirectoryExists("/dir1").ShouldBeFalse();
+        vfs.DirectoryExists("/dir2").ShouldBeFalse();
+        vfs.DirectoryExists("/dir3").ShouldBeTrue(); // Should remain
     }
 
     [Fact]
@@ -309,7 +309,7 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.DeleteDirectories(directoriesToDelete);
 
         // Assert
-        result.Should().BeSameAs(vfs);
+        result.ShouldBeSameAs(vfs);
     }
 
     [Fact]
@@ -325,10 +325,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryDeleteDirectories(directoriesToDelete).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/dir1");
-        successfulPaths.Should().Contain("/dir2");
-        successfulPaths.Should().NotContain("/nonexistent");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/dir1");
+        successfulPaths.ShouldContain("/dir2");
+        successfulPaths.ShouldNotContain("/nonexistent");
     }
 
     #endregion
@@ -352,14 +352,14 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.MoveFiles(moves);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/source1.txt").Should().BeFalse();
-        vfs.FileExists("/source2.txt").Should().BeFalse();
-        vfs.FileExists("/dest/file1.txt").Should().BeTrue();
-        vfs.FileExists("/dest/file2.txt").Should().BeTrue();
-        vfs.DirectoryExists("/dest").Should().BeTrue();
-        vfs.GetFile("/dest/file1.txt").Content.Should().Be("Content 1");
-        vfs.GetFile("/dest/file2.txt").Content.Should().Be("Content 2");
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/source1.txt").ShouldBeFalse();
+        vfs.FileExists("/source2.txt").ShouldBeFalse();
+        vfs.FileExists("/dest/file1.txt").ShouldBeTrue();
+        vfs.FileExists("/dest/file2.txt").ShouldBeTrue();
+        vfs.DirectoryExists("/dest").ShouldBeTrue();
+        vfs.GetFile("/dest/file1.txt").Content.ShouldBe("Content 1");
+        vfs.GetFile("/dest/file2.txt").Content.ShouldBe("Content 2");
     }
 
     [Fact]
@@ -379,10 +379,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
 
         // Assert
         // Note: VFS MoveFile does NOT automatically create parent directories
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/source.txt").Should().BeFalse();
-        vfs.FileExists("/existing/dest.txt").Should().BeTrue();
-        vfs.DirectoryExists("/existing").Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/source.txt").ShouldBeFalse();
+        vfs.FileExists("/existing/dest.txt").ShouldBeTrue();
+        vfs.DirectoryExists("/existing").ShouldBeTrue();
     }
 
     [Fact]
@@ -401,10 +401,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.MoveFiles(moves);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/dest1.txt").Should().BeFalse();
-        vfs.FileExists("/dest2.txt").Should().BeTrue();
-        vfs.FileExists("/existing.txt").Should().BeFalse();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/dest1.txt").ShouldBeFalse();
+        vfs.FileExists("/dest2.txt").ShouldBeTrue();
+        vfs.FileExists("/existing.txt").ShouldBeFalse();
     }
 
     [Fact]
@@ -425,10 +425,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryMoveFiles(moves).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/source1.txt");
-        successfulPaths.Should().Contain("/source2.txt");
-        successfulPaths.Should().NotContain("/nonexistent.txt");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/source1.txt");
+        successfulPaths.ShouldContain("/source2.txt");
+        successfulPaths.ShouldNotContain("/nonexistent.txt");
     }
 
     #endregion
@@ -452,14 +452,14 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CopyFiles(copies);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/source1.txt").Should().BeTrue(); // Source should remain
-        vfs.FileExists("/source2.txt").Should().BeTrue(); // Source should remain
-        vfs.FileExists("/dest/copy1.txt").Should().BeTrue();
-        vfs.FileExists("/dest/copy2.txt").Should().BeTrue();
-        vfs.DirectoryExists("/dest").Should().BeTrue();
-        vfs.GetFile("/dest/copy1.txt").Content.Should().Be("Content 1");
-        vfs.GetFile("/dest/copy2.txt").Content.Should().Be("Content 2");
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/source1.txt").ShouldBeTrue(); // Source should remain
+        vfs.FileExists("/source2.txt").ShouldBeTrue(); // Source should remain
+        vfs.FileExists("/dest/copy1.txt").ShouldBeTrue();
+        vfs.FileExists("/dest/copy2.txt").ShouldBeTrue();
+        vfs.DirectoryExists("/dest").ShouldBeTrue();
+        vfs.GetFile("/dest/copy1.txt").Content.ShouldBe("Content 1");
+        vfs.GetFile("/dest/copy2.txt").Content.ShouldBe("Content 2");
     }
 
     [Fact]
@@ -480,10 +480,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
 
         // Assert
         // Note: Base VFS operations automatically create parent directories
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists("/existing/copy.txt").Should().BeTrue();
-        vfs.FileExists("/nonexistent/copy.txt").Should().BeTrue();
-        vfs.DirectoryExists("/nonexistent").Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists("/existing/copy.txt").ShouldBeTrue();
+        vfs.FileExists("/nonexistent/copy.txt").ShouldBeTrue();
+        vfs.DirectoryExists("/nonexistent").ShouldBeTrue();
     }
 
     [Fact]
@@ -504,10 +504,10 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryCopyFiles(copies).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/source1.txt");
-        successfulPaths.Should().Contain("/source2.txt");
-        successfulPaths.Should().NotContain("/nonexistent.txt");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/source1.txt");
+        successfulPaths.ShouldContain("/source2.txt");
+        successfulPaths.ShouldNotContain("/nonexistent.txt");
     }
 
     #endregion
@@ -531,9 +531,9 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.UpdateFiles(updates);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.GetFile("/file1.txt").Content.Should().Be("Updated 1");
-        vfs.GetFile("/file2.txt").Content.Should().Be("Updated 2");
+        result.ShouldBeSameAs(vfs);
+        vfs.GetFile("/file1.txt").Content.ShouldBe("Updated 1");
+        vfs.GetFile("/file2.txt").Content.ShouldBe("Updated 2");
     }
 
     [Fact]
@@ -552,9 +552,9 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.UpdateFiles(updates);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.GetFile("/existing.txt").Content.Should().Be("Updated");
-        vfs.FileExists("/nonexistent.txt").Should().BeFalse();
+        result.ShouldBeSameAs(vfs);
+        vfs.GetFile("/existing.txt").Content.ShouldBe("Updated");
+        vfs.FileExists("/nonexistent.txt").ShouldBeFalse();
     }
 
     [Fact]
@@ -575,12 +575,12 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var successfulPaths = vfs.TryUpdateFiles(updates).ToList();
 
         // Assert
-        successfulPaths.Should().HaveCount(2);
-        successfulPaths.Should().Contain("/file1.txt");
-        successfulPaths.Should().Contain("/file2.txt");
-        successfulPaths.Should().NotContain("/nonexistent.txt");
-        vfs.GetFile("/file1.txt").Content.Should().Be("Updated 1");
-        vfs.GetFile("/file2.txt").Content.Should().Be("Updated 2");
+        successfulPaths.Count.ShouldBe(2);
+        successfulPaths.ShouldContain("/file1.txt");
+        successfulPaths.ShouldContain("/file2.txt");
+        successfulPaths.ShouldNotContain("/nonexistent.txt");
+        vfs.GetFile("/file1.txt").Content.ShouldBe("Updated 1");
+        vfs.GetFile("/file2.txt").Content.ShouldBe("Updated 2");
     }
 
     #endregion
@@ -594,13 +594,13 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var vfs = CreateVFS();
 
         // Act & Assert
-        vfs.CreateFiles(Array.Empty<(string, string)>()).Should().BeSameAs(vfs);
-        vfs.CreateDirectories(Array.Empty<string>()).Should().BeSameAs(vfs);
-        vfs.DeleteFiles(Array.Empty<string>()).Should().BeSameAs(vfs);
-        vfs.DeleteDirectories(Array.Empty<string>()).Should().BeSameAs(vfs);
-        vfs.MoveFiles(Array.Empty<(string, string)>()).Should().BeSameAs(vfs);
-        vfs.CopyFiles(Array.Empty<(string, string)>()).Should().BeSameAs(vfs);
-        vfs.UpdateFiles(Array.Empty<(string, string)>()).Should().BeSameAs(vfs);
+        vfs.CreateFiles(Array.Empty<(string, string)>()).ShouldBeSameAs(vfs);
+        vfs.CreateDirectories(Array.Empty<string>()).ShouldBeSameAs(vfs);
+        vfs.DeleteFiles(Array.Empty<string>()).ShouldBeSameAs(vfs);
+        vfs.DeleteDirectories(Array.Empty<string>()).ShouldBeSameAs(vfs);
+        vfs.MoveFiles(Array.Empty<(string, string)>()).ShouldBeSameAs(vfs);
+        vfs.CopyFiles(Array.Empty<(string, string)>()).ShouldBeSameAs(vfs);
+        vfs.UpdateFiles(Array.Empty<(string, string)>()).ShouldBeSameAs(vfs);
     }
 
     [Fact]
@@ -610,13 +610,13 @@ public class VFSBulkExtensionsTests : VirtualFileSystemTestsBase
         var vfs = CreateVFS();
 
         // Act & Assert
-        vfs.TryCreateFiles(Array.Empty<(string, string)>()).Should().BeEmpty();
-        vfs.TryCreateDirectories(Array.Empty<string>()).Should().BeEmpty();
-        vfs.TryDeleteFiles(Array.Empty<string>()).Should().BeEmpty();
-        vfs.TryDeleteDirectories(Array.Empty<string>()).Should().BeEmpty();
-        vfs.TryMoveFiles(Array.Empty<(string, string)>()).Should().BeEmpty();
-        vfs.TryCopyFiles(Array.Empty<(string, string)>()).Should().BeEmpty();
-        vfs.TryUpdateFiles(Array.Empty<(string, string)>()).Should().BeEmpty();
+        vfs.TryCreateFiles(Array.Empty<(string, string)>()).ShouldBeEmpty();
+        vfs.TryCreateDirectories(Array.Empty<string>()).ShouldBeEmpty();
+        vfs.TryDeleteFiles(Array.Empty<string>()).ShouldBeEmpty();
+        vfs.TryDeleteDirectories(Array.Empty<string>()).ShouldBeEmpty();
+        vfs.TryMoveFiles(Array.Empty<(string, string)>()).ShouldBeEmpty();
+        vfs.TryCopyFiles(Array.Empty<(string, string)>()).ShouldBeEmpty();
+        vfs.TryUpdateFiles(Array.Empty<(string, string)>()).ShouldBeEmpty();
     }
 
     #endregion

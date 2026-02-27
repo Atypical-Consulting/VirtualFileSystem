@@ -18,9 +18,9 @@ public class VFSGitHubExtensionsTests
         var result = VFSGitHubExtensions.TryParseGitHubUrl(url, out var owner, out var repo);
 
         // Assert
-        result.Should().BeTrue();
-        owner.Should().Be(expectedOwner);
-        repo.Should().Be(expectedRepo);
+        result.ShouldBeTrue();
+        owner.ShouldBe(expectedOwner);
+        repo.ShouldBe(expectedRepo);
     }
 
     [Theory]
@@ -33,7 +33,7 @@ public class VFSGitHubExtensionsTests
         var result = VFSGitHubExtensions.TryParseGitHubUrl(url, out _, out _);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -48,8 +48,8 @@ public class VFSGitHubExtensionsTests
             "non-existent-repo-xyz789");
 
         // Assert
-        success.Should().BeFalse();
-        result.Should().BeNull();
+        success.ShouldBeFalse();
+        result.ShouldBeNull();
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class VFSGitHubExtensionsTests
         var (success, result) = await vfs.TryLoadGitHubRepositoryFromUrlAsync("not-a-valid-url");
 
         // Assert
-        success.Should().BeFalse();
-        result.Should().BeNull();
+        success.ShouldBeFalse();
+        result.ShouldBeNull();
     }
 }

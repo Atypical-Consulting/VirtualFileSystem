@@ -15,17 +15,17 @@ public class GitHubLoaderOptionsTests
         var options = GitHubLoaderOptions.Default;
 
         // Assert
-        options.AccessToken.Should().BeNull();
-        options.Branch.Should().BeNull();
-        options.SubPath.Should().BeNull();
-        options.TargetPath.Should().Be("/");
-        options.MaxFileSize.Should().Be(1_048_576);
-        options.IncludeExtensions.Should().BeNull();
-        options.ExcludeExtensions.Should().BeNull();
-        options.ExcludePatterns.Should().BeNull();
-        options.IncludeBinaryFiles.Should().BeTrue();
-        options.Strategy.Should().Be(GitHubLoadingStrategy.Eager);
-        options.ProgressCallback.Should().BeNull();
+        options.AccessToken.ShouldBeNull();
+        options.Branch.ShouldBeNull();
+        options.SubPath.ShouldBeNull();
+        options.TargetPath.ShouldBe("/");
+        options.MaxFileSize.ShouldBe(1_048_576);
+        options.IncludeExtensions.ShouldBeNull();
+        options.ExcludeExtensions.ShouldBeNull();
+        options.ExcludePatterns.ShouldBeNull();
+        options.IncludeBinaryFiles.ShouldBeTrue();
+        options.Strategy.ShouldBe(GitHubLoadingStrategy.Eager);
+        options.ProgressCallback.ShouldBeNull();
     }
 
     [Fact]
@@ -35,11 +35,11 @@ public class GitHubLoaderOptionsTests
         var options = GitHubLoaderOptions.SourceCodeOnly;
 
         // Assert
-        options.IncludeBinaryFiles.Should().BeFalse();
-        options.ExcludePatterns.Should().NotBeNull();
-        options.ExcludePatterns.Should().Contain("**/node_modules/**");
-        options.ExcludePatterns.Should().Contain("**/bin/**");
-        options.ExcludePatterns.Should().Contain("**/obj/**");
+        options.IncludeBinaryFiles.ShouldBeFalse();
+        options.ExcludePatterns.ShouldNotBeNull();
+        options.ExcludePatterns.ShouldContain("**/node_modules/**");
+        options.ExcludePatterns.ShouldContain("**/bin/**");
+        options.ExcludePatterns.ShouldContain("**/obj/**");
     }
 
     [Fact]
@@ -49,13 +49,13 @@ public class GitHubLoaderOptionsTests
         var options = GitHubLoaderOptions.CSharpOnly;
 
         // Assert
-        options.IncludeBinaryFiles.Should().BeFalse();
-        options.IncludeExtensions.Should().NotBeNull();
-        options.IncludeExtensions.Should().Contain(".cs");
-        options.IncludeExtensions.Should().Contain(".csproj");
-        options.IncludeExtensions.Should().Contain(".sln");
-        options.ExcludePatterns.Should().Contain("**/bin/**");
-        options.ExcludePatterns.Should().Contain("**/obj/**");
+        options.IncludeBinaryFiles.ShouldBeFalse();
+        options.IncludeExtensions.ShouldNotBeNull();
+        options.IncludeExtensions.ShouldContain(".cs");
+        options.IncludeExtensions.ShouldContain(".csproj");
+        options.IncludeExtensions.ShouldContain(".sln");
+        options.ExcludePatterns.ShouldContain("**/bin/**");
+        options.ExcludePatterns.ShouldContain("**/obj/**");
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class GitHubLoaderOptionsTests
         var options = GitHubLoaderOptions.MetadataOnlyPreset;
 
         // Assert
-        options.Strategy.Should().Be(GitHubLoadingStrategy.MetadataOnly);
+        options.Strategy.ShouldBe(GitHubLoadingStrategy.MetadataOnly);
     }
 
     [Theory]
@@ -87,7 +87,7 @@ public class GitHubLoaderOptionsTests
         var result = GitHubLoaderOptions.IsBinaryExtension(extension);
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Theory]
@@ -100,7 +100,7 @@ public class GitHubLoaderOptionsTests
         var result = GitHubLoaderOptions.IsBinaryExtension(extension);
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -113,9 +113,9 @@ public class GitHubLoaderOptionsTests
         var modified = original with { AccessToken = "test-token" };
 
         // Assert
-        original.AccessToken.Should().BeNull();
-        modified.AccessToken.Should().Be("test-token");
-        modified.MaxFileSize.Should().Be(original.MaxFileSize);
+        original.AccessToken.ShouldBeNull();
+        modified.AccessToken.ShouldBe("test-token");
+        modified.MaxFileSize.ShouldBe(original.MaxFileSize);
     }
 
     [Fact]
@@ -131,9 +131,9 @@ public class GitHubLoaderOptionsTests
         };
 
         // Assert
-        options.AccessToken.Should().Be("my-token");
-        options.Branch.Should().Be("develop");
-        options.MaxFileSize.Should().Be(5_000_000);
-        options.Strategy.Should().Be(GitHubLoadingStrategy.Lazy);
+        options.AccessToken.ShouldBe("my-token");
+        options.Branch.ShouldBe("develop");
+        options.MaxFileSize.ShouldBe(5_000_000);
+        options.Strategy.ShouldBe(GitHubLoadingStrategy.Lazy);
     }
 }

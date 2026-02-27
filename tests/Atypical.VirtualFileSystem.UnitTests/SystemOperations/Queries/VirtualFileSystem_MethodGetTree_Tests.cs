@@ -12,7 +12,7 @@ public class VirtualFileSystem_MethodGetTree_Tests : VirtualFileSystemTestsBase
         var result = vfs.GetTree();
 
         // Assert
-        result.Should().Be("vfs://");
+        result.ShouldBe("vfs://");
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class VirtualFileSystem_MethodGetTree_Tests : VirtualFileSystemTestsBase
         var result = vfs.GetTree();
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class VirtualFileSystem_MethodGetTree_Tests : VirtualFileSystemTestsBase
         var result = vfs.GetTree();
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class VirtualFileSystem_MethodGetTree_Tests : VirtualFileSystemTestsBase
         var result = vfs.GetTree();
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 
     [Fact]
@@ -164,6 +164,6 @@ public class VirtualFileSystem_MethodGetTree_Tests : VirtualFileSystemTestsBase
         var result = vfs.GetTree();
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 }
