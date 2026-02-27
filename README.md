@@ -13,6 +13,7 @@ A virtual file system implementation in modern C# with comprehensive demo applic
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/Atypical-Consulting/VirtualFileSystem)](https://github.com/Atypical-Consulting/VirtualFileSystem/pulls)
 [![GitHub contributors](https://img.shields.io/github/contributors/Atypical-Consulting/VirtualFileSystem)](https://github.com/Atypical-Consulting/VirtualFileSystem/graphs/contributors)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Atypical-Consulting/VirtualFileSystem)](https://github.com/Atypical-Consulting/VirtualFileSystem/commits/master)
+[![Build](https://github.com/Atypical-Consulting/VirtualFileSystem/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Atypical-Consulting/VirtualFileSystem/actions/workflows/dotnet.yml)
 [![codecov](https://codecov.io/gh/Atypical-Consulting/VirtualFileSystem/branch/main/graph/badge.svg?token=041C4QKW6O)](https://codecov.io/gh/Atypical-Consulting/VirtualFileSystem)
 
 [![NuGet](https://img.shields.io/nuget/v/Atypical.VirtualFileSystem.svg)](https://www.nuget.org/packages/Atypical.VirtualFileSystem)
