@@ -1,0 +1,25 @@
+{
+  "active": true,
+  "spec": "003-fix-rename-directory-operation",
+  "state": "building",
+  "subtasks": {
+    "completed": 9,
+    "total": 10,
+    "in_progress": 1,
+    "failed": 0
+  },
+  "phase": {
+    "current": "Integration Verification",
+    "id": null,
+    "total": 2
+  },
+  "workers": {
+    "active": 0,
+    "max": 1
+  },
+  "session": {
+    "number": 11,
+    "started_at": "2026-01-23T16:17:25.470510"
+  },
+  "last_update": "2026-01-23T16:49:14.315697"
+}

@@ -37,6 +37,11 @@ public partial record VFS
         // update the directory node with the new path
         var oldName = directoryNode.Name;
         var newPath = new VFSDirectoryPath($"{directoryPath.Parent}/{newName}");
+
+        // Validate that the destination path doesn't already exist
+        if (Index.ContainsKey(newPath))
+            ThrowVirtualNodeAlreadyExists(Index[newPath]);
+
         var updatedDirectoryNode = directoryNode.UpdatePath(newPath);
 
         // Add the directory to its old parent directory with the new name
@@ -93,7 +98,7 @@ public partial record VFS
             }
         }
 
-        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, oldName, newName));
+        DirectoryRenamed?.Invoke(new VFSDirectoryRenamedArgs(directoryPath, oldName, newName, newPath));
         return this;
     }
     

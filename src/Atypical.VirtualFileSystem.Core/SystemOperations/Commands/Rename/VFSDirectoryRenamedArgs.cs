@@ -17,11 +17,13 @@ public sealed class VFSDirectoryRenamedArgs : VFSEventArgs
     /// <param name="path">The path of the renamed directory.</param>
     /// <param name="oldName">The old name of the renamed directory.</param>
     /// <param name="newName">The new name of the renamed directory.</param>
-    public VFSDirectoryRenamedArgs(VFSDirectoryPath path, string oldName, string newName)
+    /// <param name="newPath">The new path of the renamed directory.</param>
+    public VFSDirectoryRenamedArgs(VFSDirectoryPath path, string oldName, string newName, VFSDirectoryPath newPath)
     {
         Path = path;
         OldName = oldName;
         NewName = newName;
+        NewPath = newPath;
         Timestamp = DateTimeOffset.Now;
     }
 
@@ -36,9 +38,14 @@ public sealed class VFSDirectoryRenamedArgs : VFSEventArgs
     public string OldName { get; }
 
     /// <summary>
-    /// Gets the new name of the renamed file.
+    /// Gets the new name of the renamed directory.
     /// </summary>
     public string NewName { get; }
+
+    /// <summary>
+    /// Gets the new path of the renamed directory.
+    /// </summary>
+    public VFSDirectoryPath NewPath { get; }
 
     /// <summary>
     /// Gets the timestamp when the directory was renamed.
@@ -51,11 +58,11 @@ public sealed class VFSDirectoryRenamedArgs : VFSEventArgs
 
     /// <inheritdoc />
     public override string Message
-        => string.Format(MessageTemplate, Path, NewName, Timestamp);
+        => string.Format(MessageTemplate, Path, NewPath, Timestamp);
 
     /// <inheritdoc />
     public override string MessageWithMarkup
-        => ToMarkup("blue", Path, NewName, Timestamp);
+        => ToMarkup("blue", Path, NewPath, Timestamp);
 
     /// <inheritdoc />
     public override string ToString()

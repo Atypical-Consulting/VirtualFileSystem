@@ -251,11 +251,12 @@ T:Atypical.VirtualFileSystem.Core.VFSFileMovedArgs|VFSFileMovedArgs.md|VFSFileMo
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Path|VFSDirectoryRenamedArgs.Path.md|Path
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.OldName|VFSDirectoryRenamedArgs.OldName.md|OldName
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewName|VFSDirectoryRenamedArgs.NewName.md|NewName
+P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.NewPath|VFSDirectoryRenamedArgs.NewPath.md|NewPath
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Timestamp|VFSDirectoryRenamedArgs.Timestamp.md|Timestamp
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageTemplate|VFSDirectoryRenamedArgs.MessageTemplate.md|MessageTemplate
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.Message|VFSDirectoryRenamedArgs.Message.md|Message
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.MessageWithMarkup|VFSDirectoryRenamedArgs.MessageWithMarkup.md|MessageWithMarkup
-M:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,System.String,System.String)|VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string).md|VFSDirectoryRenamedArgs(VFSDirectoryPath, string, string)
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,System.String,System.String,Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSDirectoryRenamedArgs.VFSDirectoryRenamedArgs(VFSDirectoryPath,string,string,VFSDirectoryPath).md|VFSDirectoryRenamedArgs(VFSDirectoryPath, string, string, VFSDirectoryPath)
 T:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs|VFSDirectoryRenamedArgs.md|VFSDirectoryRenamedArgs
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Path|VFSFileRenamedArgs.Path.md|Path
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldName|VFSFileRenamedArgs.OldName.md|OldName
