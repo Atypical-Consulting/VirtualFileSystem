@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "CloudDrive - OneDrive-like cloud storage interface",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --minify",
-    "watch:css": "npx tailwindcss -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --watch"
+    "build:css": "npx @tailwindcss/cli -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --watch"
   },
   "devDependencies": {
-    "tailwindcss": "^4.0.0",
-    "postcss": "^8.4.33",
-    "autoprefixer": "^10.4.17"
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
   }
 }
