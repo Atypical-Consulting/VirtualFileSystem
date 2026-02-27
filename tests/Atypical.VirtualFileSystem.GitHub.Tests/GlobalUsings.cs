@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 
 global using Xunit;
-global using FluentAssertions;
+global using Shouldly;
 global using NSubstitute;
 global using Atypical.VirtualFileSystem.Core;
 global using Atypical.VirtualFileSystem.Core.Contracts;

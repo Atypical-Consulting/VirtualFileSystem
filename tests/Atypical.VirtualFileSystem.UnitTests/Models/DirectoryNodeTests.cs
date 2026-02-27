@@ -22,12 +22,12 @@ public static class DirectoryNodeTests
             var directoryNode = new DirectoryNode(directoryPath);
 
             // Assert
-            directoryNode.Should().NotBeNull();
-            directoryNode.Directories.Should().BeEmpty();
-            directoryNode.Files.Should().BeEmpty();
-            directoryNode.Path.Value.Should().Be(expectedPath);
-            directoryNode.Path.Parent.Should().NotBeNull();
-            directoryNode.Path.Parent!.Value.Should().Be(expectedParentPath);
+            directoryNode.ShouldNotBeNull();
+            directoryNode.Directories.ShouldBeEmpty();
+            directoryNode.Files.ShouldBeEmpty();
+            directoryNode.Path.Value.ShouldBe(expectedPath);
+            directoryNode.Path.Parent.ShouldNotBeNull();
+            directoryNode.Path.Parent!.Value.ShouldBe(expectedParentPath);
         }
 
         [Fact]
@@ -36,9 +36,9 @@ public static class DirectoryNodeTests
             var directoryPath = new VFSDirectoryPath("parent/child");
             var directory = new DirectoryNode(directoryPath);
 
-            directory.Path.Value.Should().Be("vfs://parent/child");
-            directory.Path.Parent.Should().NotBeNull();
-            directory.Path.Parent!.Value.Should().Be("vfs://parent");
+            directory.Path.Value.ShouldBe("vfs://parent/child");
+            directory.Path.Parent.ShouldNotBeNull();
+            directory.Path.Parent!.Value.ShouldBe("vfs://parent");
         }
     }
 
@@ -50,7 +50,7 @@ public static class DirectoryNodeTests
             var directoryPath = new VFSDirectoryPath("test");
             var directoryNode = new DirectoryNode(directoryPath);
 
-            directoryNode.ToString().Should().Be("vfs://test");
+            directoryNode.ToString().ShouldBe("vfs://test");
         }
 
         [Fact]
@@ -59,7 +59,7 @@ public static class DirectoryNodeTests
             var directoryPath = new VFSDirectoryPath("parent/child");
             var directory = new DirectoryNode(directoryPath);
 
-            directory.ToString().Should().Be("vfs://parent/child");
+            directory.ToString().ShouldBe("vfs://parent/child");
         }
     }
 }

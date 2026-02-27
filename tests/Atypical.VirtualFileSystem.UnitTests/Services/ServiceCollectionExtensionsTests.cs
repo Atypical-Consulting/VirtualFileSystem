@@ -22,8 +22,7 @@ public static class ServiceCollectionExtensionsTests
             services.AddVirtualFileSystem();
 
             // Assert
-            services.Should()
-                .Contain(service => service.ServiceType == typeof(IVirtualFileSystem)
+            services.ShouldContain(service => service.ServiceType == typeof(IVirtualFileSystem)
                                     && service.ImplementationType == typeof(VFS)
                                     && service.Lifetime == ServiceLifetime.Scoped);
         }

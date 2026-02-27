@@ -9,11 +9,11 @@ public class VirtualFileSystem_Constructor_Tests : VirtualFileSystemTestsBase
         var vfs = CreateVFS();
 
         // Assert
-        vfs.Should().NotBeNull();
-        vfs.IsEmpty.Should().BeTrue();
-        vfs.Root.IsDirectory.Should().BeTrue();
-        vfs.Root.IsFile.Should().BeFalse();
-        vfs.Root.Path.Value.Should().Be("vfs://");
-        vfs.Root.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(1));
+        vfs.ShouldNotBeNull();
+        vfs.IsEmpty.ShouldBeTrue();
+        vfs.Root.IsDirectory.ShouldBeTrue();
+        vfs.Root.IsFile.ShouldBeFalse();
+        vfs.Root.Path.Value.ShouldBe("vfs://");
+        (DateTime.Now - vfs.Root.CreationTime).ShouldBeLessThan(TimeSpan.FromHours(1));
     }
 }

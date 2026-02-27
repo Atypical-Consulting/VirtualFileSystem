@@ -14,7 +14,7 @@ public static class VirtualFileSystemExceptionTests
             var exception = new VirtualFileSystemException(message);
 
             // Assert
-            exception.Message.Should().Be(message);
+            exception.Message.ShouldBe(message);
         }
 
         [Fact]
@@ -28,8 +28,8 @@ public static class VirtualFileSystemExceptionTests
             var exception = new VirtualFileSystemException(message, innerException);
 
             // Assert
-            exception.Message.Should().Be(message);
-            exception.InnerException.Should().Be(innerException);
+            exception.Message.ShouldBe(message);
+            exception.InnerException.ShouldBe(innerException);
         }
 
         [Fact]
@@ -42,7 +42,7 @@ public static class VirtualFileSystemExceptionTests
             var exception = new VirtualFileSystemException(null!, innerException);
 
             // Assert
-            exception.InnerException.Should().Be(innerException);
+            exception.InnerException.ShouldBe(innerException);
         }
 
         [Fact]
@@ -52,8 +52,8 @@ public static class VirtualFileSystemExceptionTests
             var exception = new VirtualFileSystemException();
 
             // Assert
-            exception.Message.Should().NotBeNull();
-            exception.InnerException.Should().BeNull();
+            exception.Message.ShouldNotBeNull();
+            exception.InnerException.ShouldBeNull();
         }
     }
 }

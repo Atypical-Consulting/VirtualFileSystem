@@ -15,12 +15,12 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         Act();
             
         // Assert
-        _vfs.IsEmpty.Should().BeFalse();
-        _vfs.Index.RawIndex.Should().NotBeEmpty();
-        _vfs.Index.RawIndex.Should().HaveCount(1);
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://file.txt"));
-        _vfs.Root.Files.Should().NotBeEmpty();
-        _vfs.Root.Files.Should().HaveCount(1);
+        _vfs.IsEmpty.ShouldBeFalse();
+        _vfs.Index.RawIndex.ShouldNotBeEmpty();
+        _vfs.Index.RawIndex.Count.ShouldBe(1);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSFilePath("vfs://file.txt"));
+        _vfs.Root.Files.ShouldNotBeEmpty();
+        _vfs.Root.Files.Count().ShouldBe(1);
     }
 
     [Fact]
@@ -33,15 +33,15 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         Act();
             
         // Assert
-        _vfs.IsEmpty.Should().BeFalse();
-        _vfs.Index.RawIndex.Should().NotBeEmpty();
-        _vfs.Index.RawIndex.Should().HaveCount(4); // dir1 + dir2 + dir3 + file.txt
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
-        _vfs.Root.Directories.Should().NotBeEmpty();
-        _vfs.Root.Directories.Should().HaveCount(1);
+        _vfs.IsEmpty.ShouldBeFalse();
+        _vfs.Index.RawIndex.ShouldNotBeEmpty();
+        _vfs.Index.RawIndex.Count.ShouldBe(4); // dir1 + dir2 + dir3 + file.txt
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1/dir2"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
+        _vfs.Root.Directories.ShouldNotBeEmpty();
+        _vfs.Root.Directories.Count().ShouldBe(1);
     }
 
     [Fact]
@@ -55,9 +55,8 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         var action = Act;
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The node 'vfs://dir1/dir2/dir3/file.txt' already exists in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The node 'vfs://dir1/dir2/dir3/file.txt' already exists in the index.");
     }
     
     [Fact]
@@ -69,14 +68,14 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         _vfs.FileCreated += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(_filePath);
+            args.Path.ShouldBe(_filePath);
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -89,8 +88,8 @@ public class VirtualFileSystem_MethodCreateFile_Tests : VirtualFileSystemTestsBa
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(1);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

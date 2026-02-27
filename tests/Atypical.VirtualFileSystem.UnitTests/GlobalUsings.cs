@@ -9,5 +9,5 @@
 global using Atypical.VirtualFileSystem.Core;
 global using Atypical.VirtualFileSystem.Core.Contracts;
 global using Atypical.VirtualFileSystem.Core.Services;
-global using FluentAssertions;
+global using Shouldly;
 global using Xunit;

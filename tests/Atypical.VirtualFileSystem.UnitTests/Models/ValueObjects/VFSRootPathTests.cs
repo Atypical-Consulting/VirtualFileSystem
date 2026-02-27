@@ -20,10 +20,10 @@ public static class VFSRootPathTests
             var directoryPath = new VFSRootPath();
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
-            directoryPath.IsRoot.Should().BeTrue();
-            directoryPath.Parent.Should().BeNull();
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
+            directoryPath.IsRoot.ShouldBeTrue();
+            directoryPath.Parent.ShouldBeNull();
         }
     }
 
@@ -39,7 +39,7 @@ public static class VFSRootPathTests
             var directoryPath = new VFSRootPath();
 
             // Assert
-            directoryPath.ToString().Should().Be(expectedPath);
+            directoryPath.ToString().ShouldBe(expectedPath);
         }
     }
 
@@ -56,7 +56,7 @@ public static class VFSRootPathTests
             string result = rootPath;
 
             // Assert
-            result.Should().Be(expectedPath);
+            result.ShouldBe(expectedPath);
         }
     }
 
@@ -73,7 +73,7 @@ public static class VFSRootPathTests
             var result = rootPath1.Equals(rootPath2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
     }
 }

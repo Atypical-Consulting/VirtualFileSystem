@@ -17,10 +17,10 @@ public class VirtualFileSystem_MethodSelectDirectories_Tests : VirtualFileSystem
             .ToList();
 
         // Assert
-        directories.Should().NotBeEmpty();
-        directories.Should().HaveCount(3); // dir1 + dir2 + dir3
-        directories.Should().Contain(d => d.Path.Value == "vfs://dir1");
-        directories.Should().Contain(d => d.Path.Value == "vfs://dir2");
-        directories.Should().Contain(d => d.Path.Value == "vfs://dir3");
+        directories.ShouldNotBeEmpty();
+        directories.Count.ShouldBe(3); // dir1 + dir2 + dir3
+        directories.ShouldContain(d => d.Path.Value == "vfs://dir1");
+        directories.ShouldContain(d => d.Path.Value == "vfs://dir2");
+        directories.ShouldContain(d => d.Path.Value == "vfs://dir3");
     }
 }

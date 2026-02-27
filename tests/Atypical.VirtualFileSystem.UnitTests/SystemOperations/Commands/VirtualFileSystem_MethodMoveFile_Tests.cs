@@ -17,8 +17,8 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://new_file.txt"));
+        _vfs.Index.Count.ShouldBe(indexLength);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSFilePath("vfs://new_file.txt"));
     }
         
     [Fact]
@@ -32,7 +32,7 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
 
         // Assert
         _vfs.Index[new VFSFilePath("vfs://new_file.txt")].Path.Value
-            .Should().Be("vfs://new_file.txt");
+            .ShouldBe("vfs://new_file.txt");
     }
         
     [Fact]
@@ -48,9 +48,9 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].CreationTime.Should().Be(creationTime);
-        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
-        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].CreationTime.ShouldBe(creationTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastAccessTime.ShouldBe(lastAccessTime);
+        _vfs.Index[new VFSFilePath("vfs://new_file.txt")].LastWriteTime.ShouldNotBe(lastWriteTime);
     }
 
     [Fact]
@@ -60,9 +60,8 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         Action action = () => _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
     }
 
     [Fact]
@@ -75,15 +74,15 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         _vfs.FileMoved += args => 
         {
             eventRaised = true;
-            args.SourcePath.Should().Be(_filePath);
-            args.DestinationPath.Should().Be(_newFilePath);
+            args.SourcePath.ShouldBe(_filePath);
+            args.DestinationPath.ShouldBe(_newFilePath);
         };
 
         // Act
         _vfs.MoveFile(_filePath, _newFilePath);
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -99,8 +98,8 @@ public class VirtualFileSystem_MethodMoveFile_Tests : VirtualFileSystemTestsBase
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(5);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(5);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

@@ -21,11 +21,11 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
-        _vfs.Index.RawIndex.Should().NotContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].IsDirectory.Should().BeTrue();
-        _vfs.GetTree().Should().NotBe(tree);
+        _vfs.Index.Count.ShouldBe(indexLength);
+        _vfs.Index.RawIndex.ShouldNotContainKey(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].IsDirectory.ShouldBeTrue();
+        _vfs.GetTree().ShouldNotBe(tree);
     }
         
     [Fact]
@@ -39,7 +39,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
 
         // Assert
         _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].Path.Value
-            .Should().Be("vfs://dir1/dir2/new_dir");
+            .ShouldBe("vfs://dir1/dir2/new_dir");
     }
         
     [Fact]
@@ -56,9 +56,9 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].CreationTime.Should().Be(creationTime);
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastAccessTime.Should().Be(lastAccessTime);
-        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].CreationTime.ShouldBe(creationTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastAccessTime.ShouldBe(lastAccessTime);
+        _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastWriteTime.ShouldNotBe(lastWriteTime);
     }
     
     [Fact]
@@ -68,9 +68,8 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Action action = () => Act();
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
     }
     
     [Fact]
@@ -83,15 +82,15 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.DirectoryRenamed += args =>
         {
             eventRaised = true;
-            args.Path.Should().Be(_directoryPath);
-            args.NewName.Should().Be("new_dir");
+            args.Path.ShouldBe(_directoryPath);
+            args.NewName.ShouldBe("new_dir");
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
 
     [Fact]
@@ -110,12 +109,12 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        capturedArgs.Should().NotBeNull();
-        capturedArgs!.Path.Should().Be(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
-        capturedArgs.OldName.Should().Be("dir3");
-        capturedArgs.NewName.Should().Be("new_dir");
-        capturedArgs.NewPath.Should().Be(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
-        capturedArgs.Timestamp.Should().BeCloseTo(DateTimeOffset.Now, TimeSpan.FromSeconds(1));
+        capturedArgs.ShouldNotBeNull();
+        capturedArgs!.Path.ShouldBe(new VFSDirectoryPath("vfs://dir1/dir2/dir3"));
+        capturedArgs.OldName.ShouldBe("dir3");
+        capturedArgs.NewName.ShouldBe("new_dir");
+        capturedArgs.NewPath.ShouldBe(new VFSDirectoryPath("vfs://dir1/dir2/new_dir"));
+        (DateTimeOffset.Now - capturedArgs.Timestamp).ShouldBeLessThan(TimeSpan.FromSeconds(1));
     }
 
     [Fact]
@@ -131,9 +130,9 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         var change = _vfs.ChangeHistory.UndoStack.First();
 
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(4);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(4);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 
     [Fact]
@@ -148,22 +147,22 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert - Directory should be renamed
-        _vfs.Index.RawIndex.Should().NotContainKey(originalPath);
-        _vfs.Index.RawIndex.Should().ContainKey(newPath);
+        _vfs.Index.RawIndex.ShouldNotContainKey(originalPath);
+        _vfs.Index.RawIndex.ShouldContainKey(newPath);
 
         // Act - Undo rename
         _vfs.ChangeHistory.Undo();
 
         // Assert - Directory should be back to original name
-        _vfs.Index.RawIndex.Should().ContainKey(originalPath);
-        _vfs.Index.RawIndex.Should().NotContainKey(newPath);
+        _vfs.Index.RawIndex.ShouldContainKey(originalPath);
+        _vfs.Index.RawIndex.ShouldNotContainKey(newPath);
 
         // Act - Redo rename
         _vfs.ChangeHistory.Redo();
 
         // Assert - Directory should be renamed again
-        _vfs.Index.RawIndex.Should().NotContainKey(originalPath);
-        _vfs.Index.RawIndex.Should().ContainKey(newPath);
+        _vfs.Index.RawIndex.ShouldNotContainKey(originalPath);
+        _vfs.Index.RawIndex.ShouldContainKey(newPath);
     }
 
     [Fact]
@@ -182,25 +181,25 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
+        _vfs.Index.Count.ShouldBe(indexLength);
 
         // Verify old paths no longer exist
-        _vfs.Index.RawIndex.Should().NotContainKey(nestedFilePath);
-        _vfs.Index.RawIndex.Should().NotContainKey(deepNestedFilePath);
+        _vfs.Index.RawIndex.ShouldNotContainKey(nestedFilePath);
+        _vfs.Index.RawIndex.ShouldNotContainKey(deepNestedFilePath);
 
         // Verify new paths exist
         var newNestedFilePath = new VFSFilePath("dir1/dir2/new_dir/file.txt");
         var newDeepNestedFilePath = new VFSFilePath("dir1/dir2/new_dir/subdir/nested.txt");
-        _vfs.Index.RawIndex.Should().ContainKey(newNestedFilePath);
-        _vfs.Index.RawIndex.Should().ContainKey(newDeepNestedFilePath);
+        _vfs.Index.RawIndex.ShouldContainKey(newNestedFilePath);
+        _vfs.Index.RawIndex.ShouldContainKey(newDeepNestedFilePath);
 
         // Verify file contents are preserved
-        _vfs.Index[newNestedFilePath].As<IFileNode>().Content.Should().Be("content1");
-        _vfs.Index[newDeepNestedFilePath].As<IFileNode>().Content.Should().Be("content2");
+        _vfs.Index[newNestedFilePath].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content1");
+        _vfs.Index[newDeepNestedFilePath].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content2");
 
         // Verify file paths are updated
-        _vfs.Index[newNestedFilePath].Path.Value.Should().Be("vfs://dir1/dir2/new_dir/file.txt");
-        _vfs.Index[newDeepNestedFilePath].Path.Value.Should().Be("vfs://dir1/dir2/new_dir/subdir/nested.txt");
+        _vfs.Index[newNestedFilePath].Path.Value.ShouldBe("vfs://dir1/dir2/new_dir/file.txt");
+        _vfs.Index[newDeepNestedFilePath].Path.Value.ShouldBe("vfs://dir1/dir2/new_dir/subdir/nested.txt");
     }
 
     [Fact]
@@ -240,17 +239,17 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.RenameDirectory(pathToRename, "renamed_c");
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
+        _vfs.Index.Count.ShouldBe(indexLength);
 
         // Verify old paths no longer exist
-        _vfs.Index.RawIndex.Should().NotContainKey(new VFSDirectoryPath("vfs://a/b/c"));
-        _vfs.Index.RawIndex.Should().NotContainKey(fileAtC);
-        _vfs.Index.RawIndex.Should().NotContainKey(fileAtD);
-        _vfs.Index.RawIndex.Should().NotContainKey(fileAtE);
-        _vfs.Index.RawIndex.Should().NotContainKey(subdirAtC);
-        _vfs.Index.RawIndex.Should().NotContainKey(subdirAtE);
-        _vfs.Index.RawIndex.Should().NotContainKey(fileInSubdirC);
-        _vfs.Index.RawIndex.Should().NotContainKey(fileInSubdirE);
+        _vfs.Index.RawIndex.ShouldNotContainKey(new VFSDirectoryPath("vfs://a/b/c"));
+        _vfs.Index.RawIndex.ShouldNotContainKey(fileAtC);
+        _vfs.Index.RawIndex.ShouldNotContainKey(fileAtD);
+        _vfs.Index.RawIndex.ShouldNotContainKey(fileAtE);
+        _vfs.Index.RawIndex.ShouldNotContainKey(subdirAtC);
+        _vfs.Index.RawIndex.ShouldNotContainKey(subdirAtE);
+        _vfs.Index.RawIndex.ShouldNotContainKey(fileInSubdirC);
+        _vfs.Index.RawIndex.ShouldNotContainKey(fileInSubdirE);
 
         // Verify new paths exist
         var newFileAtC = new VFSFilePath("a/b/renamed_c/file_c.txt");
@@ -261,34 +260,34 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         var newFileInSubdirC = new VFSFilePath("a/b/renamed_c/subdir_c/nested.txt");
         var newFileInSubdirE = new VFSFilePath("a/b/renamed_c/d/e/subdir_e/deep.txt");
 
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSDirectoryPath("vfs://a/b/renamed_c"));
-        _vfs.Index.RawIndex.Should().ContainKey(newFileAtC);
-        _vfs.Index.RawIndex.Should().ContainKey(newFileAtD);
-        _vfs.Index.RawIndex.Should().ContainKey(newFileAtE);
-        _vfs.Index.RawIndex.Should().ContainKey(newSubdirAtC);
-        _vfs.Index.RawIndex.Should().ContainKey(newSubdirAtE);
-        _vfs.Index.RawIndex.Should().ContainKey(newFileInSubdirC);
-        _vfs.Index.RawIndex.Should().ContainKey(newFileInSubdirE);
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSDirectoryPath("vfs://a/b/renamed_c"));
+        _vfs.Index.RawIndex.ShouldContainKey(newFileAtC);
+        _vfs.Index.RawIndex.ShouldContainKey(newFileAtD);
+        _vfs.Index.RawIndex.ShouldContainKey(newFileAtE);
+        _vfs.Index.RawIndex.ShouldContainKey(newSubdirAtC);
+        _vfs.Index.RawIndex.ShouldContainKey(newSubdirAtE);
+        _vfs.Index.RawIndex.ShouldContainKey(newFileInSubdirC);
+        _vfs.Index.RawIndex.ShouldContainKey(newFileInSubdirE);
 
         // Verify file contents are preserved
-        _vfs.Index[fileAtB].As<IFileNode>().Content.Should().Be("content_b"); // Not affected by rename
-        _vfs.Index[newFileAtC].As<IFileNode>().Content.Should().Be("content_c");
-        _vfs.Index[newFileAtD].As<IFileNode>().Content.Should().Be("content_d");
-        _vfs.Index[newFileAtE].As<IFileNode>().Content.Should().Be("content_e");
-        _vfs.Index[newFileInSubdirC].As<IFileNode>().Content.Should().Be("nested_content");
-        _vfs.Index[newFileInSubdirE].As<IFileNode>().Content.Should().Be("deep_content");
+        _vfs.Index[fileAtB].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content_b"); // Not affected by rename
+        _vfs.Index[newFileAtC].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content_c");
+        _vfs.Index[newFileAtD].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content_d");
+        _vfs.Index[newFileAtE].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("content_e");
+        _vfs.Index[newFileInSubdirC].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("nested_content");
+        _vfs.Index[newFileInSubdirE].ShouldBeAssignableTo<IFileNode>()!.Content.ShouldBe("deep_content");
 
         // Verify file paths are correctly updated
-        _vfs.Index[newFileAtC].Path.Value.Should().Be("vfs://a/b/renamed_c/file_c.txt");
-        _vfs.Index[newFileAtD].Path.Value.Should().Be("vfs://a/b/renamed_c/d/file_d.txt");
-        _vfs.Index[newFileAtE].Path.Value.Should().Be("vfs://a/b/renamed_c/d/e/file_e.txt");
-        _vfs.Index[newFileInSubdirC].Path.Value.Should().Be("vfs://a/b/renamed_c/subdir_c/nested.txt");
-        _vfs.Index[newFileInSubdirE].Path.Value.Should().Be("vfs://a/b/renamed_c/d/e/subdir_e/deep.txt");
+        _vfs.Index[newFileAtC].Path.Value.ShouldBe("vfs://a/b/renamed_c/file_c.txt");
+        _vfs.Index[newFileAtD].Path.Value.ShouldBe("vfs://a/b/renamed_c/d/file_d.txt");
+        _vfs.Index[newFileAtE].Path.Value.ShouldBe("vfs://a/b/renamed_c/d/e/file_e.txt");
+        _vfs.Index[newFileInSubdirC].Path.Value.ShouldBe("vfs://a/b/renamed_c/subdir_c/nested.txt");
+        _vfs.Index[newFileInSubdirE].Path.Value.ShouldBe("vfs://a/b/renamed_c/d/e/subdir_e/deep.txt");
 
         // Verify directory paths are correctly updated
-        _vfs.Index[new VFSDirectoryPath("vfs://a/b/renamed_c")].Path.Value.Should().Be("vfs://a/b/renamed_c");
-        _vfs.Index[newSubdirAtC].Path.Value.Should().Be("vfs://a/b/renamed_c/subdir_c");
-        _vfs.Index[newSubdirAtE].Path.Value.Should().Be("vfs://a/b/renamed_c/d/e/subdir_e");
+        _vfs.Index[new VFSDirectoryPath("vfs://a/b/renamed_c")].Path.Value.ShouldBe("vfs://a/b/renamed_c");
+        _vfs.Index[newSubdirAtC].Path.Value.ShouldBe("vfs://a/b/renamed_c/subdir_c");
+        _vfs.Index[newSubdirAtE].Path.Value.ShouldBe("vfs://a/b/renamed_c/d/e/subdir_e");
     }
 
     [Fact]
@@ -305,8 +304,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         );
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The node 'vfs://dir1/dir2/existing' already exists in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The node 'vfs://dir1/dir2/existing' already exists in the index.");
     }
 }

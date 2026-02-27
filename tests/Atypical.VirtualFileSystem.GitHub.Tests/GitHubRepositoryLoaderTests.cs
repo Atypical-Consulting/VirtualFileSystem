@@ -32,9 +32,9 @@ public class GitHubRepositoryLoaderTests
         var result = _loader.TryParseGitHubUrl(url, out var owner, out var repo);
 
         // Assert
-        result.Should().BeTrue();
-        owner.Should().Be(expectedOwner);
-        repo.Should().Be(expectedRepo);
+        result.ShouldBeTrue();
+        owner.ShouldBe(expectedOwner);
+        repo.ShouldBe(expectedRepo);
     }
 
     [Theory]
@@ -52,9 +52,9 @@ public class GitHubRepositoryLoaderTests
         var result = _loader.TryParseGitHubUrl(url!, out var owner, out var repo);
 
         // Assert
-        result.Should().BeFalse();
-        owner.Should().BeEmpty();
-        repo.Should().BeEmpty();
+        result.ShouldBeFalse();
+        owner.ShouldBeEmpty();
+        repo.ShouldBeEmpty();
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class GitHubRepositoryLoaderTests
     {
         // Act & Assert
         var action = () => new GitHubRepositoryLoader();
-        action.Should().NotThrow();
+        action.ShouldNotThrow();
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class GitHubRepositoryLoaderTests
     {
         // Act & Assert
         var action = () => new GitHubRepositoryLoader("test-token");
-        action.Should().NotThrow();
+        action.ShouldNotThrow();
     }
 
     [Fact]
@@ -84,7 +84,7 @@ public class GitHubRepositoryLoaderTests
 
         // Act & Assert
         var action = () => new GitHubRepositoryLoader(options);
-        action.Should().NotThrow();
+        action.ShouldNotThrow();
     }
 
     [Fact]
@@ -94,8 +94,8 @@ public class GitHubRepositoryLoaderTests
         var action = () => _loader.LoadRepositoryAsync(null!, "owner", "repo");
 
         // Assert
-        await action.Should().ThrowAsync<ArgumentNullException>()
-            .WithParameterName("vfs");
+        var ex = await Should.ThrowAsync<ArgumentNullException>(action);
+        ex.ParamName.ShouldBe("vfs");
     }
 
     [Theory]
@@ -111,8 +111,8 @@ public class GitHubRepositoryLoaderTests
         var action = () => _loader.LoadRepositoryAsync(vfs, owner!, "repo");
 
         // Assert
-        await action.Should().ThrowAsync<ArgumentException>()
-            .WithParameterName("owner");
+        var ex = await Should.ThrowAsync<ArgumentException>(action);
+        ex.ParamName.ShouldBe("owner");
     }
 
     [Theory]
@@ -128,8 +128,8 @@ public class GitHubRepositoryLoaderTests
         var action = () => _loader.LoadRepositoryAsync(vfs, "owner", repository!);
 
         // Assert
-        await action.Should().ThrowAsync<ArgumentException>()
-            .WithParameterName("repository");
+        var ex = await Should.ThrowAsync<ArgumentException>(action);
+        ex.ParamName.ShouldBe("repository");
     }
 
     [Fact]
@@ -142,8 +142,8 @@ public class GitHubRepositoryLoaderTests
         var action = () => _loader.LoadRepositoryFromUrlAsync(vfs, "not-a-valid-url");
 
         // Assert
-        await action.Should().ThrowAsync<ArgumentException>()
-            .WithParameterName("repositoryUrl");
+        var ex = await Should.ThrowAsync<ArgumentException>(action);
+        ex.ParamName.ShouldBe("repositoryUrl");
     }
 
     [Fact]
@@ -159,7 +159,7 @@ public class GitHubRepositoryLoaderTests
             "non-existent-repo-67890");
 
         // Assert
-        success.Should().BeFalse();
-        result.Should().BeNull();
+        success.ShouldBeFalse();
+        result.ShouldBeNull();
     }
 }

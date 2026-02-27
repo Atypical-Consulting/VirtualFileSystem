@@ -20,11 +20,11 @@ public static class RootNodeTests
             var rootNode = new RootNode();
 
             // Assert
-            rootNode.Should().NotBeNull();
-            rootNode.Directories.Should().BeEmpty();
-            rootNode.Files.Should().BeEmpty();
-            rootNode.Path.Value.Should().Be(expectedPath);
-            rootNode.Path.Parent.Should().BeNull();
+            rootNode.ShouldNotBeNull();
+            rootNode.Directories.ShouldBeEmpty();
+            rootNode.Files.ShouldBeEmpty();
+            rootNode.Path.Value.ShouldBe(expectedPath);
+            rootNode.Path.Parent.ShouldBeNull();
         }
     }
 
@@ -35,7 +35,7 @@ public static class RootNodeTests
         {
             var rootNode = new RootNode();
 
-            rootNode.ToString().Should().Be("vfs://");
+            rootNode.ToString().ShouldBe("vfs://");
         }
     }
 }

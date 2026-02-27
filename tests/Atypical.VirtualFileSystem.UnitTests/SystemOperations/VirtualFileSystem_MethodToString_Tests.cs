@@ -20,6 +20,6 @@ public class VirtualFileSystem_MethodToString_Tests : VirtualFileSystemTestsBase
         var result = vfs.ToString();
 
         // Assert
-        result.Should().Be(expected);
+        result.ShouldBe(expected);
     }
 }

@@ -23,11 +23,11 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateBinaryFile(filePath, binaryContent);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists(filePath).ShouldBeTrue();
         var file = vfs.GetFile(filePath);
-        file.Content.Should().StartWith("[BINARY:");
-        file.Content.Should().EndWith("]");
+        file.Content.ShouldStartWith("[BINARY:");
+        file.Content.ShouldEndWith("]");
     }
 
     [Fact]
@@ -42,8 +42,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateBinaryFile(filePath, binaryContent);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -58,10 +58,10 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateBinaryFileWithDirectories(filePath, binaryContent);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.DirectoryExists("/docs").Should().BeTrue();
-        vfs.DirectoryExists("/docs/binary").Should().BeTrue();
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.DirectoryExists("/docs").ShouldBeTrue();
+        vfs.DirectoryExists("/docs/binary").ShouldBeTrue();
+        vfs.FileExists(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -76,8 +76,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateBinaryFileWithDirectories(filePath, binaryContent);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -93,8 +93,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.CreateBinaryFileFromBase64(filePath, base64Content);
 
         // Assert
-        result.Should().BeSameAs(vfs);
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeSameAs(vfs);
+        vfs.FileExists(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -107,8 +107,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
 
         // Act & Assert
         var action = () => vfs.CreateBinaryFileFromBase64(filePath, invalidBase64);
-        action.Should().Throw<FormatException>()
-            .WithMessage($"Invalid base64 string provided for file '{filePath}'.");
+        var ex = Should.Throw<FormatException>(action);
+        ex.Message.ShouldBe($"Invalid base64 string provided for file '{filePath}'.");
     }
 
     [Fact]
@@ -123,8 +123,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryCreateBinaryFile(filePath, binaryContent);
 
         // Assert
-        result.Should().BeTrue();
-        vfs.FileExists(filePath).Should().BeTrue();
+        result.ShouldBeTrue();
+        vfs.FileExists(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -140,7 +140,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryCreateBinaryFile(filePath, binaryContent);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -156,9 +156,9 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryReadBinaryFile(filePath, out var readContent);
 
         // Assert
-        result.Should().BeTrue();
-        readContent.Should().NotBeNull();
-        readContent.Should().BeEquivalentTo(originalContent);
+        result.ShouldBeTrue();
+        readContent.ShouldNotBeNull();
+        readContent.ShouldBe(originalContent);
     }
 
     [Fact]
@@ -172,8 +172,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryReadBinaryFile(filePath, out var content);
 
         // Assert
-        result.Should().BeFalse();
-        content.Should().BeNull();
+        result.ShouldBeFalse();
+        content.ShouldBeNull();
     }
 
     [Fact]
@@ -188,8 +188,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryReadBinaryFile(filePath, out var content);
 
         // Assert
-        result.Should().BeFalse();
-        content.Should().BeNull();
+        result.ShouldBeFalse();
+        content.ShouldBeNull();
     }
 
     [Fact]
@@ -206,9 +206,9 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryWriteBinaryFile(filePath, newContent);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
         vfs.TryReadBinaryFile(filePath, out var readContent);
-        readContent.Should().BeEquivalentTo(newContent);
+        readContent.ShouldBe(newContent);
     }
 
     [Fact]
@@ -223,7 +223,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.TryWriteBinaryFile(filePath, content);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -239,7 +239,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.IsBinaryFile(filePath);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -254,7 +254,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.IsBinaryFile(filePath);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -268,7 +268,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.IsBinaryFile(filePath);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -284,7 +284,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var size = vfs.GetFileSize(filePath);
 
         // Assert
-        size.Should().BeGreaterThan(0); // Size will be the base64 representation
+        size.ShouldBeGreaterThan(0); // Size will be the base64 representation
     }
 
     [Fact]
@@ -300,7 +300,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var size = vfs.GetFileSize(filePath);
 
         // Assert
-        size.Should().Be(11); // "Hello World" is 11 bytes in UTF-8
+        size.ShouldBe(11); // "Hello World" is 11 bytes in UTF-8
     }
 
     [Fact]
@@ -314,7 +314,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var size = vfs.GetFileSize(filePath);
 
         // Assert
-        size.Should().Be(-1);
+        size.ShouldBe(-1);
     }
 
     [Fact]
@@ -330,8 +330,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToBinary(filePath);
 
         // Assert
-        result.Should().BeTrue();
-        vfs.IsBinaryFile(filePath).Should().BeTrue();
+        result.ShouldBeTrue();
+        vfs.IsBinaryFile(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -347,8 +347,8 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToBinary(filePath, System.Text.Encoding.ASCII);
 
         // Assert
-        result.Should().BeTrue();
-        vfs.IsBinaryFile(filePath).Should().BeTrue();
+        result.ShouldBeTrue();
+        vfs.IsBinaryFile(filePath).ShouldBeTrue();
     }
 
     [Fact]
@@ -362,7 +362,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToBinary(filePath);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -379,9 +379,9 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToText(filePath);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
         var file = vfs.GetFile(filePath);
-        file.Content.Should().Contain(originalText);
+        file.Content.ShouldContain(originalText);
     }
 
     [Fact]
@@ -399,7 +399,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToText(filePath, encoding);
 
         // Assert
-        result.Should().BeTrue();
+        result.ShouldBeTrue();
     }
 
     [Fact]
@@ -414,7 +414,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var result = vfs.ConvertToText(filePath);
 
         // Assert
-        result.Should().BeFalse();
+        result.ShouldBeFalse();
     }
 
     [Fact]
@@ -430,13 +430,13 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var fileInfo = vfs.GetFileInfo(filePath);
 
         // Assert
-        fileInfo.Should().NotBeNull();
-        fileInfo!.Path.Should().Be(filePath);
-        fileInfo.IsBinary.Should().BeFalse();
-        fileInfo.SizeInBytes.Should().Be(11);
-        fileInfo.FileType.Should().Be("Text");
-        fileInfo.CreationTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(3));
-        fileInfo.LastWriteTime.Should().BeCloseTo(DateTime.Now, TimeSpan.FromHours(3));
+        fileInfo.ShouldNotBeNull();
+        fileInfo!.Path.ShouldBe(filePath);
+        fileInfo.IsBinary.ShouldBeFalse();
+        fileInfo.SizeInBytes.ShouldBe(11);
+        fileInfo.FileType.ShouldBe("Text");
+        (DateTime.Now - fileInfo.CreationTime).ShouldBeLessThan(TimeSpan.FromHours(3));
+        (DateTime.Now - fileInfo.LastWriteTime).ShouldBeLessThan(TimeSpan.FromHours(3));
     }
 
     [Fact]
@@ -452,10 +452,10 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var fileInfo = vfs.GetFileInfo(filePath);
 
         // Assert
-        fileInfo.Should().NotBeNull();
-        fileInfo!.Path.Should().Be(filePath);
-        fileInfo.IsBinary.Should().BeTrue();
-        fileInfo.FileType.Should().Be("Binary");
+        fileInfo.ShouldNotBeNull();
+        fileInfo!.Path.ShouldBe(filePath);
+        fileInfo.IsBinary.ShouldBeTrue();
+        fileInfo.FileType.ShouldBe("Binary");
     }
 
     [Fact]
@@ -469,7 +469,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var fileInfo = vfs.GetFileInfo(filePath);
 
         // Assert
-        fileInfo.Should().BeNull();
+        fileInfo.ShouldBeNull();
     }
 
     [Theory]
@@ -492,7 +492,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
         var sizeString = fileInfo.SizeString;
 
         // Assert
-        sizeString.Should().Be(expected);
+        sizeString.ShouldBe(expected);
     }
 
     [Fact]
@@ -505,7 +505,7 @@ public class VFSBinaryExtensionsTests : VirtualFileSystemTestsBase
             "/test.bin", true, 100, DateTime.Now, DateTime.Now);
 
         // Act & Assert
-        textFileInfo.FileType.Should().Be("Text");
-        binaryFileInfo.FileType.Should().Be("Binary");
+        textFileInfo.FileType.ShouldBe("Text");
+        binaryFileInfo.FileType.ShouldBe("Binary");
     }
 }

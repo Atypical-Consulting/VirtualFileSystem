@@ -14,9 +14,9 @@ public class VirtualFileSystem_MethodTryGetDirectory_Tests : VirtualFileSystemTe
         var result = vfs.TryGetDirectory(directoryPath, out var directory);
 
         // Assert
-        result.Should().BeTrue();
-        directory.Should().NotBeNull();
-        directory!.Path.Value.Should().Be("vfs://dir1/dir2/dir3");
+        result.ShouldBeTrue();
+        directory.ShouldNotBeNull();
+        directory!.Path.Value.ShouldBe("vfs://dir1/dir2/dir3");
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public class VirtualFileSystem_MethodTryGetDirectory_Tests : VirtualFileSystemTe
         var result = vfs.TryGetDirectory(directoryPath, out var directory);
 
         // Assert
-        result.Should().BeFalse();
-        directory.Should().BeNull();
+        result.ShouldBeFalse();
+        directory.ShouldBeNull();
     }
 }

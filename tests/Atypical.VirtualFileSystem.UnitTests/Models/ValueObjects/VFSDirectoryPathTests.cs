@@ -29,9 +29,8 @@ public static class VFSDirectoryPathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("An empty path is invalid.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("An empty path is invalid.");
         }
 
         [Fact]
@@ -47,9 +46,8 @@ public static class VFSDirectoryPathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("An empty path is invalid.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("An empty path is invalid.");
         }
 
         [Fact]
@@ -65,9 +63,8 @@ public static class VFSDirectoryPathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("The path 'vfs://invalid/../path' contains a relative path segment.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("The path 'vfs://invalid/../path' contains a relative path segment.");
         }
 
         [Fact]
@@ -83,9 +80,8 @@ public static class VFSDirectoryPathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("The path 'vfs://invalid//path' is invalid.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("The path 'vfs://invalid//path' is invalid.");
         }
 
         [Fact]
@@ -101,9 +97,8 @@ public static class VFSDirectoryPathTests
             };
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage("The directory path 'invalid/path.txt' contains a file extension.");
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe("The directory path 'invalid/path.txt' contains a file extension.");
         }
 
         [Fact]
@@ -117,8 +112,8 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -132,8 +127,8 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -147,8 +142,8 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -162,8 +157,8 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
         }
         
         
@@ -178,8 +173,8 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -193,8 +188,8 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
         
         [Fact]
@@ -208,8 +203,8 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -223,8 +218,8 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Value.Should().NotBeNull();
-            vfsPath.Value.Should().Be(expectedPath);
+            vfsPath.Value.ShouldNotBeNull();
+            vfsPath.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -238,10 +233,10 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
-            directoryPath.IsRoot.Should().BeTrue();
-            directoryPath.Parent.Should().BeNull();
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
+            directoryPath.IsRoot.ShouldBeTrue();
+            directoryPath.Parent.ShouldBeNull();
         }
 
         [Fact]
@@ -255,11 +250,11 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
-            directoryPath.IsRoot.Should().BeFalse();
-            directoryPath.Parent.Should().NotBeNull();
-            directoryPath.Parent!.Value.Should().Be("vfs://");
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
+            directoryPath.IsRoot.ShouldBeFalse();
+            directoryPath.Parent.ShouldNotBeNull();
+            directoryPath.Parent!.Value.ShouldBe("vfs://");
         }
 
         [Fact]
@@ -273,11 +268,11 @@ public static class VFSDirectoryPathTests
             var directoryPath = new VFSDirectoryPath(path);
 
             // Assert
-            directoryPath.Should().NotBeNull();
-            directoryPath.Value.Should().Be(expectedPath);
-            directoryPath.IsRoot.Should().BeFalse();
-            directoryPath.Parent.Should().NotBeNull();
-            directoryPath.Parent!.Value.Should().Be("vfs://valid");
+            directoryPath.ShouldNotBeNull();
+            directoryPath.Value.ShouldBe(expectedPath);
+            directoryPath.IsRoot.ShouldBeFalse();
+            directoryPath.Parent.ShouldNotBeNull();
+            directoryPath.Parent!.Value.ShouldBe("vfs://valid");
         }
     }
 
@@ -294,7 +289,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Name.Should().Be(expectedName);
+            vfsPath.Name.ShouldBe(expectedName);
         }
     }
 
@@ -310,7 +305,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Depth.Should().Be(0);
+            vfsPath.Depth.ShouldBe(0);
         }
 
         [Fact]
@@ -323,7 +318,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Depth.Should().Be(1);
+            vfsPath.Depth.ShouldBe(1);
         }
 
         [Fact]
@@ -336,7 +331,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Depth.Should().Be(2);
+            vfsPath.Depth.ShouldBe(2);
         }
 
         [Fact]
@@ -349,7 +344,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Depth.Should().Be(3);
+            vfsPath.Depth.ShouldBe(3);
         }
     }
 
@@ -365,7 +360,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.HasParent.Should().BeFalse();
+            vfsPath.HasParent.ShouldBeFalse();
         }
 
         [Fact]
@@ -378,7 +373,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.HasParent.Should().BeTrue();
+            vfsPath.HasParent.ShouldBeTrue();
         }
     }
 
@@ -394,7 +389,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Parent.Should().BeNull();
+            vfsPath.Parent.ShouldBeNull();
         }
         
         [Fact]
@@ -408,8 +403,8 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.Parent.Should().NotBeNull();
-            vfsPath.Parent!.Value.Should().Be(expectedParentPath);
+            vfsPath.Parent.ShouldNotBeNull();
+            vfsPath.Parent!.Value.ShouldBe(expectedParentPath);
         }
     }
 
@@ -427,8 +422,8 @@ public static class VFSDirectoryPathTests
             var parent = vfsPath.GetAbsoluteParentPath(0);
 
             // Assert
-            parent.Should().NotBeNull();
-            parent.Value.Should().Be(expectedPath);
+            parent.ShouldNotBeNull();
+            parent.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -442,12 +437,11 @@ public static class VFSDirectoryPathTests
             Action action = () => vfsPath.GetAbsoluteParentPath(-1);
 
             // Assert
-            action.Should()
-                .Throw<VirtualFileSystemException>()
-                .WithMessage($"""
-                    The depth from root must be greater than or equal to 0.
-                    Actual value: {-1}.
-                    """);
+            var ex = Should.Throw<VirtualFileSystemException>(action);
+            ex.Message.ShouldBe($"""
+                The depth from root must be greater than or equal to 0.
+                Actual value: {-1}.
+                """);
         }
 
         [Fact]
@@ -462,8 +456,8 @@ public static class VFSDirectoryPathTests
             var parent = vfsPath.GetAbsoluteParentPath(0);
 
             // Assert
-            parent.Should().NotBeNull();
-            parent.Value.Should().Be(expectedPath);
+            parent.ShouldNotBeNull();
+            parent.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -478,8 +472,8 @@ public static class VFSDirectoryPathTests
             var parent = vfsPath.GetAbsoluteParentPath(1);
 
             // Assert
-            parent.Should().NotBeNull();
-            parent.Value.Should().Be(expectedPath);
+            parent.ShouldNotBeNull();
+            parent.Value.ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -494,8 +488,8 @@ public static class VFSDirectoryPathTests
             var parent = vfsPath.GetAbsoluteParentPath(2);
 
             // Assert
-            parent.Should().NotBeNull();
-            parent.Value.Should().Be(expectedPath);
+            parent.ShouldNotBeNull();
+            parent.Value.ShouldBe(expectedPath);
         }
     }
 
@@ -513,7 +507,7 @@ public static class VFSDirectoryPathTests
             var result = directoryPath.ToString();
 
             // Assert
-            result.Should().Be(expectedPath);
+            result.ShouldBe(expectedPath);
         }
         
         [Fact]
@@ -527,7 +521,7 @@ public static class VFSDirectoryPathTests
             var vfsPath = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath.ToString().Should().Be(expectedPath);
+            vfsPath.ToString().ShouldBe(expectedPath);
         }
 
         [Fact]
@@ -541,7 +535,7 @@ public static class VFSDirectoryPathTests
             var result = directoryPath.ToString();
 
             // Assert
-            result.Should().Be($"vfs://{path}");
+            result.ShouldBe($"vfs://{path}");
         }
     }
 
@@ -558,7 +552,7 @@ public static class VFSDirectoryPathTests
             string result = directoryPath;
 
             // Assert
-            result.Should().Be(expectedPath);
+            result.ShouldBe(expectedPath);
         }
     }
 
@@ -575,7 +569,7 @@ public static class VFSDirectoryPathTests
             var result = directoryPath1.Equals(directoryPath2);
 
             // Assert
-            result.Should().BeTrue();
+            result.ShouldBeTrue();
         }
 
         [Fact]
@@ -588,7 +582,7 @@ public static class VFSDirectoryPathTests
             var vfsPath1 = new VFSDirectoryPath(path);
 
             // Assert
-            vfsPath1.Equals(vfsPath1).Should().BeTrue();
+            vfsPath1.Equals(vfsPath1).ShouldBeTrue();
         }
 
         [Fact]
@@ -603,7 +597,7 @@ public static class VFSDirectoryPathTests
             var vfsPath2 = new VFSDirectoryPath(path2);
 
             // Assert
-            vfsPath1.Equals(vfsPath2).Should().BeFalse();
+            vfsPath1.Equals(vfsPath2).ShouldBeFalse();
         }
 
         [Fact]
@@ -618,7 +612,7 @@ public static class VFSDirectoryPathTests
             var vfsPath2 = new VFSFilePath(path2);
 
             // Assert
-            vfsPath1.Equals(vfsPath2).Should().BeFalse();
+            vfsPath1.Equals(vfsPath2).ShouldBeFalse();
         }
     }
 }

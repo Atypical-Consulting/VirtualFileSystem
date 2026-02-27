@@ -18,7 +18,7 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         Act();
 
         // Assert
-        _vfs.IsEmpty.Should().BeTrue();
+        _vfs.IsEmpty.ShouldBeTrue();
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         _vfs.DeleteDirectory(ancestorPath);
 
         // Assert
-        _vfs.IsEmpty.Should().BeTrue();
+        _vfs.IsEmpty.ShouldBeTrue();
     }
 
     [Fact]
@@ -43,9 +43,8 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         var action = Act;
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The directory 'vfs://dir1' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The directory 'vfs://dir1' does not exist in the index.");
     }
         
     [Fact]
@@ -58,9 +57,8 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         var action = () => Act();
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("Cannot delete the root directory.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("Cannot delete the root directory.");
     }
     
     [Fact]
@@ -73,14 +71,14 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         _vfs.DirectoryDeleted += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(_directoryPath);
+            args.Path.ShouldBe(_directoryPath);
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -96,8 +94,8 @@ public class VirtualFileSystem_MethodDeleteDirectory_Tests : VirtualFileSystemTe
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(2);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(2);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }

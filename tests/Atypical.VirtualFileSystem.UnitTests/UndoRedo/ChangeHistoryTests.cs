@@ -14,8 +14,8 @@ public class ChangeHistoryTests
         vfs.ChangeHistory.AddChange(change);
 
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().Contain(change);
-        vfs.ChangeHistory.RedoStack.Should().NotContain(change);
+        vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        vfs.ChangeHistory.RedoStack.ShouldNotContain(change);
     }
 
     [Fact]
@@ -34,8 +34,8 @@ public class ChangeHistoryTests
         vfs.ChangeHistory.Undo();
 
         // Assert
-        vfs.ChangeHistory.UndoStack.Should().BeEmpty();
-        vfs.ChangeHistory.RedoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.UndoStack.ShouldBeEmpty();
+        vfs.ChangeHistory.RedoStack.Count.ShouldBe(1);
     }
 
     [Fact]
@@ -57,8 +57,8 @@ public class ChangeHistoryTests
         vfs.ChangeHistory.Redo();
 
         // Assert
-        vfs.ChangeHistory.RedoStack.Should().BeEmpty();
-        vfs.ChangeHistory.UndoStack.Should().HaveCount(1);
+        vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
+        vfs.ChangeHistory.UndoStack.Count.ShouldBe(1);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class ChangeHistoryTests
         vfs.CreateFile(filePath);
 
         // Assert
-        changeHistory.UndoStack.Should().BeEmpty();
+        changeHistory.UndoStack.ShouldBeEmpty();
     }
 }
     

@@ -14,8 +14,8 @@ public class VirtualFileSystem_MethodGetFile_Tests : VirtualFileSystemTestsBase
         var file = vfs.GetFile(filePath);
 
         // Assert
-        file.Should().NotBeNull();
-        file.Path.Value.Should().Be("vfs://dir1/dir2/dir3/file.txt");
+        file.ShouldNotBeNull();
+        file.Path.Value.ShouldBe("vfs://dir1/dir2/dir3/file.txt");
     }
 
     [Fact]
@@ -29,6 +29,6 @@ public class VirtualFileSystem_MethodGetFile_Tests : VirtualFileSystemTestsBase
         Action action = () => vfs.GetFile(filePath);
 
         // Assert
-        action.Should().Throw<KeyNotFoundException>();
+        Should.Throw<KeyNotFoundException>(action);
     }
 }

@@ -17,7 +17,7 @@ public static class VirtualFileSystemFactoryTests
             var virtualFileSystemFactory = new VirtualFileSystemFactory();
 
             // Assert
-            virtualFileSystemFactory.Should().NotBeNull();
+            virtualFileSystemFactory.ShouldNotBeNull();
         }
     }
 
@@ -33,9 +33,9 @@ public static class VirtualFileSystemFactoryTests
             var virtualFileSystem = virtualFileSystemFactory.CreateFileSystem();
 
             // Assert
-            virtualFileSystem.Should().NotBeNull();
-            virtualFileSystem.Root.Should().NotBeNull();
-            virtualFileSystem.Root.Path.Value.Should().Be("vfs://");
+            virtualFileSystem.ShouldNotBeNull();
+            virtualFileSystem.Root.ShouldNotBeNull();
+            virtualFileSystem.Root.Path.Value.ShouldBe("vfs://");
         }
     }
 }

@@ -13,8 +13,8 @@ public class VirtualFileSystem_MethodGetDirectory_Tests : VirtualFileSystemTests
         var root = vfs.GetDirectory(rootPath);
 
         // Assert
-        root.Should().NotBeNull();
-        root.Path.Value.Should().Be("vfs://");
+        root.ShouldNotBeNull();
+        root.Path.Value.ShouldBe("vfs://");
     }
 
     [Fact]
@@ -29,8 +29,8 @@ public class VirtualFileSystem_MethodGetDirectory_Tests : VirtualFileSystemTests
         var directory = vfs.GetDirectory(directoryPath);
 
         // Assert
-        directory.Should().NotBeNull();
-        directory.Path.Value.Should().Be("vfs://dir1/dir2/dir3");
+        directory.ShouldNotBeNull();
+        directory.Path.Value.ShouldBe("vfs://dir1/dir2/dir3");
     }
 
     [Fact]
@@ -44,6 +44,6 @@ public class VirtualFileSystem_MethodGetDirectory_Tests : VirtualFileSystemTests
         Action action = () => vfs.GetDirectory(directoryPath);
 
         // Assert
-        action.Should().Throw<KeyNotFoundException>();
+        Should.Throw<KeyNotFoundException>(action);
     }
 }

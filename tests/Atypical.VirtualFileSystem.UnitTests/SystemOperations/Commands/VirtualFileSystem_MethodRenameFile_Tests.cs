@@ -21,11 +21,11 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         Act();
 
         // Assert
-        _vfs.Index.Count.Should().Be(indexLength);
-        _vfs.Index.RawIndex.Should().NotContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
-        _vfs.Index.RawIndex.Should().ContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt"));
-        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].IsFile.Should().BeTrue();
-        _vfs.GetTree().Should().NotBe(tree);
+        _vfs.Index.Count.ShouldBe(indexLength);
+        _vfs.Index.RawIndex.ShouldNotContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/file.txt"));
+        _vfs.Index.RawIndex.ShouldContainKey(new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt"));
+        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].IsFile.ShouldBeTrue();
+        _vfs.GetTree().ShouldNotBe(tree);
     }
         
     [Fact]
@@ -39,7 +39,7 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
 
         // Assert
         _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].Path.Value
-            .Should().Be("vfs://dir1/dir2/dir3/new_file.txt");
+            .ShouldBe("vfs://dir1/dir2/dir3/new_file.txt");
     }
         
     [Fact]
@@ -56,9 +56,9 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         Act();
 
         // Assert
-        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].CreationTime.Should().Be(creationTime);
-        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastAccessTime.Should().Be(lastAccessTime);
-        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastWriteTime.Should().NotBe(lastWriteTime);
+        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].CreationTime.ShouldBe(creationTime);
+        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastAccessTime.ShouldBe(lastAccessTime);
+        _vfs.Index[new VFSFilePath("vfs://dir1/dir2/dir3/new_file.txt")].LastWriteTime.ShouldNotBe(lastWriteTime);
     }
         
     [Fact]
@@ -68,9 +68,8 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         Action action = () => Act();
 
         // Assert
-        action.Should()
-            .Throw<VirtualFileSystemException>()
-            .WithMessage("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
+        var ex = Should.Throw<VirtualFileSystemException>(action);
+        ex.Message.ShouldBe("The file 'vfs://dir1/dir2/dir3/file.txt' does not exist in the index.");
     }
     
     [Fact]
@@ -83,15 +82,15 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         _vfs.FileRenamed += args => 
         {
             eventRaised = true;
-            args.Path.Should().Be(_filePath);
-            args.NewName.Should().Be("vfs://dir1/dir2/dir3/new_file.txt");
+            args.Path.ShouldBe(_filePath);
+            args.NewName.ShouldBe("vfs://dir1/dir2/dir3/new_file.txt");
         };
 
         // Act
         Act();
 
         // Assert
-        eventRaised.Should().BeTrue();
+        eventRaised.ShouldBeTrue();
     }
     
     [Fact]
@@ -107,8 +106,8 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         var change = _vfs.ChangeHistory.UndoStack.First();
         
         // Assert
-        _vfs.ChangeHistory.UndoStack.Should().ContainEquivalentOf(change);
-        _vfs.ChangeHistory.UndoStack.Should().HaveCount(5);
-        _vfs.ChangeHistory.RedoStack.Should().BeEmpty();
+        _vfs.ChangeHistory.UndoStack.ShouldContain(change);
+        _vfs.ChangeHistory.UndoStack.Count.ShouldBe(5);
+        _vfs.ChangeHistory.RedoStack.ShouldBeEmpty();
     }
 }
