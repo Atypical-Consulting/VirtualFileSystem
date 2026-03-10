@@ -1,0 +1,109 @@
+{
+  "performance_optimizations": [
+    {
+      "id": "perf-001",
+      "type": "performance_optimizations",
+      "title": "Cache Depth property in VFSPath to avoid repeated parent chain traversal",
+      "description": "The `VFSPath.Depth` property computes depth by walking the parent chain from the current node to root on every access. For deeply nested paths, this is O(d) where d is depth, and the computation happens every time the property is accessed.",
+      "rationale": "The Depth property is used in GetTree() which iterates over all nodes. For a VFS with n nodes and average depth d, GetTree() becomes O(n*d) just for depth calculations. Since paths are immutable (records), the depth never changes after construction.",
+      "category": "runtime",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSPath.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.GetTree.cs"
+      ],
+      "currentMetric": "O(d) per Depth access, O(n*d) in GetTree()",
+      "expectedImprovement": "O(1) per Depth access after caching, reducing GetTree() to O(n) for depth calculations",
+      "implementation": "1. Add a private readonly int _depth field to VFSPath\n2. Compute depth once during construction by counting '/' separators (O(1) string scan)\n3. Return cached value from Depth property getter\n4. Alternative: Use lazy initialization with Lazy<int> if depth is rarely accessed",
+      "tradeoffs": "Adds 4 bytes per VFSPath instance for cached depth value. For typical use cases with thousands of paths, this is negligible.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-002",
+      "type": "performance_optimizations",
+      "title": "Optimize GetTree() from O(n²) to O(n) by pre-grouping siblings",
+      "description": "The `GetTree()` method calls `GetBrothers()` inside a loop over all nodes. `GetBrothers()` iterates through all Index.Values to find siblings, making GetTree() O(n²) complexity.",
+      "rationale": "GetTree() is called to visualize the entire file system structure. For a VFS with 1000 nodes, this results in ~1,000,000 operations. With 10,000 nodes, it's 100,000,000 operations. This becomes noticeably slow for larger file systems.",
+      "category": "runtime",
+      "impact": "high",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.GetTree.cs"
+      ],
+      "currentMetric": "O(n²) complexity in GetTree()",
+      "expectedImprovement": "O(n) complexity - linear time regardless of VFS size, ~1000x faster for 1000 nodes",
+      "implementation": "1. Pre-compute sibling groups before the loop using: `var siblingGroups = Index.Values.GroupBy(n => n.Path.Parent).ToDictionary(g => g.Key, g => g.ToList())`\n2. Pre-compute last sibling for each parent: `var lastSiblings = siblingGroups.ToDictionary(g => g.Key, g => g.Value.Last())`\n3. Replace GetBrothers() calls with dictionary lookups\n4. Use a single pass with proper indentation tracking",
+      "tradeoffs": "Uses additional memory for sibling groups dictionary during tree generation. Memory is released after method returns.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-003",
+      "type": "performance_optimizations",
+      "title": "Maintain separate file and directory collections in VFSIndex for O(1) access",
+      "description": "The `VFSIndex.Files` and `VFSIndex.Directories` properties use LINQ `OfType<>()` filtering on every access, which iterates through all values (O(n)). Additionally, `FilesCount` and `DirectoriesCount` call `Count()` on these enumerables, causing another full iteration.",
+      "rationale": "These properties are accessed frequently: in VFS.Files, VFS.Directories, FindFiles(), FindDirectories(), and ToString(). Each access triggers a full O(n) enumeration. For a VFS used in tight loops or with many queries, this adds up significantly.",
+      "category": "runtime",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSIndex.cs"
+      ],
+      "currentMetric": "O(n) per Files/Directories access, O(n) per Count access",
+      "expectedImprovement": "O(1) for count operations, O(f) or O(d) for enumeration where f=files count, d=directories count",
+      "implementation": "1. Add private HashSet<IFileNode> _files and HashSet<IDirectoryNode> _directories fields\n2. Update TryAdd() to add to appropriate collection based on node type\n3. Update Remove() to remove from appropriate collection\n4. Replace Files/Directories properties to return read-only views of these collections\n5. Replace FilesCount/DirectoriesCount to return _files.Count / _directories.Count",
+      "tradeoffs": "Increases memory footprint by storing additional references to nodes. Updates become slightly slower due to maintaining two additional collections.",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "perf-004",
+      "type": "performance_optimizations",
+      "title": "Avoid creating ImmutableList on every UndoStack/RedoStack property access",
+      "description": "The `ChangeHistory.UndoStack` and `RedoStack` properties create a new `ImmutableList<VFSEventArgs>` by calling `AddRange()` on every property access. This copies all elements O(n) each time the property is read.",
+      "rationale": "Users may frequently check the undo/redo stack state (e.g., to enable/disable UI buttons). Each access allocates a new immutable collection and copies all elements. For a history with 1000 operations, each access allocates and copies 1000 items.",
+      "category": "memory",
+      "impact": "medium",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs"
+      ],
+      "currentMetric": "O(n) allocation and copy per property access",
+      "expectedImprovement": "O(1) property access with no allocations when using read-only wrapper",
+      "implementation": "1. Change return type from IReadOnlyCollection<VFSEventArgs> to maintain a cached read-only view\n2. Option A: Return _undoStack.ToArray() and cache it (invalidate cache on push/pop)\n3. Option B: Use IReadOnlyCollection<VFSEventArgs> implemented by Stack<T> itself: `=> _undoStack;`\n4. Option C: Create a custom StackReadOnlyWrapper<T> that wraps the stack without copying\n5. If immutability is required for thread safety, consider using System.Collections.Immutable.ImmutableStack<T>",
+      "tradeoffs": "Option B exposes the internal Stack as IReadOnlyCollection (safe but could be cast back). Option C requires a new wrapper class. Choosing ImmutableStack changes internal implementation.",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "perf-005",
+      "type": "performance_optimizations",
+      "title": "Replace RawIndex property's ToImmutableSortedDictionary() with lazy caching",
+      "description": "The `VFSIndex.RawIndex` property calls `ToImmutableSortedDictionary()` on every access, which creates a complete copy of the underlying dictionary. This is O(n log n) for n entries.",
+      "rationale": "While RawIndex may not be accessed frequently, any access triggers expensive copying. If used in scenarios like serialization, debugging, or when comparing VFS states, this can cause significant performance degradation.",
+      "category": "memory",
+      "impact": "low",
+      "affectedAreas": [
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSIndex.cs"
+      ],
+      "currentMetric": "O(n log n) allocation and copy per RawIndex access",
+      "expectedImprovement": "O(1) for repeated accesses when cached, with invalidation on mutations",
+      "implementation": "1. Add private ImmutableSortedDictionary<VFSPath, IVirtualFileSystemNode>? _cachedRawIndex field\n2. In RawIndex getter, return cached value if not null, otherwise compute and cache\n3. Invalidate cache (set to null) in TryAdd(), Remove(), and indexer setters\n4. Alternative: Return a read-only wrapper around the SortedDictionary instead of immutable copy",
+      "tradeoffs": "Cache invalidation adds slight overhead to mutation operations. Cached immutable dictionary holds additional memory until next mutation. Read-only wrapper alternative doesn't provide true immutability guarantees.",
+      "estimatedEffort": "small"
+    }
+  ],
+  "metadata": {
+    "codebaseType": ".NET Library (C# 12)",
+    "targetFrameworks": [".NET 8.0", ".NET 9.0"],
+    "coreDataStructure": "SortedDictionary<VFSPath, IVirtualFileSystemNode>",
+    "filesAnalyzed": 25,
+    "criticalHotPaths": [
+      "VFSPath.Depth (computed property)",
+      "VFSIndex.Files/Directories (filtered enumeration)",
+      "VFS.GetTree() (quadratic complexity)",
+      "ChangeHistory.UndoStack/RedoStack (copying on access)"
+    ],
+    "potentialImprovements": {
+      "getTreeComplexity": "O(n²) → O(n)",
+      "depthLookup": "O(d) → O(1)",
+      "fileDirectoryAccess": "O(n) → O(1) for counts",
+      "memoryAllocations": "Significant reduction in repeated enumerable materializations"
+    },
+    "generatedAt": "2026-01-23T16:30:00Z"
+  }
+}

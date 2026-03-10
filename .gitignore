@@ -349,10 +349,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+
 # Auto Claude data directory
 .auto-claude/
-
-
 
 # Auto Claude generated files
 .auto-claude-security.json
@@ -361,3 +360,4 @@ MigrationBackup/
 .worktrees/
 .security-key
 logs/security/
+.auto-claude/.env

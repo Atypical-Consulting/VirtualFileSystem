@@ -1,0 +1,38 @@
+{
+  "existing_features": [],
+  "tech_stack": [],
+  "target_audience": ".NET developers who need to test code that interacts with the file system",
+  "planned_features": [
+    "File and Directory Permissions",
+    "File System Snapshots",
+    "Persistence and Serialization",
+    "File System Watch/Observer Pattern",
+    "Comprehensive Documentation Portal",
+    "Stream-Based Content API",
+    "Symbolic Links Support",
+    "Performance Benchmarks and Optimization",
+    "Exception Simulation System",
+    "System.IO.Abstractions Compatibility Layer",
+    "Cross-Platform Path Simulation",
+    "Copy File and Directory Operations",
+    "Fix Rename Directory Operation",
+    "File Version History",
+    "Custom Metadata Support",
+    "Recursive Directory Operations"
+  ],
+  "graph_hints": {},
+  "config": {
+    "enabled_types": [
+      "code_improvements",
+      "ui_ux_improvements",
+      "security_hardening",
+      "documentation_gaps",
+      "performance_optimizations",
+      "code_quality"
+    ],
+    "include_roadmap_context": true,
+    "include_kanban_context": true,
+    "max_ideas_per_type": 5
+  },
+  "created_at": "2026-01-23T16:26:31.973124"
+}

@@ -1,0 +1,139 @@
+{
+  "security_hardening": [
+    {
+      "id": "sec-001",
+      "type": "security_hardening",
+      "title": "Add Regex Timeout Protection to Prevent ReDoS Attacks",
+      "description": "Multiple methods in VFSSearchExtensions.cs and GitHubRepositoryLoader.cs create Regex objects from user-supplied glob patterns without timeout limits. Methods like ContainingPattern(), FindFilesByGlob(), FindDirectoriesByGlob(), and MatchGlobPattern() convert user input to regex patterns, which could be exploited for Regular Expression Denial of Service (ReDoS) attacks.",
+      "rationale": "Without timeout protection, specially crafted patterns can cause exponential backtracking in the regex engine, potentially hanging the application or consuming excessive CPU resources. This is a well-known denial of service vector.",
+      "category": "input_validation",
+      "severity": "medium",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSearchExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSPathExtensions.cs",
+        "src/Atypical.VirtualFileSystem.GitHub/GitHubRepositoryLoader.cs"
+      ],
+      "vulnerability": "CWE-1333: Inefficient Regular Expression Complexity",
+      "currentRisk": "Malicious glob patterns could cause CPU exhaustion when processing file searches",
+      "remediation": "Use Regex overloads that accept TimeSpan timeout parameter. In .NET, use new Regex(pattern, options, TimeSpan.FromSeconds(2)) to limit execution time. Also consider using source generators with [GeneratedRegex] where patterns are known at compile time.",
+      "references": [
+        "https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS",
+        "https://cwe.mitre.org/data/definitions/1333.html"
+      ],
+      "compliance": ["OWASP", "CWE"]
+    },
+    {
+      "id": "sec-002",
+      "type": "security_hardening",
+      "title": "Enable Deterministic Builds with Package Lock Files",
+      "description": "The project does not generate or use NuGet package lock files (packages.lock.json). Without lock files, the exact package versions resolved during build can vary, making builds non-deterministic and potentially vulnerable to supply chain attacks if package versions are compromised.",
+      "rationale": "Supply chain security is critical for open-source libraries. Lock files ensure that all builds use identical dependency versions, making it easier to detect if a dependency has been tampered with or maliciously updated.",
+      "category": "dependencies",
+      "severity": "medium",
+      "affectedFiles": [
+        "Directory.Build.props",
+        "src/Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj",
+        "src/Atypical.VirtualFileSystem.GitHub/Atypical.VirtualFileSystem.GitHub.csproj"
+      ],
+      "vulnerability": "CWE-1357: Reliance on Insufficiently Trustworthy Component",
+      "currentRisk": "Dependency resolution could pull in compromised package versions during CI/CD builds",
+      "remediation": "Add <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile> to Directory.Build.props. Generate lock files with 'dotnet restore --use-lock-file'. Commit packages.lock.json files to version control. In CI, use 'dotnet restore --locked-mode' to fail builds if lock file is out of date.",
+      "references": [
+        "https://devblogs.microsoft.com/nuget/enable-repeatable-package-restores-using-a-lock-file/",
+        "https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-lock-file"
+      ],
+      "compliance": ["SOC2", "SLSA"]
+    },
+    {
+      "id": "sec-003",
+      "type": "security_hardening",
+      "title": "Secure GitHub PAT Token Storage in Blazor Demo App",
+      "description": "The GitHubAuthService stores GitHub Personal Access Tokens (PATs) in browser localStorage using 'cloudDrive.storage.set'. localStorage is accessible to any JavaScript running on the same origin, making tokens vulnerable to XSS attacks. The token is also held in memory in plain text.",
+      "rationale": "GitHub PATs provide full access to user repositories and should be protected with defense-in-depth strategies. If an XSS vulnerability exists anywhere in the application, attackers could steal these tokens and gain unauthorized access to user GitHub accounts.",
+      "category": "secrets_management",
+      "severity": "high",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Services/GitHubAuthService.cs",
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Models/GitHubCredentials.cs"
+      ],
+      "vulnerability": "CWE-312: Cleartext Storage of Sensitive Information",
+      "currentRisk": "XSS attacks could extract GitHub PAT tokens from localStorage, enabling account takeover",
+      "remediation": "Consider using HttpOnly, Secure cookies with SameSite=Strict for token storage (requires server-side handling). Add token expiration handling. Display token scope warnings to users. Consider implementing GitHub OAuth device flow instead of PAT-based auth. At minimum, document the security implications to demo app users.",
+      "references": [
+        "https://owasp.org/www-community/HttpOnly",
+        "https://cwe.mitre.org/data/definitions/312.html",
+        "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps"
+      ],
+      "compliance": ["OWASP", "PCI-DSS"]
+    },
+    {
+      "id": "sec-004",
+      "type": "security_hardening",
+      "title": "Add Security Headers and Tighten AllowedHosts Configuration",
+      "description": "The Blazor demo application's appsettings.json has \"AllowedHosts\": \"*\" which accepts requests from any host. The application also lacks Content Security Policy (CSP) headers and other security headers that protect against common web attacks.",
+      "rationale": "Restrictive host filtering helps prevent DNS rebinding attacks. CSP headers provide defense-in-depth against XSS attacks, even if input validation fails. Security headers are a low-cost, high-value security measure.",
+      "category": "configuration",
+      "severity": "low",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/appsettings.json",
+        "src/Atypical.VirtualFileSystem.DemoBlazorApp/Program.cs"
+      ],
+      "vulnerability": "CWE-16: Configuration",
+      "currentRisk": "Application may be susceptible to DNS rebinding attacks and lacks defense-in-depth against XSS",
+      "remediation": "Change AllowedHosts to specific domains in production. Add security headers middleware: Content-Security-Policy, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Referrer-Policy: strict-origin-when-cross-origin. Example: app.Use(async (context, next) => { context.Response.Headers.Add(\"X-Content-Type-Options\", \"nosniff\"); await next(); });",
+      "references": [
+        "https://owasp.org/www-project-secure-headers/",
+        "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/host-filtering"
+      ],
+      "compliance": ["OWASP"]
+    },
+    {
+      "id": "sec-005",
+      "type": "security_hardening",
+      "title": "Strengthen Path Traversal Protection in VFS Path Handling",
+      "description": "While VFSPath constructor checks for './' relative path segments, the validation could be bypassed with certain edge cases. The path cleaning logic normalizes backslashes but doesn't explicitly validate against encoded path traversal sequences or double-encoded inputs.",
+      "rationale": "Path traversal vulnerabilities are a critical risk in any file system abstraction. Even though this is a virtual file system, consumers may use it to model real-world paths, and weak validation patterns could be copied to production code.",
+      "category": "input_validation",
+      "severity": "low",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSPath.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSFilePath.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/VFSDirectoryPath.cs"
+      ],
+      "vulnerability": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory",
+      "currentRisk": "Edge cases in path validation might allow unexpected path resolution behavior",
+      "remediation": "Add explicit check for '..' segments (not just './'). Validate against URL-encoded traversal (e.g., %2e%2e). Add unit tests for edge cases like '/path/../secret', '//server/share', and 'path/./to/../file'. Consider using Path.GetFullPath() equivalent for path canonicalization before validation.",
+      "references": [
+        "https://owasp.org/www-community/attacks/Path_Traversal",
+        "https://cwe.mitre.org/data/definitions/22.html"
+      ],
+      "compliance": ["OWASP", "CWE"]
+    }
+  ],
+  "metadata": {
+    "dependenciesScanned": 4,
+    "knownVulnerabilities": 0,
+    "filesAnalyzed": 47,
+    "criticalIssues": 0,
+    "highIssues": 1,
+    "mediumIssues": 2,
+    "lowIssues": 2,
+    "generatedAt": "2026-01-23T16:30:00Z",
+    "analysisScope": [
+      "Core VFS library",
+      "GitHub extension",
+      "Demo Blazor application",
+      "CI/CD workflows"
+    ],
+    "positiveFindings": [
+      "HTTPS redirection enabled in Blazor app",
+      "HSTS enabled for production",
+      "Antiforgery protection enabled",
+      "GitHub API rate limiting properly handled",
+      "Token validation before use",
+      "Basic path traversal protection exists",
+      "No hardcoded secrets found in source code",
+      "CI/CD secrets properly stored in GitHub Secrets"
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "documentation_gaps": [
+    {
+      "id": "doc-001",
+      "type": "documentation_gaps",
+      "title": "Add Event System Usage Guide with Examples",
+      "description": "The VFS event-driven architecture (DirectoryCreated, FileDeleted, etc.) is a core feature but lacks dedicated documentation explaining how to subscribe to events, handle them, and common use cases like logging, syncing, or real-time notifications.",
+      "rationale": "Events are prominently mentioned as a feature in the README but there's no usage example showing how to subscribe and handle them. Users must read source code (IVFSCreate.cs, VFS.cs) to understand event patterns. The demo apps use events internally but there's no tutorial explaining this for library consumers.",
+      "category": "examples",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "docs/README.md",
+        "README.md",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/VFSOperations/IVFSCreate.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Events/VFSEventArgs.cs"
+      ],
+      "currentDocumentation": "README mentions 'Support for events (file created, file deleted, etc.)' but provides no code examples or explanation",
+      "proposedContent": "Create a dedicated Events Guide section with: (1) Subscribing to events example, (2) Event types reference table (VFSDirectoryCreatedArgs, VFSFileDeletedArgs, etc.), (3) Real-world use cases (logging, sync triggers), (4) Best practices for event handling",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-002",
+      "type": "documentation_gaps",
+      "title": "Document Undo/Redo System Capabilities and Limitations",
+      "description": "The ChangeHistory undo/redo system has critical limitations (cannot undo file/directory deletions - throws NotImplementedException) that are not documented. Users may expect full undo/redo support based on feature claims.",
+      "rationale": "README claims 'Support for undo/redo operations with change history' without mentioning that deleting files/directories cannot be undone. The ChangeHistory.cs implementation throws NotImplementedException for VFSDirectoryDeletedArgs and VFSFileDeletedArgs in Undo(). This is a significant limitation users need to know before designing their applications.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/IChangeHistory.cs"
+      ],
+      "currentDocumentation": "No documentation of limitations. XML comments on ChangeHistory only describe the happy path",
+      "proposedContent": "Add clear documentation: (1) What operations can be undone/redone (create, move, rename), (2) What operations CANNOT be undone (delete - with technical reason), (3) How the undo/redo stacks work, (4) Code example showing proper usage",
+      "priority": "high",
+      "estimatedEffort": "small"
+    },
+    {
+      "id": "doc-003",
+      "type": "documentation_gaps",
+      "title": "Create Extension Methods Usage Guide",
+      "description": "The library provides 8 extension classes (VFSSearchExtensions, VFSAdvancedExtensions, VFSBulkExtensions, VFSConvenienceExtensions, VFSPathExtensions, VFSResultExtensions, VFSSafeExtensions, VFSBinaryExtensions) with powerful functionality but no documentation showing how to use them together.",
+      "rationale": "Extension methods like FindFilesByGlob(), WithExtension(), ContainingText(), CopyFile(), CopyDirectory(), and CreateFileWithDirectories() significantly enhance the library but are only discoverable through XML comments. The README doesn't mention these capabilities at all. Users are likely missing out on the fluent search API and advanced operations.",
+      "category": "examples",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSearchExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSAdvancedExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSConvenienceExtensions.cs"
+      ],
+      "currentDocumentation": "Only XML doc comments exist; no narrative documentation or examples in README",
+      "proposedContent": "Add 'Advanced Features' section to README with: (1) Search capabilities (glob patterns, content search, filters), (2) Bulk operations (CreateMany, DeleteMany), (3) Safe operations with Result type, (4) Recursive directory operations (CopyDirectory, GetFilesRecursive)",
+      "priority": "high",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-004",
+      "type": "documentation_gaps",
+      "title": "Add Architecture Overview with Diagrams",
+      "description": "The codebase uses a sophisticated index-based architecture with interface segregation (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename) and event-driven design, but there's no visual representation or explanation of how components interact.",
+      "rationale": "New contributors and users building complex applications need to understand how VFSIndex works, how paths are resolved, and how events flow through the system. CLAUDE.md has a brief overview but lacks diagrams. The interface segregation pattern is powerful but not explained.",
+      "category": "architecture",
+      "targetAudience": "contributors",
+      "affectedAreas": [
+        "CLAUDE.md",
+        "docs/README.md",
+        "CONTRIBUTING.md",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/"
+      ],
+      "currentDocumentation": "CLAUDE.md has brief text description of 'Core Design Pattern' and 'Interface Segregation' but no diagrams or detailed data flow",
+      "proposedContent": "Create architecture documentation with: (1) Component relationship diagram showing VFS, VFSIndex, nodes hierarchy, (2) Event flow diagram, (3) Path resolution explanation with VFSPathComparer, (4) Interface segregation explanation with UML-style diagram",
+      "priority": "medium",
+      "estimatedEffort": "medium"
+    },
+    {
+      "id": "doc-005",
+      "type": "documentation_gaps",
+      "title": "Add Dependency Injection and Configuration Guide",
+      "description": "The library supports DI registration via AddVirtualFileSystem() and configuration via VFSConfiguration/EventConfiguration, but there's no documentation explaining setup patterns or configuration options.",
+      "rationale": "ServiceCollectionExtensions.AddVirtualFileSystem() registers VFS as scoped, but users don't know why scoped was chosen or how to configure events. The VFSConfiguration and EventConfiguration classes allow customization but aren't documented in README. Users building ASP.NET or Blazor apps need this guidance.",
+      "category": "api_docs",
+      "targetAudience": "developers",
+      "affectedAreas": [
+        "README.md",
+        "docs/README.md",
+        "src/Atypical.VirtualFileSystem.Core/Services/ServiceCollectionExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/VFSConfiguration.cs"
+      ],
+      "currentDocumentation": "No documentation. AddVirtualFileSystem() is not mentioned in README at all",
+      "proposedContent": "Add 'Integration Guide' section: (1) DI registration example for ASP.NET/Blazor, (2) Configuration options (EventConfiguration.Disabled(), FileEventsOnly(), etc.), (3) Singleton vs Scoped lifetime considerations, (4) Integration with ILogger for event tracking",
+      "priority": "medium",
+      "estimatedEffort": "small"
+    }
+  ],
+  "metadata": {
+    "filesAnalyzed": 150,
+    "documentedPublicTypes": 45,
+    "extensionMethodCount": 50,
+    "publicInterfaceCount": 12,
+    "docsFolder": "docs/",
+    "autoGeneratedApiDocs": true,
+    "readmeLastUpdated": "unknown",
+    "generatedAt": "2026-01-23T16:30:00Z",
+    "analysisNotes": "The library has good XML documentation coverage on core interfaces, but lacks narrative documentation for advanced features, event system, and undo/redo limitations. Auto-generated API docs exist but extension methods need usage examples."
+  }
+}
