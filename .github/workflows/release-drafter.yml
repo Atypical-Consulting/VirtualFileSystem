@@ -5,10 +5,11 @@ on:
     # branches to consider in the event; optional, defaults to all
     branches:
       - main
-  # pull_request event is required only for autolabeler
-  pull_request:
-    # Only following types are handled by the action, but one can default to all as well
-    types: [opened, reopened, synchronize]
+  # pull_request event is only needed for autolabeler (currently disabled)
+  # Removing it prevents the "invalid target_commitish" error when Release Drafter
+  # tries to use refs/pull/N/merge as a release target, which GitHub rejects.
+  # pull_request:
+  #   types: [opened, reopened, synchronize]
   # pull_request_target event is required for autolabeler to support PRs from forks
   # pull_request_target:
   #   types: [opened, reopened, synchronize]
@@ -31,7 +32,7 @@ jobs:
       #  run: |
       #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 
-      # Drafts your next Release notes as Pull Requests are merged into "master"
+      # Drafts your next Release notes as Pull Requests are merged into "main"
       - uses: release-drafter/release-drafter@v7
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
