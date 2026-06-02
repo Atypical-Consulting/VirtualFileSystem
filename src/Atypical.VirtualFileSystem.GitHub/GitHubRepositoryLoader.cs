@@ -158,10 +158,13 @@ public sealed partial class GitHubRepositoryLoader : IGitHubRepositoryLoader
 
                     filesLoaded++;
                 }
-                catch (Exception ex) when (ex is not OperationCanceledException)
+                catch (Exception ex) when (ex is not OperationCanceledException and not RateLimitExceededException)
                 {
                     skippedFiles.Add(new GitHubSkippedFile(item.Path, SkipReason.LoadError, item.Size, ex.Message));
                 }
+                // A rate-limit hit mid-load must not be swallowed as a per-file skip;
+                // let it propagate to the outer handler so it surfaces as a
+                // GitHubRateLimitException, as documented.
             }
 
             stopwatch.Stop();
