@@ -188,11 +188,14 @@
 
     protected override void OnInitialized()
     {
-        StateService.OnDataChanged += StateHasChanged;
-        StateService.OnCurrentPathChanged += StateHasChanged;
-        StateService.OnSortChanged += StateHasChanged;
-        StateService.OnViewModeChanged += StateHasChanged;
+        StateService.OnDataChanged += RequestRender;
+        StateService.OnCurrentPathChanged += RequestRender;
+        StateService.OnSortChanged += RequestRender;
+        StateService.OnViewModeChanged += RequestRender;
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private IEnumerable<FileItem> GetCurrentItems()
     {
@@ -479,10 +482,10 @@
 
     public void Dispose()
     {
-        StateService.OnDataChanged -= StateHasChanged;
-        StateService.OnCurrentPathChanged -= StateHasChanged;
-        StateService.OnSortChanged -= StateHasChanged;
-        StateService.OnViewModeChanged -= StateHasChanged;
+        StateService.OnDataChanged -= RequestRender;
+        StateService.OnCurrentPathChanged -= RequestRender;
+        StateService.OnSortChanged -= RequestRender;
+        StateService.OnViewModeChanged -= RequestRender;
     }
 
     private class FileItem

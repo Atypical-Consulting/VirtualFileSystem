@@ -1,19 +1,21 @@
 using Atypical.VirtualFileSystem.DemoBlazorApp.Models;
-using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Octokit;
 
 namespace Atypical.VirtualFileSystem.DemoBlazorApp.Services;
 
 /// <summary>
 /// Service for managing GitHub Personal Access Token authentication.
-/// Stores tokens in browser localStorage and validates them against the GitHub API.
+/// Tokens are persisted with <see cref="ProtectedLocalStorage"/>, which encrypts
+/// them using the server's Data Protection key rather than storing the raw PAT in
+/// plaintext localStorage, and validated against the GitHub API.
 /// </summary>
 public sealed class GitHubAuthService : IDisposable
 {
     private const string StorageKey = "github_pat";
     private const string ProductHeaderValue = "Atypical.VirtualFileSystem.DemoBlazorApp";
 
-    private readonly IJSRuntime _jsRuntime;
+    private readonly ProtectedLocalStorage _protectedLocalStorage;
     private GitHubCredentials _credentials = GitHubCredentials.Anonymous;
     private bool _initialized;
 
@@ -37,9 +39,9 @@ public sealed class GitHubAuthService : IDisposable
     /// </summary>
     public event Action? OnRateLimitUpdated;
 
-    public GitHubAuthService(IJSRuntime jsRuntime)
+    public GitHubAuthService(ProtectedLocalStorage protectedLocalStorage)
     {
-        _jsRuntime = jsRuntime;
+        _protectedLocalStorage = protectedLocalStorage;
     }
 
     /// <summary>
@@ -52,16 +54,17 @@ public sealed class GitHubAuthService : IDisposable
 
         try
         {
-            var savedToken = await _jsRuntime.InvokeAsync<string?>("cloudDrive.storage.get", StorageKey);
-            if (!string.IsNullOrEmpty(savedToken))
+            var saved = await _protectedLocalStorage.GetAsync<string>(StorageKey);
+            if (saved.Success && !string.IsNullOrEmpty(saved.Value))
             {
                 // Try to validate saved token
-                await ValidateTokenAsync(savedToken, saveOnSuccess: false);
+                await ValidateTokenAsync(saved.Value, saveOnSuccess: false);
             }
         }
         catch (Exception)
         {
-            // Silently fail - user will need to re-authenticate
+            // Silently fail (e.g. JS interop unavailable during prerender, or a
+            // stale/undecryptable value) - user will need to re-authenticate.
             _credentials = GitHubCredentials.Anonymous;
         }
     }
@@ -146,7 +149,8 @@ public sealed class GitHubAuthService : IDisposable
         {
             RateLimitRemaining = remaining,
             RateLimitTotal = total,
-            RateLimitReset = reset
+            // Keep the previously known reset time when a partial update omits it.
+            RateLimitReset = reset ?? _credentials.RateLimitReset
         };
 
         OnRateLimitUpdated?.Invoke();
@@ -186,7 +190,7 @@ public sealed class GitHubAuthService : IDisposable
 
         try
         {
-            await _jsRuntime.InvokeVoidAsync("cloudDrive.storage.remove", StorageKey);
+            await _protectedLocalStorage.DeleteAsync(StorageKey);
         }
         catch
         {
@@ -241,7 +245,7 @@ public sealed class GitHubAuthService : IDisposable
     {
         try
         {
-            await _jsRuntime.InvokeVoidAsync("cloudDrive.storage.set", StorageKey, token);
+            await _protectedLocalStorage.SetAsync(StorageKey, token);
         }
         catch
         {

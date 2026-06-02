@@ -3,7 +3,7 @@
 
 ## VFSFileRenamedArgs\.Path Property
 
-Gets the source path of the renamed file\.
+Gets the source \(old\) path of the renamed file\.
 
 ```csharp
 public Atypical.VirtualFileSystem.Core.VFSFilePath Path { get; }

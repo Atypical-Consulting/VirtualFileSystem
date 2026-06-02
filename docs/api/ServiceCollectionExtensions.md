@@ -10,7 +10,7 @@ This class is used to register the virtual file system in the dependency injecti
 public static class ServiceCollectionExtensions
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; ServiceCollectionExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → ServiceCollectionExtensions
 
 | Methods | |
 | :--- | :--- |

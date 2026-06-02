@@ -36,7 +36,7 @@ public partial record VFS
 
         // update the directory node with the new path
         var oldName = directoryNode.Name;
-        var newPath = new VFSDirectoryPath($"{directoryPath.Parent}/{newName}");
+        var newPath = new VFSDirectoryPath(CombineWithParent(directoryPath.Parent, newName));
 
         // Validate that the destination path doesn't already exist
         if (Index.ContainsKey(newPath))
@@ -116,7 +116,7 @@ public partial record VFS
 
         // update the file node with the new path
         var oldName = fileNode.Name;
-        var newFilePath = new VFSFilePath($"{filePath.Parent}/{newName}");
+        var newFilePath = new VFSFilePath(CombineWithParent(filePath.Parent, newName));
         var updatedFileNode = fileNode.UpdatePath(newFilePath);
 
         // Add the file to its new parent directory
@@ -127,7 +127,18 @@ public partial record VFS
         Index.Remove(filePath);
         Index[newFilePath] = updatedFileNode;
 
-        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, oldName, newFilePath));
+        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, oldName, newName, newFilePath));
         return this;
+    }
+
+    // Combines a parent directory path with a new entry name, avoiding a doubled
+    // separator when the parent is the root (whose value already ends in '/').
+    private static string CombineWithParent(VFSDirectoryPath? parent, string name)
+    {
+        var parentValue = parent?.Value ?? ROOT_PATH;
+        var separator = parentValue.EndsWith(DIRECTORY_SEPARATOR, StringComparison.Ordinal)
+            ? string.Empty
+            : DIRECTORY_SEPARATOR;
+        return $"{parentValue}{separator}{name}";
     }
 }

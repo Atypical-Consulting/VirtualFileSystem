@@ -67,11 +67,14 @@
 
     protected override void OnInitialized()
     {
-        StateService.OnCurrentPathChanged += StateHasChanged;
+        StateService.OnCurrentPathChanged += RequestRender;
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     public void Dispose()
     {
-        StateService.OnCurrentPathChanged -= StateHasChanged;
+        StateService.OnCurrentPathChanged -= RequestRender;
     }
 }

@@ -10,8 +10,8 @@ public interface IVFSRename
 ```
 
 Derived  
-&#8627; [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')  
-&#8627; [VFS](VFS.md 'Atypical\.VirtualFileSystem\.Core\.VFS')
+↳ [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem')  
+↳ [VFS](VFS.md 'Atypical\.VirtualFileSystem\.Core\.VFS')
 
 | Methods | |
 | :--- | :--- |

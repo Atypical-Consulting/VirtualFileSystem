@@ -10,7 +10,7 @@ public interface IChangeHistory
 ```
 
 Derived  
-&#8627; [ChangeHistory](ChangeHistory.md 'Atypical\.VirtualFileSystem\.Core\.ChangeHistory')
+↳ [ChangeHistory](ChangeHistory.md 'Atypical\.VirtualFileSystem\.Core\.ChangeHistory')
 
 | Properties | |
 | :--- | :--- |

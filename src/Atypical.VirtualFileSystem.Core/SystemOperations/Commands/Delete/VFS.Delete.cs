@@ -32,11 +32,18 @@ public partial record VFS
         // find the path and its children in the index
         var paths = Index.GetPathsStartingWith(directoryPath);
 
+        // capture a snapshot of the subtree so the deletion can be undone
+        var deletedNodes = paths
+            .Select(p => p is VFSFilePath filePath && Index.TryGetFile(filePath, out var fileNode)
+                ? new VFSNodeSnapshot(p, IsDirectory: false, fileNode.Content)
+                : new VFSNodeSnapshot(p, IsDirectory: true, Content: null))
+            .ToImmutableArray();
+
         // remove the paths from the index
         foreach (var p in paths)
             Index.Remove(p);
 
-        DirectoryDeleted?.Invoke(new VFSDirectoryDeletedArgs(directoryPath));
+        DirectoryDeleted?.Invoke(new VFSDirectoryDeletedArgs(directoryPath, deletedNodes));
         return this;
     }
     

@@ -79,11 +79,12 @@ public class VirtualFileSystem_MethodRenameFile_Tests : VirtualFileSystemTestsBa
         _vfs.CreateFile(_filePath);
         var eventRaised = false;
 
-        _vfs.FileRenamed += args => 
+        _vfs.FileRenamed += args =>
         {
             eventRaised = true;
             args.Path.ShouldBe(_filePath);
-            args.NewName.ShouldBe("vfs://dir1/dir2/dir3/new_file.txt");
+            args.NewName.ShouldBe("new_file.txt");
+            args.NewPath.Value.ShouldBe("vfs://dir1/dir2/dir3/new_file.txt");
         };
 
         // Act

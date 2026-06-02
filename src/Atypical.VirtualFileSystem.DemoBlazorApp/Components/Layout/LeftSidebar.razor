@@ -53,14 +53,17 @@
 
     protected override void OnInitialized()
     {
-        RecycleBin.OnChange += StateHasChanged;
-        StateService.OnDataChanged += StateHasChanged;
+        RecycleBin.OnChange += RequestRender;
+        StateService.OnDataChanged += RequestRender;
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     public void Dispose()
     {
-        RecycleBin.OnChange -= StateHasChanged;
-        StateService.OnDataChanged -= StateHasChanged;
+        RecycleBin.OnChange -= RequestRender;
+        StateService.OnDataChanged -= RequestRender;
     }
 }
 

@@ -218,11 +218,13 @@ P:Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.MessageWithMarkup|VFSFileCr
 M:Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFSFileCreatedArgs.VFSFileCreatedArgs(VFSFilePath,string).md|VFSFileCreatedArgs(VFSFilePath, string)
 T:Atypical.VirtualFileSystem.Core.VFSFileCreatedArgs|VFSFileCreatedArgs.md|VFSFileCreatedArgs
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Path|VFSDirectoryDeletedArgs.Path.md|Path
+P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.DeletedNodes|VFSDirectoryDeletedArgs.DeletedNodes.md|DeletedNodes
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Timestamp|VFSDirectoryDeletedArgs.Timestamp.md|Timestamp
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.MessageTemplate|VFSDirectoryDeletedArgs.MessageTemplate.md|MessageTemplate
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.Message|VFSDirectoryDeletedArgs.Message.md|Message
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.MessageWithMarkup|VFSDirectoryDeletedArgs.MessageWithMarkup.md|MessageWithMarkup
-M:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(VFSDirectoryPath).md|VFSDirectoryDeletedArgs(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs.md#Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath)|VFSDirectoryDeletedArgs(VFSDirectoryPath)
+M:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,System.Collections.Immutable.ImmutableArray{Atypical.VirtualFileSystem.Core.VFSNodeSnapshot})|VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs.md#Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs(Atypical.VirtualFileSystem.Core.VFSDirectoryPath,System.Collections.Immutable.ImmutableArray_Atypical.VirtualFileSystem.Core.VFSNodeSnapshot_)|VFSDirectoryDeletedArgs(VFSDirectoryPath, ImmutableArray<VFSNodeSnapshot>)
 T:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs|VFSDirectoryDeletedArgs.md|VFSDirectoryDeletedArgs
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Path|VFSFileDeletedArgs.Path.md|Path
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Content|VFSFileDeletedArgs.Content.md|Content
@@ -232,6 +234,11 @@ P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.Message|VFSFileDeletedArgs.
 P:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.MessageWithMarkup|VFSFileDeletedArgs.MessageWithMarkup.md|MessageWithMarkup
 M:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String)|VFSFileDeletedArgs.VFSFileDeletedArgs(VFSFilePath,string).md|VFSFileDeletedArgs(VFSFilePath, string)
 T:Atypical.VirtualFileSystem.Core.VFSFileDeletedArgs|VFSFileDeletedArgs.md|VFSFileDeletedArgs
+P:Atypical.VirtualFileSystem.Core.VFSNodeSnapshot.Path|VFSNodeSnapshot.Path.md|Path
+P:Atypical.VirtualFileSystem.Core.VFSNodeSnapshot.IsDirectory|VFSNodeSnapshot.IsDirectory.md|IsDirectory
+P:Atypical.VirtualFileSystem.Core.VFSNodeSnapshot.Content|VFSNodeSnapshot.Content.md|Content
+M:Atypical.VirtualFileSystem.Core.VFSNodeSnapshot.#ctor(Atypical.VirtualFileSystem.Core.VFSPath,System.Boolean,System.String)|VFSNodeSnapshot.VFSNodeSnapshot(VFSPath,bool,string).md|VFSNodeSnapshot(VFSPath, bool, string)
+T:Atypical.VirtualFileSystem.Core.VFSNodeSnapshot|VFSNodeSnapshot.md|VFSNodeSnapshot
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.SourcePath|VFSDirectoryMovedArgs.SourcePath.md|SourcePath
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.DestinationPath|VFSDirectoryMovedArgs.DestinationPath.md|DestinationPath
 P:Atypical.VirtualFileSystem.Core.VFSDirectoryMovedArgs.Timestamp|VFSDirectoryMovedArgs.Timestamp.md|Timestamp
@@ -261,11 +268,12 @@ T:Atypical.VirtualFileSystem.Core.VFSDirectoryRenamedArgs|VFSDirectoryRenamedArg
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Path|VFSFileRenamedArgs.Path.md|Path
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.OldName|VFSFileRenamedArgs.OldName.md|OldName
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewName|VFSFileRenamedArgs.NewName.md|NewName
+P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.NewPath|VFSFileRenamedArgs.NewPath.md|NewPath
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Timestamp|VFSFileRenamedArgs.Timestamp.md|Timestamp
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageTemplate|VFSFileRenamedArgs.MessageTemplate.md|MessageTemplate
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.Message|VFSFileRenamedArgs.Message.md|Message
 P:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.MessageWithMarkup|VFSFileRenamedArgs.MessageWithMarkup.md|MessageWithMarkup
-M:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String,System.String)|VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,string,string).md|VFSFileRenamedArgs(VFSFilePath, string, string)
+M:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs.#ctor(Atypical.VirtualFileSystem.Core.VFSFilePath,System.String,System.String,Atypical.VirtualFileSystem.Core.VFSFilePath)|VFSFileRenamedArgs.VFSFileRenamedArgs(VFSFilePath,string,string,VFSFilePath).md|VFSFileRenamedArgs(VFSFilePath, string, string, VFSFilePath)
 T:Atypical.VirtualFileSystem.Core.VFSFileRenamedArgs|VFSFileRenamedArgs.md|VFSFileRenamedArgs
 P:Atypical.VirtualFileSystem.Core.VFSEventArgs.MessageTemplate|VFSEventArgs.MessageTemplate.md|MessageTemplate
 P:Atypical.VirtualFileSystem.Core.VFSEventArgs.Message|VFSEventArgs.Message.md|Message
@@ -472,6 +480,7 @@ E:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename.FileRenamed|IVFSRename.Fi
 T:Atypical.VirtualFileSystem.Core.Contracts.IVFSRename|IVFSRename.md|IVFSRename
 ?:Atypical.VirtualFileSystem.Core.BinaryFileNode.#ctor|BinaryFileNode.BinaryFileNode.md|BinaryFileNode
 ?:Atypical.VirtualFileSystem.Core.VirtualFileSystemException.#ctor|VirtualFileSystemException.VirtualFileSystemException.md|VirtualFileSystemException
+?:Atypical.VirtualFileSystem.Core.VFSDirectoryDeletedArgs.#ctor|VFSDirectoryDeletedArgs.VFSDirectoryDeletedArgs.md|VFSDirectoryDeletedArgs
 ?:Atypical.VirtualFileSystem.Core.Result`1.Failure|Result_T_.Failure.md|Failure
 ?:Atypical.VirtualFileSystem.Core.Result`1.GetValueOrDefault|Result_T_.GetValueOrDefault.md|GetValueOrDefault
 ?:Atypical.VirtualFileSystem.Core.Result.Failure|Result.Failure.md|Failure

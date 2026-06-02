@@ -117,6 +117,10 @@ window.cloudDrive = {
             this.undoRedoRef = dotNetRef;
         },
 
+        unregisterUndoRedo: function () {
+            this.undoRedoRef = null;
+        },
+
         handleGridNavigation: function (containerId, dotNetRef) {
             const container = document.getElementById(containerId);
             if (!container) return;

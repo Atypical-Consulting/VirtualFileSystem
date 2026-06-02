@@ -14,31 +14,38 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
     /// <summary>
     /// Initializes a new instance of the <see cref="VFSFileRenamedArgs"/> class.
     /// </summary>
-    /// <param name="path">The path of the renamed file.</param>
+    /// <param name="path">The (old) path of the renamed file.</param>
     /// <param name="oldName">The old name of the renamed file.</param>
-    /// <param name="newName">The new name of the renamed file.</param>
-    public VFSFileRenamedArgs(VFSFilePath path, string oldName, string newName)
+    /// <param name="newName">The new name of the renamed file (the file name only, not the full path).</param>
+    /// <param name="newPath">The new path of the renamed file.</param>
+    public VFSFileRenamedArgs(VFSFilePath path, string oldName, string newName, VFSFilePath newPath)
     {
         Path = path;
         OldName = oldName;
         NewName = newName;
+        NewPath = newPath;
         Timestamp = DateTimeOffset.Now;
     }
 
     /// <summary>
-    /// Gets the source path of the renamed file.
+    /// Gets the source (old) path of the renamed file.
     /// </summary>
     public VFSFilePath Path { get; }
-    
+
     /// <summary>
     /// Gets the old name of the renamed file.
     /// </summary>
     public string OldName { get; }
 
     /// <summary>
-    /// Gets the new name of the renamed file.
+    /// Gets the new name of the renamed file (the file name only, not the full path).
     /// </summary>
     public string NewName { get; }
+
+    /// <summary>
+    /// Gets the new path of the renamed file.
+    /// </summary>
+    public VFSFilePath NewPath { get; }
 
     /// <summary>
     /// Gets the timestamp when the file was renamed.
@@ -51,11 +58,11 @@ public sealed class VFSFileRenamedArgs : VFSEventArgs
 
     /// <inheritdoc />
     public override string Message
-        => string.Format(MessageTemplate, Path, NewName, Timestamp);
+        => string.Format(MessageTemplate, Path, NewPath, Timestamp);
 
     /// <inheritdoc />
     public override string MessageWithMarkup
-        => ToMarkup("blue", Path, NewName, Timestamp);
+        => ToMarkup("blue", Path, NewPath, Timestamp);
 
     /// <inheritdoc />
     public override string ToString()

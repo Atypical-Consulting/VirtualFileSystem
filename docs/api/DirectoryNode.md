@@ -9,10 +9,10 @@ Represents a directory in the virtual file system\.
 public record DirectoryNode : Atypical.VirtualFileSystem.Core.VFSNode, Atypical.VirtualFileSystem.Core.Contracts.IDirectoryNode, Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystemNode, System.IEquatable<Atypical.VirtualFileSystem.Core.DirectoryNode>
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode') &#129106; DirectoryNode
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [VFSNode](VFSNode.md 'Atypical\.VirtualFileSystem\.Core\.VFSNode') → DirectoryNode
 
 Derived  
-&#8627; [RootNode](RootNode.md 'Atypical\.VirtualFileSystem\.Core\.RootNode')
+↳ [RootNode](RootNode.md 'Atypical\.VirtualFileSystem\.Core\.RootNode')
 
 Implements [IDirectoryNode](IDirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IDirectoryNode'), [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode'), [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[DirectoryNode](DirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.DirectoryNode')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 

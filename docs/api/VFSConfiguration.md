@@ -9,7 +9,7 @@ Configuration options for the Virtual File System\.
 public sealed record VFSConfiguration : System.IEquatable<Atypical.VirtualFileSystem.Core.VFSConfiguration>
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSConfiguration
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → VFSConfiguration
 
 Implements [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[VFSConfiguration](VFSConfiguration.md 'Atypical\.VirtualFileSystem\.Core\.VFSConfiguration')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 

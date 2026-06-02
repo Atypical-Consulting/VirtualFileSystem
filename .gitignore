@@ -350,6 +350,10 @@ MigrationBackup/
 .ionide/
 
 
+# Claude Code / JetBrains IDE local config (not tracked in the repo)
+.claude/
+.idea/
+
 # Auto Claude data directory
 .auto-claude/
 

@@ -22,6 +22,15 @@ public partial record VFS
         if (!Index.TryGetDirectory(sourceDirectoryPath, out var directoryNode))
             ThrowVirtualDirectoryNotFound(sourceDirectoryPath);
 
+        // Cannot move a directory into itself or one of its own subdirectories.
+        if (string.Equals(destinationDirectoryPath.Value, sourceDirectoryPath.Value, StringComparison.OrdinalIgnoreCase)
+            || destinationDirectoryPath.Value.StartsWith(sourceDirectoryPath.Value + DIRECTORY_SEPARATOR, StringComparison.OrdinalIgnoreCase))
+            ThrowCannotMoveDirectoryIntoItself(sourceDirectoryPath, destinationDirectoryPath);
+
+        // Cannot silently overwrite an existing destination.
+        if (Index.ContainsKey(destinationDirectoryPath))
+            ThrowVirtualNodeAlreadyExists(Index[destinationDirectoryPath]);
+
         // Get all paths that start with the source directory path (files and subdirectories)
         var pathsToMove = Index.GetPathsStartingWith(sourceDirectoryPath).ToList();
 
@@ -96,6 +105,10 @@ public partial record VFS
     {
         if (!Index.TryGetFile(sourceFilePath, out var fileNode))
             ThrowVirtualFileNotFound(sourceFilePath);
+
+        // Cannot silently overwrite an existing destination.
+        if (Index.ContainsKey(destinationFilePath))
+            ThrowVirtualNodeAlreadyExists(Index[destinationFilePath]);
 
         // Remove the file from its old parent directory
         if (TryGetDirectory(sourceFilePath.Parent, out var oldParent)) 

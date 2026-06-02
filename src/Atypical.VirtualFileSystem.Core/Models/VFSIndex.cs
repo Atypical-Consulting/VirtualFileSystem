@@ -4,8 +4,6 @@
 // This source code is licensed under the BSD-style license found in the
 // LICENSE file in the root directory of this source tree. 
 
-using System.Collections.Immutable;
-
 namespace Atypical.VirtualFileSystem.Core;
 
 /// <summary>
@@ -162,13 +160,26 @@ public sealed class VFSIndex
         => (IDirectoryNode)this[directoryPath];
 
     /// <summary>
-    /// Gets the paths starting with the specified directory path.
+    /// Gets the directory itself and all of its descendants (files and subdirectories).
     /// </summary>
+    /// <remarks>
+    /// Matching is anchored on a directory-separator boundary so that a directory
+    /// such as <c>vfs://docs</c> does not wrongly capture sibling paths that merely
+    /// share its name as a prefix (e.g. <c>vfs://docs2</c>). Comparison is
+    /// case-insensitive, consistent with the index ordering (<see cref="VFSPathComparer"/>).
+    /// </remarks>
     public ImmutableArray<VFSPath> GetPathsStartingWith(VFSDirectoryPath directoryPath)
-        => Keys
-            .Where(p => p.StartsWith(directoryPath.Value))
+    {
+        var prefix = directoryPath.Value;
+        var childPrefix = prefix + DIRECTORY_SEPARATOR;
+
+        return Keys
+            .Where(p =>
+                string.Equals(p.Value, prefix, StringComparison.OrdinalIgnoreCase)
+                || p.Value.StartsWith(childPrefix, StringComparison.OrdinalIgnoreCase))
             .OrderByDescending(p => p.Value.Length)
             .ToImmutableArray();
+    }
 
     /// <summary>
     /// Returns a string that represents the current object.
