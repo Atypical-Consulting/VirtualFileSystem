@@ -18,7 +18,10 @@ public static class GitHubProviderAdapters
     public static GitHubLoaderOptions ToGitHubLoaderOptions(ProviderLoadOptions o, string? accessToken)
         => new(
             AccessToken: accessToken,
-            TargetPath: o.RemoteRoot ?? "/",
+            // RemoteRoot is the REMOTE sub-path to import FROM, so it maps to the loader's
+            // SubPath (a remote filter). TargetPath is the VFS DESTINATION root and is left
+            // at the loader's default ("/"), preserving the original load layout.
+            SubPath: o.RemoteRoot,
             MaxFileSize: o.MaxFileSizeBytes,
             Strategy: o.Strategy switch
             {

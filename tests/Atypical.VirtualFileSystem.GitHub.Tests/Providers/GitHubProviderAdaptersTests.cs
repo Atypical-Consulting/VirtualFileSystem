@@ -25,7 +25,9 @@ public class GitHubProviderAdaptersTests
 
         gh.Strategy.ShouldBe(GitHubLoadingStrategy.Lazy);
         gh.MaxFileSize.ShouldBe(1234);
-        gh.TargetPath.ShouldBe("src");
+        // RemoteRoot maps to the REMOTE filter (SubPath), not the VFS destination (TargetPath).
+        gh.SubPath.ShouldBe("src");
+        gh.TargetPath.ShouldBe("/");
         gh.AccessToken.ShouldBe("tok");
     }
 
