@@ -74,6 +74,42 @@ public class VFSStateService
         }
     }
 
+    /// <summary>The VFS root path scheme.</summary>
+    public const string RootPath = "vfs://";
+
+    /// <summary>
+    /// Builds the relative app URL that represents a directory, e.g.
+    /// "vfs://docs/src" -> "/?path=docs/src" (root -> "/"). Segments are
+    /// individually escaped so the hierarchy stays readable in the address bar.
+    /// </summary>
+    public static string ToFolderUrl(string? vfsPath)
+    {
+        var relative = StripScheme(vfsPath);
+        if (string.IsNullOrEmpty(relative))
+            return "/";
+
+        var escaped = string.Join("/", relative.Split('/').Select(Uri.EscapeDataString));
+        return $"/?path={escaped}";
+    }
+
+    /// <summary>
+    /// Converts a "path" query value back into a full VFS path, e.g.
+    /// "docs/src" -> "vfs://docs/src" (null/empty -> "vfs://").
+    /// </summary>
+    public static string FromQueryPath(string? queryPath)
+    {
+        var relative = (queryPath ?? string.Empty).Replace('\\', '/').Trim('/');
+        return string.IsNullOrEmpty(relative) ? RootPath : $"{RootPath}{relative}";
+    }
+
+    private static string StripScheme(string? vfsPath)
+    {
+        var value = vfsPath ?? string.Empty;
+        if (value.StartsWith(RootPath, StringComparison.Ordinal))
+            value = value[RootPath.Length..];
+        return value.Trim('/');
+    }
+
     // View preferences
     public ViewMode ViewMode
     {
