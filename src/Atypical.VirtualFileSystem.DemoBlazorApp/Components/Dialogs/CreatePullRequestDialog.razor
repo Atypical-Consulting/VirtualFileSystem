@@ -1,10 +1,12 @@
-@* Create Pull Request Dialog *@
+@* Capability-driven "Submit changes" dialog (PR for GitHub, upload for FTP) *@
 @inject GitHubPendingChangesService PendingChangesService
 @inject GitHubAuthService AuthService
 @inject ToastService Toast
+@inject StoragePendingChangesService StorageSubmit
+@inject IStorageProviderRegistry Registry
 @implements IDisposable
 
-<Modal @bind-IsOpen="IsOpen" Title="Create Pull Request" Size="xl" CloseOnBackdropClick="@(!_isCreating)">
+<Modal @bind-IsOpen="IsOpen" Title="@DialogTitle" Size="xl" CloseOnBackdropClick="@(!_isCreating)">
     <ChildContent>
         @if (_result is not null && _result.Success)
         {
@@ -91,6 +93,51 @@
                         </div>
                     }
                 </div>
+            </div>
+        }
+        else if (!SupportsPullRequests)
+        {
+            @* Non-PR provider (e.g. FTP): simple upload confirmation *@
+            <div class="space-y-4">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <div class="flex gap-2">
+                        <svg class="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+                        </svg>
+                        <span class="text-sm text-blue-700">
+                            @Registry.Active.DisplayName uploads changes directly to the remote — no pull request is created.
+                        </span>
+                    </div>
+                </div>
+
+                @if (_uploadChanges.Count == 0)
+                {
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                        <div class="flex gap-2">
+                            <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                            </svg>
+                            <span class="text-sm text-amber-700">
+                                No tracked changes are available to upload for this provider yet.
+                            </span>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Files to upload (@_uploadChanges.Count)
+                    </label>
+                    <div class="border border-gray-200 rounded-lg max-h-48 overflow-y-auto">
+                        @foreach (var change in _uploadChanges)
+                        {
+                            <div class="flex items-center gap-2 px-3 py-2 border-b border-gray-100 last:border-b-0 text-sm">
+                                <span class="text-gray-700 truncate flex-1" title="@change.RemotePath">@change.RemotePath</span>
+                                <span class="text-xs text-gray-400">@change.Kind</span>
+                            </div>
+                        }
+                    </div>
+                }
             </div>
         }
         else
@@ -223,6 +270,16 @@
         {
             <span class="text-sm text-gray-500">Creating pull request...</span>
         }
+        else if (!SupportsPullRequests)
+        {
+            <Button Variant="ghost" OnClick="Close">Cancel</Button>
+            <Button Variant="primary"
+                    OnClick="UploadChanges"
+                    Disabled="@(_uploadChanges.Count == 0)"
+                    Icon="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5">
+                Upload changes
+            </Button>
+        }
         else
         {
             <Button Variant="ghost" OnClick="Close">Cancel</Button>
@@ -255,6 +312,15 @@
     private (string Owner, string Repository)? _repositoryInfo;
     private bool _wasOpen;
 
+    // Non-PR (upload) provider state.
+    private List<ProviderFileChange> _uploadChanges = new();
+
+    // Capability-driven view selectors.
+    private bool SupportsPullRequests => StorageSubmit.SupportsPullRequests;
+    private string DialogTitle => SupportsPullRequests
+        ? "Create Pull Request"
+        : $"Upload changes to {Registry.Active.DisplayName}";
+
     private bool CanCreate => AuthService.IsAuthenticated
                               && !string.IsNullOrWhiteSpace(_title)
                               && !string.IsNullOrWhiteSpace(_branchName)
@@ -264,6 +330,7 @@
     {
         PendingChangesService.OnPendingChangesChanged += LoadChanges;
         AuthService.OnCredentialsChanged += OnCredentialsChanged;
+        Registry.OnActiveProviderChanged += OnCredentialsChanged;
     }
 
     private void OnCredentialsChanged() => InvokeAsync(StateHasChanged);
@@ -396,6 +463,41 @@
         }
     }
 
+    // Non-PR providers (e.g. FTP): upload the tracked changes directly via the active provider.
+    // NOTE: FTP change-set tracking is not yet wired (see concern in the report); _uploadChanges
+    // is empty today, so this path is reached only once tracking is implemented.
+    private async Task UploadChanges()
+    {
+        if (_uploadChanges.Count == 0) return;
+
+        _isCreating = true;
+        StateHasChanged();
+
+        try
+        {
+            var writeResult = await StorageSubmit.SubmitAsync(_uploadChanges, CommitContext.Empty);
+            if (writeResult.Success)
+            {
+                Toast.ShowSuccess($"Uploaded {writeResult.FileResults.Count} file(s) successfully.");
+                _uploadChanges = new();
+                await Close();
+            }
+            else
+            {
+                Toast.ShowError(writeResult.Message ?? "One or more files failed to upload.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Toast.ShowError($"Upload failed: {ex.Message}");
+        }
+        finally
+        {
+            _isCreating = false;
+            StateHasChanged();
+        }
+    }
+
     private void ResetDialog()
     {
         _result = null;
@@ -470,5 +572,6 @@
     {
         PendingChangesService.OnPendingChangesChanged -= LoadChanges;
         AuthService.OnCredentialsChanged -= OnCredentialsChanged;
+        Registry.OnActiveProviderChanged -= OnCredentialsChanged;
     }
 }

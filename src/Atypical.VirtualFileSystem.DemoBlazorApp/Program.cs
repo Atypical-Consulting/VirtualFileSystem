@@ -49,6 +49,7 @@ builder.Services.AddScoped<IStorageProviderRegistry, StorageProviderRegistry>();
 // Provider-neutral credential store and import service
 builder.Services.AddScoped<StorageCredentialStore>();
 builder.Services.AddScoped<StorageImportService>();
+builder.Services.AddScoped<StoragePendingChangesService>();
 
 var app = builder.Build();
 
