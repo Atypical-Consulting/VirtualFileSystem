@@ -227,9 +227,8 @@
     {
         if (result.IsDirectory)
         {
-            StateService.NavigateTo(result.Path.Value);
             RecentFiles.RecordAccess(result.Path.Value, true);
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo(VFSStateService.ToFolderUrl(result.Path.Value));
         }
         else
         {

@@ -93,8 +93,7 @@
 
         if (item.IsDirectory)
         {
-            StateService.NavigateTo(item.Path);
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo(VFSStateService.ToFolderUrl(item.Path));
         }
         else
         {

@@ -186,12 +186,38 @@
 
     private bool HasItems => GetCurrentItems().Any();
 
+    // The current directory is reflected in the URL as ?path=docs/src so the
+    // location is deep-linkable (refresh / share / back-forward restore it).
+    [SupplyParameterFromQuery(Name = "path")]
+    public string? PathQuery { get; set; }
+
     protected override void OnInitialized()
     {
         StateService.OnDataChanged += RequestRender;
-        StateService.OnCurrentPathChanged += RequestRender;
+        StateService.OnCurrentPathChanged += OnCurrentPathChanged;
         StateService.OnSortChanged += RequestRender;
         StateService.OnViewModeChanged += RequestRender;
+    }
+
+    // Runs on first render and whenever the query string changes (deep link,
+    // refresh, browser back/forward): make the current folder match the URL.
+    protected override void OnParametersSet()
+    {
+        var desired = VFSStateService.FromQueryPath(PathQuery);
+        if (StateService.CurrentPath != desired)
+            StateService.NavigateTo(desired);
+    }
+
+    // When navigation happens through state (breadcrumb, opening a folder,
+    // import, etc.) push the matching URL so the address bar stays in sync.
+    private void OnCurrentPathChanged()
+    {
+        var target = VFSStateService.ToFolderUrl(StateService.CurrentPath);
+        var current = "/" + Navigation.ToBaseRelativePath(Navigation.Uri);
+        if (!string.Equals(current, target, StringComparison.Ordinal))
+            Navigation.NavigateTo(target);
+
+        InvokeAsync(StateHasChanged);
     }
 
     // Service events may fire on non-UI threads; marshal to the Dispatcher.
@@ -483,7 +509,7 @@
     public void Dispose()
     {
         StateService.OnDataChanged -= RequestRender;
-        StateService.OnCurrentPathChanged -= RequestRender;
+        StateService.OnCurrentPathChanged -= OnCurrentPathChanged;
         StateService.OnSortChanged -= RequestRender;
         StateService.OnViewModeChanged -= RequestRender;
     }
