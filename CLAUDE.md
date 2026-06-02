@@ -18,14 +18,21 @@ dotnet test --collect:"XPlat Code Coverage"
 # Run demo CLI
 dotnet run --project src/Atypical.VirtualFileSystem.DemoCli/
 
+# Run the Blazor demo app
+dotnet run --project src/Atypical.VirtualFileSystem.DemoBlazorApp/
+
+# Run benchmarks (BenchmarkDotNet)
+dotnet run --project tests/Atypical.VirtualFileSystem.Benchmarks/ -c Release
+
 # Build specific project
 dotnet build src/Atypical.VirtualFileSystem.Core/
 ```
 
 ### Requirements
-- .NET SDK 9.0.0 (required by global.json)
-- Multi-targets .NET 8.0 and .NET 9.0
-- C# 12.0 with latest language features
+- .NET SDK 10.0.x (pinned by global.json; rollForward latestMinor)
+- Class libraries multi-target .NET 9.0 and .NET 10.0 (see Directory.Build.props);
+  the Blazor demo app and Benchmarks project target .NET 10.0 only
+- C# 13 (`LangVersion` 13) with latest language features
 
 ## Architecture Overview
 
@@ -64,14 +71,20 @@ IRootNode (vfs://)
 ### Test Structure
 - Base class: `VirtualFileSystemTestsBase` provides `CreateVFS()` factory
 - Naming: `VirtualFileSystem_Method{Operation}_Tests.cs`
-- Use FluentAssertions for readable assertions
+- Use Shouldly for readable assertions (e.g. `result.ShouldBe(...)`)
 - xUnit as test framework with Coverlet for coverage
+- Regression tests for fixed bugs live under `/SystemOperations/Regression/` and `/UndoRedo/`
 
 ### Test Organization
 - `/SystemOperations/Commands/` - CRUD operations
 - `/SystemOperations/Queries/` - Read operations
+- `/SystemOperations/Regression/` - Regression tests for specific fixed bugs
 - `/Models/` - Value objects and nodes  
 - `/UndoRedo/` - Change history functionality
+
+### Benchmarks
+- `tests/Atypical.VirtualFileSystem.Benchmarks` is a BenchmarkDotNet suite
+  (file/directory/search/scale/undo-redo). Run with `-c Release`.
 
 ## Key Implementation Details
 
