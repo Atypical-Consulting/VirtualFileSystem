@@ -27,7 +27,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].IsDirectory.ShouldBeTrue();
         _vfs.GetTree().ShouldNotBe(tree);
     }
-        
+
     [Fact]
     public void RenameDirectory_updates_the_directory_path()
     {
@@ -41,7 +41,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].Path.Value
             .ShouldBe("vfs://dir1/dir2/new_dir");
     }
-        
+
     [Fact]
     public void RenameDirectory_updates_the_last_write_time()
     {
@@ -60,7 +60,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastAccessTime.ShouldBe(lastAccessTime);
         _vfs.Index[new VFSDirectoryPath("vfs://dir1/dir2/new_dir")].LastWriteTime.ShouldNotBe(lastWriteTime);
     }
-    
+
     [Fact]
     public void RenameDirectory_throws_an_exception_if_the_directory_does_not_exist()
     {
@@ -71,7 +71,7 @@ public class VirtualFileSystem_MethodRenameDirectory_Tests : VirtualFileSystemTe
         var ex = Should.Throw<VirtualFileSystemException>(action);
         ex.Message.ShouldBe("The directory 'vfs://dir1/dir2/dir3' does not exist in the index.");
     }
-    
+
     [Fact]
     public void RenameDirectory_raises_a_DirectoryRenamed_event()
     {

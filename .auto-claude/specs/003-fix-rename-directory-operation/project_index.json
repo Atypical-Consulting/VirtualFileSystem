@@ -1,0 +1,39 @@
+{
+  "project_type": "single",
+  "services": {
+    "core": {
+      "path": ".",
+      "tech_stack": ["csharp", "dotnet", "net8.0", "net9.0"],
+      "port": null,
+      "dev_command": "dotnet build",
+      "test_command": "dotnet test",
+      "test_with_coverage": "dotnet test --collect:\"XPlat Code Coverage\""
+    },
+    "demo-cli": {
+      "path": "./src/Atypical.VirtualFileSystem.DemoCli",
+      "tech_stack": ["csharp", "dotnet", "spectre.console"],
+      "port": null,
+      "dev_command": "dotnet run --project src/Atypical.VirtualFileSystem.DemoCli/",
+      "test_command": null
+    }
+  },
+  "infrastructure": {
+    "docker": false,
+    "database": null,
+    "ci_cd": "github_actions"
+  },
+  "conventions": {
+    "linter": null,
+    "formatter": "csharp-standard",
+    "testing": "xunit",
+    "assertions": "fluentassertions",
+    "test_naming": "MethodName_Scenario_ExpectedBehavior",
+    "namespace_pattern": "Atypical.VirtualFileSystem.*"
+  },
+  "architecture": {
+    "pattern": "index-based virtual file system",
+    "storage": "SortedDictionary<VFSPath, IVirtualFileSystemNode>",
+    "event_driven": true,
+    "undo_redo": true
+  }
+}

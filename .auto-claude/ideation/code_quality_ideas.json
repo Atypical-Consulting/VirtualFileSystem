@@ -1,0 +1,143 @@
+{
+  "code_quality": [
+    {
+      "id": "cq-001",
+      "type": "code_quality",
+      "title": "Rename FileInfo record to avoid conflict with System.IO.FileInfo",
+      "description": "The VFSBinaryExtensions.cs file defines a `FileInfo` record class (lines 324-353) that conflicts with `System.IO.FileInfo`. This naming collision can cause confusion, especially when both namespaces are imported, and doesn't follow the project's VFS-prefixed naming convention.",
+      "rationale": "Naming conflicts with BCL types create confusion for developers, can cause compile-time ambiguity errors, and require explicit namespace qualification. Using consistent VFS-prefixed names improves discoverability and reduces cognitive load.",
+      "category": "naming",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBinaryExtensions.cs"
+      ],
+      "currentState": "A `FileInfo` record is defined at the bottom of VFSBinaryExtensions.cs, conflicting with System.IO.FileInfo",
+      "proposedChange": "Rename the record from `FileInfo` to `VFSFileInfo` to follow the project's naming convention and avoid System.IO conflicts",
+      "codeExample": "// Current:\npublic sealed record FileInfo(\n    string Path,\n    bool IsBinary,\n    long SizeInBytes,\n    DateTime CreationTime,\n    DateTime LastWriteTime\n);\n\n// Proposed:\npublic sealed record VFSFileInfo(\n    string Path,\n    bool IsBinary,\n    long SizeInBytes,\n    DateTime CreationTime,\n    DateTime LastWriteTime\n);",
+      "bestPractice": "Avoid naming classes with the same names as BCL types to prevent ambiguity and improve code clarity",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": true,
+      "prerequisites": ["Update all usages of FileInfo to VFSFileInfo"]
+    },
+    {
+      "id": "cq-002",
+      "type": "code_quality",
+      "title": "Consolidate duplicate exception-handling patterns across extension classes",
+      "description": "Three extension classes implement nearly identical exception-handling patterns with different return types: VFSSafeExtensions.cs (Try* methods returning bool), VFSResultExtensions.cs (*Result methods returning Result<T>), and VFSBulkExtensions.cs (Try* bulk operations). Each implements the same try-catch-return pattern around core VFS operations.",
+      "rationale": "Code duplication leads to maintenance burden when business logic changes. If validation logic needs updating, it must be changed in multiple places. A unified approach would reduce bugs from inconsistent implementations and simplify testing.",
+      "category": "duplication",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSafeExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSResultExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs"
+      ],
+      "currentState": "Three classes each implement their own try-catch wrappers around VFS operations with ~40 similar method implementations totaling ~980 lines",
+      "proposedChange": "Create a common internal executor class that handles exception wrapping, then have each extension class delegate to it. For example: VFSOperationExecutor.Execute(() => vfs.CreateFile(path, content)) which returns a Result, and adapters convert to bool or other types as needed.",
+      "codeExample": "// Current (repeated in 3 files with variations):\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch { return false; }\n}\n\n// Proposed common executor:\ninternal static class VFSOperationExecutor\n{\n    public static Result Execute(Action operation)\n    {\n        try { operation(); return Result.Success(); }\n        catch (Exception ex) { return Result.Failure(ex); }\n    }\n}\n\n// Extension methods delegate:\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n    => VFSOperationExecutor.Execute(() => vfs.CreateFile(filePath, content)).IsSuccess;",
+      "bestPractice": "DRY principle - Extract common patterns into reusable components",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": 150,
+        "testCoverage": null
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": ["Ensure all existing tests pass before refactoring"]
+    },
+    {
+      "id": "cq-003",
+      "type": "code_quality",
+      "title": "Add static code analyzers to enforce code quality standards",
+      "description": "The project has a comprehensive .editorconfig but doesn't include any Roslyn analyzers in its build process. Adding analyzers like StyleCop.Analyzers, Roslynator, or Microsoft.CodeAnalysis.NetAnalyzers would automatically enforce coding standards and catch potential issues during build.",
+      "rationale": "Static analysis tools catch issues early in development, enforce consistency across contributors, and can identify security vulnerabilities, performance issues, and common bugs that manual code review might miss. The project already has formatting rules in .editorconfig that could be enforced.",
+      "category": "linting",
+      "severity": "suggestion",
+      "affectedFiles": [
+        "Directory.Build.props",
+        "src/Atypical.VirtualFileSystem.Core/Atypical.VirtualFileSystem.Core.csproj"
+      ],
+      "currentState": "No Roslyn analyzers are configured. Only DefaultDocumentation is included as a build-time package.",
+      "proposedChange": "Add Microsoft.CodeAnalysis.NetAnalyzers and optionally Roslynator.Analyzers to Directory.Build.props to enable static analysis across all projects in the solution.",
+      "codeExample": "<!-- Directory.Build.props -->\n<ItemGroup>\n  <PackageReference Include=\"Microsoft.CodeAnalysis.NetAnalyzers\" Version=\"9.0.0\">\n    <PrivateAssets>all</PrivateAssets>\n    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>\n  </PackageReference>\n  <PackageReference Include=\"Roslynator.Analyzers\" Version=\"4.12.0\">\n    <PrivateAssets>all</PrivateAssets>\n    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>\n  </PackageReference>\n</ItemGroup>\n\n<PropertyGroup>\n  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>\n  <EnableNETAnalyzers>true</EnableNETAnalyzers>\n  <AnalysisLevel>latest-recommended</AnalysisLevel>\n</PropertyGroup>",
+      "bestPractice": "Use static analysis tools to automate code quality enforcement and catch issues early",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": ["May need to fix warnings flagged by new analyzers"]
+    },
+    {
+      "id": "cq-004",
+      "type": "code_quality",
+      "title": "Replace silent exception swallowing with logging or error tracking",
+      "description": "Multiple extension methods in VFSSafeExtensions.cs, VFSBinaryExtensions.cs, and VFSBulkExtensions.cs use empty catch blocks that silently swallow exceptions (e.g., `catch { return false; }`). This makes debugging difficult as important error information is lost.",
+      "rationale": "Silent exception swallowing hides the root cause of failures, making debugging nearly impossible. Even in 'safe' methods that intentionally don't throw, capturing error information is valuable for diagnostics and logging.",
+      "category": "code_smells",
+      "severity": "minor",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSSafeExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBinaryExtensions.cs",
+        "src/Atypical.VirtualFileSystem.Core/Extensions/VFSBulkExtensions.cs"
+      ],
+      "currentState": "Over 20 methods use empty catch blocks like `catch { return false; }` or `catch { return null; }`",
+      "proposedChange": "Add optional exception callback parameter to Try* methods, or use Result pattern consistently to preserve error information. Consider adding ILogger support for diagnostic scenarios.",
+      "codeExample": "// Current:\npublic static bool TryCreateFile(this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch { return false; } // Error information lost\n}\n\n// Proposed Option 1 - Exception callback:\npublic static bool TryCreateFile(\n    this IVirtualFileSystem vfs, \n    string filePath, \n    string? content = null,\n    Action<Exception>? onError = null)\n{\n    try { vfs.CreateFile(filePath, content); return true; }\n    catch (Exception ex) { onError?.Invoke(ex); return false; }\n}\n\n// Proposed Option 2 - Return tuple:\npublic static (bool Success, Exception? Error) TryCreateFile(\n    this IVirtualFileSystem vfs, string filePath, string? content = null)\n{\n    try { vfs.CreateFile(filePath, content); return (true, null); }\n    catch (Exception ex) { return (false, ex); }\n}",
+      "bestPractice": "Never silently swallow exceptions - always log, report, or preserve error information for diagnostics",
+      "metrics": {
+        "lineCount": null,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "medium",
+      "breakingChange": false,
+      "prerequisites": null
+    },
+    {
+      "id": "cq-005",
+      "type": "code_quality",
+      "title": "Separate BinaryFileNode interface into dedicated file following project conventions",
+      "description": "The IBinaryFileNode interface is defined at the bottom of BinaryFile.cs (lines 141-184) rather than in its own file under the Contracts folder, breaking the project's established pattern where all interfaces are separate files in the Contracts directory.",
+      "rationale": "Consistent file organization makes the codebase easier to navigate and maintain. The project has established a convention of placing interfaces in the Contracts folder (IDirectoryNode.cs, IFileNode.cs, IRootNode.cs, etc.), and IBinaryFileNode should follow this pattern.",
+      "category": "structure",
+      "severity": "suggestion",
+      "affectedFiles": [
+        "src/Atypical.VirtualFileSystem.Core/Models/BinaryFile.cs",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/"
+      ],
+      "currentState": "IBinaryFileNode interface is defined in BinaryFile.cs alongside the BinaryFileNode record (183 lines total in one file)",
+      "proposedChange": "Extract IBinaryFileNode interface to src/Atypical.VirtualFileSystem.Core/Contracts/IBinaryFileNode.cs to match the pattern of IFileNode.cs, IDirectoryNode.cs, and other interfaces",
+      "codeExample": "// New file: src/Atypical.VirtualFileSystem.Core/Contracts/IBinaryFileNode.cs\nnamespace Atypical.VirtualFileSystem.Core;\n\n/// <summary>\n/// Interface for binary file nodes that support both text and binary content.\n/// </summary>\npublic interface IBinaryFileNode : IFileNode\n{\n    byte[] BinaryContent { get; set; }\n    long SizeInBytes { get; }\n    bool IsBinary { get; }\n    void SetTextContent(string textContent);\n    void SetBinaryContent(byte[] binaryContent);\n    void SetContentFromBase64(string base64Content);\n    string ToBase64String();\n}",
+      "bestPractice": "Follow established project conventions for file organization - one interface per file in designated Contracts folder",
+      "metrics": {
+        "lineCount": 183,
+        "complexity": null,
+        "duplicateLines": null,
+        "testCoverage": null
+      },
+      "estimatedEffort": "small",
+      "breakingChange": false,
+      "prerequisites": null
+    }
+  ],
+  "metadata": {
+    "filesAnalyzed": 95,
+    "largeFilesFound": 3,
+    "duplicateBlocksFound": 5,
+    "lintingConfigured": true,
+    "testsPresent": true,
+    "generatedAt": "2026-01-23T16:30:00Z"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "subtasks": {
+    "subtask-1-1": {
+      "attempts": [
+        {
+          "session": 2,
+          "timestamp": "2026-01-23T16:25:30.712473",
+          "approach": "Implemented: Add NewPath property to VFSDirectoryRenamedArgs",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-2-1": {
+      "attempts": [
+        {
+          "session": 3,
+          "timestamp": "2026-01-23T16:28:35.388154",
+          "approach": "Implemented: Update DirectoryRenamed event invocation to pass new path",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-3-1": {
+      "attempts": [
+        {
+          "session": 4,
+          "timestamp": "2026-01-23T16:30:48.992927",
+          "approach": "Implemented: Fix DirectoryRenamed undo to use NewPath instead of Path",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-3-2": {
+      "attempts": [
+        {
+          "session": 5,
+          "timestamp": "2026-01-23T16:35:33.642149",
+          "approach": "Implemented: Fix DirectoryRenamed redo to use correct paths",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-4-1": {
+      "attempts": [
+        {
+          "session": 6,
+          "timestamp": "2026-01-23T16:37:42.539822",
+          "approach": "Implemented: Add test for renaming directory with nested files",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-4-2": {
+      "attempts": [
+        {
+          "session": 7,
+          "timestamp": "2026-01-23T16:40:52.591417",
+          "approach": "Implemented: Add test for renaming directory with deeply nested structure",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-4-3": {
+      "attempts": [
+        {
+          "session": 8,
+          "timestamp": "2026-01-23T16:43:42.790045",
+          "approach": "Implemented: Add test for undo/redo of directory rename",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-4-4": {
+      "attempts": [
+        {
+          "session": 9,
+          "timestamp": "2026-01-23T16:45:46.047057",
+          "approach": "Implemented: Add test for event args containing correct paths",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-5-1": {
+      "attempts": [
+        {
+          "session": 10,
+          "timestamp": "2026-01-23T16:49:02.498957",
+          "approach": "Implemented: Run full test suite to ensure no regressions",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    },
+    "subtask-5-2": {
+      "attempts": [
+        {
+          "session": 11,
+          "timestamp": "2026-01-23T16:51:43.548475",
+          "approach": "Implemented: Uncomment and test RenameDirectory in DemoCli",
+          "success": true,
+          "error": null
+        }
+      ],
+      "status": "completed"
+    }
+  },
+  "stuck_subtasks": [],
+  "metadata": {
+    "created_at": "2026-01-23T16:17:25.470262",
+    "last_updated": "2026-01-23T16:51:43.548487"
+  }
+}

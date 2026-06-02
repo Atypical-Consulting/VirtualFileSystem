@@ -25,6 +25,10 @@ jobs:
       # otherwise, read permission is required at least
       pull-requests: write
     runs-on: ubuntu-latest
+    # Only update the release draft on push to main, not on pull_request events.
+    # Running on PRs causes "Validation Failed: target_commitish" because
+    # release-drafter tries to set refs/pull/NNN/merge as the release target.
+    if: github.event_name == 'push'
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
@@ -32,7 +36,7 @@ jobs:
       #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v6
+      - uses: release-drafter/release-drafter@v7
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
         #   config-name: my-config.yml

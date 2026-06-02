@@ -1,0 +1,35 @@
+{
+  "files_to_modify": {
+    "core": [
+      "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Rename/VFSDirectoryRenamedArgs.cs",
+      "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Rename/VFS.Rename.cs",
+      "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+      "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Commands/VirtualFileSystem_MethodRenameDirectory_Tests.cs"
+    ]
+  },
+  "files_to_reference": [
+    "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Move/VFS.Move.cs",
+    "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Move/VFSDirectoryMovedArgs.cs",
+    "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Rename/VFSFileRenamedArgs.cs",
+    "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Commands/VirtualFileSystem_MethodMoveDirectory_Tests.cs"
+  ],
+  "patterns": {
+    "event_args_pattern": "Event args for directory operations should include both source and destination paths to support undo/redo",
+    "directory_operations_pattern": "Directory operations must handle nested files and subdirectories by updating all paths that start with the directory prefix",
+    "test_pattern": "Tests inherit from VirtualFileSystemTestsBase and use FluentAssertions for assertions",
+    "undo_pattern": "Undo operations reverse the change by using the 'after' state to find the node and applying the 'before' state"
+  },
+  "existing_implementations": {
+    "description": "MoveDirectory operation successfully handles nested contents and undo/redo. It stores both source and destination paths in VFSDirectoryMovedArgs.",
+    "relevant_files": [
+      "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Move/VFS.Move.cs",
+      "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Move/VFSDirectoryMovedArgs.cs"
+    ]
+  },
+  "root_cause": {
+    "issue": "VFSDirectoryRenamedArgs only stores the OLD path (before rename), causing undo to fail",
+    "details": "When undo is called, it tries to rename from the OLD path (which no longer exists in the index after the rename) back to the old name. This causes a 'directory not found' exception.",
+    "evidence": "DemoCli has the RenameDirectory operation commented out with TODO: fix rename directory (line 65-67)",
+    "solution": "VFSDirectoryRenamedArgs needs to store the NEW path (after rename) so undo can find the directory and rename it back"
+  }
+}

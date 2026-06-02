@@ -1,0 +1,7 @@
+{
+  "files": [
+    ".github/workflows/dotnet.yml",
+    ".github/workflows/publish-to-nuget.yml"
+  ],
+  "last_updated": "2026-01-23T16:17:25.469481"
+}

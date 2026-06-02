@@ -1,0 +1,125 @@
+{
+  "code_improvements": [
+    {
+      "id": "ci-001",
+      "type": "code_improvements",
+      "title": "Fix Undo for Delete Operations",
+      "description": "Complete the undo functionality for file and directory delete operations. Currently, ChangeHistory.Undo() throws NotImplementedException for VFSDirectoryDeletedArgs and VFSFileDeletedArgs. The infrastructure exists - VFSFileDeletedArgs already stores Content, and VFSDirectoryDeletedArgs needs to store deleted children to enable restoration.",
+      "rationale": "The undo/redo pattern is fully implemented for Create, Move, and Rename operations. The delete undo has explicit throw statements marking it as incomplete. VFSFileDeletedArgs.Content already captures file content, showing the pattern was anticipated. VFSDirectoryDeletedArgs just needs enhancement to store child nodes.",
+      "builds_upon": ["ChangeHistory undo/redo pattern", "VFSEventArgs hierarchy", "VFSFileDeletedArgs.Content property"],
+      "estimated_effort": "medium",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Delete/VFSDirectoryDeletedArgs.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/UndoRedo/ChangeHistoryTests.cs"
+      ],
+      "existing_patterns": [
+        "VFSFileDeletedArgs already stores Content for restoration",
+        "Redo() successfully restores deleted files/directories using stored event data",
+        "Other undo operations (Create, Move, Rename) follow symmetric patterns"
+      ],
+      "implementation_approach": "1. Enhance VFSDirectoryDeletedArgs to store a list of child nodes (files and subdirectories with their contents) at deletion time. 2. In ChangeHistory.Undo(), for VFSFileDeletedArgs: call CreateFile with stored path and content. 3. For VFSDirectoryDeletedArgs: recursively recreate directory structure and files using stored children. Follow the same pattern used in Redo() which already handles restoration logic.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-002",
+      "type": "code_improvements",
+      "title": "Add IVFSUpdate Interface for File Content Modification",
+      "description": "Add an UpdateFile operation following the existing interface segregation pattern (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename). This enables changing file content while maintaining the event-driven architecture with proper undo/redo support.",
+      "rationale": "The FileNode.Content property has a public setter but there's no VFS-level operation to modify content. This gap breaks the pattern where all state changes should go through IVirtualFileSystem operations and emit events. The interface segregation pattern (IVFSCreate, IVFSDelete, etc.) clearly shows where IVFSUpdate should fit.",
+      "builds_upon": ["Interface segregation pattern (IVFSCreate, IVFSDelete, IVFSMove, IVFSRename)", "Event-driven architecture with VFSEventArgs", "Fluent API returning IVirtualFileSystem"],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/VFSOperations/IVFSUpdate.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Update/VFS.Update.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Commands/Update/VFSFileUpdatedArgs.cs (new)",
+        "src/Atypical.VirtualFileSystem.Core/UndoRedo/ChangeHistory.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Commands/VirtualFileSystem_MethodUpdateFile_Tests.cs (new)"
+      ],
+      "existing_patterns": [
+        "IVFSCreate with CreateFile(path, content) and FileCreated event",
+        "VFSFileCreatedArgs stores path, content, and timestamp",
+        "ChangeHistory subscribes to events and handles undo/redo",
+        "All operations return IVirtualFileSystem for fluent chaining"
+      ],
+      "implementation_approach": "1. Create IVFSUpdate interface with UpdateFile(VFSFilePath, string newContent) method and FileUpdated event. 2. Create VFSFileUpdatedArgs storing path, old content, new content, and timestamp. 3. Add VFS.Update.cs partial class implementing the operation. 4. Update IVirtualFileSystem to inherit from IVFSUpdate. 5. Add undo/redo handlers in ChangeHistory. 6. Add unit tests following the existing pattern.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-003",
+      "type": "code_improvements",
+      "title": "Add FileExists and DirectoryExists Convenience Methods",
+      "description": "Add simple boolean FileExists(VFSFilePath) and DirectoryExists(VFSDirectoryPath) methods to IVirtualFileSystem. These wrap the existing TryGet* pattern for common existence checks.",
+      "rationale": "The TryGetFile and TryGetDirectory methods exist but require out parameters for simple existence checks. The VFSIndex.ContainsKey method exists internally. Common use cases just need boolean checks without retrieving the node.",
+      "builds_upon": ["TryGetFile/TryGetDirectory pattern", "VFSIndex.ContainsKey method"],
+      "estimated_effort": "trivial",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.Exists.cs (new)",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodExists_Tests.cs (new)"
+      ],
+      "existing_patterns": [
+        "TryGetFile returns bool and out parameter",
+        "TryGetDirectory returns bool and out parameter",
+        "Index.ContainsKey(VFSPath) for raw existence check"
+      ],
+      "implementation_approach": "1. Add FileExists and DirectoryExists to IVirtualFileSystem interface. 2. Create VFS.Exists.cs partial class with simple implementations: FileExists calls TryGetFile and returns the bool result, DirectoryExists calls TryGetDirectory. 3. Add unit tests following the query test naming pattern.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-004",
+      "type": "code_improvements",
+      "title": "Add Glob Pattern Support to FindFiles/FindDirectories",
+      "description": "Extend the FindFiles and FindDirectories methods to accept glob patterns (e.g., '*.txt', 'docs/**/*.md') in addition to existing Regex patterns. This provides a more intuitive API for common file system search patterns.",
+      "rationale": "FindFiles/FindDirectories already support Regex patterns via the IsMatch method on VFSPath. Glob patterns are more familiar to developers and map naturally to file system operations. The query infrastructure is in place - this adds a user-friendly overload.",
+      "builds_upon": ["FindFiles(Regex) and FindDirectories(Regex) pattern", "VFSPath.IsMatch(Regex) method", "Query method pattern in VFS.FindFiles.cs"],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IVirtualFileSystem.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.FindFiles.cs",
+        "src/Atypical.VirtualFileSystem.Core/SystemOperations/Queries/VFS.FindDirectories.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Paths/GlobPattern.cs (new)",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodFindFiles_Tests.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/SystemOperations/Queries/VirtualFileSystem_MethodFindDirectories_Tests.cs"
+      ],
+      "existing_patterns": [
+        "FindFiles(Regex regexPattern) converts to predicate",
+        "FindFiles(Func<IFileNode, bool> predicate) as base implementation",
+        "VFSPath.IsMatch(Regex) for pattern matching"
+      ],
+      "implementation_approach": "1. Create a GlobPattern class that converts glob patterns to Regex (handle *, **, ?, character classes). 2. Add FindFiles(string globPattern) and FindDirectories(string globPattern) overloads to IVirtualFileSystem. 3. Implement by converting glob to Regex and delegating to existing Regex overloads. 4. Add unit tests for common glob patterns.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "ci-005",
+      "type": "code_improvements",
+      "title": "Add GetSize Methods for Files and Directories",
+      "description": "Add methods to calculate file size (based on Content.Length) and directory size (sum of all contained files). The FileNode stores Content as a string, so size calculation is straightforward. Extend the node interfaces with size properties.",
+      "rationale": "FileNode.Content exists as a string property. File size is commonly needed for display and validation. The node hierarchy (IFileNode, IDirectoryNode) can be extended to expose Size properties. The Index enumeration pattern in VFSIndex supports aggregating directory contents.",
+      "builds_upon": ["IFileNode.Content property", "IDirectoryNode.Files and Directories collections", "VFSIndex.GetPathsStartingWith for directory contents"],
+      "estimated_effort": "small",
+      "affected_files": [
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IFileNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Contracts/IDirectoryNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Nodes/FileNode.cs",
+        "src/Atypical.VirtualFileSystem.Core/Models/Nodes/DirectoryNode.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/Models/FileNodeTests.cs",
+        "tests/Atypical.VirtualFileSystem.UnitTests/Models/DirectoryNodeTests.cs"
+      ],
+      "existing_patterns": [
+        "IFileNode.Content returns string content",
+        "IDirectoryNode.Files returns IEnumerable<IFileNode>",
+        "DirectoryNode tracks child files and directories",
+        "VFSIndex.GetPathsStartingWith for finding all paths under a directory"
+      ],
+      "implementation_approach": "1. Add Size property to IFileNode interface: long Size => Content?.Length ?? 0 (using UTF-8 byte count for accuracy). 2. Add Size property to IDirectoryNode interface: calculates total size by summing Files sizes recursively. 3. Implement in FileNode and DirectoryNode. 4. Add unit tests verifying size calculations for empty files, files with content, and nested directories.",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    }
+  ]
+}

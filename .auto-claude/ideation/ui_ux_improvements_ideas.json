@@ -1,0 +1,98 @@
+{
+  "ui_ux_improvements": [
+    {
+      "id": "uiux-001",
+      "type": "ui_ux_improvements",
+      "title": "Add Comprehensive ARIA Labels to Interactive Elements",
+      "description": "Add missing ARIA attributes to all interactive elements including toolbar buttons, dropdown menus, checkboxes, and action buttons to improve screen reader compatibility",
+      "rationale": "Currently only 5 components have ARIA attributes. Most toolbar buttons (GitHub import, settings, view toggle, history, preview panel) lack aria-label attributes. The sort dropdown in ActionBar lacks aria-expanded and aria-haspopup. This significantly impacts users relying on assistive technologies.",
+      "category": "accessibility",
+      "affected_components": [
+        "Components/Layout/TopBar.razor",
+        "Components/FileBrowser/ActionBar.razor",
+        "Components/UI/UndoRedoButtons.razor",
+        "Components/FileBrowser/FileCard.razor",
+        "Components/FileBrowser/FileRow.razor"
+      ],
+      "screenshots": [],
+      "current_state": "TopBar buttons use title attributes for tooltips but no aria-label. ActionBar sort dropdown lacks aria-expanded/aria-haspopup. View toggle buttons lack aria-pressed state. Search input relies on placeholder instead of proper label.",
+      "proposed_change": "1) Add aria-label to all icon-only buttons in TopBar.razor (GitHub import, settings, history, preview toggle, user avatar). 2) Add aria-expanded and aria-haspopup to sort dropdown button in ActionBar.razor. 3) Add aria-pressed to view toggle buttons. 4) Add visually-hidden label for search input. 5) Add aria-label to checkbox in FileCard.razor.",
+      "user_benefit": "Screen reader users will be able to understand and navigate all interactive elements, making the application accessible to users with visual impairments",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-002",
+      "type": "ui_ux_improvements",
+      "title": "Fix Error Page Design Inconsistency",
+      "description": "Update Error.razor page to use the established design system with Tailwind classes instead of undefined Bootstrap-style classes",
+      "rationale": "The Error page uses 'text-danger' class which is not defined in the Tailwind config or app.css, causing the error text to potentially render without proper styling. The page design is inconsistent with the polished CloudDrive design system.",
+      "category": "visual",
+      "affected_components": [
+        "Components/Pages/Error.razor"
+      ],
+      "screenshots": [],
+      "current_state": "Error.razor uses <h1 class=\"text-danger\"> and <h2 class=\"text-danger\"> which are Bootstrap classes not part of the project's Tailwind-based design system. The page lacks proper visual hierarchy and doesn't match the CloudDrive aesthetic.",
+      "proposed_change": "Redesign Error.razor to use the established design system: 1) Replace 'text-danger' with 'text-red-600'. 2) Wrap content in a centered card using the existing 'card' CSS class. 3) Add an error icon using the SVG pattern from Toast.razor. 4) Style the 'Development Mode' section using the existing badge and info patterns. 5) Add a 'Return Home' button using the Button component.",
+      "user_benefit": "Users encountering errors will have a consistent, professional experience that maintains trust in the application and provides clear guidance on next steps",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-003",
+      "type": "ui_ux_improvements",
+      "title": "Add Mobile-Friendly Action Alternatives",
+      "description": "Provide mobile-accessible alternatives for features currently hidden on small screens (undo/redo, sort, view toggle)",
+      "rationale": "Several important features are completely hidden on mobile with 'hidden md:flex' or 'hidden md:block': UndoRedoButtons, sort dropdown, view toggle, GitHub buttons. Mobile users lose access to core functionality like undo/redo which is essential for file operations.",
+      "category": "usability",
+      "affected_components": [
+        "Components/Layout/TopBar.razor",
+        "Components/FileBrowser/ActionBar.razor",
+        "Components/UI/UndoRedoButtons.razor"
+      ],
+      "screenshots": [],
+      "current_state": "UndoRedoButtons.razor line 5 has 'hidden md:flex' making undo/redo inaccessible on mobile. ActionBar.razor line 25 has sort dropdown 'hidden md:block'. TopBar.razor lines 44, 53, 66, 87, 102 hide GitHub buttons, view toggle, history, and preview toggle on mobile.",
+      "proposed_change": "1) Add a mobile action sheet/bottom drawer that appears via a '...' more button on mobile containing: undo, redo, sort options, view toggle, GitHub import/settings. 2) Create a new MobileActionsDrawer.razor component using the existing drawer pattern from HistoryDrawer. 3) Add a 'more actions' button visible only on mobile (lg:hidden) in TopBar that opens this drawer. 4) Include swipe gestures for undo (swipe left) and redo (swipe right) on the main content area.",
+      "user_benefit": "Mobile users will have full access to all application features, providing feature parity across devices and improving the mobile experience",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-004",
+      "type": "ui_ux_improvements",
+      "title": "Add Keyboard Navigation to Sort Dropdown",
+      "description": "Implement full keyboard navigation support for the sort dropdown menu with arrow keys, escape to close, and enter to select",
+      "rationale": "The sort dropdown in ActionBar.razor can be opened but cannot be navigated with arrow keys. Users must use Tab to move between options which is not the expected pattern for dropdown menus. This affects both keyboard-only users and power users who prefer keyboard navigation.",
+      "category": "accessibility",
+      "affected_components": [
+        "Components/FileBrowser/ActionBar.razor"
+      ],
+      "screenshots": [],
+      "current_state": "ActionBar sort dropdown (lines 24-61) uses @onclick handlers for each option but has no @onkeydown handler for keyboard navigation. The dropdown button doesn't trap focus when open and lacks arrow key support.",
+      "proposed_change": "1) Add @onkeydown handler to the sort dropdown container. 2) Track focused option index with a private field. 3) Implement: ArrowDown to move focus to next option, ArrowUp to previous, Enter/Space to select, Escape to close. 4) Add tabindex='0' to each dropdown option. 5) Visually highlight the focused option with the same hover style. 6) Auto-focus first option when dropdown opens. 7) Return focus to trigger button when dropdown closes.",
+      "user_benefit": "Keyboard users can efficiently navigate and select sort options without needing a mouse, improving accessibility and power-user workflows",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    },
+    {
+      "id": "uiux-005",
+      "type": "ui_ux_improvements",
+      "title": "Add Skeleton Loading States for File Grid/List",
+      "description": "Implement skeleton loading placeholders for the file grid and list views during initial load and navigation to improve perceived performance",
+      "rationale": "When navigating between directories or loading content, there's no visual feedback during the data fetch. Users see either nothing or a sudden content pop-in. Skeleton screens reduce perceived wait time and prevent layout shifts.",
+      "category": "performance",
+      "affected_components": [
+        "Components/FileBrowser/FileGrid.razor",
+        "Components/FileBrowser/FileList.razor",
+        "Components/FileBrowser/FileCard.razor",
+        "Components/FileBrowser/FileRow.razor"
+      ],
+      "screenshots": [],
+      "current_state": "FileGrid and FileList components render content immediately when available or show EmptyState when empty. There's no intermediate loading state showing placeholder content during navigation or initial load.",
+      "proposed_change": "1) Create SkeletonFileCard.razor with animated pulse background mimicking FileCard structure (icon area, text lines). 2) Create SkeletonFileRow.razor for list view with similar animation. 3) Add isLoading parameter to FileGrid and FileList components. 4) When isLoading is true, render 6-8 skeleton items instead of real content. 5) Use Tailwind's animate-pulse class on gray placeholder elements. 6) Add the loading state to VFSStateService with a debounce to avoid flicker on fast loads.",
+      "user_benefit": "Users experience smoother navigation with visual feedback during loading, reducing perceived wait times and preventing jarring content shifts",
+      "status": "draft",
+      "created_at": "2026-01-23T16:30:00.000Z"
+    }
+  ]
+}

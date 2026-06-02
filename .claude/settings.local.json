@@ -7,7 +7,8 @@
       "mcp__plugin_playwright_playwright__browser_evaluate",
       "Bash(killall dotnet:*)",
       "Bash(true sleep 2 cd /Users/phmatray/Repositories/github-atyp/VirtualFileSystem/src/Atypical.VirtualFileSystem.DemoBlazorApp rm -rf bin obj ~/.nuget/packages/atypical.virtualfilesystem*)",
-      "mcp__plugin_playwright_playwright__browser_select_option"
+      "mcp__plugin_playwright_playwright__browser_select_option",
+      "Skill(commit-commands:commit)"
     ],
     "deny": []
   }
