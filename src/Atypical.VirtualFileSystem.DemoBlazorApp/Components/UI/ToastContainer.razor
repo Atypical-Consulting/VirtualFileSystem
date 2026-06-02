@@ -10,19 +10,13 @@
 </div>
 
 @code {
-    private System.Threading.Timer? _timer;
-
     protected override void OnInitialized()
     {
         ToastService.OnChange += HandleChange;
-
-        // Periodic check to handle auto-removal (every 500ms)
-        _timer = new System.Threading.Timer(_ =>
-        {
-            InvokeAsync(StateHasChanged);
-        }, null, 500, 500);
     }
 
+    // OnChange now fires on auto-removal too (from a background task), so marshal
+    // to the Dispatcher; no polling timer is needed.
     private void HandleChange()
     {
         InvokeAsync(StateHasChanged);
@@ -36,6 +30,5 @@
     public void Dispose()
     {
         ToastService.OnChange -= HandleChange;
-        _timer?.Dispose();
     }
 }

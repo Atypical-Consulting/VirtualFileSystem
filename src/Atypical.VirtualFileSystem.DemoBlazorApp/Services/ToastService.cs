@@ -8,8 +8,20 @@ namespace Atypical.VirtualFileSystem.DemoBlazorApp.Services;
 public class ToastService
 {
     private readonly List<ToastMessage> _toasts = [];
+    private readonly Lock _gate = new();
 
-    public IReadOnlyList<ToastMessage> Toasts => _toasts.AsReadOnly();
+    // Returns a snapshot so callers (e.g. component render loops) can enumerate
+    // safely while background auto-removal mutates the underlying list.
+    public IReadOnlyList<ToastMessage> Toasts
+    {
+        get
+        {
+            lock (_gate)
+            {
+                return _toasts.ToList();
+            }
+        }
+    }
 
     public event Action? OnChange;
 
@@ -42,41 +54,39 @@ public class ToastService
             DurationMs = durationMs
         };
 
-        _toasts.Add(toast);
+        lock (_gate)
+        {
+            _toasts.Add(toast);
+        }
         OnChange?.Invoke();
 
-        // Auto-remove after duration - use Timer to avoid thread issues
+        // Auto-remove after the duration on a background task.
         _ = Task.Run(async () =>
         {
             await Task.Delay(durationMs);
-            RemoveSilently(toast.Id);
+            Remove(toast.Id);
         });
     }
 
     public void Remove(Guid id)
     {
-        var toast = _toasts.FirstOrDefault(t => t.Id == id);
-        if (toast != null)
+        bool removed;
+        lock (_gate)
         {
-            _toasts.Remove(toast);
-            OnChange?.Invoke();
+            var toast = _toasts.FirstOrDefault(t => t.Id == id);
+            removed = toast != null && _toasts.Remove(toast);
         }
-    }
 
-    private void RemoveSilently(Guid id)
-    {
-        var toast = _toasts.FirstOrDefault(t => t.Id == id);
-        if (toast != null)
-        {
-            _toasts.Remove(toast);
-            // Don't invoke OnChange here - the next UI interaction will pick up the change
-            // or components can poll the Toasts collection
-        }
+        if (removed)
+            OnChange?.Invoke();
     }
 
     public void Clear()
     {
-        _toasts.Clear();
+        lock (_gate)
+        {
+            _toasts.Clear();
+        }
         OnChange?.Invoke();
     }
 }
