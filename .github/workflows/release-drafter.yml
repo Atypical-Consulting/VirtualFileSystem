@@ -25,6 +25,10 @@ jobs:
       # otherwise, read permission is required at least
       pull-requests: write
     runs-on: ubuntu-latest
+    # Only update the release draft on push to main, not on pull_request events.
+    # Running on PRs causes "Validation Failed: target_commitish" because
+    # release-drafter tries to set refs/pull/NNN/merge as the release target.
+    if: github.event_name == 'push'
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
