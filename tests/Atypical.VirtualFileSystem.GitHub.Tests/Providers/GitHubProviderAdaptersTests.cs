@@ -46,11 +46,13 @@ public class GitHubProviderAdaptersTests
             LoadDuration: TimeSpan.FromSeconds(1),
             TargetPath: "src");
 
-        var result = GitHubProviderAdapters.ToProviderLoadResult(ghResult);
+        var result = GitHubProviderAdapters.ToProviderLoadResult(ghResult, requestedRemoteRoot: "o/r/src");
 
+        result.RemoteRoot.ShouldBe("o/r/src");
         result.FilesLoaded.ShouldBe(3);
         result.DirectoriesCreated.ShouldBe(2);
         result.TotalBytes.ShouldBe(99);
+        result.Duration.ShouldBe(TimeSpan.FromSeconds(1));
         result.Skipped.Count.ShouldBe(1);
         result.Skipped[0].Reason.ShouldBe(ProviderSkipReason.LoadError);
     }

@@ -76,7 +76,7 @@ public sealed class GitHubStorageProvider : IStorageProvider
             options with { RemoteRoot = subPath },
             _auth.Token);
         var result = await _loader.LoadRepositoryAsync(vfs, owner, repo, ghOptions, cancellationToken);
-        return GitHubProviderAdapters.ToProviderLoadResult(result);
+        return GitHubProviderAdapters.ToProviderLoadResult(result, options.RemoteRoot ?? string.Empty);
     }
 
     /// <inheritdoc />

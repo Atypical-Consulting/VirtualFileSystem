@@ -35,6 +35,10 @@ public static class GitHubProviderAdapters
             ExcludeExtensions: o.BlockedExtensions is null
                 ? null
                 : new HashSet<string>(o.BlockedExtensions, StringComparer.OrdinalIgnoreCase),
+            // NOTE: GlobPattern is not forwarded this milestone (GitHub exposes only exclude patterns
+            // via ExcludePatterns; include-glob support is a follow-on). The neutral GlobPattern is an
+            // include-style filter, so mapping it onto the exclude-style ExcludePatterns would invert
+            // its meaning. Dropping it is intentional rather than mismapping it.
             MetadataCallback: o.MetadataCallback,
             ProgressCallback: o.ProgressCallback is null
                 ? null
@@ -44,15 +48,22 @@ public static class GitHubProviderAdapters
     /// <summary>
     /// Maps a <see cref="GitHubLoadResult"/> to a neutral <see cref="ProviderLoadResult"/>.
     /// </summary>
-    public static ProviderLoadResult ToProviderLoadResult(GitHubLoadResult r)
+    /// <param name="r">The GitHub load result.</param>
+    /// <param name="requestedRemoteRoot">
+    /// The originally requested remote root (e.g. <c>owner/repo[/subpath]</c>) echoed back on the
+    /// result. The GitHub result only carries the VFS <c>TargetPath</c> (usually <c>/</c>), so the
+    /// neutral <see cref="ProviderLoadResult.RemoteRoot"/> is supplied by the caller instead.
+    /// </param>
+    public static ProviderLoadResult ToProviderLoadResult(GitHubLoadResult r, string requestedRemoteRoot)
         => new()
         {
-            RemoteRoot = r.TargetPath ?? string.Empty,
+            RemoteRoot = requestedRemoteRoot,
             FilesLoaded = r.FilesLoaded,
             DirectoriesCreated = r.DirectoriesCreated,
             TotalBytes = r.TotalBytesLoaded,
             Duration = r.LoadDuration,
             Skipped = r.SkippedFiles
+                // Size is unknown for some skip reasons; the neutral record uses 0 as 'unknown'.
                 .Select(s => new ProviderSkippedFile(s.Path, ToSkipReason(s.Reason), s.Size ?? 0, s.ErrorMessage))
                 .ToList(),
         };
@@ -60,6 +71,8 @@ public static class GitHubProviderAdapters
     private static ProviderSkipReason ToSkipReason(SkipReason r) => r switch
     {
         SkipReason.TooLarge => ProviderSkipReason.TooLarge,
+        // BinaryExcluded / ExtensionNotIncluded / ExtensionExcluded intentionally collapse to
+        // BlockedExtension: the neutral enum is coarser and does not distinguish those reasons.
         SkipReason.ExtensionNotIncluded => ProviderSkipReason.BlockedExtension,
         SkipReason.ExtensionExcluded => ProviderSkipReason.BlockedExtension,
         SkipReason.BinaryExcluded => ProviderSkipReason.BlockedExtension,
