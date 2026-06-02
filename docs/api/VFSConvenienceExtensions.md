@@ -10,7 +10,7 @@ These methods accept string paths directly and handle common use cases with less
 public static class VFSConvenienceExtensions
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFSConvenienceExtensions
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → VFSConvenienceExtensions
 
 | Methods | |
 | :--- | :--- |

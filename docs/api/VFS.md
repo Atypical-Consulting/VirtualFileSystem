@@ -9,7 +9,7 @@ Constants used by the Virtual File System\.
 public record VFS : Atypical.VirtualFileSystem.Core.Contracts.IVirtualFileSystem, Atypical.VirtualFileSystem.Core.Contracts.IVFSCreate, Atypical.VirtualFileSystem.Core.Contracts.IVFSDelete, Atypical.VirtualFileSystem.Core.Contracts.IVFSMove, Atypical.VirtualFileSystem.Core.Contracts.IVFSRename, System.IEquatable<Atypical.VirtualFileSystem.Core.VFS>
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; VFS
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → VFS
 
 Implements [IVirtualFileSystem](IVirtualFileSystem.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystem'), [IVFSCreate](IVFSCreate.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSCreate'), [IVFSDelete](IVFSDelete.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSDelete'), [IVFSMove](IVFSMove.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSMove'), [IVFSRename](IVFSRename.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSRename'), [System\.IEquatable&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')[VFS](VFS.md 'Atypical\.VirtualFileSystem\.Core\.VFS')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1 'System\.IEquatable\`1')
 

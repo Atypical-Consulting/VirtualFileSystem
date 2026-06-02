@@ -12,9 +12,9 @@ public interface IDirectoryNode : Atypical.VirtualFileSystem.Core.Contracts.IVir
 ```
 
 Derived  
-&#8627; [IRootNode](IRootNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IRootNode')  
-&#8627; [DirectoryNode](DirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.DirectoryNode')  
-&#8627; [RootNode](RootNode.md 'Atypical\.VirtualFileSystem\.Core\.RootNode')
+↳ [IRootNode](IRootNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IRootNode')  
+↳ [DirectoryNode](DirectoryNode.md 'Atypical\.VirtualFileSystem\.Core\.DirectoryNode')  
+↳ [RootNode](RootNode.md 'Atypical\.VirtualFileSystem\.Core\.RootNode')
 
 Implements [IVirtualFileSystemNode](IVirtualFileSystemNode.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVirtualFileSystemNode')
 

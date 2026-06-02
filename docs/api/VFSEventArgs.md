@@ -9,17 +9,17 @@ Represents the base class for all VFS event arguments\.
 public abstract class VFSEventArgs : System.EventArgs
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') &#129106; VFSEventArgs
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → [System\.EventArgs](https://learn.microsoft.com/en-us/dotnet/api/system.eventargs 'System\.EventArgs') → VFSEventArgs
 
 Derived  
-&#8627; [VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryCreatedArgs')  
-&#8627; [VFSDirectoryDeletedArgs](VFSDirectoryDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryDeletedArgs')  
-&#8627; [VFSDirectoryMovedArgs](VFSDirectoryMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryMovedArgs')  
-&#8627; [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs')  
-&#8627; [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs')  
-&#8627; [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileDeletedArgs')  
-&#8627; [VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileMovedArgs')  
-&#8627; [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileRenamedArgs')
+↳ [VFSDirectoryCreatedArgs](VFSDirectoryCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryCreatedArgs')  
+↳ [VFSDirectoryDeletedArgs](VFSDirectoryDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryDeletedArgs')  
+↳ [VFSDirectoryMovedArgs](VFSDirectoryMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryMovedArgs')  
+↳ [VFSDirectoryRenamedArgs](VFSDirectoryRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSDirectoryRenamedArgs')  
+↳ [VFSFileCreatedArgs](VFSFileCreatedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileCreatedArgs')  
+↳ [VFSFileDeletedArgs](VFSFileDeletedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileDeletedArgs')  
+↳ [VFSFileMovedArgs](VFSFileMovedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileMovedArgs')  
+↳ [VFSFileRenamedArgs](VFSFileRenamedArgs.md 'Atypical\.VirtualFileSystem\.Core\.VFSFileRenamedArgs')
 
 | Properties | |
 | :--- | :--- |

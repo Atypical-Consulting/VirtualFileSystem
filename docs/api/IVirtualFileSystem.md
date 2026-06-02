@@ -12,7 +12,7 @@ public interface IVirtualFileSystem : Atypical.VirtualFileSystem.Core.Contracts.
 ```
 
 Derived  
-&#8627; [VFS](VFS.md 'Atypical\.VirtualFileSystem\.Core\.VFS')
+↳ [VFS](VFS.md 'Atypical\.VirtualFileSystem\.Core\.VFS')
 
 Implements [IVFSCreate](IVFSCreate.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSCreate'), [IVFSDelete](IVFSDelete.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSDelete'), [IVFSMove](IVFSMove.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSMove'), [IVFSRename](IVFSRename.md 'Atypical\.VirtualFileSystem\.Core\.Contracts\.IVFSRename')
 

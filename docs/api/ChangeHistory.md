@@ -9,7 +9,7 @@ Represents a history of changes in a virtual file system\.
 public sealed class ChangeHistory : Atypical.VirtualFileSystem.Core.IChangeHistory, System.IDisposable
 ```
 
-Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') &#129106; ChangeHistory
+Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → ChangeHistory
 
 Implements [IChangeHistory](IChangeHistory.md 'Atypical\.VirtualFileSystem\.Core\.IChangeHistory'), [System\.IDisposable](https://learn.microsoft.com/en-us/dotnet/api/system.idisposable 'System\.IDisposable')
 

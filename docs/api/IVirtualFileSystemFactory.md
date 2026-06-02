@@ -11,7 +11,7 @@ public interface IVirtualFileSystemFactory
 ```
 
 Derived  
-&#8627; [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemFactory')
+↳ [VirtualFileSystemFactory](VirtualFileSystemFactory.md 'Atypical\.VirtualFileSystem\.Core\.VirtualFileSystemFactory')
 
 | Methods | |
 | :--- | :--- |
