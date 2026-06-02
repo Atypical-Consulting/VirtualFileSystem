@@ -391,7 +391,7 @@
         _ftpError = null;
         _ftpResult = null;
         await TryLoadCredentialsAsync();
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
     }
 
     // Pre-fill credential fields for credentials-based providers (e.g. FTP) from encrypted storage.
@@ -489,7 +489,7 @@
         _ftpResult = null;
         _ftpBusy = true;
         _ftpBusyMessage = "Connecting...";
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
 
         var providerId = Registry.Active.Id;
         var authRequest = new AuthRequest
@@ -566,6 +566,9 @@
         _includeExtensions = "";
         _excludeBinaryFiles = false;
         _showAdvanced = false;
+        // Only transient FTP state is reset here; the credential fields
+        // (_ftpHost/_ftpUsername/etc.) are intentionally NOT cleared so they
+        // re-prefill from the credential store next time the dialog opens.
         _ftpError = null;
         _ftpResult = null;
         await IsOpenChanged.InvokeAsync(false);

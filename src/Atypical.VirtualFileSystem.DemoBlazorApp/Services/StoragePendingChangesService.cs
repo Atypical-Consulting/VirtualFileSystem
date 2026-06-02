@@ -34,5 +34,11 @@ public sealed class StoragePendingChangesService
         IReadOnlyList<ProviderFileChange> changes,
         CommitContext context,
         CancellationToken cancellationToken = default)
-        => _registry.Active.WriteChangesAsync(changes, context, cancellationToken);
+    {
+        if (SupportsPullRequests)
+            throw new InvalidOperationException(
+                "Use the PR flow (GitHubPendingChangesService) for pull-request-capable providers.");
+
+        return _registry.Active.WriteChangesAsync(changes, context, cancellationToken);
+    }
 }
