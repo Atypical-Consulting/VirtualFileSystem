@@ -259,7 +259,7 @@ public class VFSSafeExtensionsTests
     }
 
     [Fact]
-    public void TryMoveFile_WithExistingDestination_ShouldReturnTrueAndOverwrite()
+    public void TryMoveFile_WithExistingDestination_ShouldReturnFalseAndNotOverwrite()
     {
         // Arrange
         var vfs = new VFS();
@@ -272,11 +272,12 @@ public class VFSSafeExtensionsTests
         var result = vfs.TryMoveFile(sourcePath, destinationPath);
 
         // Assert
-        // Note: VFS allows overwriting during move
-        Assert.True(result);
-        Assert.False(vfs.FileExists(sourcePath));
-        Assert.True(vfs.FileExists(destinationPath));
-        Assert.Equal("source content", vfs.GetFile(destinationPath).Content);
+        // Moving onto an existing destination must not silently overwrite it.
+        // The safe wrapper reports failure and leaves both files intact.
+        Assert.False(result);
+        Assert.True(vfs.FileExists(sourcePath));
+        Assert.Equal("source content", vfs.GetFile(sourcePath).Content);
+        Assert.Equal("destination content", vfs.GetFile(destinationPath).Content);
     }
 
     [Fact]

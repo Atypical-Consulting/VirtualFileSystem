@@ -52,6 +52,17 @@ public partial record VFS
         => ThrowVFSException($"The node '{node.Path}' already exists in the index.");
 
     /// <summary>
+    /// Throws a VFSException indicating that a directory cannot be moved into
+    /// itself or one of its own subdirectories.
+    /// </summary>
+    /// <param name="source">The source directory path.</param>
+    /// <param name="destination">The destination directory path.</param>
+    [DoesNotReturn]
+    private static void ThrowCannotMoveDirectoryIntoItself(VFSDirectoryPath source, VFSDirectoryPath destination)
+        => ThrowVFSException(
+            $"Cannot move the directory '{source}' into itself or one of its subdirectories ('{destination}').");
+
+    /// <summary>
     /// Throws a VFSException with the provided message.
     /// </summary>
     /// <param name="message">The message to include in the exception.</param>
