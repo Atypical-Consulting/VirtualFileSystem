@@ -20,6 +20,7 @@
     <!-- Project references -->
     <ItemGroup>
         <ProjectReference Include="..\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
+        <ProjectReference Include="..\Atypical.VirtualFileSystem.Providers.Abstractions\Atypical.VirtualFileSystem.Providers.Abstractions.csproj" />
     </ItemGroup>
 
     <!-- NuGet metadata -->

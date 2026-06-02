@@ -60,6 +60,13 @@ IRootNode (vfs://)
 └── IFileNode (contains Content string)
 ```
 
+### Storage Providers
+External backends are plugged in behind a provider abstraction (the `Core` VFS itself stays storage-agnostic):
+- `Atypical.VirtualFileSystem.Providers.Abstractions` defines `IStorageProvider` (`ImportAsync`/`ReadFileAsync`/`WriteChangesAsync`/`GetAccountInfoAsync`), `IStorageProviderAuth`, `ProviderCapabilities`, and neutral records (`ProviderLoadOptions/Result`, `ProviderFileChange`, `CommitContext`, `ProviderFileMetadata`, `AuthRequest/Result`).
+- Branch/PR/fork are NOT base-interface methods — they are `ProviderCapabilities` flags plus `CommitContext` fields, so capable providers (GitHub) honor them and others (FTP) ignore them.
+- Implementations: `Atypical.VirtualFileSystem.GitHub` (`GitHubStorageProvider`, wraps the existing Octokit loader/write service via adapters — Token auth, supports branches/PR/fork) and `Atypical.VirtualFileSystem.Ftp` (`FtpStorageProvider` over FluentFTP — Credentials auth, read+write/overwrite, no branches/PR).
+- The Blazor app selects the active provider via `IStorageProviderRegistry` and drives its UI (import dialog fields, "submit changes") from `ProviderCapabilities`; FTP credentials and the GitHub PAT are persisted encrypted via `ProtectedLocalStorage`.
+
 ### Path System
 - `VFSRootPath` - Root directory (vfs://)
 - `VFSDirectoryPath` - Directory paths with case-insensitive comparison

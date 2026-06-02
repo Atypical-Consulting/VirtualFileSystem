@@ -1,15 +1,18 @@
-@* GitHub Repository Import Dialog *@
+@* Capability-driven storage import dialog (GitHub, FTP, ...) *@
 @inject IVirtualFileSystem VFS
 @inject GitHubImportService ImportService
 @inject VFSStateService StateService
 @inject ToastService Toast
 @inject NavigationManager Navigation
 @inject GitHubAuthService AuthService
+@inject IStorageProviderRegistry Registry
+@inject StorageImportService StorageImport
+@inject StorageCredentialStore CredentialStore
 @implements IDisposable
 
-<Modal @bind-IsOpen="IsOpen" Title="Import from GitHub" Size="lg" CloseOnBackdropClick="@(!ImportService.State.IsImporting)">
+<Modal @bind-IsOpen="IsOpen" Title="@DialogTitle" Size="lg" CloseOnBackdropClick="@(!IsBusy)">
     <ChildContent>
-        @if (ImportService.State.IsImporting)
+        @if (IsGitHub && ImportService.State.IsImporting)
         {
             @* Loading State *@
             <div class="space-y-4">
@@ -37,7 +40,7 @@
                 </div>
             </div>
         }
-        else if (!string.IsNullOrEmpty(ImportService.State.ErrorMessage))
+        else if (IsGitHub && !string.IsNullOrEmpty(ImportService.State.ErrorMessage))
         {
             @* Error State *@
             <div class="space-y-4">
@@ -59,6 +62,20 @@
         {
             @* Input Form *@
             <div class="space-y-4">
+                @* Provider Picker (capability-driven UI) *@
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Provider</label>
+                    <select class="input" value="@Registry.Active.Id" @onchange="OnProviderChanged">
+                        @foreach (var p in Registry.Providers)
+                        {
+                            <option value="@p.Id">@p.DisplayName</option>
+                        }
+                    </select>
+                </div>
+
+                @if (IsGitHub)
+                {
+                    @* ===== GitHub field set (SupportsBranches) ===== *@
                 @* Authentication Status *@
                 <div class="flex items-center justify-between p-3 rounded-lg @(AuthService.IsAuthenticated ? "bg-green-50 border border-green-200" : "bg-gray-50 border border-gray-200")">
                     <div class="flex items-center gap-2">
@@ -200,17 +217,106 @@
                         </div>
                     </div>
                 }
+                }
+                else if (IsCredentials)
+                {
+                    @* ===== Credentials field set (e.g. FTP) ===== *@
+                    @if (_ftpBusy)
+                    {
+                        <div class="flex items-center gap-3">
+                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-cloud-600"></div>
+                            <span class="text-gray-700">@_ftpBusyMessage</span>
+                        </div>
+                    }
+                    else
+                    {
+                        @if (!string.IsNullOrEmpty(_ftpError))
+                        {
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <div class="flex gap-3">
+                                    <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-red-800">Import Failed</h4>
+                                        <p class="text-sm text-red-700 mt-1">@_ftpError</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @if (_ftpResult is not null)
+                        {
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex gap-3">
+                                    <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-green-800">Import Complete</h4>
+                                        <p class="text-sm text-green-700 mt-1">
+                                            Imported @_ftpResult.FilesLoaded files (@_ftpResult.Skipped.Count skipped) from @_ftpResult.RemoteRoot
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Host</label>
+                                <input type="text" class="input" placeholder="ftp.example.com" @bind="_ftpHost" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Port</label>
+                                <input type="number" class="input" min="1" max="65535" @bind="_ftpPort" />
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                                <input type="text" class="input" placeholder="anonymous" @bind="_ftpUsername" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                <input type="password" class="input" @bind="_ftpPassword" />
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="ftpUseTls" class="w-4 h-4 text-cloud-600 rounded border-gray-300" @bind="_ftpUseTls" />
+                            <label for="ftpUseTls" class="text-sm text-gray-700">Use TLS (explicit FTPS)</label>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Base Path</label>
+                            <input type="text" class="input" placeholder="/" @bind="_ftpBasePath" />
+                            <p class="text-xs text-gray-500 mt-1">Remote directory to import from (defaults to /)</p>
+                        </div>
+                    }
+                }
             </div>
         }
     </ChildContent>
     <Footer>
-        @if (ImportService.State.IsImporting)
+        @if (IsGitHub && ImportService.State.IsImporting)
         {
             <Button Variant="danger" OnClick="CancelImport">Cancel</Button>
         }
-        else if (!string.IsNullOrEmpty(ImportService.State.ErrorMessage))
+        else if (IsGitHub && !string.IsNullOrEmpty(ImportService.State.ErrorMessage))
         {
             <Button Variant="ghost" OnClick="Close">Close</Button>
+        }
+        else if (IsCredentials)
+        {
+            <Button Variant="ghost" OnClick="Close" Disabled="@_ftpBusy">Cancel</Button>
+            <Button Variant="primary"
+                    OnClick="StartFtpImport"
+                    Disabled="@(!CanImportFtp)"
+                    Icon="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5">
+                Import
+            </Button>
         }
         else
         {
@@ -242,18 +348,74 @@
     private bool _excludeBinaryFiles = false;
     private bool _showAdvanced = false;
 
+    // FTP / credentials provider fields
+    private string _ftpHost = "";
+    private int _ftpPort = 21;
+    private string _ftpUsername = "";
+    private string _ftpPassword = "";
+    private bool _ftpUseTls = false;
+    private string _ftpBasePath = "/";
+    private bool _ftpBusy = false;
+    private string _ftpBusyMessage = "";
+    private string? _ftpError;
+    private ProviderLoadResult? _ftpResult;
+    private string? _credentialsLoadedFor;
+
+    // Capability-driven view selectors based on the active provider.
+    private bool IsGitHub => Registry.Active.Capabilities.SupportsBranches;
+    private bool IsCredentials => Registry.Active.Capabilities.AuthKind == AuthKind.Credentials;
+    private bool IsBusy => (IsGitHub && ImportService.State.IsImporting) || _ftpBusy;
+    private string DialogTitle => $"Import from {Registry.Active.DisplayName}";
+
     private bool CanImport => !string.IsNullOrWhiteSpace(_owner) && !string.IsNullOrWhiteSpace(_repository);
+    private bool CanImportFtp => !_ftpBusy && !string.IsNullOrWhiteSpace(_ftpHost);
 
     protected override async Task OnInitializedAsync()
     {
         ImportService.OnStateChanged += OnServiceStateChanged;
         AuthService.OnCredentialsChanged += OnServiceStateChanged;
+        StorageImport.OnStateChanged += OnServiceStateChanged;
+        Registry.OnActiveProviderChanged += OnServiceStateChanged;
         await AuthService.InitializeAsync();
+        await TryLoadCredentialsAsync();
     }
 
     // Import progress and credential validation run on awaited HTTP continuations
     // that may resume off the Dispatcher, so marshal back before rendering.
     private void OnServiceStateChanged() => InvokeAsync(StateHasChanged);
+
+    private async Task OnProviderChanged(ChangeEventArgs e)
+    {
+        Registry.SetActive(e.Value?.ToString() ?? Registry.Active.Id);
+        // Reset transient FTP state when switching providers.
+        _ftpError = null;
+        _ftpResult = null;
+        await TryLoadCredentialsAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    // Pre-fill credential fields for credentials-based providers (e.g. FTP) from encrypted storage.
+    private async Task TryLoadCredentialsAsync()
+    {
+        if (!IsCredentials)
+            return;
+
+        var providerId = Registry.Active.Id;
+        if (_credentialsLoadedFor == providerId)
+            return;
+
+        _credentialsLoadedFor = providerId;
+        var saved = await CredentialStore.LoadAsync(providerId);
+        if (saved is not null)
+        {
+            _ftpHost = saved.Host ?? "";
+            _ftpPort = saved.Port == 0 ? 21 : saved.Port;
+            _ftpUsername = saved.Username ?? "";
+            _ftpPassword = saved.Password ?? "";
+            _ftpUseTls = saved.UseTls;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 
     private async Task OpenGitHubSettings()
     {
@@ -317,6 +479,69 @@
         }
     }
 
+    // Credentials-based (FTP) import: authenticate via the active provider's Auth, persist the
+    // credentials, then delegate to the provider-neutral StorageImportService.
+    private async Task StartFtpImport()
+    {
+        if (!CanImportFtp) return;
+
+        _ftpError = null;
+        _ftpResult = null;
+        _ftpBusy = true;
+        _ftpBusyMessage = "Connecting...";
+        await InvokeAsync(StateHasChanged);
+
+        var providerId = Registry.Active.Id;
+        var authRequest = new AuthRequest
+        {
+            Host = _ftpHost,
+            Port = _ftpPort,
+            Username = _ftpUsername,
+            Password = _ftpPassword,
+            UseTls = _ftpUseTls
+        };
+
+        try
+        {
+            var authResult = await Registry.Active.Auth.AuthenticateAsync(authRequest);
+            if (!authResult.Success)
+            {
+                _ftpError = authResult.ErrorMessage ?? "Authentication failed.";
+                return;
+            }
+
+            // Persist credentials for next time (best-effort; prerender-safe inside the store).
+            await CredentialStore.SaveAsync(providerId, authRequest);
+
+            _ftpBusyMessage = "Importing files...";
+            await InvokeAsync(StateHasChanged);
+
+            var options = new ProviderLoadOptions
+            {
+                RemoteRoot = string.IsNullOrWhiteSpace(_ftpBasePath) ? "/" : _ftpBasePath
+            };
+
+            _ftpResult = await StorageImport.ImportAsync(options);
+
+            var message = _ftpResult.Skipped.Count > 0
+                ? $"Imported {_ftpResult.FilesLoaded} files ({_ftpResult.Skipped.Count} skipped)"
+                : $"Imported {_ftpResult.FilesLoaded} files successfully";
+            Toast.ShowSuccess(message);
+
+            StateService.NotifyDataChanged();
+            await OnImportComplete.InvokeAsync(StateService.CurrentPath);
+        }
+        catch (Exception ex)
+        {
+            _ftpError = ex.Message;
+        }
+        finally
+        {
+            _ftpBusy = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
     private void CancelImport()
     {
         ImportService.CancelImport();
@@ -341,6 +566,11 @@
         _includeExtensions = "";
         _excludeBinaryFiles = false;
         _showAdvanced = false;
+        // Only transient FTP state is reset here; the credential fields
+        // (_ftpHost/_ftpUsername/etc.) are intentionally NOT cleared so they
+        // re-prefill from the credential store next time the dialog opens.
+        _ftpError = null;
+        _ftpResult = null;
         await IsOpenChanged.InvokeAsync(false);
     }
 
@@ -348,5 +578,7 @@
     {
         ImportService.OnStateChanged -= OnServiceStateChanged;
         AuthService.OnCredentialsChanged -= OnServiceStateChanged;
+        StorageImport.OnStateChanged -= OnServiceStateChanged;
+        Registry.OnActiveProviderChanged -= OnServiceStateChanged;
     }
 }

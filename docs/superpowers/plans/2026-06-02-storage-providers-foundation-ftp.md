@@ -740,7 +740,7 @@ public sealed class GitHubStorageProvider : IStorageProvider
 
     public async Task<ProviderLoadResult> ImportAsync(IVirtualFileSystem vfs, ProviderLoadOptions options, CancellationToken cancellationToken = default)
     {
-        // RemoteRoot for GitHub is "owner/repo[/subpath]"; parse owner/repo and pass subpath via TargetPath.
+        // RemoteRoot for GitHub is "owner/repo[/subpath]"; parse owner/repo and pass subpath via the loader's SubPath (the remote filter), NOT TargetPath (the VFS destination).
         var (owner, repo, subPath) = ParseRemoteRoot(options.RemoteRoot);
         var ghOptions = GitHubProviderAdapters.ToGitHubLoaderOptions(options with { RemoteRoot = subPath }, _auth.Token);
         var result = await _loader.LoadRepositoryAsync(vfs, owner, repo, ghOptions, cancellationToken);

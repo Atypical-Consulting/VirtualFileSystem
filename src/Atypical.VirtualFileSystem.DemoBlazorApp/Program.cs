@@ -1,6 +1,10 @@
 using Atypical.VirtualFileSystem.DemoBlazorApp.Components;
+using Atypical.VirtualFileSystem.DemoBlazorApp.Services;
 using Atypical.VirtualFileSystem.Core.Services;
+using Atypical.VirtualFileSystem.Ftp;
 using Atypical.VirtualFileSystem.GitHub;
+using Atypical.VirtualFileSystem.GitHub.Providers;
+using Atypical.VirtualFileSystem.Providers.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +34,22 @@ builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.Git
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubMetadataTracker>();
 builder.Services.AddScoped<Atypical.VirtualFileSystem.DemoBlazorApp.Services.GitHubPendingChangesService>();
 builder.Services.AddScoped<IGitHubWriteService, GitHubWriteService>();
+
+// Storage providers (neutral abstraction layer — alongside existing GitHub services)
+builder.Services.AddVirtualFileSystemFtp();
+builder.Services.AddScoped<GitHubProviderAuth>();
+builder.Services.AddScoped<GitHubStorageProvider>();
+
+// Expose both providers as IStorageProvider so the registry receives them via IEnumerable<IStorageProvider>.
+// Registration order is intentional: it determines the registry's default active provider (GitHub first = default).
+builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<GitHubStorageProvider>());
+builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<FtpStorageProvider>());
+builder.Services.AddScoped<IStorageProviderRegistry, StorageProviderRegistry>();
+
+// Provider-neutral credential store and import service
+builder.Services.AddScoped<StorageCredentialStore>();
+builder.Services.AddScoped<StorageImportService>();
+builder.Services.AddScoped<StoragePendingChangesService>();
 
 var app = builder.Build();
 
