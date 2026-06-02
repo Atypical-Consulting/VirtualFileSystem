@@ -142,9 +142,12 @@
 
     protected override void OnInitialized()
     {
-        StateService.OnSelectionChanged += StateHasChanged;
-        StateService.OnDataChanged += StateHasChanged;
+        StateService.OnSelectionChanged += RequestRender;
+        StateService.OnDataChanged += RequestRender;
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private string GetFileName(string path)
     {
@@ -199,7 +202,7 @@
 
     public void Dispose()
     {
-        StateService.OnSelectionChanged -= StateHasChanged;
-        StateService.OnDataChanged -= StateHasChanged;
+        StateService.OnSelectionChanged -= RequestRender;
+        StateService.OnDataChanged -= RequestRender;
     }
 }

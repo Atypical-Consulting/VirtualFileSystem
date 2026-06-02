@@ -2,7 +2,7 @@
 @inject VFSStateService StateService
 @inject UndoRedoService UndoRedoService
 @inject IJSRuntime JS
-@implements IDisposable
+@implements IAsyncDisposable
 
 <div class="h-screen flex flex-col bg-gray-50">
     @* Top Bar *@
@@ -71,8 +71,10 @@
 
     protected override void OnInitialized()
     {
-        StateService.OnStateChanged += StateHasChanged;
+        StateService.OnStateChanged += OnStateChanged;
     }
+
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -117,9 +119,24 @@
         InvokeAsync(StateHasChanged);
     }
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
-        StateService.OnStateChanged -= StateHasChanged;
-        _jsRef?.Dispose();
+        StateService.OnStateChanged -= OnStateChanged;
+
+        // Clear the JS-side reference before disposing it, otherwise the global
+        // keyboard handler keeps invoking a disposed DotNetObjectReference.
+        if (_jsRef is not null)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("cloudDrive.keyboard.unregisterUndoRedo");
+            }
+            catch (JSDisconnectedException)
+            {
+                // Circuit already gone; nothing to unregister.
+            }
+
+            _jsRef.Dispose();
+        }
     }
 }

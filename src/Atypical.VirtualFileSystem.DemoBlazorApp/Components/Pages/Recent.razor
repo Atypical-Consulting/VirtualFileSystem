@@ -74,8 +74,11 @@
 @code {
     protected override void OnInitialized()
     {
-        RecentFiles.OnChange += StateHasChanged;
+        RecentFiles.OnChange += RequestRender;
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private void OpenItem(RecentFileEntry entry)
     {
@@ -117,6 +120,6 @@
 
     public void Dispose()
     {
-        RecentFiles.OnChange -= StateHasChanged;
+        RecentFiles.OnChange -= RequestRender;
     }
 }

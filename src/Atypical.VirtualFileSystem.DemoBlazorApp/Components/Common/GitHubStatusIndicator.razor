@@ -24,10 +24,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        AuthService.OnCredentialsChanged += StateHasChanged;
-        AuthService.OnRateLimitUpdated += StateHasChanged;
+        AuthService.OnCredentialsChanged += RequestRender;
+        AuthService.OnRateLimitUpdated += RequestRender;
         await AuthService.InitializeAsync();
     }
+
+    // Credential/rate-limit events fire on awaited HTTP continuations; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private string GetButtonClasses()
     {
@@ -51,7 +54,7 @@
 
     public void Dispose()
     {
-        AuthService.OnCredentialsChanged -= StateHasChanged;
-        AuthService.OnRateLimitUpdated -= StateHasChanged;
+        AuthService.OnCredentialsChanged -= RequestRender;
+        AuthService.OnRateLimitUpdated -= RequestRender;
     }
 }

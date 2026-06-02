@@ -23,6 +23,11 @@ public sealed class GitHubMetadataTracker : IDisposable
     public GitHubMetadataTracker(IVirtualFileSystem vfs)
     {
         _vfs = vfs;
+
+        // Auto-sync metadata with VFS structural changes. The tracker is scoped
+        // per circuit and unsubscribes on Dispose, so subscribing here keeps the
+        // mapping correct for the lifetime of the circuit.
+        SubscribeToVfsEvents();
     }
 
     /// <summary>
@@ -180,8 +185,10 @@ public sealed class GitHubMetadataTracker : IDisposable
         if (args is VFSDirectoryDeletedArgs dirArgs)
         {
             var prefix = NormalizePath(dirArgs.Path.Value);
+            var childPrefix = prefix + "/";
             var keysToRemove = _metadataByPath.Keys
-                .Where(k => k.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                .Where(k => k.Equals(prefix, StringComparison.OrdinalIgnoreCase)
+                    || k.StartsWith(childPrefix, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             foreach (var key in keysToRemove)
@@ -202,9 +209,11 @@ public sealed class GitHubMetadataTracker : IDisposable
         {
             var oldPrefix = NormalizePath(moveArgs.SourcePath.Value);
             var newPrefix = NormalizePath(moveArgs.DestinationPath.Value);
+            var oldChildPrefix = oldPrefix + "/";
 
             var entriesToUpdate = _metadataByPath
-                .Where(kvp => kvp.Key.StartsWith(oldPrefix, StringComparison.OrdinalIgnoreCase))
+                .Where(kvp => kvp.Key.Equals(oldPrefix, StringComparison.OrdinalIgnoreCase)
+                    || kvp.Key.StartsWith(oldChildPrefix, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             foreach (var (oldPath, metadata) in entriesToUpdate)

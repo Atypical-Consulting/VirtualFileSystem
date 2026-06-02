@@ -253,6 +253,7 @@
     private PullRequestCreationStep _currentStep = PullRequestCreationStep.CheckingPermissions;
     private List<PendingFileChange> _changes = new();
     private (string Owner, string Repository)? _repositoryInfo;
+    private bool _wasOpen;
 
     private bool CanCreate => AuthService.IsAuthenticated
                               && !string.IsNullOrWhiteSpace(_title)
@@ -262,15 +263,22 @@
     protected override void OnInitialized()
     {
         PendingChangesService.OnPendingChangesChanged += LoadChanges;
-        AuthService.OnCredentialsChanged += StateHasChanged;
+        AuthService.OnCredentialsChanged += OnCredentialsChanged;
     }
+
+    private void OnCredentialsChanged() => InvokeAsync(StateHasChanged);
 
     protected override async Task OnParametersSetAsync()
     {
-        if (IsOpen && (Owner is not null || Repository is not null))
+        // Only (re)initialize on the open transition, so a parent re-render that
+        // re-passes Owner/Repository while the dialog is open does not wipe the
+        // user's typed title/branch/description.
+        if (IsOpen && !_wasOpen)
         {
             await InitializeDialog();
         }
+
+        _wasOpen = IsOpen;
     }
 
     private async Task InitializeDialog()
@@ -326,7 +334,7 @@
         {
             _changes = PendingChangesService.GetAllChanges().ToList();
         }
-        StateHasChanged();
+        InvokeAsync(StateHasChanged);
     }
 
     private async Task CreatePullRequest()
@@ -461,6 +469,6 @@
     public void Dispose()
     {
         PendingChangesService.OnPendingChangesChanged -= LoadChanges;
-        AuthService.OnCredentialsChanged -= StateHasChanged;
+        AuthService.OnCredentialsChanged -= OnCredentialsChanged;
     }
 }

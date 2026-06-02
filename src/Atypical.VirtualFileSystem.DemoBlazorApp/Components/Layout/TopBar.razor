@@ -124,10 +124,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        UndoRedoService.OnHistoryChanged += StateHasChanged;
-        GitHubAuthService.OnCredentialsChanged += StateHasChanged;
+        UndoRedoService.OnHistoryChanged += RequestRender;
+        GitHubAuthService.OnCredentialsChanged += RequestRender;
         await GitHubAuthService.InitializeAsync();
     }
+
+    // Service events may fire on non-UI threads; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private void HandleSearchKeyDown(KeyboardEventArgs e)
     {
@@ -139,7 +142,7 @@
 
     public void Dispose()
     {
-        UndoRedoService.OnHistoryChanged -= StateHasChanged;
-        GitHubAuthService.OnCredentialsChanged -= StateHasChanged;
+        UndoRedoService.OnHistoryChanged -= RequestRender;
+        GitHubAuthService.OnCredentialsChanged -= RequestRender;
     }
 }

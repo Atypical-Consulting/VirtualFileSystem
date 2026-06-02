@@ -79,9 +79,13 @@
 
     protected override void OnInitialized()
     {
-        StateService.OnItemStarred += _ => StateHasChanged();
-        StateService.OnDataChanged += StateHasChanged;
+        StateService.OnItemStarred += OnItemStarred;
+        StateService.OnDataChanged += OnDataChanged;
     }
+
+    private void OnItemStarred(string _) => InvokeAsync(StateHasChanged);
+
+    private void OnDataChanged() => InvokeAsync(StateHasChanged);
 
     private void OpenItem(StarredItem item)
     {
@@ -106,7 +110,8 @@
 
     public void Dispose()
     {
-        StateService.OnDataChanged -= StateHasChanged;
+        StateService.OnItemStarred -= OnItemStarred;
+        StateService.OnDataChanged -= OnDataChanged;
     }
 
     private class StarredItem

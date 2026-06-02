@@ -26,8 +26,11 @@
 @code {
     protected override void OnInitialized()
     {
-        UndoRedoService.OnHistoryChanged += StateHasChanged;
+        UndoRedoService.OnHistoryChanged += RequestRender;
     }
+
+    // OnHistoryChanged can fire from background continuations; marshal to the Dispatcher.
+    private void RequestRender() => InvokeAsync(StateHasChanged);
 
     private void HandleUndo()
     {
@@ -41,6 +44,6 @@
 
     public void Dispose()
     {
-        UndoRedoService.OnHistoryChanged -= StateHasChanged;
+        UndoRedoService.OnHistoryChanged -= RequestRender;
     }
 }
