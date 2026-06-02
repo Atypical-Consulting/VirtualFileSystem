@@ -45,6 +45,10 @@ builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<GitHubS
 builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<FtpStorageProvider>());
 builder.Services.AddScoped<IStorageProviderRegistry, StorageProviderRegistry>();
 
+// Provider-neutral credential store and import service
+builder.Services.AddScoped<StorageCredentialStore>();
+builder.Services.AddScoped<StorageImportService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
