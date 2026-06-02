@@ -127,7 +127,7 @@ public partial record VFS
         Index.Remove(filePath);
         Index[newFilePath] = updatedFileNode;
 
-        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, oldName, newFilePath));
+        FileRenamed?.Invoke(new VFSFileRenamedArgs(filePath, oldName, newName, newFilePath));
         return this;
     }
 

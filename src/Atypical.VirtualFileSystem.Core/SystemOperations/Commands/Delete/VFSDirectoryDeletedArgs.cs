@@ -16,8 +16,20 @@ public sealed class VFSDirectoryDeletedArgs : VFSEventArgs
     /// </summary>
     /// <param name="path">The path of the deleted directory.</param>
     public VFSDirectoryDeletedArgs(VFSDirectoryPath path)
+        : this(path, ImmutableArray<VFSNodeSnapshot>.Empty)
+    {
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="VFSDirectoryDeletedArgs"/> class
+    /// with a snapshot of the deleted subtree so the deletion can be reversed.
+    /// </summary>
+    /// <param name="path">The path of the deleted directory.</param>
+    /// <param name="deletedNodes">The directory and its descendants that were removed.</param>
+    public VFSDirectoryDeletedArgs(VFSDirectoryPath path, ImmutableArray<VFSNodeSnapshot> deletedNodes)
     {
         Path = path;
+        DeletedNodes = deletedNodes;
         Timestamp = DateTimeOffset.Now;
     }
 
@@ -25,6 +37,12 @@ public sealed class VFSDirectoryDeletedArgs : VFSEventArgs
     /// Gets the path of the deleted directory.
     /// </summary>
     public VFSDirectoryPath Path { get; }
+
+    /// <summary>
+    /// Gets the snapshot of the directory and its descendants that were removed,
+    /// used to restore the subtree on undo.
+    /// </summary>
+    public ImmutableArray<VFSNodeSnapshot> DeletedNodes { get; }
 
     /// <summary>
     /// Gets the timestamp when the directory was deleted.
