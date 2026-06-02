@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.Ftp", "src\Atypical.VirtualFileSystem.Ftp\Atypical.VirtualFileSystem.Ftp.csproj", "{9601A06C-4C43-4E68-8576-F92BBFFEA73B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atypical.VirtualFileSystem.Ftp.Tests", "tests\Atypical.VirtualFileSystem.Ftp.Tests\Atypical.VirtualFileSystem.Ftp.Tests.csproj", "{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,18 @@ Global
 		{9601A06C-4C43-4E68-8576-F92BBFFEA73B}.Release|x64.Build.0 = Release|Any CPU
 		{9601A06C-4C43-4E68-8576-F92BBFFEA73B}.Release|x86.ActiveCfg = Release|Any CPU
 		{9601A06C-4C43-4E68-8576-F92BBFFEA73B}.Release|x86.Build.0 = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|x64.Build.0 = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|x64.Build.0 = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,5 +188,6 @@ Global
 		{B2E9D21C-6C01-4F28-AF7C-2EF16148E964} = {BA11C821-EFDE-4714-A0DE-B7D4D93CE336}
 		{2E8D3BE3-F419-46B1-BBD3-FC5F753261D0} = {10E2E10B-AB65-4800-93ED-CDB737917154}
 		{9601A06C-4C43-4E68-8576-F92BBFFEA73B} = {BA11C821-EFDE-4714-A0DE-B7D4D93CE336}
+		{37D1D6B7-C4E5-44EC-96C1-C2C6CDB900C5} = {10E2E10B-AB65-4800-93ED-CDB737917154}
 	EndGlobalSection
 EndGlobal
