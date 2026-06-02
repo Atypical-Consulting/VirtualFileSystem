@@ -2,11 +2,11 @@ namespace Atypical.VirtualFileSystem.Ftp.Tests;
 
 public class FtpStorageProviderWriteTests
 {
-    private static FtpStorageProvider AuthedProvider(FakeFtpConnection fake)
+    private static async Task<FtpStorageProvider> AuthedProviderAsync(FakeFtpConnection fake)
     {
         var provider = new FtpStorageProvider(_ => fake);
         // authenticate (fake connect succeeds)
-        provider.Auth.AuthenticateAsync(new AuthRequest { Host = "h", Username = "u", Password = "p" }).GetAwaiter().GetResult();
+        await provider.Auth.AuthenticateAsync(new AuthRequest { Host = "h", Username = "u", Password = "p" });
         return provider;
     }
 
@@ -14,7 +14,7 @@ public class FtpStorageProviderWriteTests
     public async Task WriteChangesAsync_uploads_adds_and_updates_and_reports_per_file()
     {
         var fake = new FakeFtpConnection();
-        var provider = AuthedProvider(fake);
+        var provider = await AuthedProviderAsync(fake);
 
         var changes = new List<ProviderFileChange>
         {
@@ -36,7 +36,7 @@ public class FtpStorageProviderWriteTests
     {
         var fake = new FakeFtpConnection();
         fake.Files["/data/gone.txt"] = "z"u8.ToArray();
-        var provider = AuthedProvider(fake);
+        var provider = await AuthedProviderAsync(fake);
 
         var result = await provider.WriteChangesAsync(
             [new() { RemotePath = "/data/gone.txt", Kind = ChangeKind.Delete }], CommitContext.Empty);

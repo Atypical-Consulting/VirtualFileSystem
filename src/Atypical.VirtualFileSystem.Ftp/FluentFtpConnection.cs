@@ -14,8 +14,9 @@ public sealed class FluentFtpConnection : IFtpConnection, IAsyncDisposable
     {
         _client = new AsyncFtpClient(settings.Host, settings.Username, settings.Password, settings.Port);
         _client.Config.EncryptionMode = settings.UseTls ? FtpEncryptionMode.Explicit : FtpEncryptionMode.None;
-        // For demo purposes, accept any certificate when TLS is enabled; document for production hardening.
-        _client.Config.ValidateAnyCertificate = settings.UseTls;
+        // Validate server certificates by default; skip validation only when explicitly opted in
+        // (e.g. for a trusted self-signed test server).
+        _client.Config.ValidateAnyCertificate = settings is { UseTls: true, AllowInvalidCertificate: true };
     }
 
     public Task ConnectAsync(CancellationToken ct) => _client.Connect(ct);
@@ -29,7 +30,7 @@ public sealed class FluentFtpConnection : IFtpConnection, IAsyncDisposable
             i.FullName,
             i.Type == FtpObjectType.Directory,
             i.Size,
-            i.Modified.ToUniversalTime())).ToList();
+            new DateTimeOffset(i.Modified.ToUniversalTime(), TimeSpan.Zero))).ToList();
     }
 
     public Task<byte[]> DownloadAsync(string remotePath, CancellationToken ct)

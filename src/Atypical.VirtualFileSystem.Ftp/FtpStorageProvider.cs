@@ -2,28 +2,37 @@ using System.Diagnostics;
 
 namespace Atypical.VirtualFileSystem.Ftp;
 
+/// <summary>
+/// A read+write storage provider over FTP/FTPS (backed by FluentFTP through the <see cref="IFtpConnection"/> seam).
+/// </summary>
 public sealed class FtpStorageProvider : IStorageProvider
 {
     private readonly Func<FtpConnectionSettings, IFtpConnection> _connectionFactory;
     private readonly FtpProviderAuth _auth;
 
+    /// <summary>Creates the provider using the given connection factory.</summary>
     public FtpStorageProvider(Func<FtpConnectionSettings, IFtpConnection> connectionFactory)
     {
         _connectionFactory = connectionFactory;
         _auth = new FtpProviderAuth(connectionFactory);
     }
 
+    /// <inheritdoc />
     public string Id => "ftp";
+
+    /// <inheritdoc />
     public string DisplayName => "FTP";
+
+    /// <inheritdoc />
     public IStorageProviderAuth Auth => _auth;
 
+    /// <inheritdoc />
     public ProviderCapabilities Capabilities => new() { AuthKind = AuthKind.Credentials };
 
+    /// <inheritdoc />
     public async Task<ProviderLoadResult> ImportAsync(IVirtualFileSystem vfs, ProviderLoadOptions options, CancellationToken ct = default)
     {
-        // Use authenticated settings if available; fall back to an empty placeholder so the factory
-        // (which may be a test-double ignoring its argument) still receives a non-null value.
-        var settings = _auth.Settings ?? new FtpConnectionSettings { Host = string.Empty };
+        var settings = _auth.Settings ?? throw new InvalidOperationException("FTP provider is not authenticated.");
         var root = string.IsNullOrWhiteSpace(options.RemoteRoot) ? "/" : options.RemoteRoot!;
         var sw = Stopwatch.StartNew();
         var skipped = new List<ProviderSkippedFile>();
@@ -47,6 +56,12 @@ public sealed class FtpStorageProvider : IStorageProvider
                     {
                         queue.Enqueue(item.FullPath);
                         dirs++;
+
+                        // Materialize the directory node so empty directories appear in the VFS.
+                        var dirPath = ToVfsPath(item.FullPath);
+                        if (!vfs.Index.ContainsKey(new VFSDirectoryPath(dirPath)))
+                            vfs.CreateDirectory(dirPath);
+
                         continue;
                     }
 
@@ -79,8 +94,7 @@ public sealed class FtpStorageProvider : IStorageProvider
         }
         finally
         {
-            await conn.DisconnectAsync(ct);
-            if (conn is IAsyncDisposable d) await d.DisposeAsync();
+            await CloseAsync(conn);
         }
 
         sw.Stop();
@@ -95,6 +109,7 @@ public sealed class FtpStorageProvider : IStorageProvider
         };
     }
 
+    /// <inheritdoc />
     public async Task<ProviderFileContent> ReadFileAsync(string remotePath, CancellationToken ct = default)
     {
         var settings = _auth.Settings ?? throw new InvalidOperationException("FTP provider is not authenticated.");
@@ -107,11 +122,11 @@ public sealed class FtpStorageProvider : IStorageProvider
         }
         finally
         {
-            await conn.DisconnectAsync(ct);
-            if (conn is IAsyncDisposable d) await d.DisposeAsync();
+            await CloseAsync(conn);
         }
     }
 
+    /// <inheritdoc />
     public async Task<ProviderWriteResult> WriteChangesAsync(IReadOnlyList<ProviderFileChange> changes, CommitContext context, CancellationToken ct = default)
     {
         var settings = _auth.Settings ?? throw new InvalidOperationException("FTP provider is not authenticated.");
@@ -140,8 +155,7 @@ public sealed class FtpStorageProvider : IStorageProvider
         }
         finally
         {
-            await conn.DisconnectAsync(ct);
-            if (conn is IAsyncDisposable d) await d.DisposeAsync();
+            await CloseAsync(conn);
         }
 
         return new ProviderWriteResult
@@ -151,8 +165,30 @@ public sealed class FtpStorageProvider : IStorageProvider
         };
     }
 
+    /// <inheritdoc />
     public Task<ProviderAccountInfo> GetAccountInfoAsync(CancellationToken ct = default)
         => Task.FromResult(_auth.Account ?? ProviderAccountInfo.Anonymous);
+
+    /// <summary>
+    /// Disconnects (best-effort, non-cancellable) and always disposes the connection so the
+    /// underlying socket is never leaked, even if disconnect throws or the operation was cancelled.
+    /// </summary>
+    private static async Task CloseAsync(IFtpConnection conn)
+    {
+        try
+        {
+            await conn.DisconnectAsync(CancellationToken.None);
+        }
+        catch
+        {
+            // Ignore disconnect failures; disposal below still releases the socket.
+        }
+        finally
+        {
+            if (conn is IAsyncDisposable d)
+                await d.DisposeAsync();
+        }
+    }
 
     // Map an absolute remote path (e.g. "/data/sub/a.txt") to a VFS-relative path ("data/sub/a.txt").
     private static string ToVfsPath(string remotePath) => remotePath.TrimStart('/');

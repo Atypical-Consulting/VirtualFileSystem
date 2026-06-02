@@ -2,8 +2,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Atypical.VirtualFileSystem.Ftp;
 
+/// <summary>
+/// Extension methods for registering the FTP storage provider in the dependency injection container.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>Registers the FTP connection factory and <see cref="FtpStorageProvider"/> as scoped services.</summary>
+    /// <param name="services">The service collection.</param>
+    /// <returns>The service collection.</returns>
     public static IServiceCollection AddVirtualFileSystemFtp(this IServiceCollection services)
     {
         services.AddScoped<IFtpConnectionFactory, FluentFtpConnectionFactory>();
@@ -14,14 +20,4 @@ public static class ServiceCollectionExtensions
         });
         return services;
     }
-}
-
-public interface IFtpConnectionFactory
-{
-    IFtpConnection Create(FtpConnectionSettings settings);
-}
-
-public sealed class FluentFtpConnectionFactory : IFtpConnectionFactory
-{
-    public IFtpConnection Create(FtpConnectionSettings settings) => new FluentFtpConnection(settings);
 }

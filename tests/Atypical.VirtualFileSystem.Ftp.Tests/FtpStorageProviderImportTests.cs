@@ -13,14 +13,22 @@ public class FtpStorageProviderImportTests
         return fake;
     }
 
+    private static async Task<FtpStorageProvider> AuthedProviderAsync(FakeFtpConnection fake)
+    {
+        var provider = new FtpStorageProvider(_ => fake);
+        await provider.Auth.AuthenticateAsync(new AuthRequest { Host = "h", Username = "u", Password = "p" });
+        return provider;
+    }
+
     [Fact]
     public async Task ImportAsync_loads_files_recursively_into_the_vfs()
     {
         var fake = BuildTree();
-        var provider = new FtpStorageProvider(_ => fake);
+        var provider = await AuthedProviderAsync(fake);
         var vfs = new VFS();
 
-        var result = await provider.ImportAsync(vfs, new ProviderLoadOptions { RemoteRoot = "/data" });
+        // No size cap so all three files (including the 20-byte big.bin) load.
+        var result = await provider.ImportAsync(vfs, new ProviderLoadOptions { RemoteRoot = "/data", MaxFileSizeBytes = long.MaxValue });
 
         result.FilesLoaded.ShouldBe(3);
         vfs.Index.ContainsKey(new VFSFilePath("data/readme.txt")).ShouldBeTrue();
@@ -31,12 +39,27 @@ public class FtpStorageProviderImportTests
     public async Task ImportAsync_skips_files_over_the_max_size()
     {
         var fake = BuildTree();
-        var provider = new FtpStorageProvider(_ => fake);
+        var provider = await AuthedProviderAsync(fake);
         var vfs = new VFS();
 
         var result = await provider.ImportAsync(vfs, new ProviderLoadOptions { RemoteRoot = "/data", MaxFileSizeBytes = 10 });
 
         result.Skipped.ShouldContain(s => s.RemotePath == "/data/big.bin" && s.Reason == ProviderSkipReason.TooLarge);
         vfs.Index.ContainsKey(new VFSFilePath("data/big.bin")).ShouldBeFalse();
+    }
+
+    [Fact]
+    public async Task ImportAsync_materializes_empty_directories_in_the_vfs()
+    {
+        var fake = new FakeFtpConnection();
+        fake.Directories.Add("/data");
+        fake.Directories.Add("/data/empty"); // empty subdirectory: no files inside
+        var provider = await AuthedProviderAsync(fake);
+        var vfs = new VFS();
+
+        var result = await provider.ImportAsync(vfs, new ProviderLoadOptions { RemoteRoot = "/data" });
+
+        result.FilesLoaded.ShouldBe(0);
+        vfs.Index.ContainsKey(new VFSDirectoryPath("data/empty")).ShouldBeTrue();
     }
 }

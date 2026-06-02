@@ -16,9 +16,9 @@ public sealed class FakeFtpConnection : IFtpConnection
         var dir = remoteDir.TrimEnd('/');
         IReadOnlyList<FtpRemoteItem> Children() =>
             Directories.Where(d => ParentOf(d) == dir)
-                .Select(d => new FtpRemoteItem(d, true, 0, DateTime.UnixEpoch))
+                .Select(d => new FtpRemoteItem(d, true, 0, DateTimeOffset.UnixEpoch))
                 .Concat(Files.Where(f => ParentOf(f.Key) == dir)
-                    .Select(f => new FtpRemoteItem(f.Key, false, f.Value.Length, DateTime.UnixEpoch)))
+                    .Select(f => new FtpRemoteItem(f.Key, false, f.Value.Length, DateTimeOffset.UnixEpoch)))
                 .ToList();
         return Task.FromResult(Children());
     }
