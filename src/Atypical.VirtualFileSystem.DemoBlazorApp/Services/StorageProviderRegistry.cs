@@ -14,7 +14,7 @@ public sealed class StorageProviderRegistry : IStorageProviderRegistry
     public IReadOnlyList<IStorageProvider> Providers { get; }
 
     /// <inheritdoc />
-    public event Action? ActiveProviderChanged;
+    public event Action? OnActiveProviderChanged;
 
     /// <summary>
     /// Creates a registry from all <see cref="IStorageProvider"/> instances registered in DI.
@@ -41,7 +41,7 @@ public sealed class StorageProviderRegistry : IStorageProviderRegistry
         if (!ReferenceEquals(match, _active))
         {
             _active = match;
-            ActiveProviderChanged?.Invoke();
+            OnActiveProviderChanged?.Invoke();
         }
     }
 }

@@ -18,5 +18,5 @@ public interface IStorageProviderRegistry
     void SetActive(string providerId);
 
     /// <summary>Raised whenever <see cref="Active"/> changes.</summary>
-    event Action? ActiveProviderChanged;
+    event Action? OnActiveProviderChanged;
 }

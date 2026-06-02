@@ -31,6 +31,9 @@ public sealed class StorageImportService
     /// </summary>
     public async Task<ProviderLoadResult> ImportAsync(ProviderLoadOptions options, CancellationToken ct = default)
     {
+        if (IsImporting)
+            throw new InvalidOperationException("An import is already in progress.");
+
         IsImporting = true;
         OnStateChanged?.Invoke();
         try

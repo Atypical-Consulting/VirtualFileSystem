@@ -40,7 +40,8 @@ builder.Services.AddVirtualFileSystemFtp();
 builder.Services.AddScoped<GitHubProviderAuth>();
 builder.Services.AddScoped<GitHubStorageProvider>();
 
-// Expose both providers as IStorageProvider so the registry receives them via IEnumerable<IStorageProvider>
+// Expose both providers as IStorageProvider so the registry receives them via IEnumerable<IStorageProvider>.
+// Registration order is intentional: it determines the registry's default active provider (GitHub first = default).
 builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<GitHubStorageProvider>());
 builder.Services.AddScoped<IStorageProvider>(sp => sp.GetRequiredService<FtpStorageProvider>());
 builder.Services.AddScoped<IStorageProviderRegistry, StorageProviderRegistry>();
