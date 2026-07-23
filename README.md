@@ -1,3 +1,5 @@
+![VirtualFileSystem banner](.github/banner.png)
+
 # Virtual File System
 
 > **Test filesystem code without touching the real disk — fast, deterministic, and disposable.**
