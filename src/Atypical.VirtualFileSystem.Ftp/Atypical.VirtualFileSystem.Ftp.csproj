@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FluentFTP" Version="54.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
     <ProjectReference Include="..\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
     <ProjectReference Include="..\Atypical.VirtualFileSystem.Providers.Abstractions\Atypical.VirtualFileSystem.Providers.Abstractions.csproj" />
   </ItemGroup>
