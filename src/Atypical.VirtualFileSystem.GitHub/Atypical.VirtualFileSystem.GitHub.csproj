@@ -11,6 +11,14 @@
         <None Include="../../LICENSE" Pack="true" PackagePath="" />
     </ItemGroup>
 
+    <!-- Development dependencies -->
+    <ItemGroup>
+        <PackageReference Include="DotNet.ReproducibleBuilds" Version="2.0.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
     <!-- Dependencies -->
     <ItemGroup>
         <PackageReference Include="Octokit" Version="14.0.0" />
