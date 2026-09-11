@@ -3,8 +3,8 @@
     <RootNamespace>Atypical.VirtualFileSystem.Ftp</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="FluentFTP" Version="54.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11" />
+    <PackageReference Include="FluentFTP" Version="54.2.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.12" />
     <ProjectReference Include="..\Atypical.VirtualFileSystem.Core\Atypical.VirtualFileSystem.Core.csproj" />
     <ProjectReference Include="..\Atypical.VirtualFileSystem.Providers.Abstractions\Atypical.VirtualFileSystem.Providers.Abstractions.csproj" />
   </ItemGroup>
