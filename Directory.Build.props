@@ -7,6 +7,18 @@
     <Company>Atypical Consulting SRL</Company>
   </PropertyGroup>
 
+  <!-- Source Link -->
+  <!-- Consumed alongside DotNet.ReproducibleBuilds in the packable projects, which also turns on
+       deterministic builds and DebugType=embedded: the portable PDB then travels INSIDE the
+       assembly, so consumers can step into this code with no symbol-server configuration.
+       Deliberately NOT paired with IncludeSymbols/SymbolPackageFormat=snupkg — with embedded PDBs
+       no separate .pdb exists, so the snupkg would be packed empty and nuget.org rejects those
+       outright ("The package does not contain any symbol (.pdb) files"). -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
   <!-- Versioning -->
   <!-- https://saebamini.com/how-to-version-your-net-nuget-packages-libraries-and-assemblies-azure-yaml-pipelines-example-using-net-core-cli/ -->
   <PropertyGroup>
